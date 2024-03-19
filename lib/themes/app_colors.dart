@@ -1,19 +1,21 @@
 import 'package:flutter/material.dart';
 
+//Реализация цветов светлой темы
 class AppLightColors extends AppColors {
   AppLightColors()
       : super(
-    backgroundPrimary: const Color(0xFF292929),
-    backgroundSecondary: const Color(0xFF373737),
-    borderPrimary: const Color(0xFFE3E3E3),
-    borderSecondary: const Color(0xFF444444),
-    textPrimary: const Color(0xFFE3E3E3),
-    textSecondary: const Color(0xFF838383),
-    button: const Color(0xFF2D3657),
-    error: const Color(0xFFBD1F1F),
-  );
+          backgroundPrimary: const Color(0xFFE3E3E3),
+          backgroundSecondary: const Color(0xFFC4C4C4),
+          borderPrimary: const Color(0xFF2A2A2A),
+          borderSecondary: const Color(0xFF444444),
+          textPrimary: const Color(0x00000000),
+          textSecondary: const Color(0xFF3F3F3F),
+          button: const Color(0xFF485CA2),
+          error: const Color(0xFFA93A3A),
+        );
 }
 
+//Этот класс должны наследовать все реализации цветов для разных тем.
 class AppColors extends ThemeExtension<AppColors> {
   final Color backgroundPrimary;
   final Color backgroundSecondary;
@@ -60,7 +62,9 @@ class AppColors extends ThemeExtension<AppColors> {
 
   @override
   ThemeExtension<AppColors> lerp(
-      covariant ThemeExtension<AppColors>? other, double t) {
+    covariant ThemeExtension<AppColors>? other,
+    double t,
+  ) {
     if (other == null || other.runtimeType != AppColors) {
       return this;
     }
@@ -69,12 +73,12 @@ class AppColors extends ThemeExtension<AppColors> {
 
     return AppColors(
       backgroundPrimary:
-      Color.lerp(backgroundPrimary, typedOther.backgroundPrimary, t)!,
+          Color.lerp(backgroundPrimary, typedOther.backgroundPrimary, t)!,
       backgroundSecondary:
-      Color.lerp(backgroundSecondary, typedOther.backgroundSecondary, t)!,
+          Color.lerp(backgroundSecondary, typedOther.backgroundSecondary, t)!,
       borderPrimary: Color.lerp(borderPrimary, typedOther.borderPrimary, t)!,
       borderSecondary:
-      Color.lerp(borderSecondary, typedOther.borderSecondary, t)!,
+          Color.lerp(borderSecondary, typedOther.borderSecondary, t)!,
       textPrimary: Color.lerp(textPrimary, typedOther.textPrimary, t)!,
       textSecondary: Color.lerp(textSecondary, typedOther.textSecondary, t)!,
       button: Color.lerp(button, typedOther.button, t)!,
