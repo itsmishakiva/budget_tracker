@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 
 //Тут экстеншен на context, чтобы удобнее получать инстансы
 //inherited виджетов через контекст
-extension ThemeExtensions on BuildContext {
+extension BuildContextExtension on BuildContext {
   //Можно юзать context.colors вместо Theme.of(context).extension<AppColors>
   AppColors get colors => Theme.of(this).extension<AppColors>()!;
 
