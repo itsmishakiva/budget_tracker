@@ -2,6 +2,9 @@ include: package:flutter_lints/flutter.yaml
 
 linter:
   rules:
+    analyzer:
+      errors:
+        invalid_annotation_target: ignore
     avoid_print: true
     prefer_single_quotes: true
     require_trailing_commas: true
