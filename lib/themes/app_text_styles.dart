@@ -1,67 +1,69 @@
 import 'package:budget_tracker/themes/app_colors.dart';
 import 'package:flutter/material.dart';
 
+//Реазлизация текстовых стилей светлой темы
 class AppLightTextStyles extends AppTextStyles {
   AppLightTextStyles({
     required AppColors colors,
   }) : super(
-    header1: TextStyle(
-      fontFamily: 'Nunito',
-      fontWeight: FontWeight.w400,
-      fontSize: 18.0,
-      color: colors.textPrimary,
-    ),
-    header2: TextStyle(
-      fontFamily: 'Nunito',
-      fontWeight: FontWeight.w600,
-      fontSize: 14.0,
-      color: colors.textPrimary,
-    ),
-    bodyText1: TextStyle(
-      fontFamily: 'Nunito',
-      fontWeight: FontWeight.w300,
-      fontSize: 14.0,
-      color: colors.textPrimary,
-    ),
-    subtitle1: TextStyle(
-      fontFamily: 'Nunito',
-      fontWeight: FontWeight.w400,
-      fontSize: 12.0,
-      color: colors.textPrimary,
-    ),
-    subtitle2: TextStyle(
-      fontFamily: 'Nunito',
-      fontWeight: FontWeight.w500,
-      fontSize: 12.0,
-      color: colors.textPrimary,
-    ),
-    textFieldLabel1: TextStyle(
-      fontFamily: 'Nunito',
-      fontWeight: FontWeight.w400,
-      fontSize: 14.0,
-      color: colors.textSecondary,
-    ),
-    textFieldLabel2: TextStyle(
-      fontFamily: 'Nunito',
-      fontWeight: FontWeight.w400,
-      fontSize: 24.0,
-      color: colors.textSecondary,
-    ),
-    onButton: TextStyle(
-      fontFamily: 'Nunito',
-      fontWeight: FontWeight.w400,
-      fontSize: 14.0,
-      color: colors.textPrimary,
-    ),
-    error: TextStyle(
-      fontFamily: 'Nunito',
-      fontWeight: FontWeight.w400,
-      fontSize: 12.0,
-      color: colors.error,
-    ),
-  );
+          header1: TextStyle(
+            fontFamily: 'Nunito',
+            fontWeight: FontWeight.w400,
+            fontSize: 18.0,
+            color: colors.textPrimary,
+          ),
+          header2: TextStyle(
+            fontFamily: 'Nunito',
+            fontWeight: FontWeight.w600,
+            fontSize: 14.0,
+            color: colors.textPrimary,
+          ),
+          bodyText1: TextStyle(
+            fontFamily: 'Nunito',
+            fontWeight: FontWeight.w300,
+            fontSize: 14.0,
+            color: colors.textPrimary,
+          ),
+          subtitle1: TextStyle(
+            fontFamily: 'Nunito',
+            fontWeight: FontWeight.w400,
+            fontSize: 12.0,
+            color: colors.textPrimary,
+          ),
+          subtitle2: TextStyle(
+            fontFamily: 'Nunito',
+            fontWeight: FontWeight.w500,
+            fontSize: 12.0,
+            color: colors.textPrimary,
+          ),
+          textFieldLabel1: TextStyle(
+            fontFamily: 'Nunito',
+            fontWeight: FontWeight.w400,
+            fontSize: 14.0,
+            color: colors.textSecondary,
+          ),
+          textFieldLabel2: TextStyle(
+            fontFamily: 'Nunito',
+            fontWeight: FontWeight.w400,
+            fontSize: 24.0,
+            color: colors.textSecondary,
+          ),
+          onButton: TextStyle(
+            fontFamily: 'Nunito',
+            fontWeight: FontWeight.w400,
+            fontSize: 14.0,
+            color: colors.textPrimary,
+          ),
+          error: TextStyle(
+            fontFamily: 'Nunito',
+            fontWeight: FontWeight.w400,
+            fontSize: 12.0,
+            color: colors.error,
+          ),
+        );
 }
 
+//Этот класс должны наследовать все реализации текстовых стилей для разных тем.
 class AppTextStyles extends ThemeExtension<AppTextStyles> {
   final TextStyle header1;
   final TextStyle header2;
@@ -112,7 +114,9 @@ class AppTextStyles extends ThemeExtension<AppTextStyles> {
 
   @override
   ThemeExtension<AppTextStyles> lerp(
-      covariant ThemeExtension<AppTextStyles>? other, double t) {
+    covariant ThemeExtension<AppTextStyles>? other,
+    double t,
+  ) {
     if (other == null || other.runtimeType != AppTextStyles) {
       return this;
     }
@@ -126,9 +130,9 @@ class AppTextStyles extends ThemeExtension<AppTextStyles> {
       subtitle1: TextStyle.lerp(subtitle1, typedOther.subtitle1, t)!,
       subtitle2: TextStyle.lerp(subtitle2, typedOther.subtitle2, t)!,
       textFieldLabel1:
-      TextStyle.lerp(textFieldLabel1, typedOther.textFieldLabel1, t)!,
+          TextStyle.lerp(textFieldLabel1, typedOther.textFieldLabel1, t)!,
       textFieldLabel2:
-      TextStyle.lerp(textFieldLabel2, typedOther.textFieldLabel2, t)!,
+          TextStyle.lerp(textFieldLabel2, typedOther.textFieldLabel2, t)!,
       onButton: TextStyle.lerp(onButton, typedOther.onButton, t)!,
       error: TextStyle.lerp(error, typedOther.error, t)!,
     );
