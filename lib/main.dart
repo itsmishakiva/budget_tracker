@@ -6,6 +6,7 @@ import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
+import 'package:logging/logging.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -23,6 +24,8 @@ void main() async {
     return true;
   };
 
+  Logger.root.level = Level.ALL;
+
   runApp(const App());
 }
 
@@ -31,6 +34,8 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Logger mockLogger = Logger('MockLogger');
+    mockLogger.log(Level.INFO, 'Logging test');
     return MaterialApp(
       theme: AppThemes().lightThemeData(),
       localizationsDelegates: AppLocalizations.localizationsDelegates,
