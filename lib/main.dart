@@ -1,5 +1,5 @@
-import 'package:budget_tracker/core/app_router_provider.dart';
-import 'package:budget_tracker/core/logger_provider.dart';
+import 'package:budget_tracker/core/internal/app_router_provider.dart';
+import 'package:budget_tracker/core/internal/logger_provider.dart';
 import 'package:budget_tracker/firebase_options.dart';
 import 'package:budget_tracker/themes/app_themes.dart';
 import 'package:firebase_core/firebase_core.dart';

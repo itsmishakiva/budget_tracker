@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:budget_tracker/core/logger_provider.dart';
+import 'package:budget_tracker/core/internal/logger_provider.dart';
+import 'package:budget_tracker/core/ui_kit/app_scaffold.dart';
 import 'package:budget_tracker/extensions/build_context_extension.dart';
 import 'package:budget_tracker/features/operation_list/domain/entities/operation.dart';
 import 'package:budget_tracker/features/operation_list/presentation/view_model/operation_list_view_model.dart';
@@ -14,7 +15,7 @@ class OperationListScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return const AppScaffold(
       body: _OperationListScreenContent(),
     );
   }
