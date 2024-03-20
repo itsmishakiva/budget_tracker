@@ -1,4 +1,5 @@
-import 'package:budget_tracker/features/operation_list/presentation/view/screens/operation_list_screen.dart';
+import 'package:budget_tracker/core/app_router_provider.dart';
+import 'package:budget_tracker/core/logger_provider.dart';
 import 'package:budget_tracker/firebase_options.dart';
 import 'package:budget_tracker/themes/app_themes.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -25,23 +26,33 @@ void main() async {
     return true;
   };
 
-  runApp(const App());
+  Logger.root.level = Level.ALL;
+
+  Logger.root.onRecord.listen((record) {
+    print('${record.level.name}: ${record.time}: ${record.message}');
+  });
+
+  runApp(
+    ProviderScope(
+      child: const App(),
+    ),
+  );
 }
 
-class App extends StatelessWidget {
+class App extends ConsumerWidget {
   const App({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    Logger mockLogger = Logger('MockLogger');
-    mockLogger.log(Level.INFO, 'Logging test');
-    return ProviderScope(
-      child: MaterialApp(
-        theme: AppThemes().lightThemeData(),
-        localizationsDelegates: AppLocalizations.localizationsDelegates,
-        supportedLocales: AppLocalizations.supportedLocales,
-        home: const OperationListScreen(),
-      ),
+  Widget build(BuildContext context, WidgetRef ref) {
+    final logger = ref.read(loggerProvider);
+    final router = ref.watch(appRouterProvider);
+    logger.info("Logger test!");
+
+    return MaterialApp.router(
+      theme: AppThemes().lightThemeData(),
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
+      routerConfig: router.config(),
     );
   }
 }

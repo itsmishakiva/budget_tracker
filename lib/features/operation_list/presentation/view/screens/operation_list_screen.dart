@@ -1,9 +1,14 @@
+import 'package:auto_route/auto_route.dart';
+import 'package:budget_tracker/core/logger_provider.dart';
+import 'package:budget_tracker/extensions/build_context_extension.dart';
 import 'package:budget_tracker/features/operation_list/domain/entities/operation.dart';
 import 'package:budget_tracker/features/operation_list/presentation/view_model/operation_list_view_model.dart';
 import 'package:budget_tracker/features/operation_list/presentation/view_model/operation_list_view_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:logging/logging.dart';
 
+@RoutePage()
 class OperationListScreen extends StatelessWidget {
   const OperationListScreen({super.key});
 
@@ -23,6 +28,7 @@ class _OperationListScreenContent extends ConsumerWidget {
     final state = ref.watch(operationListViewModelProvider);
     switch (state) {
       case OperationListViewLoadingState _:
+        ref.read(loggerProvider).log(Level.INFO, "Hello!");
         return const Center(
           child: CircularProgressIndicator(),
         );
@@ -51,11 +57,47 @@ class _OperationListTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
+      leading: SizedBox(
+        width: 30,
+        height: 30,
+        child: _OperationListTileImage(
+          url: operation.companyAssetUrl,
+        ),
+      ),
       title: Text(operation.title),
       subtitle: Text(operation.description),
       trailing: Text(
         operation.sum.toString(),
       ),
+    );
+  }
+}
+
+class _OperationListTileImage extends StatelessWidget {
+  const _OperationListTileImage({
+    this.url,
+  });
+
+  final String? url;
+
+  @override
+  Widget build(BuildContext context) {
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(6.0),
+      child: url == null
+          ? ColoredBox(color: context.colors.backgroundSecondary)
+          : Image.network(
+              url!,
+              frameBuilder: (context, child, frame, syncLoaded) {
+                if (frame == null)
+                  return ColoredBox(color: context.colors.backgroundSecondary);
+                return child;
+              },
+              errorBuilder: (context, child, event) {
+                return ColoredBox(color: context.colors.backgroundSecondary);
+              },
+              fit: BoxFit.cover,
+            ),
     );
   }
 }
