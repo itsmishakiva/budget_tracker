@@ -138,10 +138,10 @@ class _PinCodeGraphicTile extends ConsumerWidget {
         color = context.colors.error;
         break;
       case PinCodeDefaultViewState _:
-        if (index < state.input.length) color = context.colors.button;
+        if (index < state.input.length) color = context.colors.accent;
         break;
       case PinCodeLoadingViewState _:
-        color = context.colors.button;
+        color = context.colors.accent;
         break;
       default:
         break;
