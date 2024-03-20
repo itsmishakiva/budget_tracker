@@ -19,20 +19,29 @@ class PinCodeViewModel extends Notifier<PinCodeViewState> {
 
   Future<void> userInput(String symbol) async {
     bool success = false;
-    if (state is! PinCodeDefaultViewState) return;
+    if (state is! PinCodeDefaultViewState ||
+        (state is PinCodeDefaultViewState &&
+            (state as PinCodeDefaultViewState).input.length > 4)) return;
     state = PinCodeDefaultViewState(
-        input: (state as PinCodeDefaultViewState).input + symbol);
-    if ((state as PinCodeDefaultViewState).input.length == 4) {
+      input: (state as PinCodeDefaultViewState).input + symbol,
+    );
+    if (state is PinCodeDefaultViewState &&
+        (state as PinCodeDefaultViewState).input.length == 4) {
+      await Future.delayed(const Duration(milliseconds: 300));
       state = PinCodeLoadingViewState();
       //TODO send to repository
+
       await Future.delayed(const Duration(milliseconds: 300));
       success = Random().nextBool();
+
       if (success) {
         state = PinCodeSuccessViewState();
       } else {
         state = PinCodeErrorViewState();
       }
-      await Future.delayed(Duration(seconds: 1));
+      await Future.delayed(
+        Duration(milliseconds: 600),
+      );
       state = PinCodeDefaultViewState();
     }
   }
