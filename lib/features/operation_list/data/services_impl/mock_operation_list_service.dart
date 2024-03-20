@@ -1,7 +1,7 @@
 import 'package:budget_tracker/features/operation_list/data/dto/operation_dto.dart';
-import 'package:budget_tracker/features/operation_list/data/i_services/i_operation_list_service.dart';
+import 'package:budget_tracker/features/operation_list/data/services/operation_list_service.dart';
 
-class MockOperationListService implements IOperationListService {
+class MockOperationListService implements OperationListService {
   @override
   Future<List<OperationDTO>> getOperationList() async {
     await Future.delayed(
