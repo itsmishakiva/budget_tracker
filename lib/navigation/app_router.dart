@@ -6,8 +6,11 @@ class AppRouter extends $AppRouter {
   @override
   List<AutoRoute> get routes => [
         AutoRoute(
-          page: OperationListRoute.page,
+          page: PinCodeRoute.page,
           initial: true,
+        ),
+        AutoRoute(
+          page: OperationListRoute.page,
         ),
       ];
 }

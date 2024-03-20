@@ -12,6 +12,7 @@ class AppLightColors extends AppColors {
           textSecondary: const Color(0xFF3F3F3F),
           button: const Color(0xFF485CA2),
           error: const Color(0xFFA93A3A),
+          success: const Color(0xFF129112),
         );
 }
 
@@ -25,6 +26,7 @@ class AppColors extends ThemeExtension<AppColors> {
   final Color textSecondary;
   final Color button;
   final Color error;
+  final Color success;
 
   const AppColors({
     required this.backgroundPrimary,
@@ -35,6 +37,7 @@ class AppColors extends ThemeExtension<AppColors> {
     required this.textSecondary,
     required this.button,
     required this.error,
+    required this.success,
   });
 
   @override
@@ -47,6 +50,7 @@ class AppColors extends ThemeExtension<AppColors> {
     Color? textSecondary,
     Color? button,
     Color? error,
+    Color? success,
   }) {
     return AppColors(
       backgroundPrimary: backgroundPrimary ?? this.backgroundPrimary,
@@ -56,6 +60,7 @@ class AppColors extends ThemeExtension<AppColors> {
       textPrimary: textPrimary ?? this.textPrimary,
       textSecondary: textSecondary ?? this.textSecondary,
       button: button ?? this.button,
+      success: success ?? this.success,
       error: error ?? this.error,
     );
   }
@@ -83,6 +88,7 @@ class AppColors extends ThemeExtension<AppColors> {
       textSecondary: Color.lerp(textSecondary, typedOther.textSecondary, t)!,
       button: Color.lerp(button, typedOther.button, t)!,
       error: Color.lerp(error, typedOther.error, t)!,
+      success: Color.lerp(success, typedOther.success, t)!,
     );
   }
 }

@@ -4,22 +4,17 @@ import 'package:budget_tracker/features/operation_list/presentation/view_model/o
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final operationListViewModelProvider =
-    NotifierProvider<OperationListViewModel, OperationListViewState>(
-  () => OperationListViewModel(
+    StateNotifierProvider<OperationListViewModel, OperationListViewState>(
+  (ref) => OperationListViewModel(
     RepositoryHandler.getOperationListRepository(),
-  ),
+  )..loadData(),
 );
 
-class OperationListViewModel extends Notifier<OperationListViewState> {
+class OperationListViewModel extends StateNotifier<OperationListViewState> {
   final IOperationListRepository _repository;
 
-  OperationListViewModel(this._repository);
-
-  @override
-  OperationListViewState build() {
-    loadData();
-    return OperationListViewLoadingState();
-  }
+  OperationListViewModel(this._repository)
+      : super(OperationListViewLoadingState());
 
   Future<void> loadData() async {
     try {
