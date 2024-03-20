@@ -19,6 +19,7 @@ mixin _$Operation {
   int get id => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
   double get sum => throw _privateConstructorUsedError;
+  String get currencySymbol => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
   String get companyName => throw _privateConstructorUsedError;
   String? get companyAssetUrl => throw _privateConstructorUsedError;
@@ -37,6 +38,7 @@ abstract class $OperationCopyWith<$Res> {
       {int id,
       String title,
       double sum,
+      String currencySymbol,
       String description,
       String companyName,
       String? companyAssetUrl});
@@ -58,6 +60,7 @@ class _$OperationCopyWithImpl<$Res, $Val extends Operation>
     Object? id = null,
     Object? title = null,
     Object? sum = null,
+    Object? currencySymbol = null,
     Object? description = null,
     Object? companyName = null,
     Object? companyAssetUrl = freezed,
@@ -75,6 +78,10 @@ class _$OperationCopyWithImpl<$Res, $Val extends Operation>
           ? _value.sum
           : sum // ignore: cast_nullable_to_non_nullable
               as double,
+      currencySymbol: null == currencySymbol
+          ? _value.currencySymbol
+          : currencySymbol // ignore: cast_nullable_to_non_nullable
+              as String,
       description: null == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
@@ -103,6 +110,7 @@ abstract class _$$OperationImplCopyWith<$Res>
       {int id,
       String title,
       double sum,
+      String currencySymbol,
       String description,
       String companyName,
       String? companyAssetUrl});
@@ -122,6 +130,7 @@ class __$$OperationImplCopyWithImpl<$Res>
     Object? id = null,
     Object? title = null,
     Object? sum = null,
+    Object? currencySymbol = null,
     Object? description = null,
     Object? companyName = null,
     Object? companyAssetUrl = freezed,
@@ -139,6 +148,10 @@ class __$$OperationImplCopyWithImpl<$Res>
           ? _value.sum
           : sum // ignore: cast_nullable_to_non_nullable
               as double,
+      currencySymbol: null == currencySymbol
+          ? _value.currencySymbol
+          : currencySymbol // ignore: cast_nullable_to_non_nullable
+              as String,
       description: null == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
@@ -162,6 +175,7 @@ class _$OperationImpl with DiagnosticableTreeMixin implements _Operation {
       {required this.id,
       required this.title,
       required this.sum,
+      required this.currencySymbol,
       required this.description,
       required this.companyName,
       this.companyAssetUrl});
@@ -173,6 +187,8 @@ class _$OperationImpl with DiagnosticableTreeMixin implements _Operation {
   @override
   final double sum;
   @override
+  final String currencySymbol;
+  @override
   final String description;
   @override
   final String companyName;
@@ -181,7 +197,7 @@ class _$OperationImpl with DiagnosticableTreeMixin implements _Operation {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Operation(id: $id, title: $title, sum: $sum, description: $description, companyName: $companyName, companyAssetUrl: $companyAssetUrl)';
+    return 'Operation(id: $id, title: $title, sum: $sum, currencySymbol: $currencySymbol, description: $description, companyName: $companyName, companyAssetUrl: $companyAssetUrl)';
   }
 
   @override
@@ -192,6 +208,7 @@ class _$OperationImpl with DiagnosticableTreeMixin implements _Operation {
       ..add(DiagnosticsProperty('id', id))
       ..add(DiagnosticsProperty('title', title))
       ..add(DiagnosticsProperty('sum', sum))
+      ..add(DiagnosticsProperty('currencySymbol', currencySymbol))
       ..add(DiagnosticsProperty('description', description))
       ..add(DiagnosticsProperty('companyName', companyName))
       ..add(DiagnosticsProperty('companyAssetUrl', companyAssetUrl));
@@ -205,6 +222,8 @@ class _$OperationImpl with DiagnosticableTreeMixin implements _Operation {
             (identical(other.id, id) || other.id == id) &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.sum, sum) || other.sum == sum) &&
+            (identical(other.currencySymbol, currencySymbol) ||
+                other.currencySymbol == currencySymbol) &&
             (identical(other.description, description) ||
                 other.description == description) &&
             (identical(other.companyName, companyName) ||
@@ -214,8 +233,8 @@ class _$OperationImpl with DiagnosticableTreeMixin implements _Operation {
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, id, title, sum, description, companyName, companyAssetUrl);
+  int get hashCode => Object.hash(runtimeType, id, title, sum, currencySymbol,
+      description, companyName, companyAssetUrl);
 
   @JsonKey(ignore: true)
   @override
@@ -229,6 +248,7 @@ abstract class _Operation implements Operation {
       {required final int id,
       required final String title,
       required final double sum,
+      required final String currencySymbol,
       required final String description,
       required final String companyName,
       final String? companyAssetUrl}) = _$OperationImpl;
@@ -239,6 +259,8 @@ abstract class _Operation implements Operation {
   String get title;
   @override
   double get sum;
+  @override
+  String get currencySymbol;
   @override
   String get description;
   @override

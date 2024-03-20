@@ -10,7 +10,7 @@ _$OperationDTOImpl _$$OperationDTOImplFromJson(Map<String, dynamic> json) =>
     _$OperationDTOImpl(
       id: json['id'] as int,
       title: json['title'] as String,
-      sum: (json['sum'] as num).toDouble(),
+      sum: json['sum'] as String,
       description: json['description'] as String?,
       companyName: json['companyName'] as String?,
       companyAssetUrl: json['companyAssetUrl'] as String?,

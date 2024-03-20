@@ -12,7 +12,7 @@ class MockOperationListService implements IOperationListService {
         {
           'id': 1,
           'title': 'Operation1',
-          'sum': 1000.00,
+          'sum': '1000.00₽',
           'description': 'Some description here',
           'companyName': 'Yandex',
           'companyAssetUrl':
@@ -21,7 +21,7 @@ class MockOperationListService implements IOperationListService {
         {
           'id': 2,
           'title': 'Operation2',
-          'sum': 433.00,
+          'sum': '433.00₽',
           'description': 'Some description here',
           'companyName': 'Google',
           'companyAssetUrl':
@@ -30,7 +30,7 @@ class MockOperationListService implements IOperationListService {
         {
           'id': 3,
           'title': 'Operation3',
-          'sum': 123.12,
+          'sum': '123.12₽',
           'description': 'Some description here',
           'companyName': 'VK',
           'companyAssetUrl':

@@ -9,7 +9,7 @@ class OperationDTO with _$OperationDTO {
   factory OperationDTO({
     required int id,
     required String title,
-    required double sum,
+    required String sum,
     String? description,
     String? companyName,
     String? companyAssetUrl,

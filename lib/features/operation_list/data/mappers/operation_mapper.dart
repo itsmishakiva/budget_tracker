@@ -8,7 +8,8 @@ class OperationMapper implements IOperationMapper {
     return Operation(
       id: dto.id,
       title: dto.title,
-      sum: dto.sum,
+      sum: double.parse(dto.sum.substring(0, dto.sum.length - 1)),
+      currencySymbol: dto.sum[dto.sum.length - 1],
       description: dto.description ?? '',
       companyName: dto.companyName ?? '',
       companyAssetUrl: dto.companyAssetUrl,
@@ -20,7 +21,7 @@ class OperationMapper implements IOperationMapper {
     return OperationDTO(
       id: entity.id,
       title: entity.title,
-      sum: entity.sum,
+      sum: entity.sum.toString() + entity.currencySymbol,
       description: entity.description,
       companyName: entity.companyName,
       companyAssetUrl: entity.companyAssetUrl,

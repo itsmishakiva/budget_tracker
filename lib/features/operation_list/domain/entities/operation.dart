@@ -9,6 +9,7 @@ class Operation with _$Operation {
     required int id,
     required String title,
     required double sum,
+    required String currencySymbol,
     required String description,
     required String companyName,
     String? companyAssetUrl,

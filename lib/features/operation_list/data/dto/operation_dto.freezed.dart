@@ -22,7 +22,7 @@ OperationDTO _$OperationDTOFromJson(Map<String, dynamic> json) {
 mixin _$OperationDTO {
   int get id => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
-  double get sum => throw _privateConstructorUsedError;
+  String get sum => throw _privateConstructorUsedError;
   String? get description => throw _privateConstructorUsedError;
   String? get companyName => throw _privateConstructorUsedError;
   String? get companyAssetUrl => throw _privateConstructorUsedError;
@@ -42,7 +42,7 @@ abstract class $OperationDTOCopyWith<$Res> {
   $Res call(
       {int id,
       String title,
-      double sum,
+      String sum,
       String? description,
       String? companyName,
       String? companyAssetUrl});
@@ -80,7 +80,7 @@ class _$OperationDTOCopyWithImpl<$Res, $Val extends OperationDTO>
       sum: null == sum
           ? _value.sum
           : sum // ignore: cast_nullable_to_non_nullable
-              as double,
+              as String,
       description: freezed == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
@@ -108,7 +108,7 @@ abstract class _$$OperationDTOImplCopyWith<$Res>
   $Res call(
       {int id,
       String title,
-      double sum,
+      String sum,
       String? description,
       String? companyName,
       String? companyAssetUrl});
@@ -144,7 +144,7 @@ class __$$OperationDTOImplCopyWithImpl<$Res>
       sum: null == sum
           ? _value.sum
           : sum // ignore: cast_nullable_to_non_nullable
-              as double,
+              as String,
       description: freezed == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
@@ -180,7 +180,7 @@ class _$OperationDTOImpl with DiagnosticableTreeMixin implements _OperationDTO {
   @override
   final String title;
   @override
-  final double sum;
+  final String sum;
   @override
   final String? description;
   @override
@@ -245,7 +245,7 @@ abstract class _OperationDTO implements OperationDTO {
   factory _OperationDTO(
       {required final int id,
       required final String title,
-      required final double sum,
+      required final String sum,
       final String? description,
       final String? companyName,
       final String? companyAssetUrl}) = _$OperationDTOImpl;
@@ -258,7 +258,7 @@ abstract class _OperationDTO implements OperationDTO {
   @override
   String get title;
   @override
-  double get sum;
+  String get sum;
   @override
   String? get description;
   @override

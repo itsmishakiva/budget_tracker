@@ -66,8 +66,19 @@ class _OperationListTile extends StatelessWidget {
       ),
       title: Text(operation.title),
       subtitle: Text(operation.description),
-      trailing: Text(
-        operation.sum.toString(),
+      trailing: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(
+            operation.sum.toString(),
+          ),
+          Text(
+            operation.currencySymbol,
+            style: TextStyle(
+              fontWeight: FontWeight.w700,
+            ),
+          ),
+        ],
       ),
     );
   }
