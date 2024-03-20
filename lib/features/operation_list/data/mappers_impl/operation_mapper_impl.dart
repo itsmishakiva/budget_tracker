@@ -1,8 +1,8 @@
 import 'package:budget_tracker/features/operation_list/data/dto/operation_dto.dart';
-import 'package:budget_tracker/features/operation_list/data/i_mappers/i_operation_mapper.dart';
+import 'package:budget_tracker/features/operation_list/data/mappers/i_operation_mapper.dart';
 import 'package:budget_tracker/features/operation_list/domain/entities/operation.dart';
 
-class OperationMapper implements IOperationMapper {
+class OperationMapperImpl implements OperationMapper {
   @override
   Operation fromDto(OperationDTO dto) {
     return Operation(

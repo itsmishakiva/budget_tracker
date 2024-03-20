@@ -1,20 +1,23 @@
-import 'package:budget_tracker/features/operation_list/domain/i_repositories/i_operation_list_repository.dart';
-import 'package:budget_tracker/features/operation_list/internal/repository_handler.dart';
+import 'package:budget_tracker/features/operation_list/domain/repositories/operation_repository.dart';
+import 'package:budget_tracker/features/operation_list/internal/repository_provider.dart';
 import 'package:budget_tracker/features/operation_list/presentation/view_model/operation_list_view_state.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final operationListViewModelProvider =
     StateNotifierProvider<OperationListViewModel, OperationListViewState>(
   (ref) => OperationListViewModel(
-    RepositoryHandler.getOperationListRepository(),
+    OperationListViewLoadingState(),
+    ref.read(repositoryProvider),
   )..loadData(),
 );
 
 class OperationListViewModel extends StateNotifier<OperationListViewState> {
-  final IOperationListRepository _repository;
+  final OperationRepository _repository;
 
-  OperationListViewModel(this._repository)
-      : super(OperationListViewLoadingState());
+  OperationListViewModel(
+    OperationListViewState state,
+    this._repository,
+  ) : super(state);
 
   Future<void> loadData() async {
     try {
