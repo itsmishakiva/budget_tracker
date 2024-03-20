@@ -4,14 +4,14 @@ import 'package:flutter/material.dart';
 class AppLightColors extends AppColors {
   AppLightColors()
       : super(
-          backgroundPrimary: const Color(0xFFE3E3E3),
-          backgroundSecondary: const Color(0xFFC4C4C4),
-          borderPrimary: const Color(0xFF2A2A2A),
-          borderSecondary: const Color(0xFF444444),
-          textPrimary: const Color(0x00000000),
-          textSecondary: const Color(0xFF3F3F3F),
-          button: const Color(0xFF485CA2),
-          error: const Color(0xFFA93A3A),
+          backgroundPrimary: const Color(0xFFFFFFFF),
+          backgroundSecondary: const Color(0xFFFAF9FF),
+          accent: const Color(0xFF3A60F3),
+          accentSecondary: const Color(0xFF5779F7),
+          textPrimary: const Color(0xFF4B425F),
+          textSurface: const Color(0xFFFFFFFF),
+          error: const Color(0xFFFF4B4C),
+          success: const Color(0xFF02C46D),
         );
 }
 
@@ -19,44 +19,44 @@ class AppLightColors extends AppColors {
 class AppColors extends ThemeExtension<AppColors> {
   final Color backgroundPrimary;
   final Color backgroundSecondary;
-  final Color borderPrimary;
-  final Color borderSecondary;
+  final Color accent;
+  final Color accentSecondary;
   final Color textPrimary;
-  final Color textSecondary;
-  final Color button;
+  final Color textSurface;
   final Color error;
+  final Color success;
 
   const AppColors({
     required this.backgroundPrimary,
     required this.backgroundSecondary,
-    required this.borderPrimary,
-    required this.borderSecondary,
+    required this.accent,
+    required this.accentSecondary,
     required this.textPrimary,
-    required this.textSecondary,
-    required this.button,
+    required this.textSurface,
     required this.error,
+    required this.success,
   });
 
   @override
   ThemeExtension<AppColors> copyWith({
     Color? backgroundPrimary,
     Color? backgroundSecondary,
-    Color? borderPrimary,
-    Color? borderSecondary,
+    Color? accent,
+    Color? accentSecondary,
     Color? textPrimary,
-    Color? textSecondary,
-    Color? button,
+    Color? textSurface,
     Color? error,
+    Color? success,
   }) {
     return AppColors(
       backgroundPrimary: backgroundPrimary ?? this.backgroundPrimary,
       backgroundSecondary: backgroundSecondary ?? this.backgroundSecondary,
-      borderPrimary: borderPrimary ?? this.borderPrimary,
-      borderSecondary: borderSecondary ?? this.borderSecondary,
+      accent: accent ?? this.accent,
+      accentSecondary: accentSecondary ?? this.accentSecondary,
       textPrimary: textPrimary ?? this.textPrimary,
-      textSecondary: textSecondary ?? this.textSecondary,
-      button: button ?? this.button,
+      textSurface: textSurface ?? this.textSurface,
       error: error ?? this.error,
+      success: success ?? this.success,
     );
   }
 
@@ -76,13 +76,13 @@ class AppColors extends ThemeExtension<AppColors> {
           Color.lerp(backgroundPrimary, typedOther.backgroundPrimary, t)!,
       backgroundSecondary:
           Color.lerp(backgroundSecondary, typedOther.backgroundSecondary, t)!,
-      borderPrimary: Color.lerp(borderPrimary, typedOther.borderPrimary, t)!,
-      borderSecondary:
-          Color.lerp(borderSecondary, typedOther.borderSecondary, t)!,
+      accent: Color.lerp(accent, typedOther.accent, t)!,
+      accentSecondary:
+          Color.lerp(accentSecondary, typedOther.accentSecondary, t)!,
       textPrimary: Color.lerp(textPrimary, typedOther.textPrimary, t)!,
-      textSecondary: Color.lerp(textSecondary, typedOther.textSecondary, t)!,
-      button: Color.lerp(button, typedOther.button, t)!,
+      textSurface: Color.lerp(textSurface, typedOther.textSurface, t)!,
       error: Color.lerp(error, typedOther.error, t)!,
+      success: Color.lerp(success, typedOther.success, t)!,
     );
   }
 }
