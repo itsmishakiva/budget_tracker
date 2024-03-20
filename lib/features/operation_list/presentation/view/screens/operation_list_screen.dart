@@ -70,7 +70,7 @@ class _OperationListTile extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Text(
-            operation.sum.toString(),
+            operation.sum.toStringAsFixed(2),
           ),
           Text(
             operation.currencySymbol,
