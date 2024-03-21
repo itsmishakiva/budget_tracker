@@ -1,10 +1,10 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:budget_tracker/core/internal/logger_provider.dart';
 import 'package:budget_tracker/core/ui_kit/app_scaffold.dart';
 import 'package:budget_tracker/extensions/build_context_extension.dart';
 import 'package:budget_tracker/features/operation_list/domain/entities/operation.dart';
 import 'package:budget_tracker/features/operation_list/presentation/view_model/operation_list_view_model.dart';
 import 'package:budget_tracker/features/operation_list/presentation/view_model/operation_list_view_state.dart';
+import 'package:budget_tracker/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logging/logging.dart';
@@ -29,7 +29,7 @@ class _OperationListScreenContent extends ConsumerWidget {
     final state = ref.watch(operationListViewModelProvider);
     switch (state) {
       case OperationListViewLoadingState _:
-        ref.read(loggerProvider).log(Level.INFO, "Hello!");
+        logger.log(Level.INFO, "Hello!");
         return const Center(
           child: CircularProgressIndicator(),
         );

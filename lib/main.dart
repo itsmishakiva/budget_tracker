@@ -1,5 +1,4 @@
 import 'package:budget_tracker/core/internal/app_router_provider.dart';
-import 'package:budget_tracker/core/internal/logger_provider.dart';
 import 'package:budget_tracker/firebase_options.dart';
 import 'package:budget_tracker/themes/app_themes.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -9,6 +8,8 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logging/logging.dart';
+
+Logger logger = Logger("AppLogger");
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -44,7 +45,6 @@ class App extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final logger = ref.read(loggerProvider);
     final router = ref.watch(appRouterProvider);
     logger.info("Logger test!");
 

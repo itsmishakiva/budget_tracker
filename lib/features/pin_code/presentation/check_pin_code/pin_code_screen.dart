@@ -2,19 +2,20 @@ import 'package:auto_route/auto_route.dart';
 import 'package:budget_tracker/core/ui_kit/app_scaffold.dart';
 import 'package:budget_tracker/core/ui_kit/constraints_contants.dart';
 import 'package:budget_tracker/extensions/build_context_extension.dart';
-import 'package:budget_tracker/features/pin_code/presentation/view_model/pin_code_view_model.dart';
-import 'package:budget_tracker/features/pin_code/presentation/view_model/pin_code_view_state.dart';
+import 'package:budget_tracker/features/pin_code/presentation/check_pin_code/pin_code_view_model.dart';
+import 'package:budget_tracker/features/pin_code/presentation/check_pin_code/pin_code_view_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:vibration/vibration.dart';
 
 @RoutePage()
-class PinCodeScreen extends StatelessWidget {
+class PinCodeScreen extends ConsumerWidget {
   const PinCodeScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final state = ref.watch(pinCodeViewModelProvider);
     return AppScaffold(
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16.0),
@@ -23,7 +24,20 @@ class PinCodeScreen extends StatelessWidget {
             const Spacer(flex: 3),
             _PinCodeGraphics(),
             const Spacer(flex: 2),
-            _PinCodeKeyboard(),
+            PinCodeKeyboard(
+              biometryType: state.biometryTypes,
+              onTap: (text) {
+                ref.read(pinCodeViewModelProvider.notifier).userInput(text);
+              },
+              onBiometryTap: () {
+                ref.read(pinCodeViewModelProvider.notifier).biometryInput(
+                      context.locale!.biometryReason,
+                    );
+              },
+              onBackButtonTap: () {
+                ref.read(pinCodeViewModelProvider.notifier).userInput(null);
+              },
+            ),
             const SizedBox(height: 32),
           ],
         ),
@@ -32,16 +46,27 @@ class PinCodeScreen extends StatelessWidget {
   }
 }
 
-class _PinCodeKeyboard extends ConsumerWidget {
-  const _PinCodeKeyboard();
+class PinCodeKeyboard extends ConsumerWidget {
+  const PinCodeKeyboard({
+    required this.biometryType,
+    required this.onTap,
+    required this.onBackButtonTap,
+    this.onBiometryTap,
+  });
+
+  final BiometryTypes biometryType;
+  final void Function(String?) onTap;
+  final void Function() onBackButtonTap;
+  final void Function()? onBiometryTap;
 
   Row _generateNumberButtonsRow(int startNumber) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: List.generate(
         3,
-        (index) => _PinCodeKeyboardButton(
+        (index) => PinCodeKeyboardButton(
           text: (index + startNumber).toString(),
+          onTap: () => onTap((index + startNumber).toString()),
         ),
       ),
     );
@@ -64,14 +89,22 @@ class _PinCodeKeyboard extends ConsumerWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                _PinCodeKeyboardButton(
-                  svgAssetName: 'assets/svg/face_id.svg',
-                  onTap: () {},
+                if (biometryType != BiometryTypes.none)
+                  PinCodeKeyboardButton(
+                    svgAssetName: biometryType == BiometryTypes.faceId
+                        ? 'assets/svg/face_id.svg'
+                        : 'assets/svg/fingerprint.svg',
+                    onTap: onBiometryTap!,
+                  ),
+                if (biometryType == BiometryTypes.none)
+                  const SizedBox(width: 74),
+                PinCodeKeyboardButton(
+                  text: '0',
+                  onTap: () => onTap('0'),
                 ),
-                _PinCodeKeyboardButton(text: '0'),
-                _PinCodeKeyboardButton(
+                PinCodeKeyboardButton(
                   svgAssetName: 'assets/svg/back_icon.svg',
-                  onTap: () {},
+                  onTap: onBackButtonTap,
                 ),
               ],
             ),
@@ -82,23 +115,23 @@ class _PinCodeKeyboard extends ConsumerWidget {
   }
 }
 
-class _PinCodeKeyboardButton extends ConsumerStatefulWidget {
-  const _PinCodeKeyboardButton({
+class PinCodeKeyboardButton extends ConsumerStatefulWidget {
+  const PinCodeKeyboardButton({
     this.text,
     this.svgAssetName,
-    this.onTap,
-  }) : assert(text != null && svgAssetName == null && onTap == null ||
-            text == null && svgAssetName != null && onTap != null);
+    required this.onTap,
+  });
+
   final String? text;
   final String? svgAssetName;
-  final void Function()? onTap;
+  final void Function() onTap;
 
   @override
-  ConsumerState<_PinCodeKeyboardButton> createState() =>
+  ConsumerState<PinCodeKeyboardButton> createState() =>
       _PinCodeKeyboardButtonState();
 }
 
-class _PinCodeKeyboardButtonState extends ConsumerState<_PinCodeKeyboardButton>
+class _PinCodeKeyboardButtonState extends ConsumerState<PinCodeKeyboardButton>
     with SingleTickerProviderStateMixin {
   late final AnimationController _animationController;
 
@@ -109,6 +142,12 @@ class _PinCodeKeyboardButtonState extends ConsumerState<_PinCodeKeyboardButton>
       vsync: this,
       duration: const Duration(milliseconds: 100),
     );
+  }
+
+  @override
+  void dispose() {
+    _animationController.dispose();
+    super.dispose();
   }
 
   @override
@@ -126,10 +165,7 @@ class _PinCodeKeyboardButtonState extends ConsumerState<_PinCodeKeyboardButton>
       onTapDown: (details) {
         awaitAnimationFunction = _animationController.forward();
       },
-      onTap: widget.onTap ??
-          () {
-            ref.read(pinCodeViewModelProvider.notifier).userInput(widget.text!);
-          },
+      onTap: widget.onTap,
       child: AnimatedBuilder(
         animation: _animationController,
         builder: (context, child) {
@@ -212,7 +248,9 @@ class _PinCodeGraphicTileState extends ConsumerState<_PinCodeGraphicTile>
     super.initState();
     _inputAnimationController = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 100),
+      duration: const Duration(
+        milliseconds: PinCodeViewModel.inputAnimationTimeMs,
+      ),
     );
     _errorAnimationController = AnimationController(
       vsync: this,
@@ -220,22 +258,33 @@ class _PinCodeGraphicTileState extends ConsumerState<_PinCodeGraphicTile>
       lowerBound: -0.5,
       upperBound: 0.5,
     );
+    _errorAnimationController.value = 0;
     _successAnimationController = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 300),
     );
-    Future(() {
-      _errorAnimationController.value = 0;
-    });
   }
 
   @override
-  Widget build(BuildContext context) {
-    Future(() {
-      _errorAnimationController.stop();
-      _errorAnimationController.value = 0;
-    });
-    final state = ref.watch(pinCodeViewModelProvider);
+  void dispose() {
+    _errorAnimationController.dispose();
+    _successAnimationController.dispose();
+    _inputAnimationController.dispose();
+    super.dispose();
+  }
+
+  Widget _getTileUi(Color color) {
+    return Container(
+      width: _PinCodeGraphicTile._graphicSize,
+      height: _PinCodeGraphicTile._graphicSize,
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        color: color,
+      ),
+    );
+  }
+
+  (Animation<double>?, Color) _getCurrentUiData(PinCodeViewState state) {
     Color color = context.colors.disabled;
     Animation<double>? animation;
     switch (state) {
@@ -278,47 +327,48 @@ class _PinCodeGraphicTileState extends ConsumerState<_PinCodeGraphicTile>
       default:
         break;
     }
+    return (animation, color);
+  }
 
-    return animation == null
-        ? Container(
-            width: _PinCodeGraphicTile._graphicSize,
-            height: _PinCodeGraphicTile._graphicSize,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              color: color,
-            ),
-          )
-        : AnimatedBuilder(
-            animation: animation,
-            builder: (context, child) {
-              switch (state) {
-                case PinCodeDefaultViewState _:
-                  return Transform.scale(
-                    scale: 1 + 0.2 * animation!.value,
-                    child: child,
-                  );
-                case PinCodeSuccessViewState _:
-                  return Transform.scale(
-                    scale: 1 + 0.2 * animation!.value,
-                    child: child,
-                  );
-                case PinCodeErrorViewState _:
-                  return Transform.translate(
-                    offset: Offset(animation!.value * 4, 0),
-                    child: child,
-                  );
-                default:
-                  return child!;
-              }
-            },
-            child: Container(
-              width: _PinCodeGraphicTile._graphicSize,
-              height: _PinCodeGraphicTile._graphicSize,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: color,
-              ),
-            ),
-          );
+  @override
+  Widget build(BuildContext context) {
+    final state = ref.watch(pinCodeViewModelProvider);
+
+    Future(() {
+      _errorAnimationController.stop();
+      _errorAnimationController.value = 0;
+    });
+
+    final uiData = _getCurrentUiData(state);
+    final Color color = uiData.$2;
+    final Animation<double>? animation = uiData.$1;
+
+    if (animation == null) return _getTileUi(color);
+
+    return AnimatedBuilder(
+      animation: animation,
+      builder: (context, child) {
+        switch (state) {
+          case PinCodeDefaultViewState _:
+            return Transform.scale(
+              scale: 1 + 0.2 * animation.value,
+              child: child,
+            );
+          case PinCodeSuccessViewState _:
+            return Transform.scale(
+              scale: 1 + 0.2 * animation.value,
+              child: child,
+            );
+          case PinCodeErrorViewState _:
+            return Transform.translate(
+              offset: Offset(animation.value * 4, 0),
+              child: child,
+            );
+          default:
+            return child!;
+        }
+      },
+      child: _getTileUi(color),
+    );
   }
 }

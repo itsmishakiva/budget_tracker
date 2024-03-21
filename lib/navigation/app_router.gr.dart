@@ -11,7 +11,7 @@
 import 'package:auto_route/auto_route.dart' as _i3;
 import 'package:budget_tracker/features/operation_list/presentation/view/screens/operation_list_screen.dart'
     as _i1;
-import 'package:budget_tracker/features/pin_code/presentation/view/screens/pin_code_screen.dart'
+import 'package:budget_tracker/features/pin_code/presentation/check_pin_code/pin_code_screen.dart'
     as _i2;
 
 abstract class $AppRouter extends _i3.RootStackRouter {
