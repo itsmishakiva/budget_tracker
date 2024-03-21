@@ -9,7 +9,7 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:auto_route/auto_route.dart' as _i2;
-import 'package:budget_tracker/features/operation_list/presentation/view/screens/operation_list_screen.dart'
+import 'package:budget_tracker/features/operation_list/presentation/operation_list/operation_list_screen.dart'
     as _i1;
 
 abstract class $AppRouter extends _i2.RootStackRouter {
