@@ -47,7 +47,8 @@ class _OperationCreationTypeScreenContent extends ConsumerWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                padding:  EdgeInsets.symmetric(vertical: constraints.horizontalScreenPadding),
+                padding: EdgeInsets.symmetric(
+                    vertical: constraints.horizontalScreenPadding),
                 child: GestureDetector(
                   child: Icon(
                     Icons.arrow_back_ios_new,
@@ -66,7 +67,9 @@ class _OperationCreationTypeScreenContent extends ConsumerWidget {
               _ChoiceTileGroup(
                 tiles: state.data,
               ),
-              MyButton(title: context.locale!.next,),
+              MyButton(
+                title: context.locale!.next,
+              ),
             ],
           ),
         );
@@ -75,8 +78,7 @@ class _OperationCreationTypeScreenContent extends ConsumerWidget {
 }
 
 class _OperationTypeTile extends ConsumerWidget {
-  const _OperationTypeTile(
-      {required this.isSelected, required this.isIncome});
+  const _OperationTypeTile({required this.isSelected, required this.isIncome});
 
   final bool isSelected;
   final bool isIncome;
@@ -220,7 +222,8 @@ class _ChoiceTileGroup extends StatelessWidget {
           SizedBox(
             height: 20,
           ),
-          Text(context.locale!.chooseTransactionCategory, style: context.textStyles.hint),
+          Text(context.locale!.chooseTransactionCategory,
+              style: context.textStyles.hint),
           SizedBox(
             height: 5,
           ),
@@ -243,4 +246,3 @@ class _ChoiceTileGroup extends StatelessWidget {
     );
   }
 }
-

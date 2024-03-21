@@ -68,7 +68,6 @@ class SumInputField extends StatefulWidget {
 }
 
 class _SumInputFieldState extends State<SumInputField> {
-
   String display = '';
 
   void onButtonPressed(String value) {
@@ -76,7 +75,6 @@ class _SumInputFieldState extends State<SumInputField> {
       display += value;
     });
   }
-
 
   String inputSum = "0";
   @override
@@ -109,7 +107,7 @@ class _SumInputFieldState extends State<SumInputField> {
                 topLeft: Radius.circular(15),
                 topRight: Radius.circular(15),
               ),
-            color: context.colors.backgroundPrimary,
+              color: context.colors.backgroundPrimary,
             ),
             // child: GridView.count(
             //   crossAxisCount: 3,

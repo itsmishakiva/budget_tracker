@@ -3,5 +3,5 @@ import 'package:budget_tracker/features/operation_creation/data/services_impl/mo
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final serviceProvider = Provider<OperationTypeListService>(
-      (ref) => MockOperationTypeListService(),
+  (ref) => MockOperationTypeListService(),
 );

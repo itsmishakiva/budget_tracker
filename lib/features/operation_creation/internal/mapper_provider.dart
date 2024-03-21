@@ -3,5 +3,5 @@ import 'package:budget_tracker/features/operation_creation/data/mappers_impl/ope
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final mapperProvider = Provider<OperationTypeMapper>(
-      (ref) => OperationTypeMapperImpl(),
+  (ref) => OperationTypeMapperImpl(),
 );

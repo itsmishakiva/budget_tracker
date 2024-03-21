@@ -22,7 +22,7 @@ class MyButton extends ConsumerWidget {
           onPressed: () => onTap,
           child: Text(title,
               style:
-              context.textStyles.textButton.copyWith(color: Colors.white)),
+                  context.textStyles.textButton.copyWith(color: Colors.white)),
         ),
       ),
     );

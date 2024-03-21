@@ -5,7 +5,7 @@ import 'package:budget_tracker/features/operation_creation/internal/service_prov
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final repositoryProvider = Provider<OperationTypeRepository>(
-      (ref) => OperationTypeRepositoryImpl(
+  (ref) => OperationTypeRepositoryImpl(
     ref.watch(serviceProvider),
     ref.watch(mapperProvider),
   ),

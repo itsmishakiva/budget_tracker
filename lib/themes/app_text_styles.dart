@@ -124,7 +124,7 @@ class AppTextStyles extends ThemeExtension<AppTextStyles> {
       headerSurface2: headerSurface2 ?? this.headerSurface2,
       bodyTextSurface: bodyTextSurface ?? this.bodyTextSurface,
       textButton: textButton ?? this.textButton,
-      hint: hint?? this.hint,
+      hint: hint ?? this.hint,
       subtitle1: subtitle1 ?? this.subtitle1,
       onNumericButton: onNumericButton ?? this.onNumericButton,
       onButton: onButton ?? this.onButton,
