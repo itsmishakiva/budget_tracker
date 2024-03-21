@@ -6,10 +6,12 @@ class AppScaffold extends StatelessWidget {
     super.key,
     this.body,
     this.floatingActionButton,
+    this.floatingActionButtonLocation,
   });
 
   final Widget? body;
   final Widget? floatingActionButton;
+  final Widget? floatingActionButtonLocation;
 
   @override
   Widget build(BuildContext context) {

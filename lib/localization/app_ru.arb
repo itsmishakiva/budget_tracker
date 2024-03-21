@@ -1,3 +1,11 @@
 {
-    "budgetTracker": "Трекер бюджета"
+    "budgetTracker": "Трекер бюджета",
+    "createTransaction" : "Создать транзакцию",
+    "chooseTransactionType": "Выберите тип транзакции",
+    "incomingTransaction": "Входящая операция",
+    "outgoingTransaction": "Исходящая операция",
+    "chooseTransactionCategory": "Выберите категорию транзакции",
+    "next": "Далее",
+    "currentBalance": "Текущий баланс",
+    "inputAmount": "Введите сумму"
 }

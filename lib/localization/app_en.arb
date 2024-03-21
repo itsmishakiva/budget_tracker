@@ -1,3 +1,11 @@
 {
-    "budgetTracker": "Budget tracker"
+    "budgetTracker": "Budget tracker",
+    "createTransaction" : "Create transaction",
+    "chooseTransactionType": "Choose transaction type",
+    "incomingTransaction": "Incoming transaction",
+    "outgoingTransaction": "Outgoing transaction",
+    "chooseTransactionCategory": "Choose transaction category",
+    "next": "Continue",
+    "currentBalance": "Current balance",
+    "inputAmount": "inputAmount"
 }
