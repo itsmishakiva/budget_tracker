@@ -4,7 +4,7 @@ import 'package:budget_tracker/features/operation_list/presentation/view_model/o
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final operationListViewModelProvider =
-    StateNotifierProvider<OperationListViewModel, OperationListViewState>(
+StateNotifierProvider<OperationListViewModel, OperationListViewState>(
   (ref) => OperationListViewModel(
     OperationListViewLoadingState(),
     ref.read(repositoryProvider),

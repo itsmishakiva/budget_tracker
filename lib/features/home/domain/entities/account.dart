@@ -1,15 +1,16 @@
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'operation.freezed.dart';
+part 'account.freezed.dart';
 
 @freezed
-class Operation with _$Operation {
-  factory Operation({
+class Account with _$Account {
+  factory Account({
     required int id,
     required String title,
     required double sum,
+    required double expenses,
+    required double income,
     required String currencySymbol,
-    required String companyName,
-  }) = _Operation;
+  }) = _Account;
 }

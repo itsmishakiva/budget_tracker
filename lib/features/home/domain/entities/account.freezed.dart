@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'operation.dart';
+part of 'account.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,35 +15,36 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
-mixin _$Operation {
+mixin _$Account {
   int get id => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
   double get sum => throw _privateConstructorUsedError;
+  double get expenses => throw _privateConstructorUsedError;
+  double get income => throw _privateConstructorUsedError;
   String get currencySymbol => throw _privateConstructorUsedError;
-  String get companyName => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $OperationCopyWith<Operation> get copyWith =>
-      throw _privateConstructorUsedError;
+  $AccountCopyWith<Account> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $OperationCopyWith<$Res> {
-  factory $OperationCopyWith(Operation value, $Res Function(Operation) then) =
-      _$OperationCopyWithImpl<$Res, Operation>;
+abstract class $AccountCopyWith<$Res> {
+  factory $AccountCopyWith(Account value, $Res Function(Account) then) =
+      _$AccountCopyWithImpl<$Res, Account>;
   @useResult
   $Res call(
       {int id,
       String title,
       double sum,
-      String currencySymbol,
-      String companyName});
+      double expenses,
+      double income,
+      String currencySymbol});
 }
 
 /// @nodoc
-class _$OperationCopyWithImpl<$Res, $Val extends Operation>
-    implements $OperationCopyWith<$Res> {
-  _$OperationCopyWithImpl(this._value, this._then);
+class _$AccountCopyWithImpl<$Res, $Val extends Account>
+    implements $AccountCopyWith<$Res> {
+  _$AccountCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -56,8 +57,9 @@ class _$OperationCopyWithImpl<$Res, $Val extends Operation>
     Object? id = null,
     Object? title = null,
     Object? sum = null,
+    Object? expenses = null,
+    Object? income = null,
     Object? currencySymbol = null,
-    Object? companyName = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -72,40 +74,44 @@ class _$OperationCopyWithImpl<$Res, $Val extends Operation>
           ? _value.sum
           : sum // ignore: cast_nullable_to_non_nullable
               as double,
+      expenses: null == expenses
+          ? _value.expenses
+          : expenses // ignore: cast_nullable_to_non_nullable
+              as double,
+      income: null == income
+          ? _value.income
+          : income // ignore: cast_nullable_to_non_nullable
+              as double,
       currencySymbol: null == currencySymbol
           ? _value.currencySymbol
           : currencySymbol // ignore: cast_nullable_to_non_nullable
-              as String,
-      companyName: null == companyName
-          ? _value.companyName
-          : companyName // ignore: cast_nullable_to_non_nullable
               as String,
     ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$$OperationImplCopyWith<$Res>
-    implements $OperationCopyWith<$Res> {
-  factory _$$OperationImplCopyWith(
-          _$OperationImpl value, $Res Function(_$OperationImpl) then) =
-      __$$OperationImplCopyWithImpl<$Res>;
+abstract class _$$AccountImplCopyWith<$Res> implements $AccountCopyWith<$Res> {
+  factory _$$AccountImplCopyWith(
+          _$AccountImpl value, $Res Function(_$AccountImpl) then) =
+      __$$AccountImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
       {int id,
       String title,
       double sum,
-      String currencySymbol,
-      String companyName});
+      double expenses,
+      double income,
+      String currencySymbol});
 }
 
 /// @nodoc
-class __$$OperationImplCopyWithImpl<$Res>
-    extends _$OperationCopyWithImpl<$Res, _$OperationImpl>
-    implements _$$OperationImplCopyWith<$Res> {
-  __$$OperationImplCopyWithImpl(
-      _$OperationImpl _value, $Res Function(_$OperationImpl) _then)
+class __$$AccountImplCopyWithImpl<$Res>
+    extends _$AccountCopyWithImpl<$Res, _$AccountImpl>
+    implements _$$AccountImplCopyWith<$Res> {
+  __$$AccountImplCopyWithImpl(
+      _$AccountImpl _value, $Res Function(_$AccountImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -114,10 +120,11 @@ class __$$OperationImplCopyWithImpl<$Res>
     Object? id = null,
     Object? title = null,
     Object? sum = null,
+    Object? expenses = null,
+    Object? income = null,
     Object? currencySymbol = null,
-    Object? companyName = null,
   }) {
-    return _then(_$OperationImpl(
+    return _then(_$AccountImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -130,13 +137,17 @@ class __$$OperationImplCopyWithImpl<$Res>
           ? _value.sum
           : sum // ignore: cast_nullable_to_non_nullable
               as double,
+      expenses: null == expenses
+          ? _value.expenses
+          : expenses // ignore: cast_nullable_to_non_nullable
+              as double,
+      income: null == income
+          ? _value.income
+          : income // ignore: cast_nullable_to_non_nullable
+              as double,
       currencySymbol: null == currencySymbol
           ? _value.currencySymbol
           : currencySymbol // ignore: cast_nullable_to_non_nullable
-              as String,
-      companyName: null == companyName
-          ? _value.companyName
-          : companyName // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -144,13 +155,14 @@ class __$$OperationImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$OperationImpl with DiagnosticableTreeMixin implements _Operation {
-  _$OperationImpl(
+class _$AccountImpl with DiagnosticableTreeMixin implements _Account {
+  _$AccountImpl(
       {required this.id,
       required this.title,
       required this.sum,
-      required this.currencySymbol,
-      required this.companyName});
+      required this.expenses,
+      required this.income,
+      required this.currencySymbol});
 
   @override
   final int id;
@@ -159,59 +171,64 @@ class _$OperationImpl with DiagnosticableTreeMixin implements _Operation {
   @override
   final double sum;
   @override
-  final String currencySymbol;
+  final double expenses;
   @override
-  final String companyName;
+  final double income;
+  @override
+  final String currencySymbol;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Operation(id: $id, title: $title, sum: $sum, currencySymbol: $currencySymbol, companyName: $companyName)';
+    return 'Account(id: $id, title: $title, sum: $sum, expenses: $expenses, income: $income, currencySymbol: $currencySymbol)';
   }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('type', 'Operation'))
+      ..add(DiagnosticsProperty('type', 'Account'))
       ..add(DiagnosticsProperty('id', id))
       ..add(DiagnosticsProperty('title', title))
       ..add(DiagnosticsProperty('sum', sum))
-      ..add(DiagnosticsProperty('currencySymbol', currencySymbol))
-      ..add(DiagnosticsProperty('companyName', companyName));
+      ..add(DiagnosticsProperty('expenses', expenses))
+      ..add(DiagnosticsProperty('income', income))
+      ..add(DiagnosticsProperty('currencySymbol', currencySymbol));
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$OperationImpl &&
+            other is _$AccountImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.sum, sum) || other.sum == sum) &&
+            (identical(other.expenses, expenses) ||
+                other.expenses == expenses) &&
+            (identical(other.income, income) || other.income == income) &&
             (identical(other.currencySymbol, currencySymbol) ||
-                other.currencySymbol == currencySymbol) &&
-            (identical(other.companyName, companyName) ||
-                other.companyName == companyName));
+                other.currencySymbol == currencySymbol));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, id, title, sum, currencySymbol, companyName);
+  int get hashCode => Object.hash(
+      runtimeType, id, title, sum, expenses, income, currencySymbol);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$OperationImplCopyWith<_$OperationImpl> get copyWith =>
-      __$$OperationImplCopyWithImpl<_$OperationImpl>(this, _$identity);
+  _$$AccountImplCopyWith<_$AccountImpl> get copyWith =>
+      __$$AccountImplCopyWithImpl<_$AccountImpl>(this, _$identity);
 }
 
-abstract class _Operation implements Operation {
-  factory _Operation(
+abstract class _Account implements Account {
+  factory _Account(
       {required final int id,
       required final String title,
       required final double sum,
-      required final String currencySymbol,
-      required final String companyName}) = _$OperationImpl;
+      required final double expenses,
+      required final double income,
+      required final String currencySymbol}) = _$AccountImpl;
 
   @override
   int get id;
@@ -220,11 +237,13 @@ abstract class _Operation implements Operation {
   @override
   double get sum;
   @override
+  double get expenses;
+  @override
+  double get income;
+  @override
   String get currencySymbol;
   @override
-  String get companyName;
-  @override
   @JsonKey(ignore: true)
-  _$$OperationImplCopyWith<_$OperationImpl> get copyWith =>
+  _$$AccountImplCopyWith<_$AccountImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

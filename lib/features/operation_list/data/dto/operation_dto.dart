@@ -10,9 +10,7 @@ class OperationDTO with _$OperationDTO {
     required int id,
     required String title,
     required String sum,
-    String? description,
     String? companyName,
-    String? companyAssetUrl,
   }) = _OperationDTO;
 
   factory OperationDTO.fromJson(Map<String, Object?> json) =>

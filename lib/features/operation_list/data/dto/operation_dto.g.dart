@@ -11,9 +11,7 @@ _$OperationDTOImpl _$$OperationDTOImplFromJson(Map<String, dynamic> json) =>
       id: json['id'] as int,
       title: json['title'] as String,
       sum: json['sum'] as String,
-      description: json['description'] as String?,
       companyName: json['companyName'] as String?,
-      companyAssetUrl: json['companyAssetUrl'] as String?,
     );
 
 Map<String, dynamic> _$$OperationDTOImplToJson(_$OperationDTOImpl instance) =>
@@ -21,7 +19,5 @@ Map<String, dynamic> _$$OperationDTOImplToJson(_$OperationDTOImpl instance) =>
       'id': instance.id,
       'title': instance.title,
       'sum': instance.sum,
-      'description': instance.description,
       'companyName': instance.companyName,
-      'companyAssetUrl': instance.companyAssetUrl,
     };

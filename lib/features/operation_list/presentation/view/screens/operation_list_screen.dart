@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:auto_route/auto_route.dart';
 import 'package:budget_tracker/core/internal/logger_provider.dart';
 import 'package:budget_tracker/core/ui_kit/app_scaffold.dart';
@@ -5,9 +7,12 @@ import 'package:budget_tracker/extensions/build_context_extension.dart';
 import 'package:budget_tracker/features/operation_list/domain/entities/operation.dart';
 import 'package:budget_tracker/features/operation_list/presentation/view_model/operation_list_view_model.dart';
 import 'package:budget_tracker/features/operation_list/presentation/view_model/operation_list_view_state.dart';
+import 'package:budget_tracker/themes/app_text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logging/logging.dart';
+
+import '../../../../../themes/app_colors.dart';
 
 @RoutePage()
 class OperationListScreen extends StatelessWidget {
@@ -16,13 +21,13 @@ class OperationListScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const AppScaffold(
-      body: _OperationListScreenContent(),
+      body: OperationListScreenContent(),
     );
   }
 }
 
-class _OperationListScreenContent extends ConsumerWidget {
-  const _OperationListScreenContent();
+class OperationListScreenContent extends ConsumerWidget {
+  const OperationListScreenContent();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -54,32 +59,73 @@ class _OperationListTile extends StatelessWidget {
   });
 
   final Operation operation;
+  final double size = 30;
+
+  Color _randomColor() {
+    final random = Random();
+    return Color.fromRGBO(
+      random.nextInt(256), // Красный
+      random.nextInt(256), // Зеленый
+      random.nextInt(256), // Синий
+      1.0, // Прозрачность
+    );
+  }
+
+  Icon _operationIcon(String operation, Color color) {
+
+    switch (operation) {
+      case "Home":
+        return Icon(Icons.home, size: size, color: color);
+      case "Health":
+        return Icon(Icons.heart_broken_rounded, size: size, color: color);
+      case "Food":
+        return Icon(Icons.emoji_food_beverage, size: size, color: color);
+      default:
+        return Icon(Icons.home, size: size, color: color);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      leading: SizedBox(
-        width: 30,
-        height: 30,
-        child: _OperationListTileImage(
-          url: operation.companyAssetUrl,
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 8),
+      child: ListTile(
+        tileColor: AppLightColors().backgroundPrimary,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20.0),
         ),
-      ),
-      title: Text(operation.title),
-      subtitle: Text(operation.description),
-      trailing: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Text(
-            operation.sum.toStringAsFixed(2),
+        leading: Container(
+          width: 60,
+          height: 60,
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            color: AppLightColors().customLightColors[operation.id % 6],
           ),
-          Text(
-            operation.currencySymbol,
-            style: TextStyle(
-              fontWeight: FontWeight.w700,
+          child: _operationIcon(operation.title, AppLightColors().customColors[operation.id % 6])
+        ),
+        title: Text(
+            operation.title,
+          style: AppLightTextStyles(colors: AppLightColors()).header3,
+          overflow: TextOverflow.ellipsis,
+        ),
+        subtitle: Text(
+            operation.companyName,
+          style: AppLightTextStyles(colors: AppLightColors()).subtitle2,
+          overflow: TextOverflow.ellipsis,
+        ),
+        trailing: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              operation.sum.toStringAsFixed(2),
+              style: AppLightTextStyles(colors: AppLightColors()).header3,
             ),
-          ),
-        ],
+            Text(
+              operation.currencySymbol,
+              style: AppLightTextStyles(colors: AppLightColors()).header3,
+            ),
+          ],
+        ),
       ),
     );
   }
