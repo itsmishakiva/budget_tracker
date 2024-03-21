@@ -5,4 +5,6 @@ final constraintsConstantsProvider =
 
 class ConstraintsConstants {
   final horizontalScreenPadding = 16.0;
+  final tileMargin = 5.0;
+  final tileBorderRadius = 20.0;
 }

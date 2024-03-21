@@ -5,9 +5,11 @@ class AppScaffold extends StatelessWidget {
   const AppScaffold({
     super.key,
     this.body,
+    this.floatingActionButton,
   });
 
   final Widget? body;
+  final Widget? floatingActionButton;
 
   @override
   Widget build(BuildContext context) {
@@ -21,6 +23,7 @@ class AppScaffold extends StatelessWidget {
       ),
       child: Scaffold(
         body: body,
+        floatingActionButton: floatingActionButton,
       ),
     );
   }
