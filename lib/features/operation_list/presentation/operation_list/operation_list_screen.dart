@@ -29,7 +29,7 @@ class _OperationListScreenContent extends ConsumerWidget {
     final state = ref.watch(operationListViewModelProvider);
     switch (state) {
       case OperationListViewLoadingState _:
-        ref.read(loggerProvider).log(Level.INFO, "Hello!");
+        ref.read(loggerProvider).log(Level.INFO, 'Hello!');
         return const Center(
           child: CircularProgressIndicator(),
         );
@@ -75,7 +75,7 @@ class _OperationListTile extends StatelessWidget {
           ),
           Text(
             operation.currencySymbol,
-            style: TextStyle(
+            style: const TextStyle(
               fontWeight: FontWeight.w700,
             ),
           ),
@@ -101,8 +101,9 @@ class _OperationListTileImage extends StatelessWidget {
           : Image.network(
               url!,
               frameBuilder: (context, child, frame, syncLoaded) {
-                if (frame == null)
+                if (frame == null) {
                   return ColoredBox(color: context.colors.backgroundSecondary);
+                }
                 return child;
               },
               errorBuilder: (context, child, event) {
