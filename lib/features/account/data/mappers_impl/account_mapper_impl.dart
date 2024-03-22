@@ -9,9 +9,6 @@ import '../mappers/account_mapper.dart';
 class AccountMapperImpl implements AccountMapper {
   @override
   Account fromDto(AccountDTO dto) {
-    print(88888);
-    print(dto.sum.substring(0, dto.sum.length - 1));
-    print(33333);
     return Account(
       id: dto.id,
       title: dto.title,

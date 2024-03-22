@@ -9,7 +9,8 @@ class AccountListViewLoadingState extends AccountListViewState {}
 class AccountListViewErrorState extends AccountListViewState {}
 
 class AccountListViewDataState extends AccountListViewState {
-  AccountListViewDataState({required this.data});
+  AccountListViewDataState({required this.dataAccount, required this.dataOperations});
 
-  final List<Account> data;
+  final List<Account> dataAccount;
+  final List<Operation> dataOperations;
 }

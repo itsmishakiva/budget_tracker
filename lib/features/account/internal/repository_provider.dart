@@ -7,7 +7,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../data/repositories_impl/account_repository_impl.dart';
 import '../domain/repositories/account_repository.dart';
 
-final repositoryProvider = Provider<AccountRepository>(
+final accountRepositoryProvider = Provider<AccountRepository>(
       (ref) => AccountRepositoryImpl(
     ref.watch(serviceProvider),
     ref.watch(mapperProvider),

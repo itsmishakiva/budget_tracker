@@ -18,8 +18,6 @@ class MockAccountListService implements AccountListService {
         },
       ],
     };
-    print(999999999);
-    print(AccountDTO.fromJson(result['account']!.first as Map<String, Object?>));
     return result['account']
         ?.map((e) => AccountDTO.fromJson(e))
         .toList() ??
