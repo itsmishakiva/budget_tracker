@@ -1,3 +1,6 @@
 {
-    "budgetTracker": "Budget tracker"
+    "budgetTracker": "Budget tracker",
+    "biometryReason" : "Use biometry to enter the app",
+    "createPin" : "Create PIN code",
+    "repeatPin" : "Repeat your PIN"
 }

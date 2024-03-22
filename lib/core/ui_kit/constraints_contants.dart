@@ -5,4 +5,5 @@ final constraintsConstantsProvider =
 
 class ConstraintsConstants {
   final horizontalScreenPadding = 16.0;
+  final defaultBorderRadius = 22.0;
 }

@@ -8,28 +8,58 @@
 // coverage:ignore-file
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:auto_route/auto_route.dart' as _i2;
-import 'package:budget_tracker/features/operation_list/presentation/operation_list/operation_list_screen.dart'
+import 'package:auto_route/auto_route.dart' as _i4;
+import 'package:budget_tracker/features/operations/presentation/view/screens/operation_list_screen.dart'
+    as _i2;
+import 'package:budget_tracker/features/pin_code/presentation/check_pin_code/pin_code_screen.dart'
+    as _i3;
+import 'package:budget_tracker/features/pin_code/presentation/create_pin_code/create_pin_code_screen.dart'
     as _i1;
 
-abstract class $AppRouter extends _i2.RootStackRouter {
+abstract class $AppRouter extends _i4.RootStackRouter {
   $AppRouter({super.navigatorKey});
 
   @override
-  final Map<String, _i2.PageFactory> pagesMap = {
-    OperationListRoute.name: (routeData) {
-      return _i2.AutoRoutePage<dynamic>(
+  final Map<String, _i4.PageFactory> pagesMap = {
+    CreatePinCodeRoute.name: (routeData) {
+      return _i4.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i1.OperationListScreen(),
+        child: const _i1.CreatePinCodeScreen(),
       );
-    }
+    },
+    OperationListRoute.name: (routeData) {
+      return _i4.AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const _i2.OperationListScreen(),
+      );
+    },
+    PinCodeRoute.name: (routeData) {
+      return _i4.AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const _i3.PinCodeScreen(),
+      );
+    },
   };
 }
 
 /// generated route for
-/// [_i1.OperationListScreen]
-class OperationListRoute extends _i2.PageRouteInfo<void> {
-  const OperationListRoute({List<_i2.PageRouteInfo>? children})
+/// [_i1.CreatePinCodeScreen]
+class CreatePinCodeRoute extends _i4.PageRouteInfo<void> {
+  const CreatePinCodeRoute({List<_i4.PageRouteInfo>? children})
+      : super(
+          CreatePinCodeRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'CreatePinCodeRoute';
+
+  static const _i4.PageInfo<void> page = _i4.PageInfo<void>(name);
+}
+
+/// generated route for
+/// [_i2.OperationListScreen]
+class OperationListRoute extends _i4.PageRouteInfo<void> {
+  const OperationListRoute({List<_i4.PageRouteInfo>? children})
       : super(
           OperationListRoute.name,
           initialChildren: children,
@@ -37,5 +67,19 @@ class OperationListRoute extends _i2.PageRouteInfo<void> {
 
   static const String name = 'OperationListRoute';
 
-  static const _i2.PageInfo<void> page = _i2.PageInfo<void>(name);
+  static const _i4.PageInfo<void> page = _i4.PageInfo<void>(name);
+}
+
+/// generated route for
+/// [_i3.PinCodeScreen]
+class PinCodeRoute extends _i4.PageRouteInfo<void> {
+  const PinCodeRoute({List<_i4.PageRouteInfo>? children})
+      : super(
+          PinCodeRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'PinCodeRoute';
+
+  static const _i4.PageInfo<void> page = _i4.PageInfo<void>(name);
 }
