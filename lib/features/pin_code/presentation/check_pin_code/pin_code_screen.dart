@@ -43,7 +43,7 @@ class PinCodeScreen extends ConsumerWidget {
                 ref.read(pinCodeViewModelProvider.notifier).resetState();
               },
               onSuccessFinish: () {
-                ref.read(appRouterProvider).replaceNamed('/operations');
+                ref.read(appRouterProvider).replaceNamed('/home');
               },
               onDefaultFilled: () {
                 ref
