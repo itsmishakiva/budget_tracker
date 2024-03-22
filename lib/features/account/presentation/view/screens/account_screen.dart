@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:budget_tracker/extensions/build_context_extension.dart';
 import 'package:flutter/material.dart';
 
 import 'package:budget_tracker/themes/app_colors.dart';
@@ -10,94 +11,107 @@ class AccountListTile extends StatelessWidget {
   const AccountListTile({
     super.key,
     required this.account,
-    required this.scale,
   });
 
   final Account account;
-  final double scale;
 
   @override
   Widget build(BuildContext context) {
-    return Center(
+    return Padding(
+      padding: const EdgeInsets.symmetric(
+        horizontal: 16.0,
+      ),
       child: Stack(
         children: [
           Center(
-            child: Padding(
-              padding: const EdgeInsets.only(top: 8.0, bottom: 20),
-              child: Container(
-                width: 300,
-                height: 200,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20.0),
-                  color: AppLightColors().accent,
-                ),
+            child: Container(
+              width: 300,
+              height: 200,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20.0),
+                color: context.colors.accent,
               ),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.only(right: 30.0, left: 30.0, top: 25),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(20.0),
-              child: ClipRect(
-                child: BackdropFilter(
-                  filter: ImageFilter.blur(sigmaX: 70.0, sigmaY: 50.0),
-                  child: Transform.scale(
-                    scale: scale,
-                    child: Column(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 15.0),
-                          child: Text(
-                            account.title,
-                            style: AppLightTextStyles(colors: AppLightColors())
-                                .bodyTextSurface,
-                          ),
-                        ),
-                        Text(
-                          account.sum.toString(),
-                          style: AppLightTextStyles(colors: AppLightColors())
-                              .headerSurface3,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(10.0),
-                          child: Row(
-                            children: [
-                              Expanded(
-                                child: Row(
-                                  children: [
-                                    _iconArrow(
-                                      Icon(
-                                        Icons.arrow_downward,
-                                        color: AppLightColors().error,
-                                      ),
-                                    ),
-                                    _info(
-                                      'Expenses',
-                                      '${account.expenses}${account.currencySymbol}',
-                                    ),
-                                  ],
-                                ),
+          Positioned(
+            left: 0,
+            right: 0,
+            top: 50,
+            child: Center(
+              child: SizedBox(
+                width: 320,
+                height: 220,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(20.0),
+                  child: ClipRect(
+                    child: BackdropFilter(
+                      filter: ImageFilter.blur(
+                        sigmaX: 10.0,
+                        sigmaY: 30.0,
+                        tileMode: TileMode.decal,
+                      ),
+                      child: Container(
+                        color: context.colors.accent.withOpacity(0.6),
+                        child: Column(
+                          children: [
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(vertical: 15.0),
+                              child: Text(
+                                account.title,
+                                style:
+                                    AppLightTextStyles(colors: AppLightColors())
+                                        .bodyTextSurface,
                               ),
-                              Expanded(
-                                child: Row(
-                                  children: [
-                                    _iconArrow(
-                                      Icon(
-                                        Icons.arrow_upward,
-                                        color: AppLightColors().success,
-                                      ),
+                            ),
+                            Text(
+                              account.sum.toString(),
+                              style:
+                                  AppLightTextStyles(colors: AppLightColors())
+                                      .headerSurface3,
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: Row(
+                                children: [
+                                  Expanded(
+                                    child: Row(
+                                      children: [
+                                        _iconArrow(
+                                          Icon(
+                                            Icons.arrow_downward,
+                                            color: AppLightColors().error,
+                                          ),
+                                        ),
+                                        _info(
+                                          'Expenses',
+                                          '${account.expenses}${account.currencySymbol}',
+                                        ),
+                                      ],
                                     ),
-                                    _info(
-                                      'Income',
-                                      '${account.income}${account.currencySymbol}',
+                                  ),
+                                  Expanded(
+                                    child: Row(
+                                      children: [
+                                        _iconArrow(
+                                          Icon(
+                                            Icons.arrow_upward,
+                                            color: AppLightColors().success,
+                                          ),
+                                        ),
+                                        _info(
+                                          'Income',
+                                          '${account.income}${account.currencySymbol}',
+                                        ),
+                                      ],
                                     ),
-                                  ],
-                                ),
+                                  ),
+                                ],
                               ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
-                      ],
+                      ),
                     ),
                   ),
                 ),
