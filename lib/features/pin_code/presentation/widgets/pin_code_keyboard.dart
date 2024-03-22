@@ -1,4 +1,4 @@
-import 'package:budget_tracker/core/ui_kit/constraints_contants.dart';
+import 'package:budget_tracker/core/ui_kit/constraints_constants.dart';
 import 'package:budget_tracker/features/pin_code/presentation/check_pin_code/pin_code_view_state.dart';
 import 'package:budget_tracker/features/pin_code/presentation/widgets/numeric_keyboard_button.dart';
 import 'package:flutter/material.dart';

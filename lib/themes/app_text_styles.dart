@@ -60,6 +60,18 @@ class AppLightTextStyles extends AppTextStyles {
             fontSize: 14.0,
             color: colors.textSurface,
           ),
+          textButton: TextStyle(
+            fontFamily: 'Nunito',
+            fontWeight: FontWeight.w600,
+            fontSize: 15,
+            color: colors.textPrimary,
+          ),
+          hint: TextStyle(
+            fontFamily: 'Nunito',
+            fontWeight: FontWeight.w600,
+            fontSize: 15,
+            color: colors.textSecondary,
+          ),
           subtitle1: TextStyle(
             fontFamily: 'Nunito',
             fontWeight: FontWeight.w600,
@@ -104,6 +116,8 @@ class AppTextStyles extends ThemeExtension<AppTextStyles> {
   final TextStyle bodyTextSurface;
   final TextStyle bodyTextSurface1;
   final TextStyle bodyTextSurface2;
+  final TextStyle textButton;
+  final TextStyle hint;
   final TextStyle subtitle1;
   final TextStyle subtitle2;
   final TextStyle onNumericButton;
@@ -120,6 +134,8 @@ class AppTextStyles extends ThemeExtension<AppTextStyles> {
     required this.bodyTextSurface,
     required this.bodyTextSurface1,
     required this.bodyTextSurface2,
+    required this.textButton,
+    required this.hint,
     required this.subtitle1,
     required this.subtitle2,
     required this.onNumericButton,
@@ -135,9 +151,13 @@ class AppTextStyles extends ThemeExtension<AppTextStyles> {
     TextStyle? headerSurface1,
     TextStyle? headerSurface2,
     TextStyle? headerSurface3,
+    TextStyle? bodyTextSurface,
+    TextStyle? bodyTextSurface1,
+    TextStyle? bodyTextSurface2,
+    TextStyle? textButton,
+    TextStyle? hint,
     TextStyle? subtitle1,
     TextStyle? onNumericButton,
-    TextStyle? bodyTextSurface,
     TextStyle? onButton,
     TextStyle? error,
   }) {
@@ -149,8 +169,10 @@ class AppTextStyles extends ThemeExtension<AppTextStyles> {
       headerSurface2: headerSurface2 ?? this.headerSurface2,
       headerSurface3: headerSurface3 ?? this.headerSurface3,
       bodyTextSurface: bodyTextSurface ?? this.bodyTextSurface,
-      bodyTextSurface1: bodyTextSurface1,
-      bodyTextSurface2: bodyTextSurface2,
+      bodyTextSurface1: bodyTextSurface1 ?? this.bodyTextSurface1,
+      bodyTextSurface2: bodyTextSurface2 ?? this.bodyTextSurface2,
+      textButton: textButton ?? this.textButton,
+      hint: hint ?? this.hint,
       subtitle1: subtitle1 ?? this.subtitle1,
       subtitle2: subtitle2,
       onNumericButton: onNumericButton ?? this.onNumericButton,
@@ -180,6 +202,8 @@ class AppTextStyles extends ThemeExtension<AppTextStyles> {
           TextStyle.lerp(headerSurface2, typedOther.headerSurface2, t)!,
       headerSurface3:
           TextStyle.lerp(headerSurface2, typedOther.headerSurface3, t)!,
+      textButton: TextStyle.lerp(textButton, typedOther.textButton, t)!,
+      hint: TextStyle.lerp(hint, typedOther.hint, t)!,
       subtitle1: TextStyle.lerp(subtitle1, typedOther.subtitle1, t)!,
       subtitle2: TextStyle.lerp(subtitle2, typedOther.subtitle2, t)!,
       bodyTextSurface:

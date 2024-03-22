@@ -15,6 +15,10 @@ class AppRouter extends $AppRouter {
           initial: true,
         ),
         AutoRoute(
+          page: OperationCreationSumRoute.page,
+          path: '/operation_creation',
+        ),
+        AutoRoute(
           page: OperationListRoute.page,
           path: '/operations',
         ),

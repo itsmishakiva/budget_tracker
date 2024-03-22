@@ -13,7 +13,9 @@ class AppLightColors extends AppColors {
           textSecondary: const Color(0xFFDEDADB),
           textSurface: const Color(0xFFFFFFFF),
           error: const Color(0xFFFF4B4C),
+          errorLight: const Color(0xFFFDE8E8),
           success: const Color(0xFF02C46D),
+          successLight: const Color(0xFFE8FDEA),
         );
 }
 
@@ -27,7 +29,9 @@ class AppColors extends ThemeExtension<AppColors> {
   final Color textSecondary;
   final Color textSurface;
   final Color error;
+  final Color errorLight;
   final Color success;
+  final Color successLight;
 
   const AppColors({
     required this.backgroundPrimary,
@@ -39,7 +43,9 @@ class AppColors extends ThemeExtension<AppColors> {
     required this.textSecondary,
     required this.textSurface,
     required this.error,
+    required this.errorLight,
     required this.success,
+    required this.successLight,
   });
 
   @override
@@ -53,7 +59,9 @@ class AppColors extends ThemeExtension<AppColors> {
     Color? textSecondary,
     Color? textSurface,
     Color? error,
+    Color? errorLight,
     Color? success,
+    Color? successLight,
   }) {
     return AppColors(
       backgroundPrimary: backgroundPrimary ?? this.backgroundPrimary,
@@ -65,7 +73,9 @@ class AppColors extends ThemeExtension<AppColors> {
       textSecondary: textSecondary ?? this.textSecondary,
       textSurface: textSurface ?? this.textSurface,
       error: error ?? this.error,
+      errorLight: errorLight ?? this.errorLight,
       success: success ?? this.success,
+      successLight: successLight ?? this.successLight,
     );
   }
 
@@ -93,7 +103,9 @@ class AppColors extends ThemeExtension<AppColors> {
       textSecondary: Color.lerp(textSecondary, typedOther.textSecondary, t)!,
       textSurface: Color.lerp(textSurface, typedOther.textSurface, t)!,
       error: Color.lerp(error, typedOther.error, t)!,
+      errorLight: Color.lerp(errorLight, typedOther.errorLight, t)!,
       success: Color.lerp(success, typedOther.success, t)!,
+      successLight: Color.lerp(successLight, typedOther.successLight, t)!,
     );
   }
 }

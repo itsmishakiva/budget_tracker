@@ -1,4 +1,4 @@
-import 'package:budget_tracker/core/ui_kit/constraints_contants.dart';
+import 'package:budget_tracker/core/ui_kit/constraints_constants.dart';
 import 'package:budget_tracker/extensions/build_context_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

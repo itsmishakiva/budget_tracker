@@ -2,5 +2,13 @@
     "budgetTracker": "Budget tracker",
     "biometryReason" : "Use biometry to enter the app",
     "createPin" : "Create PIN code",
-    "repeatPin" : "Repeat your PIN"
+    "repeatPin" : "Repeat your PIN",
+    "createTransaction" : "Create transaction",
+    "chooseTransactionType": "Choose transaction type",
+    "incomingTransaction": "Incoming transaction",
+    "outgoingTransaction": "Outgoing transaction",
+    "chooseTransactionCategory": "Choose transaction category",
+    "next": "Continue",
+    "currentBalance": "Current balance",
+    "inputAmount": "inputAmount"
 }
