@@ -7,8 +7,7 @@ part of 'operation_type_dto.dart';
 // **************************************************************************
 
 _$OperationTypeDTOImpl _$$OperationTypeDTOImplFromJson(
-  Map<String, dynamic> json,
-) =>
+        Map<String, dynamic> json) =>
     _$OperationTypeDTOImpl(
       id: json['id'] as int,
       isIncome: json['isIncome'] as bool,
@@ -17,8 +16,7 @@ _$OperationTypeDTOImpl _$$OperationTypeDTOImplFromJson(
     );
 
 Map<String, dynamic> _$$OperationTypeDTOImplToJson(
-  _$OperationTypeDTOImpl instance,
-) =>
+        _$OperationTypeDTOImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'isIncome': instance.isIncome,

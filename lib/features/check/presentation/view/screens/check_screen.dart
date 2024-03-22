@@ -6,8 +6,11 @@ import 'package:flutter/material.dart';
 import 'package:budget_tracker/themes/app_colors.dart';
 
 import 'package:budget_tracker/features/check/domain/entities/check.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class CheckListTile extends StatelessWidget {
+import 'package:budget_tracker/core/internal/app_router_provider.dart';
+
+class CheckListTile extends ConsumerWidget {
   const CheckListTile({
     super.key,
     required this.check,
@@ -16,100 +19,105 @@ class CheckListTile extends StatelessWidget {
   final Check check;
 
   @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(
-        horizontal: 16.0,
-      ),
-      child: Stack(
-        children: [
-          Center(
-            child: Container(
-              width: 300,
-              height: 200,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20.0),
-                color: context.colors.accent,
+  Widget build(BuildContext context, WidgetRef ref) {
+    return InkWell(
+      onTap: () {
+        ref.read(appRouterProvider).navigateNamed('/analytics');
+      },
+      child: Padding(
+        padding: const EdgeInsets.symmetric(
+          horizontal: 16.0,
+        ),
+        child: Stack(
+          children: [
+            Center(
+              child: Container(
+                width: 300,
+                height: 200,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20.0),
+                  color: context.colors.accent,
+                ),
               ),
             ),
-          ),
-          Positioned(
-            left: 0,
-            right: 0,
-            top: 50,
-            child: Center(
-              child: SizedBox(
-                width: 320,
-                height: 220,
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(20.0),
-                  child: ClipRect(
-                    child: BackdropFilter(
-                      filter: ImageFilter.blur(
-                        sigmaX: 10.0,
-                        sigmaY: 30.0,
-                        tileMode: TileMode.decal,
-                      ),
-                      child: Container(
-                        color: context.colors.accent.withOpacity(0.6),
-                        child: Column(
-                          children: [
-                            Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(vertical: 15.0),
-                              child: Text(
-                                check.title,
-                                style: context.textStyles.bodyTextSurface,
+            Positioned(
+              left: 0,
+              right: 0,
+              top: 50,
+              child: Center(
+                child: SizedBox(
+                  width: 320,
+                  height: 220,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(20.0),
+                    child: ClipRect(
+                      child: BackdropFilter(
+                        filter: ImageFilter.blur(
+                          sigmaX: 10.0,
+                          sigmaY: 30.0,
+                          tileMode: TileMode.decal,
+                        ),
+                        child: Container(
+                          color: context.colors.accent.withOpacity(0.6),
+                          child: Column(
+                            children: [
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 15.0),
+                                child: Text(
+                                  check.title,
+                                  style: context.textStyles.bodyTextSurface,
+                                ),
                               ),
-                            ),
-                            Text(
-                              check.sum.toString(),
-                              style: context.textStyles.headerSurface3,
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.all(10.0),
-                              child: Row(
-                                children: [
-                                  Expanded(
-                                    child: Row(
-                                      children: [
-                                        _iconArrow(
-                                          context,
-                                          Icon(
-                                            Icons.arrow_downward,
-                                            color: AppLightColors().error,
-                                          ),
-                                        ),
-                                        _info(
-                                          context,
-                                          'Expenses',
-                                          '${check.expenses}₽',
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  Expanded(
-                                    child: Row(
-                                      children: [
-                                        _iconArrow(
-                                          context,
-                                          Icon(
-                                            Icons.arrow_upward,
-                                            color: AppLightColors().success,
-                                          ),
-                                        ),
-                                        _info(
-                                          context,
-                                          'Income',
-                                          '${check.income}₽',
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ],
+                              Text(
+                                check.sum.toString(),
+                                style: context.textStyles.headerSurface3,
                               ),
-                            ),
-                          ],
+                              Padding(
+                                padding: const EdgeInsets.all(10.0),
+                                child: Row(
+                                  children: [
+                                    Expanded(
+                                      child: Row(
+                                        children: [
+                                          _iconArrow(
+                                            context,
+                                            Icon(
+                                              Icons.arrow_downward,
+                                              color: AppLightColors().error,
+                                            ),
+                                          ),
+                                          _info(
+                                            context,
+                                            'Expenses',
+                                            '${check.expenses}₽',
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    Expanded(
+                                      child: Row(
+                                        children: [
+                                          _iconArrow(
+                                            context,
+                                            Icon(
+                                              Icons.arrow_upward,
+                                              color: AppLightColors().success,
+                                            ),
+                                          ),
+                                          _info(
+                                            context,
+                                            'Income',
+                                            '${check.income}₽',
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ),
@@ -117,8 +125,8 @@ class CheckListTile extends StatelessWidget {
                 ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
