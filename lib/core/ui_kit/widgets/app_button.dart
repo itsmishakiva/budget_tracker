@@ -7,7 +7,7 @@ class AppButton extends ConsumerWidget {
   const AppButton({super.key, this.onTap, required this.title});
 
   final String title;
-  final Function? onTap;
+  final void Function()? onTap;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

@@ -29,7 +29,7 @@ class OperationCreationSumScreen extends StatelessWidget {
                           Icons.arrow_back_ios_new,
                           color: context.colors.backgroundPrimary,
                         ),
-                        onTap: () {},
+                        onTap: () {}, //TODO add navigation
                       ),
                     ),
                     Text(
@@ -49,6 +49,28 @@ class OperationCreationSumScreen extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+}
+
+class CurrentBalance extends StatelessWidget {
+  const CurrentBalance({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Text(
+          '${context.locale!.currentBalance} ',
+          style: context.textStyles.bodyTextSurface
+              .copyWith(fontWeight: FontWeight.w300),
+        ),
+        Text(
+          '1234.3',
+          style: context.textStyles.bodyTextSurface
+              .copyWith(fontWeight: FontWeight.w700),
+        ),
+      ],
     );
   }
 }
@@ -88,38 +110,8 @@ class _SumInputField extends StatelessWidget {
               ),
               color: context.colors.backgroundPrimary,
             ),
-            // child: GridView.count(
-            //   crossAxisCount: 3,
-            //   children: List.generate(9, (index) {
-            //     return TextButton(
-            //       onPressed: () => onButtonPressed((index + 1).toString()),
-            //       child: Text((index + 1).toString()),
-            //     );
-            //   })
-            // ),
+            //TODO add numpad
           ),
-        ),
-      ],
-    );
-  }
-}
-
-class CurrentBalance extends StatelessWidget {
-  const CurrentBalance({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Text(
-          '${context.locale!.currentBalance} ',
-          style: context.textStyles.bodyTextSurface
-              .copyWith(fontWeight: FontWeight.w300),
-        ),
-        Text(
-          '1234.3',
-          style: context.textStyles.bodyTextSurface
-              .copyWith(fontWeight: FontWeight.w700),
         ),
       ],
     );

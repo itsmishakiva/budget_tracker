@@ -18,6 +18,7 @@ class OperationCreationTypeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppScaffold(
+      backgroundColor: context.colors.backgroundSecondary,
       body: _OperationCreationTypeScreenContent(),
     );
   }
@@ -43,54 +44,10 @@ class _OperationCreationTypeScreenContent extends ConsumerWidget {
           padding: EdgeInsets.all(constraints.horizontalScreenPadding),
           child: Stack(
             children: [
-              CustomScrollView(
-                slivers: [
-                  SliverAppBar(
-                    centerTitle: true,
-                    backgroundColor: Colors.transparent,
-                    leading: GestureDetector(
-                      child: Icon(
-                        Icons.arrow_back_ios_new,
-                        color: context.colors.textPrimary,
-                      ),
-                      onTap: () {},
-                    ),
-                    title: Text(
-                      context.locale!.createTransaction,
-                      style: context.textStyles.header1,
-                    ),
-                  ),
-                  SliverList(
-                    delegate: SliverChildListDelegate(
-                      [
-                        const _TypeTileGroup(),
-                        const _ChoiceTileGroup(),
-                      ],
-                    ),
-                  ),
-                  SliverList.separated(
-                    separatorBuilder: (BuildContext context, int index) =>
-                        const SizedBox(
-                      height: 5,
-                    ),
-                    itemCount: state.data.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return _OperationChoiceTile(
-                        isSelected: false,
-                        categoryTile: state.data[index],
-                      );
-                    },
-                  ),
-                  const SliverToBoxAdapter(
-                    child: SizedBox(
-                      height: 55,
-                    ),
-                  ),
-                ],
-              ),
+              CustomScrollViewWidget(tiles: state.data),
               Align(
                 alignment: Alignment.bottomCenter,
-                child: AppButton(title: context.locale!.next),
+                child: AppButton(title: context.locale!.next,),
               ),
             ],
           ),
@@ -98,6 +55,62 @@ class _OperationCreationTypeScreenContent extends ConsumerWidget {
     }
   }
 }
+
+class CustomScrollViewWidget extends StatelessWidget {
+  const CustomScrollViewWidget({super.key, required this.tiles});
+
+  final List<OperationType> tiles;
+  @override
+  Widget build(BuildContext context) {
+    return CustomScrollView(
+      slivers: [
+        SliverAppBar(
+          centerTitle: true,
+          backgroundColor: Colors.transparent,
+          leading: GestureDetector(
+            child: Icon(
+              Icons.arrow_back_ios_new,
+              color: context.colors.textPrimary,
+            ),
+            onTap: () {},
+          ),
+          title: Text(
+            context.locale!.createTransaction,
+            style: context.textStyles.header1,
+          ),
+        ),
+        SliverList(
+          delegate: SliverChildListDelegate(
+            [
+              const _TypeTileGroup(),
+              const _ChoiceTileGroup(),
+            ],
+          ),
+        ),
+        SliverList.separated(
+          separatorBuilder: (BuildContext context, int index) =>
+          const SizedBox(
+            height: 5,
+          ),
+          itemCount: tiles.length,
+          itemBuilder: (BuildContext context, int index) {
+            return _OperationChoiceTile(
+              isSelected: false,
+              categoryTile: tiles[index],
+            );
+          },
+        ),
+        const SliverToBoxAdapter(
+          child: SizedBox(
+            height: 55,
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+
 
 class _OperationTypeTile extends ConsumerWidget {
   const _OperationTypeTile({required this.isSelected, required this.isIncome});
