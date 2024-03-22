@@ -2,11 +2,12 @@ include: package:flutter_lints/flutter.yaml
 
 linter:
   rules:
-    analyzer:
-      errors:
-        invalid_annotation_target: ignore
-    avoid_print: true
-    prefer_single_quotes: true
-    require_trailing_commas: true
-    always_use_package_imports: true
+    - analyzer:
+        errors:
+          invalid_annotation_target: ignore
+    - avoid_print
+    - prefer_single_quotes
+    - require_trailing_commas
+    - always_use_package_imports
+    - prefer_const_declarations
 
