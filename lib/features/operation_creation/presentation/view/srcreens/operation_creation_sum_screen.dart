@@ -1,53 +1,54 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:budget_tracker/core/internal/app_router_provider.dart';
 import 'package:budget_tracker/core/ui_kit/app_scaffold.dart';
 import 'package:budget_tracker/extensions/build_context_extension.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 @RoutePage()
-class OperationCreationSumScreen extends StatelessWidget {
+class OperationCreationSumScreen extends ConsumerWidget {
   const OperationCreationSumScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return AppScaffold(
-      body: Container(
-        width: double.infinity,
-        color: context.colors.accent,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 16),
-                      child: GestureDetector(
-                        child: Icon(
-                          Icons.arrow_back_ios_new,
-                          color: context.colors.backgroundPrimary,
-                        ),
-                        onTap: () {}, //TODO add navigation
-                      ),
+      backgroundColor: context.colors.accent,
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 16),
+                  child: GestureDetector(
+                    child: Icon(
+                      Icons.arrow_back_ios_new,
+                      color: context.colors.backgroundPrimary,
                     ),
-                    Text(
-                      context.locale!.inputAmount,
-                      style: context.textStyles.bodyTextSurface
-                          .copyWith(fontWeight: FontWeight.w700),
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    // MyButton(),
-                  ],
+                    onTap: () {
+                      ref.read(appRouterProvider).maybePop();
+                    },
+                  ),
                 ),
-              ),
+                Text(
+                  context.locale!.inputAmount,
+                  style: context.textStyles.bodyTextSurface
+                      .copyWith(fontWeight: FontWeight.w700),
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                // MyButton(),
+              ],
             ),
-            const _SumInputField(),
-          ],
-        ),
+          ),
+          const Expanded(
+            child: _SumInputField(),
+          ),
+        ],
       ),
     );
   }
@@ -101,17 +102,15 @@ class _SumInputField extends StatelessWidget {
         const SizedBox(
           height: 25,
         ),
-        Expanded(
-          child: Container(
-            decoration: BoxDecoration(
-              borderRadius: const BorderRadius.only(
-                topLeft: Radius.circular(15),
-                topRight: Radius.circular(15),
-              ),
-              color: context.colors.backgroundPrimary,
+        Container(
+          decoration: BoxDecoration(
+            borderRadius: const BorderRadius.only(
+              topLeft: Radius.circular(15),
+              topRight: Radius.circular(15),
             ),
-            //TODO add numpad
+            color: context.colors.backgroundPrimary,
           ),
+          //TODO add numpad
         ),
       ],
     );

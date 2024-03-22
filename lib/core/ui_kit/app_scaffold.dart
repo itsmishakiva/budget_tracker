@@ -4,14 +4,14 @@ import 'package:flutter/services.dart';
 class AppScaffold extends StatelessWidget {
   const AppScaffold({
     super.key,
+    required this.body,
     this.backgroundColor,
-    this.body,
     this.navigationBar,
     this.floatingActionButton,
   });
 
   final Color? backgroundColor;
-  final Widget? body;
+  final Widget body;
   final Widget? navigationBar;
   final Widget? floatingActionButton;
 
@@ -27,7 +27,9 @@ class AppScaffold extends StatelessWidget {
       ),
       child: Scaffold(
         backgroundColor: backgroundColor,
-        body: body,
+        body: SafeArea(
+          child: body,
+        ),
         bottomNavigationBar: navigationBar,
         floatingActionButton: floatingActionButton,
       ),
