@@ -16,9 +16,10 @@ class OperationTypeMapperImpl implements OperationTypeMapper {
   @override
   OperationTypeDTO toDto(OperationType entity) {
     return OperationTypeDTO(
-        id: entity.id,
-        isIncome: entity.isIncome,
-        title: entity.title,
-        categoryIconAsset: entity.categoryIconAsset);
+      id: entity.id,
+      isIncome: entity.isIncome,
+      title: entity.title,
+      categoryIconAsset: entity.categoryIconAsset,
+    );
   }
 }

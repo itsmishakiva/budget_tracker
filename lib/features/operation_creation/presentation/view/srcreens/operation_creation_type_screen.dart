@@ -1,15 +1,15 @@
-import "package:auto_route/auto_route.dart";
-import "package:budget_tracker/core/internal/logger_provider.dart";
-import "package:budget_tracker/core/ui_kit/app_scaffold.dart";
-import "package:budget_tracker/core/ui_kit/constraints_constants.dart";
-import "package:budget_tracker/core/ui_kit/widgets/my_button.dart";
-import "package:budget_tracker/extensions/build_context_extension.dart";
-import "package:budget_tracker/features/operation_creation/domain/entities/operation_type.dart";
-import "package:budget_tracker/features/operation_creation/presentation/view/view_model/operation_creation_type_view_model.dart";
-import "package:budget_tracker/features/operation_creation/presentation/view/view_model/operation_creation_type_view_state.dart";
-import "package:flutter/material.dart";
-import "package:flutter_riverpod/flutter_riverpod.dart";
-import "package:logging/logging.dart";
+import 'package:auto_route/auto_route.dart';
+import 'package:budget_tracker/core/internal/logger_provider.dart';
+import 'package:budget_tracker/core/ui_kit/app_scaffold.dart';
+import 'package:budget_tracker/core/ui_kit/constraints_constants.dart';
+import 'package:budget_tracker/core/ui_kit/widgets/app_button.dart';
+import 'package:budget_tracker/extensions/build_context_extension.dart';
+import 'package:budget_tracker/features/operation_creation/domain/entities/operation_type.dart';
+import 'package:budget_tracker/features/operation_creation/presentation/view/view_model/operation_creation_type_view_model.dart';
+import 'package:budget_tracker/features/operation_creation/presentation/view/view_model/operation_creation_type_view_state.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:logging/logging.dart';
 
 @RoutePage()
 class OperationCreationTypeScreen extends StatelessWidget {
@@ -24,15 +24,13 @@ class OperationCreationTypeScreen extends StatelessWidget {
 }
 
 class _OperationCreationTypeScreenContent extends ConsumerWidget {
-  // const _OperationCreationTypeScreenContent({super.key});
-
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(operationCreationViewModelProvider);
     final constraints = ref.watch(constraintsConstantsProvider);
     switch (state) {
       case OperationCreationViewLoadingState _:
-        ref.read(loggerProvider).log(Level.INFO, "Hello!");
+        ref.read(loggerProvider).log(Level.INFO, 'Hello!');
         return const Center(
           child: CircularProgressIndicator(),
         );
@@ -42,33 +40,57 @@ class _OperationCreationTypeScreenContent extends ConsumerWidget {
         );
       case OperationCreationViewDataState _:
         return Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+          padding: EdgeInsets.all(constraints.horizontalScreenPadding),
+          child: Stack(
             children: [
-              Padding(
-                padding: EdgeInsets.symmetric(
-                    vertical: constraints.horizontalScreenPadding),
-                child: GestureDetector(
-                  child: Icon(
-                    Icons.arrow_back_ios_new,
-                    color: context.colors.textPrimary,
+              CustomScrollView(
+                slivers: [
+                  SliverAppBar(
+                    centerTitle: true,
+                    backgroundColor: Colors.transparent,
+                    leading: GestureDetector(
+                      child: Icon(
+                        Icons.arrow_back_ios_new,
+                        color: context.colors.textPrimary,
+                      ),
+                      onTap: () {},
+                    ),
+                    title: Text(
+                      context.locale!.createTransaction,
+                      style: context.textStyles.header1,
+                    ),
                   ),
-                  onTap: () {},
-                ),
+                  SliverList(
+                    delegate: SliverChildListDelegate(
+                      [
+                        const _TypeTileGroup(),
+                        const _ChoiceTileGroup(),
+                      ],
+                    ),
+                  ),
+                  SliverList.separated(
+                    separatorBuilder: (BuildContext context, int index) =>
+                        const SizedBox(
+                      height: 5,
+                    ),
+                    itemCount: state.data.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return _OperationChoiceTile(
+                        isSelected: false,
+                        categoryTile: state.data[index],
+                      );
+                    },
+                  ),
+                  const SliverToBoxAdapter(
+                    child: SizedBox(
+                      height: 55,
+                    ),
+                  ),
+                ],
               ),
-              Text(
-                context.locale!.createTransaction,
-                style: context.textStyles.header1,
-              ),
-              _TypeTileGroup(
-                subtitle: context.locale!.chooseTransactionType,
-              ),
-              _ChoiceTileGroup(
-                tiles: state.data,
-              ),
-              MyButton(
-                title: context.locale!.next,
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: AppButton(title: context.locale!.next),
               ),
             ],
           ),
@@ -88,20 +110,32 @@ class _OperationTypeTile extends ConsumerWidget {
     final constraints = ref.watch(constraintsConstantsProvider);
     return GestureDetector(
       onTap: () {},
-      child: Container(
+      child: SizedBox(
         height: 80,
         child: Card(
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(constraints.tileBorderRadius),
+            borderRadius: BorderRadius.circular(
+              constraints.tileBorderRadius,
+            ),
           ),
           elevation: 2,
           color: context.colors.backgroundPrimary,
           child: Center(
             child: ListTile(
+              // tileColor: Colors.white,
               leading: CircleAvatar(
-                backgroundColor:
-                    (isIncome) ? context.colors.success : context.colors.error,
-                child: (isIncome) ? Icon(Icons.upload) : Icon(Icons.download),
+                backgroundColor: (isIncome)
+                    ? context.colors.successLight
+                    : context.colors.errorLight,
+                child: (isIncome)
+                    ? Icon(
+                        Icons.upload,
+                        color: context.colors.success,
+                      )
+                    : Icon(
+                        Icons.download,
+                        color: context.colors.error,
+                      ),
               ),
               title: (isIncome)
                   ? Text(
@@ -117,7 +151,7 @@ class _OperationTypeTile extends ConsumerWidget {
                 activeColor: context.colors.textPrimary,
                 value: 0,
                 groupValue: 0,
-                onChanged: (int? value) {},
+                onChanged: (value) {},
               ),
             ),
           ),
@@ -128,33 +162,32 @@ class _OperationTypeTile extends ConsumerWidget {
 }
 
 class _TypeTileGroup extends StatelessWidget {
-  const _TypeTileGroup({required this.subtitle});
-
-  final String subtitle;
+  const _TypeTileGroup();
 
   @override
   Widget build(BuildContext context) {
-    bool _isSelected = true;
-
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        SizedBox(
+        const SizedBox(
           height: 20,
         ),
-        Text(subtitle, style: context.textStyles.hint),
-        SizedBox(
+        Text(
+          context.locale!.chooseTransactionType,
+          style: context.textStyles.hint,
+        ),
+        const SizedBox(
           height: 5,
         ),
-        _OperationTypeTile(
-          isSelected: _isSelected,
+        const _OperationTypeTile(
+          isSelected: true,
           isIncome: true,
         ),
-        SizedBox(
+        const SizedBox(
           height: 5,
         ),
-        _OperationTypeTile(
-          isSelected: _isSelected,
+        const _OperationTypeTile(
+          isSelected: false,
           isIncome: false,
         ),
       ],
@@ -163,8 +196,10 @@ class _TypeTileGroup extends StatelessWidget {
 }
 
 class _OperationChoiceTile extends ConsumerWidget {
-  const _OperationChoiceTile(
-      {required this.isSelected, required this.categoryTile});
+  const _OperationChoiceTile({
+    required this.isSelected,
+    required this.categoryTile,
+  });
 
   final OperationType categoryTile;
 
@@ -175,11 +210,13 @@ class _OperationChoiceTile extends ConsumerWidget {
     final constraints = ref.watch(constraintsConstantsProvider);
     return GestureDetector(
       onTap: () {},
-      child: Container(
+      child: SizedBox(
         height: 80,
         child: Card(
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(constraints.tileBorderRadius),
+            borderRadius: BorderRadius.circular(
+              constraints.tileBorderRadius,
+            ),
           ),
           elevation: 2,
           color: context.colors.backgroundPrimary,
@@ -196,7 +233,7 @@ class _OperationChoiceTile extends ConsumerWidget {
                 activeColor: context.colors.textPrimary,
                 value: 0,
                 groupValue: 0,
-                onChanged: (int? value) {},
+                onChanged: (value) {},
               ),
             ),
           ),
@@ -207,42 +244,24 @@ class _OperationChoiceTile extends ConsumerWidget {
 }
 
 class _ChoiceTileGroup extends StatelessWidget {
-  const _ChoiceTileGroup({required this.tiles});
-
-  final List<OperationType> tiles;
+  const _ChoiceTileGroup();
 
   @override
   Widget build(BuildContext context) {
-    bool _isSelected = true;
-
-    return Expanded(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SizedBox(
-            height: 20,
-          ),
-          Text(context.locale!.chooseTransactionCategory,
-              style: context.textStyles.hint),
-          SizedBox(
-            height: 5,
-          ),
-          Expanded(
-            child: ListView.builder(
-              itemCount: tiles.length,
-              itemBuilder: (BuildContext context, int index) {
-                return _OperationChoiceTile(
-                  isSelected: _isSelected,
-                  categoryTile: tiles[index],
-                );
-              },
-            ),
-          ),
-          SizedBox(
-            height: 5,
-          ),
-        ],
-      ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const SizedBox(
+          height: 20,
+        ),
+        Text(
+          context.locale!.chooseTransactionCategory,
+          style: context.textStyles.hint,
+        ),
+        const SizedBox(
+          height: 5,
+        ),
+      ],
     );
   }
 }

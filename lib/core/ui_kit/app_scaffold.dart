@@ -1,3 +1,4 @@
+import 'package:budget_tracker/extensions/build_context_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -6,12 +7,10 @@ class AppScaffold extends StatelessWidget {
     super.key,
     this.body,
     this.floatingActionButton,
-    this.floatingActionButtonLocation,
   });
 
   final Widget? body;
   final Widget? floatingActionButton;
-  final Widget? floatingActionButtonLocation;
 
   @override
   Widget build(BuildContext context) {
@@ -24,6 +23,7 @@ class AppScaffold extends StatelessWidget {
             : Brightness.dark,
       ),
       child: Scaffold(
+        backgroundColor: context.colors.backgroundSecondary,
         body: body,
         floatingActionButton: floatingActionButton,
       ),

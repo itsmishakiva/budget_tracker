@@ -4,16 +4,9 @@ import 'package:budget_tracker/extensions/build_context_extension.dart';
 import 'package:flutter/material.dart';
 
 @RoutePage()
-class OperationCreationSumScreen extends StatefulWidget {
+class OperationCreationSumScreen extends StatelessWidget {
   const OperationCreationSumScreen({super.key});
 
-  @override
-  State<OperationCreationSumScreen> createState() =>
-      _OperationCreationSumScreenState();
-}
-
-class _OperationCreationSumScreenState
-    extends State<OperationCreationSumScreen> {
   @override
   Widget build(BuildContext context) {
     return AppScaffold(
@@ -44,7 +37,7 @@ class _OperationCreationSumScreenState
                       style: context.textStyles.bodyTextSurface
                           .copyWith(fontWeight: FontWeight.w700),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
                     // MyButton(),
@@ -52,7 +45,7 @@ class _OperationCreationSumScreenState
                 ),
               ),
             ),
-            SumInputField(),
+            const _SumInputField(),
           ],
         ),
       ),
@@ -60,50 +53,36 @@ class _OperationCreationSumScreenState
   }
 }
 
-class SumInputField extends StatefulWidget {
-  const SumInputField({super.key});
+class _SumInputField extends StatelessWidget {
+  const _SumInputField();
 
-  @override
-  State<SumInputField> createState() => _SumInputFieldState();
-}
-
-class _SumInputFieldState extends State<SumInputField> {
-  String display = '';
-
-  void onButtonPressed(String value) {
-    setState(() {
-      display += value;
-    });
-  }
-
-  String inputSum = "0";
   @override
   Widget build(BuildContext context) {
+    String display = '';
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16.0),
           child: Text(
-            "\₽${display}",
+            '₽$display',
             style: context.textStyles.headerSurface1,
           ),
         ),
-        SizedBox(
+        const SizedBox(
           height: 5,
         ),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+        const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16.0),
           child: CurrentBalance(),
         ),
-        SizedBox(
+        const SizedBox(
           height: 25,
         ),
         Expanded(
           child: Container(
-            // height: 487,
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.only(
+              borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(15),
                 topRight: Radius.circular(15),
               ),
@@ -133,12 +112,12 @@ class CurrentBalance extends StatelessWidget {
     return Row(
       children: [
         Text(
-          "${context.locale!.currentBalance} ",
+          '${context.locale!.currentBalance} ',
           style: context.textStyles.bodyTextSurface
               .copyWith(fontWeight: FontWeight.w300),
         ),
         Text(
-          "1234.3",
+          '1234.3',
           style: context.textStyles.bodyTextSurface
               .copyWith(fontWeight: FontWeight.w700),
         ),
