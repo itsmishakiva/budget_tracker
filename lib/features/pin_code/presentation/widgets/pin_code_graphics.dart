@@ -127,7 +127,9 @@ class _PinCodeGraphicTileState extends State<_PinCodeGraphicTile>
           await animation.animateBack(
             animation.lowerBound,
           );
-          widget.onSuccessFinish();
+          if (widget.index == 0) {
+            widget.onSuccessFinish();
+          }
         });
         color = context.colors.success;
         break;
@@ -137,7 +139,9 @@ class _PinCodeGraphicTileState extends State<_PinCodeGraphicTile>
           Vibration.vibrate(amplitude: 255);
           animation!.repeat(reverse: true);
           await Future.delayed(const Duration(milliseconds: 500));
-          widget.onErrorFinish();
+          if (widget.index == 0) {
+            widget.onErrorFinish();
+          }
         });
         color = context.colors.error;
         break;
@@ -152,7 +156,9 @@ class _PinCodeGraphicTileState extends State<_PinCodeGraphicTile>
             await animation.animateBack(
               animation.lowerBound,
             );
-            if (widget.pin.length == 4) widget.onDefaultFilled();
+            if (widget.pin.length == 4) {
+              widget.onDefaultFilled();
+            }
           });
           color = context.colors.accent;
         }

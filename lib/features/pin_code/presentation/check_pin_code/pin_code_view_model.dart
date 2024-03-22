@@ -3,8 +3,10 @@ import 'dart:async';
 import 'package:budget_tracker/features/pin_code/domain/repositories/pin_code_repository.dart';
 import 'package:budget_tracker/features/pin_code/internal/pin_code_repository_provider.dart';
 import 'package:budget_tracker/features/pin_code/presentation/check_pin_code/pin_code_view_state.dart';
+import 'package:budget_tracker/main.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:local_auth/local_auth.dart';
+import 'package:logging/logging.dart';
 
 final pinCodeViewModelProvider =
     StateNotifierProvider<PinCodeViewModel, PinCodeViewState>(
@@ -85,6 +87,7 @@ class PinCodeViewModel extends StateNotifier<PinCodeViewState> {
 
   void _setErrorOrSuccessState(bool success) {
     if (success) {
+      logger.log(Level.WARNING, 'SET SUCCESS');
       state = PinCodeSuccessViewState(
         biometryTypes: state.biometryTypes,
       );
