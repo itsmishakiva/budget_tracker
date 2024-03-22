@@ -1,9 +1,9 @@
-import 'package:budget_tracker/features/operation_creation/data/dto/operation_type_dto.dart';
-import 'package:budget_tracker/features/operation_creation/data/services/operation_type_list_service.dart';
+import 'package:budget_tracker/features/categories/data/dto/category_dto.dart';
+import 'package:budget_tracker/features/categories/data/services/category_list_service.dart';
 
-class MockOperationTypeListService implements OperationTypeListService {
+class MockCategoryListService implements CategoryListService {
   @override
-  Future<List<OperationTypeDTO>> getOperationTypeList() async {
+  Future<List<CategoryDTO>> getCategoryList() async {
     await Future.delayed(
       const Duration(seconds: 2),
     );
@@ -54,7 +54,7 @@ class MockOperationTypeListService implements OperationTypeListService {
       ],
     };
     return result['operation_types']
-            ?.map((e) => OperationTypeDTO.fromJson(e))
+            ?.map((e) => CategoryDTO.fromJson(e))
             .toList() ??
         [];
   }

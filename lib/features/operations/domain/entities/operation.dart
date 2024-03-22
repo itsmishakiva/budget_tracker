@@ -1,3 +1,4 @@
+import 'package:budget_tracker/features/categories/domain/entities/category.dart' as Cat;
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -7,9 +8,9 @@ part 'operation.freezed.dart';
 class Operation with _$Operation {
   factory Operation({
     required int id,
-    required String title,
+    required bool incoming,
     required double sum,
-    required String currencySymbol,
-    required String companyName,
+    required DateTime date,
+    required Cat.Category category,
   }) = _Operation;
 }

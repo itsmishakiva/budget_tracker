@@ -61,6 +61,7 @@ class OperationListTile extends StatefulWidget {
 }
 
 class _OperationListTileState extends State<OperationListTile> {
+
   final double size = 30;
   Color color = Colors.white24;
 
@@ -72,7 +73,7 @@ class _OperationListTileState extends State<OperationListTile> {
 
   void _loadColor() async {
     Color? loadedColor =
-        await ColorStorageManager().loadColor(widget.operation.title);
+        await ColorStorageManager().loadColor(widget.operation.category.title);
     setState(() {
       color = loadedColor;
     });
@@ -132,17 +133,12 @@ class _OperationListTileState extends State<OperationListTile> {
           ),
           // child: _operationIcon(operation.title, AppLightColors().customColors[operation.id % 6])
           child: Center(
-            child: _operationIcon(widget.operation.title),
+            child: _operationIcon(widget.operation.category.title),
           ),
         ),
         title: Text(
-          widget.operation.title,
+          widget.operation.category.title,
           style: context.textStyles.header3,
-          overflow: TextOverflow.ellipsis,
-        ),
-        subtitle: Text(
-          widget.operation.companyName,
-          style: context.textStyles.subtitle2,
           overflow: TextOverflow.ellipsis,
         ),
         trailing: Row(
@@ -153,7 +149,7 @@ class _OperationListTileState extends State<OperationListTile> {
               style: context.textStyles.header3,
             ),
             Text(
-              widget.operation.currencySymbol,
+              '₽',
               style: context.textStyles.header3,
             ),
           ],
