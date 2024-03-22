@@ -2,19 +2,19 @@ enum BiometryTypes { none, fingerprint, faceId }
 
 sealed class PinCodeViewState {
   PinCodeViewState({
+    this.input = '',
     this.biometryTypes = BiometryTypes.none,
   });
 
   BiometryTypes biometryTypes;
+  final String input;
 }
 
 class PinCodeDefaultViewState extends PinCodeViewState {
   PinCodeDefaultViewState({
-    this.input = '',
+    super.input,
     super.biometryTypes,
   });
-
-  final String input;
 }
 
 class PinCodeLoadingViewState extends PinCodeViewState {

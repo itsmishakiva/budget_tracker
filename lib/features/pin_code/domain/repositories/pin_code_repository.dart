@@ -3,5 +3,7 @@ abstract interface class PinCodeRepository {
 
   Future<void> setCode(String code);
 
+  Future<void> setCodeRepeat(String code);
+
   Future<bool> checkCreated();
 }

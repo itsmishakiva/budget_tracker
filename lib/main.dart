@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logging/logging.dart';
 
-Logger logger = Logger("AppLogger");
+Logger logger = Logger('AppLogger');
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -30,12 +30,14 @@ void main() async {
   Logger.root.level = Level.ALL;
 
   Logger.root.onRecord.listen((record) {
-    print('${record.level.name}: ${record.time}: ${record.message}');
+    if (kDebugMode) {
+      print('${record.level.name}: ${record.time}: ${record.message}');
+    }
   });
 
   runApp(
-    ProviderScope(
-      child: const App(),
+    const ProviderScope(
+      child: App(),
     ),
   );
 }
@@ -46,7 +48,7 @@ class App extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final router = ref.watch(appRouterProvider);
-    logger.info("Logger test!");
+    logger.info('Logger test!');
 
     return MaterialApp.router(
       theme: AppThemes().lightThemeData(),

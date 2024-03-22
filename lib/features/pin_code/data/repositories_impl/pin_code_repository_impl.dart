@@ -6,6 +6,8 @@ class PinCodeRepositoryImpl implements PinCodeRepository {
 
   final PinCodeService _service;
 
+  String? firstInputCode;
+
   @override
   Future<bool> checkCode(String code) {
     return _service.checkCode(code);
@@ -13,6 +15,15 @@ class PinCodeRepositoryImpl implements PinCodeRepository {
 
   @override
   Future<void> setCode(String code) async {
+    firstInputCode = code;
+  }
+
+  @override
+  Future<void> setCodeRepeat(String code) async {
+    if (firstInputCode != code) {
+      firstInputCode = null;
+      throw 'Codes are not the same';
+    }
     await _service.setCode(code);
   }
 

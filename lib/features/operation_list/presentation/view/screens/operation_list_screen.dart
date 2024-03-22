@@ -4,10 +4,8 @@ import 'package:budget_tracker/extensions/build_context_extension.dart';
 import 'package:budget_tracker/features/operation_list/domain/entities/operation.dart';
 import 'package:budget_tracker/features/operation_list/presentation/view_model/operation_list_view_model.dart';
 import 'package:budget_tracker/features/operation_list/presentation/view_model/operation_list_view_state.dart';
-import 'package:budget_tracker/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:logging/logging.dart';
 
 @RoutePage()
 class OperationListScreen extends StatelessWidget {
@@ -29,7 +27,6 @@ class _OperationListScreenContent extends ConsumerWidget {
     final state = ref.watch(operationListViewModelProvider);
     switch (state) {
       case OperationListViewLoadingState _:
-        logger.log(Level.INFO, "Hello!");
         return const Center(
           child: CircularProgressIndicator(),
         );
@@ -75,7 +72,7 @@ class _OperationListTile extends StatelessWidget {
           ),
           Text(
             operation.currencySymbol,
-            style: TextStyle(
+            style: const TextStyle(
               fontWeight: FontWeight.w700,
             ),
           ),
@@ -101,8 +98,9 @@ class _OperationListTileImage extends StatelessWidget {
           : Image.network(
               url!,
               frameBuilder: (context, child, frame, syncLoaded) {
-                if (frame == null)
+                if (frame == null) {
                   return ColoredBox(color: context.colors.backgroundSecondary);
+                }
                 return child;
               },
               errorBuilder: (context, child, event) {

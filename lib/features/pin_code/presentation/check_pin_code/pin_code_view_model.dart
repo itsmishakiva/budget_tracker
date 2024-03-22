@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:budget_tracker/features/pin_code/domain/repositories/pin_code_repository.dart';
+import 'package:budget_tracker/features/pin_code/internal/pin_code_duration_constants.dart';
 import 'package:budget_tracker/features/pin_code/internal/pin_code_repository_provider.dart';
 import 'package:budget_tracker/features/pin_code/presentation/check_pin_code/pin_code_view_state.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -19,8 +20,6 @@ class PinCodeViewModel extends StateNotifier<PinCodeViewState> {
 
   final PinCodeRepository _repository;
   final LocalAuthentication _auth = LocalAuthentication();
-  static const resetTimeoutMs = 600;
-  static const inputAnimationTimeMs = 100;
 
   Future<void> init() async {
     final bool canAuthenticateWithBiometrics = await _auth.canCheckBiometrics;
@@ -82,7 +81,9 @@ class PinCodeViewModel extends StateNotifier<PinCodeViewState> {
 
   Future<void> _checkSuccess(String input) async {
     await Future.delayed(
-      const Duration(milliseconds: inputAnimationTimeMs),
+      const Duration(
+        milliseconds: PinCodeDurationConstants.inputAnimationTimeMs,
+      ),
     );
     state = PinCodeLoadingViewState(
       biometryTypes: state.biometryTypes,
@@ -108,7 +109,9 @@ class PinCodeViewModel extends StateNotifier<PinCodeViewState> {
 
   Future<void> _resetState() async {
     await Future.delayed(
-      const Duration(milliseconds: resetTimeoutMs),
+      const Duration(
+        milliseconds: PinCodeDurationConstants.resetTimeoutMs,
+      ),
     );
     state = PinCodeDefaultViewState(
       biometryTypes: state.biometryTypes,
