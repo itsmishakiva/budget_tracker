@@ -1,59 +1,50 @@
-import 'dart:convert';
 import 'dart:math';
-import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class EmojiStorageManager {
+class ColorStorageManager {
+  final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
 
-  Future<bool> hasEmoji() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    String check = prefs.getString('filled') ?? '';
-    if (check != null) return true;
-    else return false;
+  Future<bool> hasColor() async {
+    final SharedPreferences prefs = await _prefs;
+    String? check = prefs.getString('filled');
+    return (check != null);
   }
 
-  Color generateRandomColor() {
+  String generateRandomColor() {
     Random random = Random();
 
     double hue = random.nextDouble();
 
-    double saturation = 0.05 + random.nextDouble() * 0.1; // Насыщенность в диапазоне 0.05 - 0.15
-    double brightness = 0.95 + random.nextDouble() * 0.05; // Яркость в диапазоне 0.95 - 1.0
-    print(ColorConverter.colorToString(HSVColor.fromAHSV(1.0, hue * 360.0, saturation, brightness).toColor()));
+    double saturation = 0.05 +
+        random.nextDouble() * 0.1; // Насыщенность в диапазоне 0.05 - 0.15
+    double brightness =
+        0.95 + random.nextDouble() * 0.05; // Яркость в диапазоне 0.95 - 1.0
 
-    return HSVColor.fromAHSV(1.0, hue * 360.0, saturation, brightness).toColor();
+    return ColorConverter.colorToString(
+      HSVColor.fromAHSV(1.0, hue * 360.0, saturation, brightness).toColor(),
+    );
   }
 
-
-  Future<void> saveColors(Color color) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setString("Home", generateRandomColor().toString());
-    await prefs.setString("Health", generateRandomColor().toString());
-    await prefs.setString("Food", generateRandomColor().toString());
-    await prefs.setString("Gifts", generateRandomColor().toString());
-    await prefs.setString("Travels", generateRandomColor().toString());
-    await prefs.setString("Family", generateRandomColor().toString());
-    await prefs.setString("Education", generateRandomColor().toString());
-    await prefs.setString("Shop", generateRandomColor().toString());
-    await prefs.setString("Other", generateRandomColor().toString());
-    await prefs.setString("filled", "yes");
+  Future<void> saveColors() async {
+    final SharedPreferences prefs = await _prefs;
+    await prefs.setString('Home', generateRandomColor());
+    await prefs.setString('Health', generateRandomColor());
+    await prefs.setString('Food', generateRandomColor());
+    await prefs.setString('Gifts', generateRandomColor());
+    await prefs.setString('Travels', generateRandomColor());
+    await prefs.setString('Family', generateRandomColor());
+    await prefs.setString('Education', generateRandomColor());
+    await prefs.setString('Shop', generateRandomColor());
+    await prefs.setString('Other', generateRandomColor());
+    await prefs.setString('filled', 'yes');
   }
 
-  // Future<Color> loadColor(String) async {
-  //   SharedPreferences prefs = await SharedPreferences.getInstance();
-  //   return (prefs.getString(String)).toColor() ?? '';
-  // }
-
-  Future<String> loadDepartureAirplane() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    return prefs.getString('departure_airplane') ?? '';
-  }
-
-  Future<void> saveDepartureAirplane(String emoji) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setString('departure_airplane', emoji);
+  Future<Color> loadColor(String name) async {
+    final SharedPreferences prefs = await _prefs;
+    String color = prefs.getString(name) ?? generateRandomColor();
+    return ColorConverter.stringToColor(color);
   }
 }
 
@@ -67,4 +58,3 @@ class ColorConverter {
     return Color(value).withAlpha(255);
   }
 }
-

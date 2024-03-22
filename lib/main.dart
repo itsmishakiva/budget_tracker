@@ -1,6 +1,7 @@
 import 'package:budget_tracker/core/internal/app_router_provider.dart';
 import 'package:budget_tracker/core/internal/logger_provider.dart';
 import 'package:budget_tracker/firebase_options.dart';
+import 'package:budget_tracker/themes/app_operation_colors.dart';
 import 'package:budget_tracker/themes/app_themes.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
@@ -29,12 +30,19 @@ void main() async {
   Logger.root.level = Level.ALL;
 
   Logger.root.onRecord.listen((record) {
-    print('${record.level.name}: ${record.time}: ${record.message}');
+    if (kDebugMode) {
+      print('${record.level.name}: ${record.time}: ${record.message}');
+    }
   });
 
+  bool hasColor = await ColorStorageManager().hasColor();
+  if (!hasColor) {
+    await ColorStorageManager().saveColors();
+  }
+
   runApp(
-    ProviderScope(
-      child: const App(),
+    const ProviderScope(
+      child: App(),
     ),
   );
 }
@@ -46,7 +54,7 @@ class App extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final logger = ref.read(loggerProvider);
     final router = ref.watch(appRouterProvider);
-    logger.info("Logger test!");
+    logger.info('Logger test!');
 
     return MaterialApp.router(
       theme: AppThemes().lightThemeData(),

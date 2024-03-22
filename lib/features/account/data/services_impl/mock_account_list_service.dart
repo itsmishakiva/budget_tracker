@@ -1,5 +1,5 @@
-import '../dto/account_dto.dart';
-import '../services/account_list_service.dart';
+import 'package:budget_tracker/features/account/data/dto/account_dto.dart';
+import 'package:budget_tracker/features/account/data/services/account_list_service.dart';
 
 class MockAccountListService implements AccountListService {
   @override
@@ -18,9 +18,6 @@ class MockAccountListService implements AccountListService {
         },
       ],
     };
-    return result['account']
-        ?.map((e) => AccountDTO.fromJson(e))
-        .toList() ??
-        [];
+    return result['account']?.map((e) => AccountDTO.fromJson(e)).toList() ?? [];
   }
 }

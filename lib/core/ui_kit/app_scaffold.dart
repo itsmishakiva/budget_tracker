@@ -13,7 +13,6 @@ class AppScaffold extends StatelessWidget {
   final Widget? navigationBar;
   final Color? backgroundColor;
 
-
   @override
   Widget build(BuildContext context) {
     return AnnotatedRegion<SystemUiOverlayStyle>(

@@ -1,9 +1,6 @@
-import 'dart:math';
-
 import 'package:auto_route/auto_route.dart';
 import 'package:budget_tracker/core/internal/logger_provider.dart';
 import 'package:budget_tracker/core/ui_kit/app_scaffold.dart';
-import 'package:budget_tracker/extensions/build_context_extension.dart';
 import 'package:budget_tracker/features/operation_list/domain/entities/operation.dart';
 import 'package:budget_tracker/features/operation_list/presentation/view_model/operation_list_view_model.dart';
 import 'package:budget_tracker/features/operation_list/presentation/view_model/operation_list_view_state.dart';
@@ -12,7 +9,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logging/logging.dart';
 
-import '../../../../../themes/app_colors.dart';
+import 'package:budget_tracker/themes/app_colors.dart';
+import 'package:flutter_emoji/flutter_emoji.dart';
+
+import 'package:budget_tracker/themes/app_operation_colors.dart';
 
 @RoutePage()
 class OperationListScreen extends StatelessWidget {
@@ -27,14 +27,14 @@ class OperationListScreen extends StatelessWidget {
 }
 
 class OperationListScreenContent extends ConsumerWidget {
-  const OperationListScreenContent();
+  const OperationListScreenContent({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(operationListViewModelProvider);
     switch (state) {
       case OperationListViewLoadingState _:
-        ref.read(loggerProvider).log(Level.INFO, "Hello!");
+        ref.read(loggerProvider).log(Level.INFO, 'Hello!');
         return const Center(
           child: CircularProgressIndicator(),
         );
@@ -44,8 +44,9 @@ class OperationListScreenContent extends ConsumerWidget {
         );
       case OperationListViewDataState _:
         return ListView.builder(
+          itemExtent: 100,
           itemCount: state.data.length,
-          itemBuilder: (context, index) => _OperationListTile(
+          itemBuilder: (context, index) => OperationListTile(
             operation: state.data[index],
           ),
         );
@@ -53,35 +54,68 @@ class OperationListScreenContent extends ConsumerWidget {
   }
 }
 
-class _OperationListTile extends StatelessWidget {
-  const _OperationListTile({
+class OperationListTile extends StatefulWidget {
+  const OperationListTile({
+    super.key,
     required this.operation,
   });
 
   final Operation operation;
-  final double size = 30;
 
-  Color _randomColor() {
-    final random = Random();
-    return Color.fromRGBO(
-      random.nextInt(256), // Красный
-      random.nextInt(256), // Зеленый
-      random.nextInt(256), // Синий
-      1.0, // Прозрачность
-    );
+  @override
+  State<OperationListTile> createState() => _OperationListTileState();
+}
+
+class _OperationListTileState extends State<OperationListTile> {
+  final double size = 30;
+  Color color = Colors.white24;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadColor();
   }
 
-  Icon _operationIcon(String operation, Color color) {
+  void _loadColor() async {
+    Color? loadedColor =
+        await ColorStorageManager().loadColor(widget.operation.title);
+    setState(() {
+      color = loadedColor;
+    });
+  }
 
+  Text _operationIcon(String operation) {
     switch (operation) {
-      case "Home":
-        return Icon(Icons.home, size: size, color: color);
-      case "Health":
-        return Icon(Icons.heart_broken_rounded, size: size, color: color);
-      case "Food":
-        return Icon(Icons.emoji_food_beverage, size: size, color: color);
+      case 'Home':
+        return Text(
+          EmojiParser().emojify(':house:'),
+          style: const TextStyle(fontSize: 24.0),
+        );
+      case 'Health':
+        return Text(
+          EmojiParser().emojify(':broken_heart:'),
+          style: const TextStyle(fontSize: 24.0),
+        );
+      case 'Food':
+        return Text(
+          EmojiParser().emojify(':fork_and_knife:'),
+          style: const TextStyle(fontSize: 24.0),
+        );
+      case 'Gifts':
+        return Text(
+          EmojiParser().emojify(':gift:'),
+          style: const TextStyle(fontSize: 24.0),
+        );
+      case 'Travels':
+        return Text(
+          EmojiParser().emojify(':airplane_departure:'),
+          style: const TextStyle(fontSize: 24.0),
+        );
       default:
-        return Icon(Icons.home, size: size, color: color);
+        return Text(
+          EmojiParser().emojify(':broken_heart:'),
+          style: const TextStyle(fontSize: 24.0),
+        );
     }
   }
 
@@ -99,17 +133,21 @@ class _OperationListTile extends StatelessWidget {
           height: 60,
           decoration: BoxDecoration(
             shape: BoxShape.circle,
-            color: AppLightColors().customLightColors[operation.id % 6],
+            // color: AppLightColors().customLightColors[operation.id % 6],
+            color: color,
           ),
-          child: _operationIcon(operation.title, AppLightColors().customColors[operation.id % 6])
+          // child: _operationIcon(operation.title, AppLightColors().customColors[operation.id % 6])
+          child: Center(
+            child: _operationIcon(widget.operation.title),
+          ),
         ),
         title: Text(
-            operation.title,
+          widget.operation.title,
           style: AppLightTextStyles(colors: AppLightColors()).header3,
           overflow: TextOverflow.ellipsis,
         ),
         subtitle: Text(
-            operation.companyName,
+          widget.operation.companyName,
           style: AppLightTextStyles(colors: AppLightColors()).subtitle2,
           overflow: TextOverflow.ellipsis,
         ),
@@ -117,45 +155,16 @@ class _OperationListTile extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-              operation.sum.toStringAsFixed(2),
+              widget.operation.sum.toStringAsFixed(2),
               style: AppLightTextStyles(colors: AppLightColors()).header3,
             ),
             Text(
-              operation.currencySymbol,
+              widget.operation.currencySymbol,
               style: AppLightTextStyles(colors: AppLightColors()).header3,
             ),
           ],
         ),
       ),
-    );
-  }
-}
-
-class _OperationListTileImage extends StatelessWidget {
-  const _OperationListTileImage({
-    this.url,
-  });
-
-  final String? url;
-
-  @override
-  Widget build(BuildContext context) {
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(6.0),
-      child: url == null
-          ? ColoredBox(color: context.colors.backgroundSecondary)
-          : Image.network(
-              url!,
-              frameBuilder: (context, child, frame, syncLoaded) {
-                if (frame == null)
-                  return ColoredBox(color: context.colors.backgroundSecondary);
-                return child;
-              },
-              errorBuilder: (context, child, event) {
-                return ColoredBox(color: context.colors.backgroundSecondary);
-              },
-              fit: BoxFit.cover,
-            ),
     );
   }
 }

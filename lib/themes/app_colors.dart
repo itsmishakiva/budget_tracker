@@ -4,35 +4,18 @@ import 'package:flutter/material.dart';
 class AppLightColors extends AppColors {
   AppLightColors()
       : super(
-    backgroundPrimary: const Color(0xFFFFFFFF),
-    backgroundSecondary: const Color(0xFFFAF9FF),
-    disabled: const Color(0xFFE4E4E4),
-    accent: const Color(0xFF3A60F3),
-    accentSecondary: const Color(0xFF5779F7),
-    textPrimary: const Color(0xFF4B425F),
-    textSecondary: const Color(0xFFDEDADB),
-    textSurface: const Color(0xFFFFFFFF),
-    error: const Color(0xFFFF4B4C),
-    success: const Color(0xFF02C46D),
-    customColors: [
-      const Color(0xFF6448FE),
-      const Color(0xFFFE6197),
-      const Color(0xFF27b03b),
-      const Color(0xFF61A3FE),
-      const Color(0xFFFFA738),
-      const Color(0xFFFF5DCD),
-    ],
-    customLightColors: [
-      const Color(0xFFD3CCFF),
-      const Color(0xFFFFE0E8),
-      const Color(0xffdeffe2),
-      const Color(0xFFEBF3FF),
-      const Color(0xFFFFEEDB),
-      const Color(0xFFFFDCF3),
-    ],
-  );
+          backgroundPrimary: const Color(0xFFFFFFFF),
+          backgroundSecondary: const Color(0xFFFAF9FF),
+          disabled: const Color(0xFFE4E4E4),
+          accent: const Color(0xFF3A60F3),
+          accentSecondary: const Color(0xFF5779F7),
+          textPrimary: const Color(0xFF4B425F),
+          textSecondary: const Color(0xFFDEDADB),
+          textSurface: const Color(0xFFFFFFFF),
+          error: const Color(0xFFFF4B4C),
+          success: const Color(0xFF02C46D),
+        );
 }
-
 
 class AppColors extends ThemeExtension<AppColors> {
   final Color backgroundPrimary;
@@ -45,8 +28,6 @@ class AppColors extends ThemeExtension<AppColors> {
   final Color textSurface;
   final Color error;
   final Color success;
-  final List<Color> customColors;
-  final List<Color> customLightColors;
 
   const AppColors({
     required this.backgroundPrimary,
@@ -59,8 +40,6 @@ class AppColors extends ThemeExtension<AppColors> {
     required this.textSurface,
     required this.error,
     required this.success,
-    required this.customColors,
-    required this.customLightColors,
   });
 
   @override
@@ -75,8 +54,6 @@ class AppColors extends ThemeExtension<AppColors> {
     Color? textSurface,
     Color? error,
     Color? success,
-    List<Color>? customColors,
-    List<Color>? customLightColors,
   }) {
     return AppColors(
       backgroundPrimary: backgroundPrimary ?? this.backgroundPrimary,
@@ -89,16 +66,14 @@ class AppColors extends ThemeExtension<AppColors> {
       textSurface: textSurface ?? this.textSurface,
       error: error ?? this.error,
       success: success ?? this.success,
-      customColors: customColors ?? this.customColors,
-      customLightColors: customLightColors ?? this.customLightColors,
     );
   }
 
   @override
   ThemeExtension<AppColors> lerp(
-      covariant ThemeExtension<AppColors>? other,
-      double t,
-      ) {
+    covariant ThemeExtension<AppColors>? other,
+    double t,
+  ) {
     if (other == null || other.runtimeType != AppColors) {
       return this;
     }
@@ -107,20 +82,18 @@ class AppColors extends ThemeExtension<AppColors> {
 
     return AppColors(
       backgroundPrimary:
-      Color.lerp(backgroundPrimary, typedOther.backgroundPrimary, t)!,
+          Color.lerp(backgroundPrimary, typedOther.backgroundPrimary, t)!,
       backgroundSecondary:
-      Color.lerp(backgroundSecondary, typedOther.backgroundSecondary, t)!,
+          Color.lerp(backgroundSecondary, typedOther.backgroundSecondary, t)!,
       disabled: Color.lerp(disabled, typedOther.disabled, t)!,
       accent: Color.lerp(accent, typedOther.accent, t)!,
       accentSecondary:
-      Color.lerp(accentSecondary, typedOther.accentSecondary, t)!,
+          Color.lerp(accentSecondary, typedOther.accentSecondary, t)!,
       textPrimary: Color.lerp(textPrimary, typedOther.textPrimary, t)!,
       textSecondary: Color.lerp(textSecondary, typedOther.textSecondary, t)!,
       textSurface: Color.lerp(textSurface, typedOther.textSurface, t)!,
       error: Color.lerp(error, typedOther.error, t)!,
       success: Color.lerp(success, typedOther.success, t)!,
-      customColors: customColors,
-      customLightColors: customLightColors,
     );
   }
 }
