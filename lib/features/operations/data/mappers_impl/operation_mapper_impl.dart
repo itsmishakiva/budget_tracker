@@ -10,9 +10,7 @@ class OperationMapperImpl implements OperationMapper {
       title: dto.title,
       sum: double.parse(dto.sum.substring(0, dto.sum.length - 1)),
       currencySymbol: dto.sum[dto.sum.length - 1],
-      description: dto.description ?? '',
       companyName: dto.companyName ?? '',
-      companyAssetUrl: dto.companyAssetUrl,
     );
   }
 
@@ -22,9 +20,7 @@ class OperationMapperImpl implements OperationMapper {
       id: entity.id,
       title: entity.title,
       sum: entity.sum.toString() + entity.currencySymbol,
-      description: entity.description,
       companyName: entity.companyName,
-      companyAssetUrl: entity.companyAssetUrl,
     );
   }
 }

@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'operation.dart';
+part of 'account_dto.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,36 +14,37 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
+AccountDTO _$AccountDTOFromJson(Map<String, dynamic> json) {
+  return _AccountDTO.fromJson(json);
+}
+
 /// @nodoc
-mixin _$Operation {
+mixin _$AccountDTO {
   int get id => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
-  double get sum => throw _privateConstructorUsedError;
-  String get currencySymbol => throw _privateConstructorUsedError;
-  String get companyName => throw _privateConstructorUsedError;
+  String get sum => throw _privateConstructorUsedError;
+  String get expenses => throw _privateConstructorUsedError;
+  String get income => throw _privateConstructorUsedError;
 
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $OperationCopyWith<Operation> get copyWith =>
+  $AccountDTOCopyWith<AccountDTO> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $OperationCopyWith<$Res> {
-  factory $OperationCopyWith(Operation value, $Res Function(Operation) then) =
-      _$OperationCopyWithImpl<$Res, Operation>;
+abstract class $AccountDTOCopyWith<$Res> {
+  factory $AccountDTOCopyWith(
+          AccountDTO value, $Res Function(AccountDTO) then) =
+      _$AccountDTOCopyWithImpl<$Res, AccountDTO>;
   @useResult
-  $Res call(
-      {int id,
-      String title,
-      double sum,
-      String currencySymbol,
-      String companyName});
+  $Res call({int id, String title, String sum, String expenses, String income});
 }
 
 /// @nodoc
-class _$OperationCopyWithImpl<$Res, $Val extends Operation>
-    implements $OperationCopyWith<$Res> {
-  _$OperationCopyWithImpl(this._value, this._then);
+class _$AccountDTOCopyWithImpl<$Res, $Val extends AccountDTO>
+    implements $AccountDTOCopyWith<$Res> {
+  _$AccountDTOCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -56,8 +57,8 @@ class _$OperationCopyWithImpl<$Res, $Val extends Operation>
     Object? id = null,
     Object? title = null,
     Object? sum = null,
-    Object? currencySymbol = null,
-    Object? companyName = null,
+    Object? expenses = null,
+    Object? income = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -71,41 +72,36 @@ class _$OperationCopyWithImpl<$Res, $Val extends Operation>
       sum: null == sum
           ? _value.sum
           : sum // ignore: cast_nullable_to_non_nullable
-              as double,
-      currencySymbol: null == currencySymbol
-          ? _value.currencySymbol
-          : currencySymbol // ignore: cast_nullable_to_non_nullable
               as String,
-      companyName: null == companyName
-          ? _value.companyName
-          : companyName // ignore: cast_nullable_to_non_nullable
+      expenses: null == expenses
+          ? _value.expenses
+          : expenses // ignore: cast_nullable_to_non_nullable
+              as String,
+      income: null == income
+          ? _value.income
+          : income // ignore: cast_nullable_to_non_nullable
               as String,
     ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$$OperationImplCopyWith<$Res>
-    implements $OperationCopyWith<$Res> {
-  factory _$$OperationImplCopyWith(
-          _$OperationImpl value, $Res Function(_$OperationImpl) then) =
-      __$$OperationImplCopyWithImpl<$Res>;
+abstract class _$$AccountDTOImplCopyWith<$Res>
+    implements $AccountDTOCopyWith<$Res> {
+  factory _$$AccountDTOImplCopyWith(
+          _$AccountDTOImpl value, $Res Function(_$AccountDTOImpl) then) =
+      __$$AccountDTOImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {int id,
-      String title,
-      double sum,
-      String currencySymbol,
-      String companyName});
+  $Res call({int id, String title, String sum, String expenses, String income});
 }
 
 /// @nodoc
-class __$$OperationImplCopyWithImpl<$Res>
-    extends _$OperationCopyWithImpl<$Res, _$OperationImpl>
-    implements _$$OperationImplCopyWith<$Res> {
-  __$$OperationImplCopyWithImpl(
-      _$OperationImpl _value, $Res Function(_$OperationImpl) _then)
+class __$$AccountDTOImplCopyWithImpl<$Res>
+    extends _$AccountDTOCopyWithImpl<$Res, _$AccountDTOImpl>
+    implements _$$AccountDTOImplCopyWith<$Res> {
+  __$$AccountDTOImplCopyWithImpl(
+      _$AccountDTOImpl _value, $Res Function(_$AccountDTOImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -114,10 +110,10 @@ class __$$OperationImplCopyWithImpl<$Res>
     Object? id = null,
     Object? title = null,
     Object? sum = null,
-    Object? currencySymbol = null,
-    Object? companyName = null,
+    Object? expenses = null,
+    Object? income = null,
   }) {
-    return _then(_$OperationImpl(
+    return _then(_$AccountDTOImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -129,102 +125,115 @@ class __$$OperationImplCopyWithImpl<$Res>
       sum: null == sum
           ? _value.sum
           : sum // ignore: cast_nullable_to_non_nullable
-              as double,
-      currencySymbol: null == currencySymbol
-          ? _value.currencySymbol
-          : currencySymbol // ignore: cast_nullable_to_non_nullable
               as String,
-      companyName: null == companyName
-          ? _value.companyName
-          : companyName // ignore: cast_nullable_to_non_nullable
+      expenses: null == expenses
+          ? _value.expenses
+          : expenses // ignore: cast_nullable_to_non_nullable
+              as String,
+      income: null == income
+          ? _value.income
+          : income // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
 }
 
 /// @nodoc
-
-class _$OperationImpl with DiagnosticableTreeMixin implements _Operation {
-  _$OperationImpl(
+@JsonSerializable()
+class _$AccountDTOImpl with DiagnosticableTreeMixin implements _AccountDTO {
+  _$AccountDTOImpl(
       {required this.id,
       required this.title,
       required this.sum,
-      required this.currencySymbol,
-      required this.companyName});
+      required this.expenses,
+      required this.income});
+
+  factory _$AccountDTOImpl.fromJson(Map<String, dynamic> json) =>
+      _$$AccountDTOImplFromJson(json);
 
   @override
   final int id;
   @override
   final String title;
   @override
-  final double sum;
+  final String sum;
   @override
-  final String currencySymbol;
+  final String expenses;
   @override
-  final String companyName;
+  final String income;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Operation(id: $id, title: $title, sum: $sum, currencySymbol: $currencySymbol, companyName: $companyName)';
+    return 'AccountDTO(id: $id, title: $title, sum: $sum, expenses: $expenses, income: $income)';
   }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('type', 'Operation'))
+      ..add(DiagnosticsProperty('type', 'AccountDTO'))
       ..add(DiagnosticsProperty('id', id))
       ..add(DiagnosticsProperty('title', title))
       ..add(DiagnosticsProperty('sum', sum))
-      ..add(DiagnosticsProperty('currencySymbol', currencySymbol))
-      ..add(DiagnosticsProperty('companyName', companyName));
+      ..add(DiagnosticsProperty('expenses', expenses))
+      ..add(DiagnosticsProperty('income', income));
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$OperationImpl &&
+            other is _$AccountDTOImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.sum, sum) || other.sum == sum) &&
-            (identical(other.currencySymbol, currencySymbol) ||
-                other.currencySymbol == currencySymbol) &&
-            (identical(other.companyName, companyName) ||
-                other.companyName == companyName));
+            (identical(other.expenses, expenses) ||
+                other.expenses == expenses) &&
+            (identical(other.income, income) || other.income == income));
   }
 
+  @JsonKey(ignore: true)
   @override
   int get hashCode =>
-      Object.hash(runtimeType, id, title, sum, currencySymbol, companyName);
+      Object.hash(runtimeType, id, title, sum, expenses, income);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$OperationImplCopyWith<_$OperationImpl> get copyWith =>
-      __$$OperationImplCopyWithImpl<_$OperationImpl>(this, _$identity);
+  _$$AccountDTOImplCopyWith<_$AccountDTOImpl> get copyWith =>
+      __$$AccountDTOImplCopyWithImpl<_$AccountDTOImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$AccountDTOImplToJson(
+      this,
+    );
+  }
 }
 
-abstract class _Operation implements Operation {
-  factory _Operation(
+abstract class _AccountDTO implements AccountDTO {
+  factory _AccountDTO(
       {required final int id,
       required final String title,
-      required final double sum,
-      required final String currencySymbol,
-      required final String companyName}) = _$OperationImpl;
+      required final String sum,
+      required final String expenses,
+      required final String income}) = _$AccountDTOImpl;
+
+  factory _AccountDTO.fromJson(Map<String, dynamic> json) =
+      _$AccountDTOImpl.fromJson;
 
   @override
   int get id;
   @override
   String get title;
   @override
-  double get sum;
+  String get sum;
   @override
-  String get currencySymbol;
+  String get expenses;
   @override
-  String get companyName;
+  String get income;
   @override
   @JsonKey(ignore: true)
-  _$$OperationImplCopyWith<_$OperationImpl> get copyWith =>
+  _$$AccountDTOImplCopyWith<_$AccountDTOImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

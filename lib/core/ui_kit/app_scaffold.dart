@@ -5,9 +5,13 @@ class AppScaffold extends StatelessWidget {
   const AppScaffold({
     super.key,
     this.body,
+    this.navigationBar,
+    this.backgroundColor,
   });
 
   final Widget? body;
+  final Widget? navigationBar;
+  final Color? backgroundColor;
 
   @override
   Widget build(BuildContext context) {
@@ -21,6 +25,8 @@ class AppScaffold extends StatelessWidget {
       ),
       child: Scaffold(
         body: body,
+        backgroundColor: backgroundColor,
+        bottomNavigationBar: navigationBar,
       ),
     );
   }

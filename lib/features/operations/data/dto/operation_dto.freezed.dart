@@ -23,9 +23,7 @@ mixin _$OperationDTO {
   int get id => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
   String get sum => throw _privateConstructorUsedError;
-  String? get description => throw _privateConstructorUsedError;
   String? get companyName => throw _privateConstructorUsedError;
-  String? get companyAssetUrl => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -39,13 +37,7 @@ abstract class $OperationDTOCopyWith<$Res> {
           OperationDTO value, $Res Function(OperationDTO) then) =
       _$OperationDTOCopyWithImpl<$Res, OperationDTO>;
   @useResult
-  $Res call(
-      {int id,
-      String title,
-      String sum,
-      String? description,
-      String? companyName,
-      String? companyAssetUrl});
+  $Res call({int id, String title, String sum, String? companyName});
 }
 
 /// @nodoc
@@ -64,9 +56,7 @@ class _$OperationDTOCopyWithImpl<$Res, $Val extends OperationDTO>
     Object? id = null,
     Object? title = null,
     Object? sum = null,
-    Object? description = freezed,
     Object? companyName = freezed,
-    Object? companyAssetUrl = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -81,17 +71,9 @@ class _$OperationDTOCopyWithImpl<$Res, $Val extends OperationDTO>
           ? _value.sum
           : sum // ignore: cast_nullable_to_non_nullable
               as String,
-      description: freezed == description
-          ? _value.description
-          : description // ignore: cast_nullable_to_non_nullable
-              as String?,
       companyName: freezed == companyName
           ? _value.companyName
           : companyName // ignore: cast_nullable_to_non_nullable
-              as String?,
-      companyAssetUrl: freezed == companyAssetUrl
-          ? _value.companyAssetUrl
-          : companyAssetUrl // ignore: cast_nullable_to_non_nullable
               as String?,
     ) as $Val);
   }
@@ -105,13 +87,7 @@ abstract class _$$OperationDTOImplCopyWith<$Res>
       __$$OperationDTOImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {int id,
-      String title,
-      String sum,
-      String? description,
-      String? companyName,
-      String? companyAssetUrl});
+  $Res call({int id, String title, String sum, String? companyName});
 }
 
 /// @nodoc
@@ -128,9 +104,7 @@ class __$$OperationDTOImplCopyWithImpl<$Res>
     Object? id = null,
     Object? title = null,
     Object? sum = null,
-    Object? description = freezed,
     Object? companyName = freezed,
-    Object? companyAssetUrl = freezed,
   }) {
     return _then(_$OperationDTOImpl(
       id: null == id
@@ -145,17 +119,9 @@ class __$$OperationDTOImplCopyWithImpl<$Res>
           ? _value.sum
           : sum // ignore: cast_nullable_to_non_nullable
               as String,
-      description: freezed == description
-          ? _value.description
-          : description // ignore: cast_nullable_to_non_nullable
-              as String?,
       companyName: freezed == companyName
           ? _value.companyName
           : companyName // ignore: cast_nullable_to_non_nullable
-              as String?,
-      companyAssetUrl: freezed == companyAssetUrl
-          ? _value.companyAssetUrl
-          : companyAssetUrl // ignore: cast_nullable_to_non_nullable
               as String?,
     ));
   }
@@ -168,9 +134,7 @@ class _$OperationDTOImpl with DiagnosticableTreeMixin implements _OperationDTO {
       {required this.id,
       required this.title,
       required this.sum,
-      this.description,
-      this.companyName,
-      this.companyAssetUrl});
+      this.companyName});
 
   factory _$OperationDTOImpl.fromJson(Map<String, dynamic> json) =>
       _$$OperationDTOImplFromJson(json);
@@ -182,15 +146,11 @@ class _$OperationDTOImpl with DiagnosticableTreeMixin implements _OperationDTO {
   @override
   final String sum;
   @override
-  final String? description;
-  @override
   final String? companyName;
-  @override
-  final String? companyAssetUrl;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'OperationDTO(id: $id, title: $title, sum: $sum, description: $description, companyName: $companyName, companyAssetUrl: $companyAssetUrl)';
+    return 'OperationDTO(id: $id, title: $title, sum: $sum, companyName: $companyName)';
   }
 
   @override
@@ -201,9 +161,7 @@ class _$OperationDTOImpl with DiagnosticableTreeMixin implements _OperationDTO {
       ..add(DiagnosticsProperty('id', id))
       ..add(DiagnosticsProperty('title', title))
       ..add(DiagnosticsProperty('sum', sum))
-      ..add(DiagnosticsProperty('description', description))
-      ..add(DiagnosticsProperty('companyName', companyName))
-      ..add(DiagnosticsProperty('companyAssetUrl', companyAssetUrl));
+      ..add(DiagnosticsProperty('companyName', companyName));
   }
 
   @override
@@ -214,18 +172,13 @@ class _$OperationDTOImpl with DiagnosticableTreeMixin implements _OperationDTO {
             (identical(other.id, id) || other.id == id) &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.sum, sum) || other.sum == sum) &&
-            (identical(other.description, description) ||
-                other.description == description) &&
             (identical(other.companyName, companyName) ||
-                other.companyName == companyName) &&
-            (identical(other.companyAssetUrl, companyAssetUrl) ||
-                other.companyAssetUrl == companyAssetUrl));
+                other.companyName == companyName));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, id, title, sum, description, companyName, companyAssetUrl);
+  int get hashCode => Object.hash(runtimeType, id, title, sum, companyName);
 
   @JsonKey(ignore: true)
   @override
@@ -246,9 +199,7 @@ abstract class _OperationDTO implements OperationDTO {
       {required final int id,
       required final String title,
       required final String sum,
-      final String? description,
-      final String? companyName,
-      final String? companyAssetUrl}) = _$OperationDTOImpl;
+      final String? companyName}) = _$OperationDTOImpl;
 
   factory _OperationDTO.fromJson(Map<String, dynamic> json) =
       _$OperationDTOImpl.fromJson;
@@ -260,11 +211,7 @@ abstract class _OperationDTO implements OperationDTO {
   @override
   String get sum;
   @override
-  String? get description;
-  @override
   String? get companyName;
-  @override
-  String? get companyAssetUrl;
   @override
   @JsonKey(ignore: true)
   _$$OperationDTOImplCopyWith<_$OperationDTOImpl> get copyWith =>

@@ -1,23 +1,25 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'operation_dto.dart';
+part of 'account_dto.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$OperationDTOImpl _$$OperationDTOImplFromJson(Map<String, dynamic> json) =>
-    _$OperationDTOImpl(
+_$AccountDTOImpl _$$AccountDTOImplFromJson(Map<String, dynamic> json) =>
+    _$AccountDTOImpl(
       id: json['id'] as int,
       title: json['title'] as String,
       sum: json['sum'] as String,
-      companyName: json['companyName'] as String?,
+      expenses: json['expenses'] as String,
+      income: json['income'] as String,
     );
 
-Map<String, dynamic> _$$OperationDTOImplToJson(_$OperationDTOImpl instance) =>
+Map<String, dynamic> _$$AccountDTOImplToJson(_$AccountDTOImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'title': instance.title,
       'sum': instance.sum,
-      'companyName': instance.companyName,
+      'expenses': instance.expenses,
+      'income': instance.income,
     };

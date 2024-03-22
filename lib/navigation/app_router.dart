@@ -18,5 +18,9 @@ class AppRouter extends $AppRouter {
           page: OperationListRoute.page,
           path: '/operations',
         ),
+        AutoRoute(
+          page: HomeRoute.page,
+          path: '/home',
+        ),
       ];
 }

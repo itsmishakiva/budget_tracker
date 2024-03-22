@@ -10,4 +10,3 @@ linter:
     - require_trailing_commas
     - always_use_package_imports
     - prefer_const_declarations
-

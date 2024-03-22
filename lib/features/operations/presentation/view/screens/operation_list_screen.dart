@@ -6,6 +6,8 @@ import 'package:budget_tracker/features/operations/presentation/view_model/opera
 import 'package:budget_tracker/features/operations/presentation/view_model/operation_list_view_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_emoji/flutter_emoji.dart';
+import 'package:budget_tracker/themes/app_operation_colors.dart';
 
 @RoutePage()
 class OperationListScreen extends StatelessWidget {
@@ -14,13 +16,13 @@ class OperationListScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const AppScaffold(
-      body: _OperationListScreenContent(),
+      body: OperationListScreenContent(),
     );
   }
 }
 
-class _OperationListScreenContent extends ConsumerWidget {
-  const _OperationListScreenContent();
+class OperationListScreenContent extends ConsumerWidget {
+  const OperationListScreenContent({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -36,8 +38,9 @@ class _OperationListScreenContent extends ConsumerWidget {
         );
       case OperationListViewDataState _:
         return ListView.builder(
+          itemExtent: 100,
           itemCount: state.data.length,
-          itemBuilder: (context, index) => _OperationListTile(
+          itemBuilder: (context, index) => OperationListTile(
             operation: state.data[index],
           ),
         );
@@ -45,69 +48,117 @@ class _OperationListScreenContent extends ConsumerWidget {
   }
 }
 
-class _OperationListTile extends StatelessWidget {
-  const _OperationListTile({
+class OperationListTile extends StatefulWidget {
+  const OperationListTile({
+    super.key,
     required this.operation,
   });
 
   final Operation operation;
 
   @override
-  Widget build(BuildContext context) {
-    return ListTile(
-      leading: SizedBox(
-        width: 30,
-        height: 30,
-        child: _OperationListTileImage(
-          url: operation.companyAssetUrl,
-        ),
-      ),
-      title: Text(operation.title),
-      subtitle: Text(operation.description),
-      trailing: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Text(
-            operation.sum.toStringAsFixed(2),
-          ),
-          Text(
-            operation.currencySymbol,
-            style: const TextStyle(
-              fontWeight: FontWeight.w700,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
+  State<OperationListTile> createState() => _OperationListTileState();
 }
 
-class _OperationListTileImage extends StatelessWidget {
-  const _OperationListTileImage({
-    this.url,
-  });
+class _OperationListTileState extends State<OperationListTile> {
+  final double size = 30;
+  Color color = Colors.white24;
 
-  final String? url;
+  @override
+  void initState() {
+    super.initState();
+    _loadColor();
+  }
+
+  void _loadColor() async {
+    Color? loadedColor =
+        await ColorStorageManager().loadColor(widget.operation.title);
+    setState(() {
+      color = loadedColor;
+    });
+  }
+
+  Text _operationIcon(String operation) {
+    switch (operation) {
+      case 'Home':
+        return Text(
+          EmojiParser().emojify(':house:'),
+          style: const TextStyle(fontSize: 24.0),
+        );
+      case 'Health':
+        return Text(
+          EmojiParser().emojify(':broken_heart:'),
+          style: const TextStyle(fontSize: 24.0),
+        );
+      case 'Food':
+        return Text(
+          EmojiParser().emojify(':fork_and_knife:'),
+          style: const TextStyle(fontSize: 24.0),
+        );
+      case 'Gifts':
+        return Text(
+          EmojiParser().emojify(':gift:'),
+          style: const TextStyle(fontSize: 24.0),
+        );
+      case 'Travels':
+        return Text(
+          EmojiParser().emojify(':airplane_departure:'),
+          style: const TextStyle(fontSize: 24.0),
+        );
+      default:
+        return Text(
+          EmojiParser().emojify(':broken_heart:'),
+          style: const TextStyle(fontSize: 24.0),
+        );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(6.0),
-      child: url == null
-          ? ColoredBox(color: context.colors.backgroundSecondary)
-          : Image.network(
-              url!,
-              frameBuilder: (context, child, frame, syncLoaded) {
-                if (frame == null) {
-                  return ColoredBox(color: context.colors.backgroundSecondary);
-                }
-                return child;
-              },
-              errorBuilder: (context, child, event) {
-                return ColoredBox(color: context.colors.backgroundSecondary);
-              },
-              fit: BoxFit.cover,
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 8),
+      child: ListTile(
+        tileColor: context.colors.backgroundPrimary,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20.0),
+        ),
+        leading: Container(
+          width: 60,
+          height: 60,
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            // color: AppLightColors().customLightColors[operation.id % 6],
+            color: color,
+          ),
+          // child: _operationIcon(operation.title, AppLightColors().customColors[operation.id % 6])
+          child: Center(
+            child: _operationIcon(widget.operation.title),
+          ),
+        ),
+        title: Text(
+          widget.operation.title,
+          style: context.textStyles.header3,
+          overflow: TextOverflow.ellipsis,
+        ),
+        subtitle: Text(
+          widget.operation.companyName,
+          style: context.textStyles.subtitle2,
+          overflow: TextOverflow.ellipsis,
+        ),
+        trailing: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              widget.operation.sum.toStringAsFixed(2),
+              style: context.textStyles.header3,
             ),
+            Text(
+              widget.operation.currencySymbol,
+              style: context.textStyles.header3,
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
