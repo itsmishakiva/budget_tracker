@@ -4,7 +4,6 @@ import 'package:budget_tracker/extensions/build_context_extension.dart';
 import 'package:flutter/material.dart';
 
 import 'package:budget_tracker/themes/app_colors.dart';
-import 'package:budget_tracker/themes/app_text_styles.dart';
 import 'package:budget_tracker/features/account/domain/entities/account.dart';
 
 class AccountListTile extends StatelessWidget {
@@ -59,16 +58,12 @@ class AccountListTile extends StatelessWidget {
                                   const EdgeInsets.symmetric(vertical: 15.0),
                               child: Text(
                                 account.title,
-                                style:
-                                    AppLightTextStyles(colors: AppLightColors())
-                                        .bodyTextSurface,
+                                style: context.textStyles.bodyTextSurface,
                               ),
                             ),
                             Text(
                               account.sum.toString(),
-                              style:
-                                  AppLightTextStyles(colors: AppLightColors())
-                                      .headerSurface3,
+                              style: context.textStyles.headerSurface3,
                             ),
                             Padding(
                               padding: const EdgeInsets.all(10.0),
@@ -84,6 +79,7 @@ class AccountListTile extends StatelessWidget {
                                           ),
                                         ),
                                         _info(
+                                          context,
                                           'Expenses',
                                           '${account.expenses}${account.currencySymbol}',
                                         ),
@@ -100,6 +96,7 @@ class AccountListTile extends StatelessWidget {
                                           ),
                                         ),
                                         _info(
+                                          context,
                                           'Income',
                                           '${account.income}${account.currencySymbol}',
                                         ),
@@ -142,7 +139,7 @@ class AccountListTile extends StatelessWidget {
     );
   }
 
-  Widget _info(String type, String sum) {
+  Widget _info(BuildContext context, String type, String sum) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10.0),
       child: Column(
@@ -150,13 +147,11 @@ class AccountListTile extends StatelessWidget {
         children: [
           Text(
             type,
-            style:
-                AppLightTextStyles(colors: AppLightColors()).bodyTextSurface1,
+            style: context.textStyles.bodyTextSurface1,
           ),
           Text(
             sum,
-            style:
-                AppLightTextStyles(colors: AppLightColors()).bodyTextSurface2,
+            style: context.textStyles.bodyTextSurface2,
           ),
         ],
       ),
