@@ -1,7 +1,7 @@
-import 'package:budget_tracker/features/operation_list/data/mappers/i_operation_mapper.dart';
-import 'package:budget_tracker/features/operation_list/data/services/operation_list_service.dart';
-import 'package:budget_tracker/features/operation_list/domain/entities/operation.dart';
-import 'package:budget_tracker/features/operation_list/domain/repositories/operation_repository.dart';
+import 'package:budget_tracker/features/operations/data/mappers/i_operation_mapper.dart';
+import 'package:budget_tracker/features/operations/data/services/operation_list_service.dart';
+import 'package:budget_tracker/features/operations/domain/entities/operation.dart';
+import 'package:budget_tracker/features/operations/domain/repositories/operation_repository.dart';
 
 class OperationRepositoryImpl implements OperationRepository {
   OperationRepositoryImpl(this._service, this._mapper);

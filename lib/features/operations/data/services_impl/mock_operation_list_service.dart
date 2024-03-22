@@ -1,5 +1,5 @@
-import 'package:budget_tracker/features/operation_list/data/dto/operation_dto.dart';
-import 'package:budget_tracker/features/operation_list/data/services/operation_list_service.dart';
+import 'package:budget_tracker/features/operations/data/dto/operation_dto.dart';
+import 'package:budget_tracker/features/operations/data/services/operation_list_service.dart';
 
 class MockOperationListService implements OperationListService {
   @override

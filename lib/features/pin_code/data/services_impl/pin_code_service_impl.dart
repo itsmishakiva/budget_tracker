@@ -25,8 +25,8 @@ class PinCodeServiceImpl implements PinCodeService {
 
   @override
   Future<void> setCode(String code) async {
-    String hash = sha256.convert(utf8.encode(code)).toString();
     String salt = _generateRandomString(_saltSize);
+    String hash = sha256.convert(utf8.encode(code + salt)).toString();
     await _secureStorage.write(key: _pinKey, value: hash);
     await _secureStorage.write(key: _saltKey, value: salt);
   }

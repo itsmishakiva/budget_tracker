@@ -7,13 +7,16 @@ class AppRouter extends $AppRouter {
   List<AutoRoute> get routes => [
         AutoRoute(
           page: PinCodeRoute.page,
+          path: '/pin',
         ),
         AutoRoute(
           page: CreatePinCodeRoute.page,
+          path: '/create_pin',
           initial: true,
         ),
         AutoRoute(
           page: OperationListRoute.page,
+          path: '/operations',
         ),
       ];
 }

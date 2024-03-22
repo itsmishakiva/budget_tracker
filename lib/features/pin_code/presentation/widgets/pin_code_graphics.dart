@@ -1,5 +1,4 @@
 import 'package:budget_tracker/extensions/build_context_extension.dart';
-import 'package:budget_tracker/features/pin_code/internal/pin_code_duration_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:vibration/vibration.dart';
 
@@ -15,10 +14,16 @@ class PinCodeGraphics extends StatelessWidget {
     super.key,
     required this.pin,
     required this.state,
+    required this.onSuccessFinish,
+    required this.onErrorFinish,
+    required this.onDefaultFilled,
   });
 
   final String pin;
   final PinCodeGraphicStates state;
+  final Function onSuccessFinish;
+  final Function onErrorFinish;
+  final Function onDefaultFilled;
 
   @override
   Widget build(BuildContext context) {
@@ -32,6 +37,9 @@ class PinCodeGraphics extends StatelessWidget {
             index: index,
             pin: pin,
             state: state,
+            onErrorFinish: onErrorFinish,
+            onSuccessFinish: onSuccessFinish,
+            onDefaultFilled: onDefaultFilled,
           ),
         ),
       ),
@@ -44,11 +52,17 @@ class _PinCodeGraphicTile extends StatefulWidget {
     required this.index,
     required this.pin,
     required this.state,
+    required this.onErrorFinish,
+    required this.onSuccessFinish,
+    required this.onDefaultFilled,
   });
 
   final int index;
   final String pin;
   final PinCodeGraphicStates state;
+  final Function onSuccessFinish;
+  final Function onErrorFinish;
+  final Function onDefaultFilled;
   static const _graphicSize = 16.0;
 
   @override
@@ -67,7 +81,7 @@ class _PinCodeGraphicTileState extends State<_PinCodeGraphicTile>
     _inputAnimationController = AnimationController(
       vsync: this,
       duration: const Duration(
-        milliseconds: PinCodeDurationConstants.inputAnimationTimeMs,
+        milliseconds: 100,
       ),
     );
     _errorAnimationController = AnimationController(
@@ -110,9 +124,10 @@ class _PinCodeGraphicTileState extends State<_PinCodeGraphicTile>
         animation = _successAnimationController;
         Future(() async {
           await animation!.forward();
-          animation.animateBack(
+          await animation.animateBack(
             animation.lowerBound,
           );
+          widget.onSuccessFinish();
         });
         color = context.colors.success;
         break;
@@ -121,6 +136,8 @@ class _PinCodeGraphicTileState extends State<_PinCodeGraphicTile>
         Future(() async {
           Vibration.vibrate(amplitude: 255);
           animation!.repeat(reverse: true);
+          await Future.delayed(const Duration(milliseconds: 500));
+          widget.onErrorFinish();
         });
         color = context.colors.error;
         break;
@@ -132,9 +149,10 @@ class _PinCodeGraphicTileState extends State<_PinCodeGraphicTile>
               return;
             }
             await animation!.forward();
-            animation.animateBack(
+            await animation.animateBack(
               animation.lowerBound,
             );
+            if (widget.pin.length == 4) widget.onDefaultFilled();
           });
           color = context.colors.accent;
         }

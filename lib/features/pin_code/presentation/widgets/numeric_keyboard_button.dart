@@ -9,17 +9,12 @@ class NumericKeyboardButton extends StatefulWidget {
     super.key,
     this.text,
     this.svgAssetName,
-    this.onTextTap,
-    this.onSvgTap,
-  }) : assert(
-          (text != null && onTextTap != null) ||
-              (svgAssetName != null && onSvgTap != null),
-        );
+    required this.onTap,
+  }) : assert(text != null || svgAssetName != null);
 
   final String? text;
   final String? svgAssetName;
-  final void Function(String)? onTextTap;
-  final void Function()? onSvgTap;
+  final void Function() onTap;
 
   @override
   State<NumericKeyboardButton> createState() => _NumericKeyboardButtonState();
@@ -59,9 +54,7 @@ class _NumericKeyboardButtonState extends State<NumericKeyboardButton>
       onTapDown: (details) {
         awaitAnimationFunction = _animationController.forward();
       },
-      onTap: widget.text != null
-          ? () => widget.onTextTap!(widget.text!)
-          : widget.onSvgTap,
+      onTap: widget.onTap,
       child: AnimatedBuilder(
         animation: _animationController,
         builder: (context, child) {

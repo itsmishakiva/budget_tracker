@@ -14,7 +14,7 @@ class PinCodeKeyboard extends ConsumerWidget {
   });
 
   final BiometryTypes biometryType;
-  final void Function(String?) onTap;
+  final void Function(String) onTap;
   final void Function() onBackButtonTap;
   final void Function()? onBiometryTap;
 
@@ -25,7 +25,7 @@ class PinCodeKeyboard extends ConsumerWidget {
         3,
         (index) => NumericKeyboardButton(
           text: (index + startNumber).toString(),
-          onTextTap: onTap,
+          onTap: () => onTap((index + startNumber).toString()),
         ),
       ),
     );
@@ -53,17 +53,17 @@ class PinCodeKeyboard extends ConsumerWidget {
                     svgAssetName: biometryType == BiometryTypes.faceId
                         ? 'assets/svg/face_id.svg'
                         : 'assets/svg/fingerprint.svg',
-                    onSvgTap: onBiometryTap!,
+                    onTap: onBiometryTap!,
                   ),
                 if (biometryType == BiometryTypes.none)
                   const SizedBox(width: 74),
                 NumericKeyboardButton(
                   text: '0',
-                  onTextTap: onTap,
+                  onTap: () => onTap('0'),
                 ),
                 NumericKeyboardButton(
                   svgAssetName: 'assets/svg/back_icon.svg',
-                  onSvgTap: onBackButtonTap,
+                  onTap: onBackButtonTap,
                 ),
               ],
             ),

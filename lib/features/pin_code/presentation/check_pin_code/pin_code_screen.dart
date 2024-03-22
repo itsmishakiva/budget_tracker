@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:budget_tracker/core/internal/app_router_provider.dart';
 import 'package:budget_tracker/core/ui_kit/app_scaffold.dart';
 import 'package:budget_tracker/extensions/build_context_extension.dart';
 import 'package:budget_tracker/features/pin_code/presentation/check_pin_code/pin_code_view_model.dart';
@@ -38,6 +39,17 @@ class PinCodeScreen extends ConsumerWidget {
             PinCodeGraphics(
               pin: state.input,
               state: graphicsState,
+              onErrorFinish: () {
+                ref.read(pinCodeViewModelProvider.notifier).resetState();
+              },
+              onSuccessFinish: () {
+                ref.read(appRouterProvider).replaceNamed('/operations');
+              },
+              onDefaultFilled: () {
+                ref
+                    .read(pinCodeViewModelProvider.notifier)
+                    .checkSuccess(state.input);
+              },
             ),
             const Spacer(flex: 2),
             PinCodeKeyboard(

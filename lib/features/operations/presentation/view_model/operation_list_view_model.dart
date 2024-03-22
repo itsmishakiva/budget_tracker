@@ -1,6 +1,6 @@
-import 'package:budget_tracker/features/operation_list/domain/repositories/operation_repository.dart';
-import 'package:budget_tracker/features/operation_list/internal/repository_provider.dart';
-import 'package:budget_tracker/features/operation_list/presentation/view_model/operation_list_view_state.dart';
+import 'package:budget_tracker/features/operations/domain/repositories/operation_repository.dart';
+import 'package:budget_tracker/features/operations/internal/repository_provider.dart';
+import 'package:budget_tracker/features/operations/presentation/view_model/operation_list_view_state.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final operationListViewModelProvider =

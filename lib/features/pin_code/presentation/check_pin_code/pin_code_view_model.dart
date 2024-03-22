@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:budget_tracker/features/pin_code/domain/repositories/pin_code_repository.dart';
-import 'package:budget_tracker/features/pin_code/internal/pin_code_duration_constants.dart';
 import 'package:budget_tracker/features/pin_code/internal/pin_code_repository_provider.dart';
 import 'package:budget_tracker/features/pin_code/presentation/check_pin_code/pin_code_view_state.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -49,7 +48,6 @@ class PinCodeViewModel extends StateNotifier<PinCodeViewState> {
         biometryTypes: state.biometryTypes,
       );
     }
-    _resetState();
   }
 
   Future<void> userInput(String? symbol) async {
@@ -73,18 +71,9 @@ class PinCodeViewModel extends StateNotifier<PinCodeViewState> {
         biometryTypes: state.biometryTypes,
       );
     }
-
-    if (isDefaultState && input.length == 4) {
-      _checkSuccess(input);
-    }
   }
 
-  Future<void> _checkSuccess(String input) async {
-    await Future.delayed(
-      const Duration(
-        milliseconds: PinCodeDurationConstants.inputAnimationTimeMs,
-      ),
-    );
+  Future<void> checkSuccess(String input) async {
     state = PinCodeLoadingViewState(
       biometryTypes: state.biometryTypes,
     );
@@ -92,7 +81,6 @@ class PinCodeViewModel extends StateNotifier<PinCodeViewState> {
     bool success = await _repository.checkCode(input);
 
     _setErrorOrSuccessState(success);
-    _resetState();
   }
 
   void _setErrorOrSuccessState(bool success) {
@@ -107,12 +95,7 @@ class PinCodeViewModel extends StateNotifier<PinCodeViewState> {
     }
   }
 
-  Future<void> _resetState() async {
-    await Future.delayed(
-      const Duration(
-        milliseconds: PinCodeDurationConstants.resetTimeoutMs,
-      ),
-    );
+  Future<void> resetState() async {
     state = PinCodeDefaultViewState(
       biometryTypes: state.biometryTypes,
     );

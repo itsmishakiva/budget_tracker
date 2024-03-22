@@ -9,7 +9,7 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:auto_route/auto_route.dart' as _i4;
-import 'package:budget_tracker/features/operation_list/presentation/view/screens/operation_list_screen.dart'
+import 'package:budget_tracker/features/operations/presentation/view/screens/operation_list_screen.dart'
     as _i2;
 import 'package:budget_tracker/features/pin_code/presentation/check_pin_code/pin_code_screen.dart'
     as _i3;

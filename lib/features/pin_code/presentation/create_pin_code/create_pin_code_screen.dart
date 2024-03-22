@@ -1,5 +1,7 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:budget_tracker/core/internal/app_router_provider.dart';
 import 'package:budget_tracker/core/ui_kit/app_scaffold.dart';
+import 'package:budget_tracker/extensions/build_context_extension.dart';
 import 'package:budget_tracker/features/pin_code/presentation/check_pin_code/pin_code_view_state.dart';
 import 'package:budget_tracker/features/pin_code/presentation/create_pin_code/create_pin_code_view_model.dart';
 import 'package:budget_tracker/features/pin_code/presentation/create_pin_code/create_pin_code_view_state.dart';
@@ -15,6 +17,7 @@ class CreatePinCodeScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(createPinCodeViewModelProvider);
+    String? message;
     var graphicsState = PinCodeGraphicStates.common;
     switch (state) {
       case CreatePinCodeErrorViewState _:
@@ -26,6 +29,11 @@ class CreatePinCodeScreen extends ConsumerWidget {
       case CreatePinCodeLoadingViewState _:
         graphicsState = PinCodeGraphicStates.loading;
         break;
+      case CreatePinCodeDefaultViewState _:
+        message = state.firstInput
+            ? context.locale!.createPin
+            : context.locale!.repeatPin;
+        break;
       default:
         break;
     }
@@ -35,9 +43,30 @@ class CreatePinCodeScreen extends ConsumerWidget {
         child: Column(
           children: [
             const Spacer(flex: 3),
+            SizedBox(
+              height: 32,
+              child: message != null
+                  ? Text(
+                      message,
+                      style: context.textStyles.header2,
+                    )
+                  : null,
+            ),
+            const SizedBox(height: 32),
             PinCodeGraphics(
               pin: state.input,
               state: graphicsState,
+              onSuccessFinish: () {
+                ref.read(appRouterProvider).navigateNamed('/pin');
+              },
+              onDefaultFilled: () {
+                ref
+                    .read(createPinCodeViewModelProvider.notifier)
+                    .sendData(state.input);
+              },
+              onErrorFinish: () {
+                ref.read(createPinCodeViewModelProvider.notifier).resetState();
+              },
             ),
             const Spacer(flex: 2),
             PinCodeKeyboard(

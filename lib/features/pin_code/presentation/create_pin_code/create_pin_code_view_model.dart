@@ -1,10 +1,7 @@
 import 'package:budget_tracker/features/pin_code/domain/repositories/pin_code_repository.dart';
-import 'package:budget_tracker/features/pin_code/internal/pin_code_duration_constants.dart';
 import 'package:budget_tracker/features/pin_code/internal/pin_code_repository_provider.dart';
 import 'package:budget_tracker/features/pin_code/presentation/create_pin_code/create_pin_code_view_state.dart';
-import 'package:budget_tracker/main.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:logging/logging.dart';
 
 final createPinCodeViewModelProvider =
     StateNotifierProvider<CreatePinCodeViewModel, CreatePinCodeViewState>(
@@ -15,7 +12,10 @@ final createPinCodeViewModelProvider =
 );
 
 class CreatePinCodeViewModel extends StateNotifier<CreatePinCodeViewState> {
-  CreatePinCodeViewModel(super.state, this._repository);
+  CreatePinCodeViewModel(
+    super.state,
+    this._repository,
+  );
 
   final PinCodeRepository _repository;
 
@@ -40,19 +40,10 @@ class CreatePinCodeViewModel extends StateNotifier<CreatePinCodeViewState> {
         firstInput: (state as CreatePinCodeDefaultViewState).firstInput,
       );
     }
-
-    if (isDefaultState && input.length == 4) {
-      _sendData(input);
-    }
   }
 
-  Future<void> _sendData(String input) async {
+  Future<void> sendData(String input) async {
     bool shouldRepeat = (state as CreatePinCodeDefaultViewState).firstInput;
-    await Future.delayed(
-      const Duration(
-        milliseconds: PinCodeDurationConstants.inputAnimationTimeMs,
-      ),
-    );
     state = CreatePinCodeLoadingViewState();
 
     bool success = true;
@@ -62,7 +53,6 @@ class CreatePinCodeViewModel extends StateNotifier<CreatePinCodeViewState> {
       try {
         await _repository.setCodeRepeat(input);
       } catch (e) {
-        logger.log(Level.WARNING, 'g');
         success = false;
       }
     }
@@ -70,24 +60,19 @@ class CreatePinCodeViewModel extends StateNotifier<CreatePinCodeViewState> {
     _setErrorOrSuccessState(success, shouldRepeat);
   }
 
-  void _setErrorOrSuccessState(bool success, bool shouldRepeat) {
+  void _setErrorOrSuccessState(bool success, bool shouldRepeat) async {
     if (success) {
       if (shouldRepeat) {
         state = CreatePinCodeDefaultViewState(firstInput: false);
       } else {
         state = CreatePinCodeSuccessViewState();
-        _resetState();
       }
     } else {
       state = CreatePinCodeErrorViewState();
-      _resetState();
     }
   }
 
-  Future<void> _resetState() async {
-    await Future.delayed(
-      const Duration(milliseconds: PinCodeDurationConstants.resetTimeoutMs),
-    );
+  Future<void> resetState() async {
     state = CreatePinCodeDefaultViewState();
   }
 }

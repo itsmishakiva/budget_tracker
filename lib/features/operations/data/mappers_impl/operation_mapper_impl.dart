@@ -1,6 +1,6 @@
-import 'package:budget_tracker/features/operation_list/data/dto/operation_dto.dart';
-import 'package:budget_tracker/features/operation_list/data/mappers/i_operation_mapper.dart';
-import 'package:budget_tracker/features/operation_list/domain/entities/operation.dart';
+import 'package:budget_tracker/features/operations/data/dto/operation_dto.dart';
+import 'package:budget_tracker/features/operations/data/mappers/i_operation_mapper.dart';
+import 'package:budget_tracker/features/operations/domain/entities/operation.dart';
 
 class OperationMapperImpl implements OperationMapper {
   @override

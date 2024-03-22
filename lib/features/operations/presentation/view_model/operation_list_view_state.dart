@@ -1,4 +1,4 @@
-import 'package:budget_tracker/features/operation_list/domain/entities/operation.dart';
+import 'package:budget_tracker/features/operations/domain/entities/operation.dart';
 
 sealed class OperationListViewState {}
 
