@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-// Реализация цветов светлой темы
 class AppLightColors extends AppColors {
   AppLightColors()
       : super(

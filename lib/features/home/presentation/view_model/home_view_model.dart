@@ -2,11 +2,12 @@ import 'package:budget_tracker/features/operations/domain/repositories/operation
 import 'package:budget_tracker/features/operations/internal/operation_repository_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'package:budget_tracker/features/account/domain/repositories/account_repository.dart';
-import 'package:budget_tracker/features/account/internal/repository_provider.dart';
+import 'package:budget_tracker/features/check/internal/repository_provider.dart';
 import 'package:budget_tracker/features/home/presentation/view_model/home_view_state.dart';
 
-final accountListViewModelProvider =
+import 'package:budget_tracker/features/check/domain/repositories/check_repository.dart';
+
+final homeViewModelProvider =
     StateNotifierProvider<HomeViewModel, HomeViewState>(
   (ref) => HomeViewModel(
     HomeViewLoadingState(),
@@ -16,7 +17,7 @@ final accountListViewModelProvider =
 );
 
 class HomeViewModel extends StateNotifier<HomeViewState> {
-  final AccountRepository _repositoryAccount;
+  final CheckRepository _repositoryAccount;
   final OperationRepository _repositoryOperation;
 
   HomeViewModel(
@@ -28,7 +29,7 @@ class HomeViewModel extends StateNotifier<HomeViewState> {
   Future<void> loadData() async {
     try {
       state = HomeViewDataState(
-        dataAccount: await _repositoryAccount.getAccountList(),
+        dataAccount: await _repositoryAccount.getCheck(),
         dataOperations: await _repositoryOperation.getOperationList(),
       );
     } catch (e) {
