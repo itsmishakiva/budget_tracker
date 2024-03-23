@@ -1,7 +1,10 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:budget_tracker/core/internal/app_router_provider.dart';
 import 'package:budget_tracker/core/ui_kit/app_scaffold.dart';
+import 'package:budget_tracker/core/ui_kit/constraints_constants.dart';
+import 'package:budget_tracker/core/ui_kit/widgets/app_button.dart';
 import 'package:budget_tracker/extensions/build_context_extension.dart';
+import 'package:budget_tracker/features/operation_creation/presentation/view/widgets/numpad.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -46,7 +49,7 @@ class OperationCreationSumScreen extends ConsumerWidget {
             ),
           ),
           const Expanded(
-            child: _SumInputField(),
+            child: _SumInputContainer(),
           ),
         ],
       ),
@@ -76,12 +79,12 @@ class CurrentBalance extends StatelessWidget {
   }
 }
 
-class _SumInputField extends StatelessWidget {
-  const _SumInputField();
+class _SumInputContainer extends ConsumerWidget {
+  const _SumInputContainer();
 
   @override
-  Widget build(BuildContext context) {
-    String display = '';
+  Widget build(BuildContext context, WidgetRef ref) {
+    final display = ref.watch(calculatorControllerProvider);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -102,17 +105,39 @@ class _SumInputField extends StatelessWidget {
         const SizedBox(
           height: 25,
         ),
-        Container(
-          decoration: BoxDecoration(
-            borderRadius: const BorderRadius.only(
-              topLeft: Radius.circular(15),
-              topRight: Radius.circular(15),
-            ),
-            color: context.colors.backgroundPrimary,
-          ),
-          //TODO add numpad
-        ),
+        const NumPadContainer(),
       ],
+    );
+  }
+}
+
+class NumPadContainer extends ConsumerWidget {
+  const NumPadContainer({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final constraints = ref.watch(constraintsConstantsProvider);
+    return Expanded(
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: const BorderRadius.only(
+            topLeft: Radius.circular(25),
+            topRight: Radius.circular(25),
+          ),
+          color: context.colors.backgroundPrimary,
+        ),
+        child: Column(
+          children: [
+            const Numpad(),
+            Padding(
+              padding: EdgeInsets.symmetric(
+                horizontal: constraints.horizontalScreenPadding,
+              ),
+              child: AppButton(title: context.locale!.next),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

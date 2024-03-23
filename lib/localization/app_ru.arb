@@ -9,6 +9,7 @@
     "outgoingTransaction": "Исходящая операция",
     "chooseTransactionCategory": "Выберите категорию транзакции",
     "next": "Далее",
+    "done": "Готово",
     "currentBalance": "Текущий баланс",
     "inputAmount": "Введите сумму"
 }

@@ -9,6 +9,7 @@
     "outgoingTransaction": "Outgoing transaction",
     "chooseTransactionCategory": "Choose transaction category",
     "next": "Continue",
+    "done": "Done",
     "currentBalance": "Current balance",
-    "inputAmount": "inputAmount"
+    "inputAmount": "Input amount"
 }
