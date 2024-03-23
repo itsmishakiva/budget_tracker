@@ -1,11 +1,12 @@
 import 'package:auto_route/annotations.dart';
+import 'package:budget_tracker/core/internal/app_router_provider.dart';
 import 'package:budget_tracker/core/ui_kit/app_scaffold.dart';
+import 'package:budget_tracker/extensions/build_context_extension.dart';
 import 'package:budget_tracker/features/operations/presentation/view/screens/operation_list_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logging/logging.dart';
 import 'package:budget_tracker/core/internal/logger_provider.dart';
-import 'package:budget_tracker/themes/app_colors.dart';
 import 'package:budget_tracker/features/account/domain/entities/account.dart';
 import 'package:budget_tracker/features/account/presentation/view/screens/account_screen.dart';
 import 'package:budget_tracker/features/account/presentation/view_model/account_list_view_model.dart';
@@ -21,10 +22,20 @@ class HomeScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return AppScaffold(
-      backgroundColor: AppLightColors().backgroundSecondary,
+      backgroundColor: context.colors.backgroundSecondary,
       body: AccountListScreenContent(
         scrollController: scrollController,
       ), // Передача scrollController в AccountListScreenContent
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          ref.read(appRouterProvider).navigateNamed('/operation_creation');
+        },
+        backgroundColor: context.colors.accent,
+        child: Icon(
+          Icons.add,
+          color: context.colors.textSurface,
+        ),
+      ),
     );
   }
 }
@@ -61,8 +72,13 @@ class AccountListScreenContent extends ConsumerWidget {
             SliverList(
               delegate: SliverChildBuilderDelegate(
                 (context, index) {
-                  return OperationListTile(
-                    operation: state.dataOperations[index],
+                  return Column(
+                    children: [
+                      if (index != 0) const SizedBox(height: 16.0),
+                      OperationListTile(
+                        operation: state.dataOperations[index],
+                      ),
+                    ],
                   );
                 },
                 childCount: state.dataOperations.length,
@@ -86,25 +102,33 @@ class _AccountListTileHeaderDelegate extends SliverPersistentHeaderDelegate {
     bool overlapsContent,
   ) {
     double scale = 1.0 - shrinkOffset / 500;
-    scale = scale < 0.7 ? 0.7 : scale;
-    return Transform.scale(
-      scale: scale,
-      alignment: Alignment.topCenter,
-      child: AccountListTile(
-        account: account,
-        scale: 1.0,
-      ),
+    return Stack(
+      children: [
+        Positioned(
+          left: 0,
+          right: 0,
+          top: 0,
+          bottom: -shrinkOffset,
+          child: Transform.scale(
+            scale: scale,
+            origin: const Offset(0, -150),
+            child: AccountListTile(
+              account: account,
+            ),
+          ),
+        ),
+      ],
     );
   }
-
-  @override
-  double get maxExtent => 240;
-
-  @override
-  double get minExtent => 190;
 
   @override
   bool shouldRebuild(_AccountListTileHeaderDelegate oldDelegate) {
     return false;
   }
+
+  @override
+  double get maxExtent => 286;
+
+  @override
+  double get minExtent => 0;
 }

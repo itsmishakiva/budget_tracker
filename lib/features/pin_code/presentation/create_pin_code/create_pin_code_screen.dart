@@ -57,7 +57,7 @@ class CreatePinCodeScreen extends ConsumerWidget {
               pin: state.input,
               state: graphicsState,
               onSuccessFinish: () {
-                ref.read(appRouterProvider).navigateNamed('/pin');
+                ref.read(appRouterProvider).replaceNamed('/pin');
               },
               onDefaultFilled: () {
                 ref

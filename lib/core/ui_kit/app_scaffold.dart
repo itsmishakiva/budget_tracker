@@ -1,17 +1,18 @@
+import 'package:budget_tracker/extensions/build_context_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class AppScaffold extends StatelessWidget {
   const AppScaffold({
     super.key,
+    required this.body,
     this.backgroundColor,
-    this.body,
     this.navigationBar,
     this.floatingActionButton,
   });
 
   final Color? backgroundColor;
-  final Widget? body;
+  final Widget body;
   final Widget? navigationBar;
   final Widget? floatingActionButton;
 
@@ -26,8 +27,11 @@ class AppScaffold extends StatelessWidget {
             : Brightness.dark,
       ),
       child: Scaffold(
-        backgroundColor: backgroundColor,
-        body: body,
+        backgroundColor: backgroundColor ?? context.colors.backgroundPrimary,
+        body: SafeArea(
+          bottom: false,
+          child: body,
+        ),
         bottomNavigationBar: navigationBar,
         floatingActionButton: floatingActionButton,
       ),

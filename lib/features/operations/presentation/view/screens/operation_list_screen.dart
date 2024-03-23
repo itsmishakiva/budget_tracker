@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_emoji/flutter_emoji.dart';
 import 'package:budget_tracker/themes/app_operation_colors.dart';
+import 'package:intl/intl.dart';
 
 @RoutePage()
 class OperationListScreen extends StatelessWidget {
@@ -116,40 +117,71 @@ class _OperationListTileState extends State<OperationListTile> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 8),
-      child: ListTile(
-        tileColor: context.colors.backgroundPrimary,
-        shape: RoundedRectangleBorder(
+      padding: const EdgeInsets.symmetric(horizontal: 20.0),
+      child: Container(
+        padding: const EdgeInsets.symmetric(
+          vertical: 8.0,
+          horizontal: 16.0,
+        ),
+        decoration: BoxDecoration(
+          color: context.colors.backgroundPrimary,
           borderRadius: BorderRadius.circular(20.0),
-        ),
-        leading: Container(
-          width: 60,
-          height: 60,
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            // color: AppLightColors().customLightColors[operation.id % 6],
-            color: color,
-          ),
-          // child: _operationIcon(operation.title, AppLightColors().customColors[operation.id % 6])
-          child: Center(
-            child: _operationIcon(widget.operation.category.title),
-          ),
-        ),
-        title: Text(
-          widget.operation.category.title,
-          style: context.textStyles.header3,
-          overflow: TextOverflow.ellipsis,
-        ),
-        trailing: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text(
-              widget.operation.sum.toStringAsFixed(2),
-              style: context.textStyles.header3,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.06),
+              offset: const Offset(0, 1),
+              blurRadius: 5,
+              spreadRadius: 1.5,
             ),
-            Text(
-              '₽',
-              style: context.textStyles.header3,
+          ],
+        ),
+        child: Row(
+          children: [
+            Container(
+              width: 55,
+              height: 55,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                // color: AppLightColors().customLightColors[operation.id % 6],
+                color: color,
+              ),
+              // child: _operationIcon(operation.title, AppLightColors().customColors[operation.id % 6])
+              child: Center(
+                child: _operationIcon(widget.operation.category.title),
+              ),
+            ),
+            const SizedBox(width: 16.0),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    widget.operation.category.title,
+                    style: context.textStyles.header3,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  Text(
+                    DateFormat('dd MM yyyy').format(
+                      widget.operation.date,
+                    ),
+                    style: context.textStyles.subtitle2,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(width: 16.0),
+            RichText(
+              text: TextSpan(
+                text: widget.operation.sum.toStringAsFixed(2),
+                style: context.textStyles.header3,
+                children: [
+                  TextSpan(
+                    text: '₽',
+                    style: context.textStyles.header3,
+                  ),
+                ],
+              ),
             ),
           ],
         ),
