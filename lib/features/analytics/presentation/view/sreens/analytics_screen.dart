@@ -13,167 +13,175 @@ class AnalyticsScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return AppScaffold(
       backgroundColor: context.colors.accent,
-      body: Container(
-        // padding: EdgeInsets.symmetric(horizontal: 20, vertical: 60),
-        child: Column(
-          children: [
-            Padding(
-              padding: EdgeInsets.only(right: 20, left: 20, top: 10),
-              child: Row(
+      body: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(right: 20, left: 20, top: 10),
+            child: Row(
+              children: [
+                Text(
+                  'Stats',
+                  style: context.textStyles.subtitle1,
+                ),
+                const Spacer(),
+                TextButton(
+                  onPressed: () {},
+                  child: Text(
+                    'Day',
+                    style: context.textStyles.subtitle2,
+                  ),
+                ),
+                TextButton(
+                  onPressed: () {},
+                  child: Text(
+                    'Week',
+                    style: context.textStyles.subtitle2,
+                  ),
+                ),
+                TextButton(
+                  onPressed: () {},
+                  child: Text(
+                    'Year',
+                    style: context.textStyles.subtitle2,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          SizedBox(
+            height: 250,
+            width: 350,
+            child: PageView(
+              children: const [
+                LineChartWidget(),
+                PieChartWithLegend(),
+              ],
+            ),
+          ),
+          const BottomBar(),
+          Padding(
+            padding: const EdgeInsets.only(top: 19.0),
+            child: Container(
+              height: 400,
+              decoration: BoxDecoration(
+                color: context.colors.disabled,
+                borderRadius: const BorderRadius.only(
+                  topLeft:
+                      Radius.circular(30.0), // Закругляем верхний левый угол
+                  topRight:
+                      Radius.circular(30.0), // Закругляем верхний правый угол
+                ),
+              ),
+              child: Column(
                 children: [
-                  Text(
-                    'Stats',
-                    style: context.textStyles.subtitle1,
-                  ),
-                  Spacer(),
-                  TextButton(
-                      onPressed: (){},
-                      child: Text(
-                        'Day',
-                        style: context.textStyles.subtitle2,
-                      )
-                  ),
-                  TextButton(
-                      onPressed: (){},
-                      child: Text(
-                        'Week',
-                        style: context.textStyles.subtitle2,
-                      )
-                  ),
-                  TextButton(
-                      onPressed: (){},
-                      child: Text(
-                        'Year',
-                        style: context.textStyles.subtitle2,
-                      )
+                  Container(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 20, vertical: 20),
+                    child: const Row(
+                      children: [
+                        // Text(
+                        //     'All',
+                        //   style: context.textStyles.subtitle3,
+                        // ),
+                      ],
+                    ),
                   ),
                 ],
               ),
             ),
-            Container(
-              height: 250,
-              width: 350,
-              child: PageView(
-                children: [
-                  LineChartWidget(),
-                  PieChartWithLegend(),
-                ],
-              ),
-            ),
-            bottomBar(),
-            Padding(
-              padding: const EdgeInsets.only(top: 19.0),
-              child: Container(
-                height: 400,
-                decoration: BoxDecoration(
-                  color: context.colors.disabled,
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(30.0), // Закругляем верхний левый угол
-                    topRight: Radius.circular(30.0), // Закругляем верхний правый угол
-                  ),
-                ),
-                child: Column(
-                  children: [
-                    Container(
-                      child: Row(
-                        children: [
-                          // Text(
-                          //     'All',
-                          //   style: context.textStyles.subtitle3,
-                          // ),
-                        ],
-                      ),
-                    )
-                  ],
-                ),
-              ),
-            )
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
-
 }
 
 class LineChartWidget extends StatelessWidget {
-
+  const LineChartWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
     return LineChart(
-        LineChartData(
-            minX: 0,
-            minY: 0,
-            maxX: 10,
-            maxY: 10,
-            borderData: FlBorderData(
-              show: false, // Скрыть рамку
-            ),
-            titlesData: FlTitlesData(
-              rightTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)), // Скрыть правые цифры
-              topTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)), // Скрыть верхние цифры
-              bottomTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)), // Показать цифры слева
-              leftTitles: AxisTitles(sideTitles: leftTitles()), // Показать цифры снизу
-            ),
-            lineBarsData: [
-              LineChartBarData(
-                  spots: [
-                    FlSpot(0, 3),
-                    FlSpot(3, 9),
-                    FlSpot(5, 4),
-                    FlSpot(8, 2),
-                    FlSpot(10, 9),
-                  ],
-                  isCurved: true,
-                  color: context.colors.backgroundPrimary,
-                  barWidth: 3,
-                  belowBarData: BarAreaData(
-                    show: true,
-                    gradient: LinearGradient(
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                      colors: [
-                        context.colors.backgroundPrimary.withOpacity(0.3), // Начальная прозрачность
-                        context.colors.backgroundPrimary.withOpacity(0), // Конечная прозрачность
-                      ],
-                    ),
-                  )
+      LineChartData(
+        minX: 0,
+        minY: 0,
+        maxX: 10,
+        maxY: 10,
+        borderData: FlBorderData(
+          show: false, // Скрыть рамку
+        ),
+        titlesData: FlTitlesData(
+          rightTitles: const AxisTitles(
+              sideTitles: SideTitles(showTitles: false)), // Скрыть правые цифры
+          topTitles: const AxisTitles(
+              sideTitles:
+                  SideTitles(showTitles: false)), // Скрыть верхние цифры
+          bottomTitles: const AxisTitles(
+              sideTitles:
+                  SideTitles(showTitles: false)), // Показать цифры слева
+          leftTitles:
+              AxisTitles(sideTitles: leftTitles()), // Показать цифры снизу
+        ),
+        lineBarsData: [
+          LineChartBarData(
+            spots: [
+              const FlSpot(0, 3),
+              const FlSpot(3, 9),
+              const FlSpot(5, 4),
+              const FlSpot(8, 2),
+              const FlSpot(10, 9),
+            ],
+            isCurved: true,
+            color: context.colors.backgroundPrimary,
+            barWidth: 3,
+            belowBarData: BarAreaData(
+              show: true,
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [
+                  context.colors.backgroundPrimary
+                      .withOpacity(0.3), // Начальная прозрачность
+                  context.colors.backgroundPrimary
+                      .withOpacity(0), // Конечная прозрачность
+                ],
               ),
-              LineChartBarData(
-                  spots: [
-                    FlSpot(0, 7),
-                    FlSpot(3, 2),
-                    FlSpot(5, 8),
-                    FlSpot(8, 1),
-                    FlSpot(10, 9),
-                  ],
-                  isCurved: true,
-                  color: context.colors.errorLight,
-                  barWidth: 3,
-                  belowBarData: BarAreaData(
-                    show: true,
-                    gradient: LinearGradient(
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                      colors: [
-                        context.colors.errorLight.withOpacity(0.3), // Начальная прозрачность
-                        context.colors.errorLight.withOpacity(0), // Конечная прозрачность
-                      ],
-                    ),
-                  )
+            ),
+          ),
+          LineChartBarData(
+            spots: [
+              const FlSpot(0, 7),
+              const FlSpot(3, 2),
+              const FlSpot(5, 8),
+              const FlSpot(8, 1),
+              const FlSpot(10, 9),
+            ],
+            isCurved: true,
+            color: context.colors.errorLight,
+            barWidth: 3,
+            belowBarData: BarAreaData(
+              show: true,
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [
+                  context.colors.errorLight.withOpacity(0.3),
+                  context.colors.errorLight.withOpacity(0),
+                ],
               ),
-            ]
-        )
+            ),
+          ),
+        ],
+      ),
     );
   }
 
   SideTitles leftTitles() => SideTitles(
-    getTitlesWidget: leftTitleWidgets,
-    interval: 1,
-    reservedSize: 40,
-    showTitles: true,
-  );
+        getTitlesWidget: leftTitleWidgets,
+        interval: 1,
+        reservedSize: 40,
+        showTitles: true,
+      );
 
   Text leftTitleWidgets(double value, TitleMeta meta) {
     String text = switch (value.toInt()) {
@@ -191,29 +199,32 @@ class LineChartWidget extends StatelessWidget {
       text,
       textAlign: TextAlign.center,
       style: TextStyle(
-          fontWeight: FontWeight.bold, fontSize: 14, color: Colors.grey.shade300),
+        fontWeight: FontWeight.bold,
+        fontSize: 14,
+        color: Colors.grey.shade300,
+      ),
     );
   }
 }
 
-class bottomBar extends StatelessWidget {
-  const bottomBar({super.key});
+class BottomBar extends StatelessWidget {
+  const BottomBar({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(left: 50.0, right: 10),
-      child: Container(
+      child: SizedBox(
         height: 30,
         width: 300,
         child: ListView(
           scrollDirection: Axis.horizontal,
-          children: [
-            dates(date: "1th week"),
-            dates(date: "1th week"),
-            dates(date: "1th week"),
-            dates(date: "1th week"),
-            dates(date: "1th week"),
+          children: const [
+            Dates(date: '1th week'),
+            Dates(date: '1th week'),
+            Dates(date: '1th week'),
+            Dates(date: '1th week'),
+            Dates(date: '1th week'),
           ],
         ),
       ),
@@ -221,10 +232,10 @@ class bottomBar extends StatelessWidget {
   }
 }
 
-class dates extends StatelessWidget {
-  const dates({
+class Dates extends StatelessWidget {
+  const Dates({
     super.key,
-    required this.date
+    required this.date,
   });
 
   final String date;
@@ -232,9 +243,8 @@ class dates extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 4),
+      padding: const EdgeInsets.symmetric(horizontal: 4),
       child: Container(
-
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
           color: Colors.transparent,
@@ -246,7 +256,7 @@ class dates extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 10),
           child: Text(
-              date,
+            date,
             style: context.textStyles.subtitle2,
           ),
         ),
@@ -255,8 +265,9 @@ class dates extends StatelessWidget {
   }
 }
 
-
 class PieChartWithLegend extends StatelessWidget {
+  const PieChartWithLegend({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -315,7 +326,7 @@ class PieChartWithLegend extends StatelessWidget {
 
   Widget legendItem({required Color color, required String title}) {
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: 4),
+      padding: const EdgeInsets.symmetric(vertical: 4),
       child: Row(
         children: [
           Container(
@@ -323,17 +334,13 @@ class PieChartWithLegend extends StatelessWidget {
             height: 16,
             color: color,
           ),
-          SizedBox(width: 8),
+          const SizedBox(width: 8),
           Text(
             title,
-            style: TextStyle(fontSize: 16),
+            style: const TextStyle(fontSize: 16),
           ),
         ],
       ),
     );
   }
 }
-
-
-
-

@@ -10,7 +10,7 @@ import 'package:budget_tracker/features/check/domain/repositories/check_reposito
 final homeViewModelProvider =
     StateNotifierProvider<HomeViewModel, HomeViewState>(
   (ref) => HomeViewModel(
-    HomeViewLoadingState(),
+    AnalyticsViewLoadingState(),
     ref.read(accountRepositoryProvider),
     ref.read(operationRepositoryProvider),
   )..loadData(),
@@ -28,9 +28,11 @@ class HomeViewModel extends StateNotifier<HomeViewState> {
 
   Future<void> loadData() async {
     try {
+      final dataAccount = await _repositoryAccount.getCheck();
+      final dataOperations = await _repositoryOperation.getOperationList();
       state = HomeViewDataState(
-        dataAccount: await _repositoryAccount.getCheck(),
-        dataOperations: await _repositoryOperation.getOperationList(),
+        dataAccount: dataAccount,
+        dataOperations: dataOperations,
       );
     } catch (e) {
       state = HomeViewErrorState();

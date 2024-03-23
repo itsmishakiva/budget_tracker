@@ -51,7 +51,7 @@ class CheckListScreenContent extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(homeViewModelProvider);
     switch (state) {
-      case HomeViewLoadingState _:
+      case AnalyticsViewLoadingState _:
         ref.read(loggerProvider).log(Level.INFO, 'Hello!');
         return const Center(
           child: CircularProgressIndicator(),

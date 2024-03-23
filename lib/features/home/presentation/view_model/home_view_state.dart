@@ -4,12 +4,15 @@ import 'package:budget_tracker/features/check/domain/entities/check.dart';
 
 sealed class HomeViewState {}
 
-class HomeViewLoadingState extends HomeViewState {}
+class AnalyticsViewLoadingState extends HomeViewState {}
 
 class HomeViewErrorState extends HomeViewState {}
 
 class HomeViewDataState extends HomeViewState {
-  HomeViewDataState({required this.dataAccount, required this.dataOperations});
+  HomeViewDataState({
+    required this.dataAccount,
+    required this.dataOperations,
+  });
 
   final List<Check> dataAccount;
   final List<Operation> dataOperations;
