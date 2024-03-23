@@ -147,7 +147,7 @@ class _OperationListTileState extends State<OperationListTile> {
               ),
               // child: _operationIcon(operation.title, AppLightColors().customColors[operation.id % 6])
               child: Center(
-                child: _operationIcon(widget.operation.category.title),
+                child: _operationIcon(widget.operation.category.icon),
               ),
             ),
             const SizedBox(width: 16.0),

@@ -7,7 +7,6 @@ class CategoryMapperImpl implements CategoryMapper {
   Category fromDto(CategoryDTO dto) {
     return Category(
       id: dto.id,
-      isIncome: dto.isIncome,
       title: dto.title,
       icon: dto.icon,
     );
@@ -17,7 +16,6 @@ class CategoryMapperImpl implements CategoryMapper {
   CategoryDTO toDto(Category entity) {
     return CategoryDTO(
       id: entity.id,
-      isIncome: entity.isIncome,
       title: entity.title,
       icon: entity.icon,
     );

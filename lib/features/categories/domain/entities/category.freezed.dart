@@ -17,7 +17,6 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$Category {
   int get id => throw _privateConstructorUsedError;
-  bool get isIncome => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
   String get icon => throw _privateConstructorUsedError;
 
@@ -31,7 +30,7 @@ abstract class $CategoryCopyWith<$Res> {
   factory $CategoryCopyWith(Category value, $Res Function(Category) then) =
       _$CategoryCopyWithImpl<$Res, Category>;
   @useResult
-  $Res call({int id, bool isIncome, String title, String icon});
+  $Res call({int id, String title, String icon});
 }
 
 /// @nodoc
@@ -48,7 +47,6 @@ class _$CategoryCopyWithImpl<$Res, $Val extends Category>
   @override
   $Res call({
     Object? id = null,
-    Object? isIncome = null,
     Object? title = null,
     Object? icon = null,
   }) {
@@ -57,10 +55,6 @@ class _$CategoryCopyWithImpl<$Res, $Val extends Category>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      isIncome: null == isIncome
-          ? _value.isIncome
-          : isIncome // ignore: cast_nullable_to_non_nullable
-              as bool,
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -81,7 +75,7 @@ abstract class _$$CategoryImplCopyWith<$Res>
       __$$CategoryImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int id, bool isIncome, String title, String icon});
+  $Res call({int id, String title, String icon});
 }
 
 /// @nodoc
@@ -96,7 +90,6 @@ class __$$CategoryImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
-    Object? isIncome = null,
     Object? title = null,
     Object? icon = null,
   }) {
@@ -105,10 +98,6 @@ class __$$CategoryImplCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      isIncome: null == isIncome
-          ? _value.isIncome
-          : isIncome // ignore: cast_nullable_to_non_nullable
-              as bool,
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -124,16 +113,10 @@ class __$$CategoryImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$CategoryImpl implements _Category {
-  _$CategoryImpl(
-      {required this.id,
-      required this.isIncome,
-      required this.title,
-      required this.icon});
+  _$CategoryImpl({required this.id, required this.title, required this.icon});
 
   @override
   final int id;
-  @override
-  final bool isIncome;
   @override
   final String title;
   @override
@@ -141,7 +124,7 @@ class _$CategoryImpl implements _Category {
 
   @override
   String toString() {
-    return 'Category(id: $id, isIncome: $isIncome, title: $title, icon: $icon)';
+    return 'Category(id: $id, title: $title, icon: $icon)';
   }
 
   @override
@@ -150,14 +133,12 @@ class _$CategoryImpl implements _Category {
         (other.runtimeType == runtimeType &&
             other is _$CategoryImpl &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.isIncome, isIncome) ||
-                other.isIncome == isIncome) &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.icon, icon) || other.icon == icon));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, id, isIncome, title, icon);
+  int get hashCode => Object.hash(runtimeType, id, title, icon);
 
   @JsonKey(ignore: true)
   @override
@@ -169,14 +150,11 @@ class _$CategoryImpl implements _Category {
 abstract class _Category implements Category {
   factory _Category(
       {required final int id,
-      required final bool isIncome,
       required final String title,
       required final String icon}) = _$CategoryImpl;
 
   @override
   int get id;
-  @override
-  bool get isIncome;
   @override
   String get title;
   @override

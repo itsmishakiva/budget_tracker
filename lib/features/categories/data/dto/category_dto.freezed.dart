@@ -21,7 +21,6 @@ CategoryDTO _$CategoryDTOFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$CategoryDTO {
   int get id => throw _privateConstructorUsedError;
-  bool get isIncome => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
   String get icon => throw _privateConstructorUsedError;
 
@@ -37,7 +36,7 @@ abstract class $CategoryDTOCopyWith<$Res> {
           CategoryDTO value, $Res Function(CategoryDTO) then) =
       _$CategoryDTOCopyWithImpl<$Res, CategoryDTO>;
   @useResult
-  $Res call({int id, bool isIncome, String title, String icon});
+  $Res call({int id, String title, String icon});
 }
 
 /// @nodoc
@@ -54,7 +53,6 @@ class _$CategoryDTOCopyWithImpl<$Res, $Val extends CategoryDTO>
   @override
   $Res call({
     Object? id = null,
-    Object? isIncome = null,
     Object? title = null,
     Object? icon = null,
   }) {
@@ -63,10 +61,6 @@ class _$CategoryDTOCopyWithImpl<$Res, $Val extends CategoryDTO>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      isIncome: null == isIncome
-          ? _value.isIncome
-          : isIncome // ignore: cast_nullable_to_non_nullable
-              as bool,
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -87,7 +81,7 @@ abstract class _$$CategoryDTOImplCopyWith<$Res>
       __$$CategoryDTOImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int id, bool isIncome, String title, String icon});
+  $Res call({int id, String title, String icon});
 }
 
 /// @nodoc
@@ -102,7 +96,6 @@ class __$$CategoryDTOImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
-    Object? isIncome = null,
     Object? title = null,
     Object? icon = null,
   }) {
@@ -111,10 +104,6 @@ class __$$CategoryDTOImplCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      isIncome: null == isIncome
-          ? _value.isIncome
-          : isIncome // ignore: cast_nullable_to_non_nullable
-              as bool,
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -131,10 +120,7 @@ class __$$CategoryDTOImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$CategoryDTOImpl with DiagnosticableTreeMixin implements _CategoryDTO {
   _$CategoryDTOImpl(
-      {required this.id,
-      required this.isIncome,
-      required this.title,
-      required this.icon});
+      {required this.id, required this.title, required this.icon});
 
   factory _$CategoryDTOImpl.fromJson(Map<String, dynamic> json) =>
       _$$CategoryDTOImplFromJson(json);
@@ -142,15 +128,13 @@ class _$CategoryDTOImpl with DiagnosticableTreeMixin implements _CategoryDTO {
   @override
   final int id;
   @override
-  final bool isIncome;
-  @override
   final String title;
   @override
   final String icon;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'CategoryDTO(id: $id, isIncome: $isIncome, title: $title, icon: $icon)';
+    return 'CategoryDTO(id: $id, title: $title, icon: $icon)';
   }
 
   @override
@@ -159,7 +143,6 @@ class _$CategoryDTOImpl with DiagnosticableTreeMixin implements _CategoryDTO {
     properties
       ..add(DiagnosticsProperty('type', 'CategoryDTO'))
       ..add(DiagnosticsProperty('id', id))
-      ..add(DiagnosticsProperty('isIncome', isIncome))
       ..add(DiagnosticsProperty('title', title))
       ..add(DiagnosticsProperty('icon', icon));
   }
@@ -170,15 +153,13 @@ class _$CategoryDTOImpl with DiagnosticableTreeMixin implements _CategoryDTO {
         (other.runtimeType == runtimeType &&
             other is _$CategoryDTOImpl &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.isIncome, isIncome) ||
-                other.isIncome == isIncome) &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.icon, icon) || other.icon == icon));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, isIncome, title, icon);
+  int get hashCode => Object.hash(runtimeType, id, title, icon);
 
   @JsonKey(ignore: true)
   @override
@@ -197,7 +178,6 @@ class _$CategoryDTOImpl with DiagnosticableTreeMixin implements _CategoryDTO {
 abstract class _CategoryDTO implements CategoryDTO {
   factory _CategoryDTO(
       {required final int id,
-      required final bool isIncome,
       required final String title,
       required final String icon}) = _$CategoryDTOImpl;
 
@@ -206,8 +186,6 @@ abstract class _CategoryDTO implements CategoryDTO {
 
   @override
   int get id;
-  @override
-  bool get isIncome;
   @override
   String get title;
   @override

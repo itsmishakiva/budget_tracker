@@ -8,7 +8,6 @@ part 'category_dto.g.dart';
 class CategoryDTO with _$CategoryDTO {
   factory CategoryDTO({
     required int id,
-    required bool isIncome,
     required String title,
     required String icon,
   }) = _CategoryDTO;

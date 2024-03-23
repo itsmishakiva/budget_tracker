@@ -5,7 +5,6 @@ part 'category.freezed.dart';
 class Category with _$Category {
   factory Category({
     required int id,
-    required bool isIncome,
     required String title,
     required String icon,
   }) = _Category;
