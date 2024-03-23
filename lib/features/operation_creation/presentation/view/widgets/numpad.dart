@@ -3,8 +3,8 @@ import 'package:budget_tracker/core/ui_kit/widgets/numeric_keyboard_button.dart'
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class CalculatorController extends StateNotifier<String> {
-  CalculatorController() : super('0');
+class NumpadController extends StateNotifier<String> {
+  NumpadController() : super('0');
 
   void appendDigit(String digit) {
     if (state.length < 10) {
@@ -28,8 +28,8 @@ class CalculatorController extends StateNotifier<String> {
 }
 
 final calculatorControllerProvider =
-    StateNotifierProvider<CalculatorController, String>(
-  (ref) => CalculatorController(),
+    StateNotifierProvider<NumpadController, String>(
+  (ref) => NumpadController(),
 );
 
 class NumericRow extends ConsumerWidget {
