@@ -20,7 +20,7 @@ mixin _$Operation {
   bool get incoming => throw _privateConstructorUsedError;
   double get sum => throw _privateConstructorUsedError;
   DateTime get date => throw _privateConstructorUsedError;
-  Cat.Category get category => throw _privateConstructorUsedError;
+  entity_category.Category get category => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $OperationCopyWith<Operation> get copyWith =>
@@ -37,7 +37,7 @@ abstract class $OperationCopyWith<$Res> {
       bool incoming,
       double sum,
       DateTime date,
-      Cat.Category category});
+      entity_category.Category category});
 
   $CategoryCopyWith<$Res> get category;
 }
@@ -81,7 +81,7 @@ class _$OperationCopyWithImpl<$Res, $Val extends Operation>
       category: null == category
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
-              as Cat.Category,
+              as entity_category.Category,
     ) as $Val);
   }
 
@@ -107,7 +107,7 @@ abstract class _$$OperationImplCopyWith<$Res>
       bool incoming,
       double sum,
       DateTime date,
-      Cat.Category category});
+      entity_category.Category category});
 
   @override
   $CategoryCopyWith<$Res> get category;
@@ -150,7 +150,7 @@ class __$$OperationImplCopyWithImpl<$Res>
       category: null == category
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
-              as Cat.Category,
+              as entity_category.Category,
     ));
   }
 }
@@ -174,7 +174,7 @@ class _$OperationImpl with DiagnosticableTreeMixin implements _Operation {
   @override
   final DateTime date;
   @override
-  final Cat.Category category;
+  final entity_category.Category category;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -224,7 +224,7 @@ abstract class _Operation implements Operation {
       required final bool incoming,
       required final double sum,
       required final DateTime date,
-      required final Cat.Category category}) = _$OperationImpl;
+      required final entity_category.Category category}) = _$OperationImpl;
 
   @override
   int get id;
@@ -235,7 +235,7 @@ abstract class _Operation implements Operation {
   @override
   DateTime get date;
   @override
-  Cat.Category get category;
+  entity_category.Category get category;
   @override
   @JsonKey(ignore: true)
   _$$OperationImplCopyWith<_$OperationImpl> get copyWith =>

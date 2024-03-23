@@ -10,7 +10,7 @@ part 'operation_dto.g.dart';
 class OperationDTO with _$OperationDTO {
   factory OperationDTO({
     required int id,
-    required bool income,
+    required bool incoming,
     required String sum,
     required int date,
     required entity_category.Category category,

@@ -21,7 +21,7 @@ OperationDTO _$OperationDTOFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$OperationDTO {
   int get id => throw _privateConstructorUsedError;
-  bool get income => throw _privateConstructorUsedError;
+  bool get incoming => throw _privateConstructorUsedError;
   String get sum => throw _privateConstructorUsedError;
   int get date => throw _privateConstructorUsedError;
   entity_category.Category get category => throw _privateConstructorUsedError;
@@ -40,7 +40,7 @@ abstract class $OperationDTOCopyWith<$Res> {
   @useResult
   $Res call(
       {int id,
-      bool income,
+      bool incoming,
       String sum,
       int date,
       entity_category.Category category});
@@ -62,7 +62,7 @@ class _$OperationDTOCopyWithImpl<$Res, $Val extends OperationDTO>
   @override
   $Res call({
     Object? id = null,
-    Object? income = null,
+    Object? incoming = null,
     Object? sum = null,
     Object? date = null,
     Object? category = null,
@@ -72,9 +72,9 @@ class _$OperationDTOCopyWithImpl<$Res, $Val extends OperationDTO>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      income: null == income
-          ? _value.income
-          : income // ignore: cast_nullable_to_non_nullable
+      incoming: null == incoming
+          ? _value.incoming
+          : incoming // ignore: cast_nullable_to_non_nullable
               as bool,
       sum: null == sum
           ? _value.sum
@@ -110,7 +110,7 @@ abstract class _$$OperationDTOImplCopyWith<$Res>
   @useResult
   $Res call(
       {int id,
-      bool income,
+      bool incoming,
       String sum,
       int date,
       entity_category.Category category});
@@ -131,7 +131,7 @@ class __$$OperationDTOImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
-    Object? income = null,
+    Object? incoming = null,
     Object? sum = null,
     Object? date = null,
     Object? category = null,
@@ -141,9 +141,9 @@ class __$$OperationDTOImplCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      income: null == income
-          ? _value.income
-          : income // ignore: cast_nullable_to_non_nullable
+      incoming: null == incoming
+          ? _value.incoming
+          : incoming // ignore: cast_nullable_to_non_nullable
               as bool,
       sum: null == sum
           ? _value.sum
@@ -166,7 +166,7 @@ class __$$OperationDTOImplCopyWithImpl<$Res>
 class _$OperationDTOImpl with DiagnosticableTreeMixin implements _OperationDTO {
   _$OperationDTOImpl(
       {required this.id,
-      required this.income,
+      required this.incoming,
       required this.sum,
       required this.date,
       required this.category});
@@ -177,7 +177,7 @@ class _$OperationDTOImpl with DiagnosticableTreeMixin implements _OperationDTO {
   @override
   final int id;
   @override
-  final bool income;
+  final bool incoming;
   @override
   final String sum;
   @override
@@ -187,7 +187,7 @@ class _$OperationDTOImpl with DiagnosticableTreeMixin implements _OperationDTO {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'OperationDTO(id: $id, income: $income, sum: $sum, date: $date, category: $category)';
+    return 'OperationDTO(id: $id, incoming: $incoming, sum: $sum, date: $date, category: $category)';
   }
 
   @override
@@ -196,7 +196,7 @@ class _$OperationDTOImpl with DiagnosticableTreeMixin implements _OperationDTO {
     properties
       ..add(DiagnosticsProperty('type', 'OperationDTO'))
       ..add(DiagnosticsProperty('id', id))
-      ..add(DiagnosticsProperty('income', income))
+      ..add(DiagnosticsProperty('incoming', incoming))
       ..add(DiagnosticsProperty('sum', sum))
       ..add(DiagnosticsProperty('date', date))
       ..add(DiagnosticsProperty('category', category));
@@ -208,7 +208,8 @@ class _$OperationDTOImpl with DiagnosticableTreeMixin implements _OperationDTO {
         (other.runtimeType == runtimeType &&
             other is _$OperationDTOImpl &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.income, income) || other.income == income) &&
+            (identical(other.incoming, incoming) ||
+                other.incoming == incoming) &&
             (identical(other.sum, sum) || other.sum == sum) &&
             (identical(other.date, date) || other.date == date) &&
             (identical(other.category, category) ||
@@ -217,7 +218,8 @@ class _$OperationDTOImpl with DiagnosticableTreeMixin implements _OperationDTO {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, income, sum, date, category);
+  int get hashCode =>
+      Object.hash(runtimeType, id, incoming, sum, date, category);
 
   @JsonKey(ignore: true)
   @override
@@ -236,7 +238,7 @@ class _$OperationDTOImpl with DiagnosticableTreeMixin implements _OperationDTO {
 abstract class _OperationDTO implements OperationDTO {
   factory _OperationDTO(
       {required final int id,
-      required final bool income,
+      required final bool incoming,
       required final String sum,
       required final int date,
       required final entity_category.Category category}) = _$OperationDTOImpl;
@@ -247,7 +249,7 @@ abstract class _OperationDTO implements OperationDTO {
   @override
   int get id;
   @override
-  bool get income;
+  bool get incoming;
   @override
   String get sum;
   @override
