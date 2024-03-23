@@ -77,42 +77,9 @@ class CheckListTile extends ConsumerWidget {
                                 padding: const EdgeInsets.all(10.0),
                                 child: Row(
                                   children: [
-                                    Expanded(
-                                      child: Row(
-                                        children: [
-                                          _iconArrow(
-                                            context,
-                                            Icon(
-                                              Icons.arrow_downward,
-                                              color: AppLightColors().error,
-                                            ),
-                                          ),
-                                          _info(
-                                            context,
-                                            'Expenses',
-                                            '${check.expenses}₽',
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                    Expanded(
-                                      child: Row(
-                                        children: [
-                                          _iconArrow(
-                                            context,
-                                            Icon(
-                                              Icons.arrow_upward,
-                                              color: AppLightColors().success,
-                                            ),
-                                          ),
-                                          _info(
-                                            context,
-                                            'Income',
-                                            '${check.income}₽',
-                                          ),
-                                        ],
-                                      ),
-                                    ),
+                                    _moneyFlow(
+                                        context, 'Expenses', check.expenses),
+                                    _moneyFlow(context, 'Income', check.income),
                                   ],
                                 ),
                               ),
@@ -127,6 +94,31 @@ class CheckListTile extends ConsumerWidget {
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget _moneyFlow(BuildContext context, String direction, double sum) {
+    return Expanded(
+      child: Row(
+        children: [
+          _iconArrow(
+            context,
+            Icon(
+              direction == 'Expenses'
+                  ? Icons.arrow_downward
+                  : Icons.arrow_upward,
+              color: direction == 'Expenses'
+                  ? AppLightColors().error
+                  : AppLightColors().success,
+            ),
+          ),
+          _info(
+            context,
+            direction,
+            '$sum₽',
+          ),
+        ],
       ),
     );
   }

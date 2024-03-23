@@ -4,7 +4,7 @@ import 'package:budget_tracker/features/check/domain/entities/check.dart';
 
 sealed class HomeViewState {}
 
-class AnalyticsViewLoadingState extends HomeViewState {}
+class HomeViewLoadingState extends HomeViewState {}
 
 class HomeViewErrorState extends HomeViewState {}
 

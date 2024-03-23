@@ -2,7 +2,7 @@ import 'package:budget_tracker/features/operations/domain/repositories/operation
 import 'package:budget_tracker/features/operations/internal/operation_repository_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'package:budget_tracker/features/check/internal/repository_provider.dart';
+import 'package:budget_tracker/features/check/internal/check_repository_provider.dart';
 import 'package:budget_tracker/features/home/presentation/view_model/home_view_state.dart';
 
 import 'package:budget_tracker/features/check/domain/repositories/check_repository.dart';
@@ -10,8 +10,8 @@ import 'package:budget_tracker/features/check/domain/repositories/check_reposito
 final homeViewModelProvider =
     StateNotifierProvider<HomeViewModel, HomeViewState>(
   (ref) => HomeViewModel(
-    AnalyticsViewLoadingState(),
-    ref.read(accountRepositoryProvider),
+    HomeViewLoadingState(),
+    ref.read(checkRepositoryProvider),
     ref.read(operationRepositoryProvider),
   )..loadData(),
 );

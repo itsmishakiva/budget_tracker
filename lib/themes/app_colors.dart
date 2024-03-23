@@ -15,7 +15,7 @@ class AppLightColors extends AppColors {
           errorLight: const Color(0xFFFDE8E8),
           success: const Color(0xFF02C46D),
           successLight: const Color(0xFFE8FDEA),
-          grey: const Color(0xFFB4B4B4),
+          textSubtitile: const Color(0xFFB4B4B4),
         );
 }
 
@@ -32,7 +32,7 @@ class AppColors extends ThemeExtension<AppColors> {
   final Color errorLight;
   final Color success;
   final Color successLight;
-  final Color grey;
+  final Color textSubtitile;
 
   const AppColors({
     required this.backgroundPrimary,
@@ -47,7 +47,7 @@ class AppColors extends ThemeExtension<AppColors> {
     required this.errorLight,
     required this.success,
     required this.successLight,
-    required this.grey,
+    required this.textSubtitile,
   });
 
   @override
@@ -64,7 +64,7 @@ class AppColors extends ThemeExtension<AppColors> {
     Color? errorLight,
     Color? success,
     Color? successLight,
-    Color? grey,
+    Color? textSubtitile,
   }) {
     return AppColors(
       backgroundPrimary: backgroundPrimary ?? this.backgroundPrimary,
@@ -79,7 +79,7 @@ class AppColors extends ThemeExtension<AppColors> {
       errorLight: errorLight ?? this.errorLight,
       success: success ?? this.success,
       successLight: successLight ?? this.successLight,
-      grey: grey ?? this.grey,
+      textSubtitile: textSubtitile ?? this.textSubtitile,
     );
   }
 
@@ -110,7 +110,7 @@ class AppColors extends ThemeExtension<AppColors> {
       errorLight: Color.lerp(errorLight, typedOther.errorLight, t)!,
       success: Color.lerp(success, typedOther.success, t)!,
       successLight: Color.lerp(successLight, typedOther.successLight, t)!,
-      grey: Color.lerp(grey, typedOther.grey, t)!,
+      textSubtitile: Color.lerp(textSubtitile, typedOther.textSubtitile, t)!,
     );
   }
 }

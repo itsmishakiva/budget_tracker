@@ -87,8 +87,8 @@ class AppLightTextStyles extends AppTextStyles {
           subtitle3: TextStyle(
             fontFamily: 'Nunito',
             fontWeight: FontWeight.w600,
-            fontSize: 16.0,
-            color: colors.grey,
+            fontSize: 12.0,
+            color: colors.textSubtitile,
           ),
           onNumericButton: TextStyle(
             fontFamily: 'Nunito',
