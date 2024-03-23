@@ -10,6 +10,10 @@ class AppRouter extends $AppRouter {
           path: '/pin',
         ),
         AutoRoute(
+          page: AnalyticsRoute.page,
+          path: '/analytics',
+        ),
+        AutoRoute(
           page: CreatePinCodeRoute.page,
           path: '/create_pin',
           initial: true,

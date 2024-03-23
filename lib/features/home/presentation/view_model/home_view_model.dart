@@ -3,22 +3,23 @@ import 'package:budget_tracker/features/operations/internal/operation_repository
 import 'package:budget_tracker/main.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'package:budget_tracker/features/account/domain/repositories/account_repository.dart';
-import 'package:budget_tracker/features/account/internal/repository_provider.dart';
+import 'package:budget_tracker/features/check/internal/check_repository_provider.dart';
 import 'package:budget_tracker/features/home/presentation/view_model/home_view_state.dart';
 import 'package:logging/logging.dart';
 
-final accountListViewModelProvider =
+import 'package:budget_tracker/features/check/domain/repositories/check_repository.dart';
+
+final homeViewModelProvider =
     StateNotifierProvider<HomeViewModel, HomeViewState>(
   (ref) => HomeViewModel(
     HomeViewLoadingState(),
-    ref.read(accountRepositoryProvider),
+    ref.read(checkRepositoryProvider),
     ref.read(operationRepositoryProvider),
   )..loadData(),
 );
 
 class HomeViewModel extends StateNotifier<HomeViewState> {
-  final AccountRepository _repositoryAccount;
+  final CheckRepository _repositoryAccount;
   final OperationRepository _repositoryOperation;
 
   HomeViewModel(
@@ -29,9 +30,11 @@ class HomeViewModel extends StateNotifier<HomeViewState> {
 
   Future<void> loadData() async {
     try {
+      final dataAccount = await _repositoryAccount.getCheck();
+      final dataOperations = await _repositoryOperation.getOperationList();
       state = HomeViewDataState(
-        dataAccount: await _repositoryAccount.getAccountList(),
-        dataOperations: await _repositoryOperation.getOperationList(),
+        dataAccount: dataAccount,
+        dataOperations: dataOperations,
       );
     } catch (e) {
       logger.log(Level.WARNING, e);

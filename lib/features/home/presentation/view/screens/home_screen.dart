@@ -7,25 +7,25 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logging/logging.dart';
 import 'package:budget_tracker/core/internal/logger_provider.dart';
-import 'package:budget_tracker/features/account/domain/entities/account.dart';
-import 'package:budget_tracker/features/account/presentation/view/screens/account_screen.dart';
-import 'package:budget_tracker/features/account/presentation/view_model/account_list_view_model.dart';
-import 'package:budget_tracker/features/account/presentation/view_model/account_list_view_state.dart';
+import 'package:budget_tracker/themes/app_colors.dart';
+import 'package:budget_tracker/features/home/presentation/view_model/home_view_model.dart';
+import 'package:budget_tracker/features/check/domain/entities/check.dart';
+import 'package:budget_tracker/features/check/presentation/view/screens/check_screen.dart';
+import 'package:budget_tracker/features/home/presentation/view_model/home_view_state.dart';
 
 @RoutePage()
 class HomeScreen extends ConsumerWidget {
-  final ScrollController scrollController =
-      ScrollController(); // Создание scrollController
+  final ScrollController scrollController = ScrollController();
 
   HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return AppScaffold(
-      backgroundColor: context.colors.backgroundSecondary,
-      body: AccountListScreenContent(
+      backgroundColor: AppLightColors().backgroundSecondary,
+      body: CheckListScreenContent(
         scrollController: scrollController,
-      ), // Передача scrollController в AccountListScreenContent
+      ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           ref.read(appRouterProvider).navigateNamed('/operation_creation');
@@ -40,32 +40,34 @@ class HomeScreen extends ConsumerWidget {
   }
 }
 
-class AccountListScreenContent extends ConsumerWidget {
+class CheckListScreenContent extends ConsumerWidget {
   final ScrollController scrollController;
 
-  // Удалите 'const' перед конструктором
-  const AccountListScreenContent({super.key, required this.scrollController});
+  const CheckListScreenContent({super.key, required this.scrollController});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.watch(accountListViewModelProvider);
+    final state = ref.watch(homeViewModelProvider);
     switch (state) {
-      case AccountListViewLoadingState _:
+      case HomeViewLoadingState _:
         ref.read(loggerProvider).log(Level.INFO, 'Hello!');
         return const Center(
           child: CircularProgressIndicator(),
         );
-      case AccountListViewErrorState _:
+      case HomeViewErrorState _:
         return const Center(
           child: Icon(Icons.error),
         );
-      case AccountListViewDataState _:
+      case HomeViewDataState _:
         return CustomScrollView(
+          physics: const AlwaysScrollableScrollPhysics(
+            parent: BouncingScrollPhysics(),
+          ),
           controller: scrollController,
           slivers: [
             SliverPersistentHeader(
-              delegate: _AccountListTileHeaderDelegate(
-                account: state.dataAccount[0],
+              delegate: _CheckTileHeaderDelegate(
+                check: state.dataAccount[0],
               ),
               pinned: true,
             ),
@@ -90,10 +92,10 @@ class AccountListScreenContent extends ConsumerWidget {
   }
 }
 
-class _AccountListTileHeaderDelegate extends SliverPersistentHeaderDelegate {
-  final Account account;
+class _CheckTileHeaderDelegate extends SliverPersistentHeaderDelegate {
+  final Check check;
 
-  _AccountListTileHeaderDelegate({required this.account});
+  _CheckTileHeaderDelegate({required this.check});
 
   @override
   Widget build(
@@ -112,8 +114,8 @@ class _AccountListTileHeaderDelegate extends SliverPersistentHeaderDelegate {
           child: Transform.scale(
             scale: scale,
             origin: const Offset(0, -150),
-            child: AccountListTile(
-              account: account,
+            child: CheckListTile(
+              check: check,
             ),
           ),
         ),
@@ -122,7 +124,7 @@ class _AccountListTileHeaderDelegate extends SliverPersistentHeaderDelegate {
   }
 
   @override
-  bool shouldRebuild(_AccountListTileHeaderDelegate oldDelegate) {
+  bool shouldRebuild(_CheckTileHeaderDelegate oldDelegate) {
     return false;
   }
 

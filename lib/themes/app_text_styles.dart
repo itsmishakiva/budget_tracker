@@ -84,6 +84,12 @@ class AppTextStylesRealization extends AppTextStyles {
             fontSize: 12.0,
             color: colors.textSecondary,
           ),
+          subtitle3: TextStyle(
+            fontFamily: 'Nunito',
+            fontWeight: FontWeight.w600,
+            fontSize: 12.0,
+            color: colors.textSubtitile,
+          ),
           onNumericButton: TextStyle(
             fontFamily: 'Nunito',
             fontWeight: FontWeight.w800,
@@ -120,6 +126,7 @@ class AppTextStyles extends ThemeExtension<AppTextStyles> {
   final TextStyle hint;
   final TextStyle subtitle1;
   final TextStyle subtitle2;
+  final TextStyle subtitle3;
   final TextStyle onNumericButton;
   final TextStyle onButton;
   final TextStyle error;
@@ -138,6 +145,7 @@ class AppTextStyles extends ThemeExtension<AppTextStyles> {
     required this.hint,
     required this.subtitle1,
     required this.subtitle2,
+    required this.subtitle3,
     required this.onNumericButton,
     required this.onButton,
     required this.error,
@@ -157,6 +165,8 @@ class AppTextStyles extends ThemeExtension<AppTextStyles> {
     TextStyle? textButton,
     TextStyle? hint,
     TextStyle? subtitle1,
+    TextStyle? subtitle2,
+    TextStyle? subtitle3,
     TextStyle? onNumericButton,
     TextStyle? onButton,
     TextStyle? error,
@@ -174,7 +184,8 @@ class AppTextStyles extends ThemeExtension<AppTextStyles> {
       textButton: textButton ?? this.textButton,
       hint: hint ?? this.hint,
       subtitle1: subtitle1 ?? this.subtitle1,
-      subtitle2: subtitle2,
+      subtitle2: subtitle2 ?? this.subtitle2,
+      subtitle3: subtitle3 ?? this.subtitle3,
       onNumericButton: onNumericButton ?? this.onNumericButton,
       onButton: onButton ?? this.onButton,
       error: error ?? this.error,
@@ -206,6 +217,7 @@ class AppTextStyles extends ThemeExtension<AppTextStyles> {
       hint: TextStyle.lerp(hint, typedOther.hint, t)!,
       subtitle1: TextStyle.lerp(subtitle1, typedOther.subtitle1, t)!,
       subtitle2: TextStyle.lerp(subtitle2, typedOther.subtitle2, t)!,
+      subtitle3: TextStyle.lerp(subtitle3, typedOther.subtitle3, t)!,
       bodyTextSurface:
           TextStyle.lerp(bodyTextSurface, typedOther.bodyTextSurface, t)!,
       bodyTextSurface1:
