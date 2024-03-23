@@ -54,10 +54,12 @@ class App extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final router = ref.watch(appRouterProvider);
+    final themes = AppThemes();
     logger.info('Logger test!');
 
     return MaterialApp.router(
-      theme: AppThemes().lightThemeData(),
+      theme: themes.lightThemeData(),
+      darkTheme: themes.darkThemeData(),
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
       routerConfig: router.config(),

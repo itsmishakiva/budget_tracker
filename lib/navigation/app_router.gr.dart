@@ -13,9 +13,9 @@ import 'package:budget_tracker/features/analytics/presentation/view/sreens/analy
     as _i1;
 import 'package:budget_tracker/features/home/presentation/view/screens/home_screen.dart'
     as _i3;
-import 'package:budget_tracker/features/operation_creation/presentation/view/srcreens/operation_creation_sum_screen.dart'
+import 'package:budget_tracker/features/operations/presentation/view/screens/operation_creation_sum_screen.dart'
     as _i4;
-import 'package:budget_tracker/features/operation_creation/presentation/view/srcreens/operation_creation_type_screen.dart'
+import 'package:budget_tracker/features/operations/presentation/view/screens/operation_creation_type_screen.dart'
     as _i5;
 import 'package:budget_tracker/features/operations/presentation/view/screens/operation_list_screen.dart'
     as _i6;
@@ -33,7 +33,7 @@ abstract class $AppRouter extends _i8.RootStackRouter {
     AnalyticsRoute.name: (routeData) {
       return _i8.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: _i1.AnalyticsScreen(),
+        child: const _i1.AnalyticsScreen(),
       );
     },
     CreatePinCodeRoute.name: (routeData) {

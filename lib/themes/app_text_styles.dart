@@ -2,8 +2,8 @@ import 'package:budget_tracker/themes/app_colors.dart';
 import 'package:flutter/material.dart';
 
 //Реазлизация текстовых стилей светлой темы
-class AppLightTextStyles extends AppTextStyles {
-  AppLightTextStyles({
+class AppTextStylesRealization extends AppTextStyles {
+  AppTextStylesRealization({
     required AppColors colors,
   }) : super(
           header1: TextStyle(

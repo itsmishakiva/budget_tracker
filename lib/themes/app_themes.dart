@@ -5,11 +5,16 @@ import 'package:flutter/material.dart';
 //Класс, через который в MaterialApp можем получить любую тему
 class AppThemes {
   final _appLightColors = AppLightColors();
-  late final _appLightTextStyles = AppLightTextStyles(colors: _appLightColors);
+  final _appDarkColors = AppDarkColors();
+  late final _appLightTextStyles =
+      AppTextStylesRealization(colors: _appLightColors);
+  late final _appDarkTextStyles =
+      AppTextStylesRealization(colors: _appDarkColors);
 
   //Метод для получения светлой темы
   ThemeData lightThemeData() {
     return ThemeData(
+      brightness: Brightness.light,
       splashColor: Colors.transparent,
       focusColor: Colors.black.withOpacity(0.1),
       hoverColor: Colors.black.withOpacity(0.1),
@@ -17,6 +22,20 @@ class AppThemes {
       extensions: [
         _appLightColors,
         _appLightTextStyles,
+      ],
+    );
+  }
+
+  ThemeData darkThemeData() {
+    return ThemeData(
+      brightness: Brightness.dark,
+      splashColor: Colors.transparent,
+      focusColor: Colors.black.withOpacity(0.1),
+      hoverColor: Colors.black.withOpacity(0.1),
+      highlightColor: Colors.black.withOpacity(0.1),
+      extensions: [
+        _appDarkColors,
+        _appDarkTextStyles,
       ],
     );
   }
