@@ -1,5 +1,4 @@
-import 'package:budget_tracker/features/categories/domain/entities/category.dart'
-    as entity_category;
+import 'package:budget_tracker/features/categories/data/dto/category_dto.dart';
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -13,7 +12,7 @@ class OperationDTO with _$OperationDTO {
     required bool incoming,
     required String sum,
     required int date,
-    required entity_category.Category category,
+    required CategoryDTO category,
   }) = _OperationDTO;
 
   factory OperationDTO.fromJson(Map<String, Object?> json) =>

@@ -1,12 +1,14 @@
-import 'package:budget_tracker/features/categories/data/mappers_impl/category_mapper_impl.dart';
+import 'package:budget_tracker/features/categories/data/mappers/i_category_mapper.dart';
 import 'package:budget_tracker/features/operations/data/dto/operation_dto.dart';
 import 'package:budget_tracker/features/operations/data/mappers/operation_mapper.dart';
 import 'package:budget_tracker/features/operations/domain/entities/operation.dart';
 
 class OperationMapperImpl implements OperationMapper {
-  final CategoryMapperImpl categoryMapperImpl;
+  final CategoryMapper categoryMapper;
 
-  OperationMapperImpl({required this.categoryMapperImpl});
+  OperationMapperImpl({
+    required this.categoryMapper,
+  });
 
   @override
   Operation fromDto(OperationDTO dto) {
@@ -15,7 +17,7 @@ class OperationMapperImpl implements OperationMapper {
       incoming: dto.incoming,
       sum: double.parse(dto.sum.substring(0, dto.sum.length - 1)),
       date: DateTime.fromMillisecondsSinceEpoch(dto.date),
-      category: dto.category,
+      category: categoryMapper.fromDto(dto.category),
     );
   }
 
@@ -26,7 +28,7 @@ class OperationMapperImpl implements OperationMapper {
       incoming: entity.incoming,
       sum: entity.sum.toString(),
       date: entity.date.millisecondsSinceEpoch,
-      category: categoryMapperImpl.fromDTO(dto.category),
+      category: categoryMapper.toDto(entity.category),
     );
   }
 }

@@ -24,7 +24,7 @@ mixin _$OperationDTO {
   bool get incoming => throw _privateConstructorUsedError;
   String get sum => throw _privateConstructorUsedError;
   int get date => throw _privateConstructorUsedError;
-  entity_category.Category get category => throw _privateConstructorUsedError;
+  CategoryDTO get category => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -39,13 +39,9 @@ abstract class $OperationDTOCopyWith<$Res> {
       _$OperationDTOCopyWithImpl<$Res, OperationDTO>;
   @useResult
   $Res call(
-      {int id,
-      bool incoming,
-      String sum,
-      int date,
-      entity_category.Category category});
+      {int id, bool incoming, String sum, int date, CategoryDTO category});
 
-  $CategoryCopyWith<$Res> get category;
+  $CategoryDTOCopyWith<$Res> get category;
 }
 
 /// @nodoc
@@ -87,14 +83,14 @@ class _$OperationDTOCopyWithImpl<$Res, $Val extends OperationDTO>
       category: null == category
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
-              as entity_category.Category,
+              as CategoryDTO,
     ) as $Val);
   }
 
   @override
   @pragma('vm:prefer-inline')
-  $CategoryCopyWith<$Res> get category {
-    return $CategoryCopyWith<$Res>(_value.category, (value) {
+  $CategoryDTOCopyWith<$Res> get category {
+    return $CategoryDTOCopyWith<$Res>(_value.category, (value) {
       return _then(_value.copyWith(category: value) as $Val);
     });
   }
@@ -109,14 +105,10 @@ abstract class _$$OperationDTOImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {int id,
-      bool incoming,
-      String sum,
-      int date,
-      entity_category.Category category});
+      {int id, bool incoming, String sum, int date, CategoryDTO category});
 
   @override
-  $CategoryCopyWith<$Res> get category;
+  $CategoryDTOCopyWith<$Res> get category;
 }
 
 /// @nodoc
@@ -156,7 +148,7 @@ class __$$OperationDTOImplCopyWithImpl<$Res>
       category: null == category
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
-              as entity_category.Category,
+              as CategoryDTO,
     ));
   }
 }
@@ -183,7 +175,7 @@ class _$OperationDTOImpl with DiagnosticableTreeMixin implements _OperationDTO {
   @override
   final int date;
   @override
-  final entity_category.Category category;
+  final CategoryDTO category;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -241,7 +233,7 @@ abstract class _OperationDTO implements OperationDTO {
       required final bool incoming,
       required final String sum,
       required final int date,
-      required final entity_category.Category category}) = _$OperationDTOImpl;
+      required final CategoryDTO category}) = _$OperationDTOImpl;
 
   factory _OperationDTO.fromJson(Map<String, dynamic> json) =
       _$OperationDTOImpl.fromJson;
@@ -255,7 +247,7 @@ abstract class _OperationDTO implements OperationDTO {
   @override
   int get date;
   @override
-  entity_category.Category get category;
+  CategoryDTO get category;
   @override
   @JsonKey(ignore: true)
   _$$OperationDTOImplCopyWith<_$OperationDTOImpl> get copyWith =>

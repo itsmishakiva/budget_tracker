@@ -4,8 +4,7 @@ import 'package:budget_tracker/features/operations/data/mappers_impl/operation_m
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final operationMapperProvider = Provider<OperationMapper>(
-  (ref) {
-    final categoryMapper = ref.watch(categoryMapperProvider);
-    OperationMapperImpl(categoryMapperImpl: categoryMapper);
-  },
+  (ref) => OperationMapperImpl(
+    categoryMapper: ref.watch(categoryMapperProvider),
+  ),
 );

@@ -20,7 +20,7 @@ mixin _$Operation {
   bool get incoming => throw _privateConstructorUsedError;
   double get sum => throw _privateConstructorUsedError;
   DateTime get date => throw _privateConstructorUsedError;
-  entity_category.Category get category => throw _privateConstructorUsedError;
+  Category get category => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $OperationCopyWith<Operation> get copyWith =>
@@ -33,11 +33,7 @@ abstract class $OperationCopyWith<$Res> {
       _$OperationCopyWithImpl<$Res, Operation>;
   @useResult
   $Res call(
-      {int id,
-      bool incoming,
-      double sum,
-      DateTime date,
-      entity_category.Category category});
+      {int id, bool incoming, double sum, DateTime date, Category category});
 
   $CategoryCopyWith<$Res> get category;
 }
@@ -81,7 +77,7 @@ class _$OperationCopyWithImpl<$Res, $Val extends Operation>
       category: null == category
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
-              as entity_category.Category,
+              as Category,
     ) as $Val);
   }
 
@@ -103,11 +99,7 @@ abstract class _$$OperationImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {int id,
-      bool incoming,
-      double sum,
-      DateTime date,
-      entity_category.Category category});
+      {int id, bool incoming, double sum, DateTime date, Category category});
 
   @override
   $CategoryCopyWith<$Res> get category;
@@ -150,14 +142,14 @@ class __$$OperationImplCopyWithImpl<$Res>
       category: null == category
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
-              as entity_category.Category,
+              as Category,
     ));
   }
 }
 
 /// @nodoc
 
-class _$OperationImpl with DiagnosticableTreeMixin implements _Operation {
+class _$OperationImpl implements _Operation {
   _$OperationImpl(
       {required this.id,
       required this.incoming,
@@ -174,23 +166,11 @@ class _$OperationImpl with DiagnosticableTreeMixin implements _Operation {
   @override
   final DateTime date;
   @override
-  final entity_category.Category category;
+  final Category category;
 
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+  String toString() {
     return 'Operation(id: $id, incoming: $incoming, sum: $sum, date: $date, category: $category)';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'Operation'))
-      ..add(DiagnosticsProperty('id', id))
-      ..add(DiagnosticsProperty('incoming', incoming))
-      ..add(DiagnosticsProperty('sum', sum))
-      ..add(DiagnosticsProperty('date', date))
-      ..add(DiagnosticsProperty('category', category));
   }
 
   @override
@@ -224,7 +204,7 @@ abstract class _Operation implements Operation {
       required final bool incoming,
       required final double sum,
       required final DateTime date,
-      required final entity_category.Category category}) = _$OperationImpl;
+      required final Category category}) = _$OperationImpl;
 
   @override
   int get id;
@@ -235,7 +215,7 @@ abstract class _Operation implements Operation {
   @override
   DateTime get date;
   @override
-  entity_category.Category get category;
+  Category get category;
   @override
   @JsonKey(ignore: true)
   _$$OperationImplCopyWith<_$OperationImpl> get copyWith =>
