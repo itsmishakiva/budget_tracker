@@ -9,15 +9,17 @@ part of 'operation_dto.dart';
 _$OperationDTOImpl _$$OperationDTOImplFromJson(Map<String, dynamic> json) =>
     _$OperationDTOImpl(
       id: json['id'] as int,
-      title: json['title'] as String,
+      incoming: json['incoming'] as bool,
       sum: json['sum'] as String,
-      companyName: json['companyName'] as String?,
+      date: json['date'] as int,
+      category: CategoryDTO.fromJson(json['category'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$OperationDTOImplToJson(_$OperationDTOImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'title': instance.title,
+      'incoming': instance.incoming,
       'sum': instance.sum,
-      'companyName': instance.companyName,
+      'date': instance.date,
+      'category': instance.category,
     };

@@ -11,9 +11,9 @@
 import 'package:auto_route/auto_route.dart' as _i7;
 import 'package:budget_tracker/features/home/presentation/view/screens/home_screen.dart'
     as _i2;
-import 'package:budget_tracker/features/operation_creation/presentation/view/srcreens/operation_creation_sum_screen.dart'
+import 'package:budget_tracker/features/operations/presentation/view/screens/operation_creation_sum_screen.dart'
     as _i3;
-import 'package:budget_tracker/features/operation_creation/presentation/view/srcreens/operation_creation_type_screen.dart'
+import 'package:budget_tracker/features/operations/presentation/view/screens/operation_creation_type_screen.dart'
     as _i4;
 import 'package:budget_tracker/features/operations/presentation/view/screens/operation_list_screen.dart'
     as _i5;

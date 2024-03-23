@@ -1,10 +1,12 @@
 import 'package:budget_tracker/features/operations/domain/repositories/operation_repository.dart';
 import 'package:budget_tracker/features/operations/internal/operation_repository_provider.dart';
+import 'package:budget_tracker/main.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:budget_tracker/features/account/domain/repositories/account_repository.dart';
 import 'package:budget_tracker/features/account/internal/repository_provider.dart';
 import 'package:budget_tracker/features/home/presentation/view_model/home_view_state.dart';
+import 'package:logging/logging.dart';
 
 final accountListViewModelProvider =
     StateNotifierProvider<HomeViewModel, HomeViewState>(
@@ -32,6 +34,7 @@ class HomeViewModel extends StateNotifier<HomeViewState> {
         dataOperations: await _repositoryOperation.getOperationList(),
       );
     } catch (e) {
+      logger.log(Level.WARNING, e);
       state = HomeViewErrorState();
     }
   }

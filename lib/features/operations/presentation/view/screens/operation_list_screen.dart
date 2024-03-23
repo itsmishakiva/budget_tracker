@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_emoji/flutter_emoji.dart';
 import 'package:budget_tracker/themes/app_operation_colors.dart';
+import 'package:intl/intl.dart';
 
 @RoutePage()
 class OperationListScreen extends StatelessWidget {
@@ -72,7 +73,7 @@ class _OperationListTileState extends State<OperationListTile> {
 
   void _loadColor() async {
     Color? loadedColor =
-        await ColorStorageManager().loadColor(widget.operation.title);
+        await ColorStorageManager().loadColor(widget.operation.category.title);
     setState(() {
       color = loadedColor;
     });
@@ -146,7 +147,7 @@ class _OperationListTileState extends State<OperationListTile> {
               ),
               // child: _operationIcon(operation.title, AppLightColors().customColors[operation.id % 6])
               child: Center(
-                child: _operationIcon(widget.operation.title),
+                child: _operationIcon(widget.operation.category.icon),
               ),
             ),
             const SizedBox(width: 16.0),
@@ -155,12 +156,14 @@ class _OperationListTileState extends State<OperationListTile> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    widget.operation.title,
+                    widget.operation.category.title,
                     style: context.textStyles.header3,
                     overflow: TextOverflow.ellipsis,
                   ),
                   Text(
-                    widget.operation.companyName,
+                    DateFormat('dd MM yyyy').format(
+                      widget.operation.date,
+                    ),
                     style: context.textStyles.subtitle2,
                     overflow: TextOverflow.ellipsis,
                   ),
@@ -174,7 +177,7 @@ class _OperationListTileState extends State<OperationListTile> {
                 style: context.textStyles.header3,
                 children: [
                   TextSpan(
-                    text: widget.operation.currencySymbol,
+                    text: '₽',
                     style: context.textStyles.header3,
                   ),
                 ],

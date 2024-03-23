@@ -17,10 +17,10 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$Operation {
   int get id => throw _privateConstructorUsedError;
-  String get title => throw _privateConstructorUsedError;
+  bool get incoming => throw _privateConstructorUsedError;
   double get sum => throw _privateConstructorUsedError;
-  String get currencySymbol => throw _privateConstructorUsedError;
-  String get companyName => throw _privateConstructorUsedError;
+  DateTime get date => throw _privateConstructorUsedError;
+  Category get category => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $OperationCopyWith<Operation> get copyWith =>
@@ -33,11 +33,9 @@ abstract class $OperationCopyWith<$Res> {
       _$OperationCopyWithImpl<$Res, Operation>;
   @useResult
   $Res call(
-      {int id,
-      String title,
-      double sum,
-      String currencySymbol,
-      String companyName});
+      {int id, bool incoming, double sum, DateTime date, Category category});
+
+  $CategoryCopyWith<$Res> get category;
 }
 
 /// @nodoc
@@ -54,33 +52,41 @@ class _$OperationCopyWithImpl<$Res, $Val extends Operation>
   @override
   $Res call({
     Object? id = null,
-    Object? title = null,
+    Object? incoming = null,
     Object? sum = null,
-    Object? currencySymbol = null,
-    Object? companyName = null,
+    Object? date = null,
+    Object? category = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      title: null == title
-          ? _value.title
-          : title // ignore: cast_nullable_to_non_nullable
-              as String,
+      incoming: null == incoming
+          ? _value.incoming
+          : incoming // ignore: cast_nullable_to_non_nullable
+              as bool,
       sum: null == sum
           ? _value.sum
           : sum // ignore: cast_nullable_to_non_nullable
               as double,
-      currencySymbol: null == currencySymbol
-          ? _value.currencySymbol
-          : currencySymbol // ignore: cast_nullable_to_non_nullable
-              as String,
-      companyName: null == companyName
-          ? _value.companyName
-          : companyName // ignore: cast_nullable_to_non_nullable
-              as String,
+      date: null == date
+          ? _value.date
+          : date // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      category: null == category
+          ? _value.category
+          : category // ignore: cast_nullable_to_non_nullable
+              as Category,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $CategoryCopyWith<$Res> get category {
+    return $CategoryCopyWith<$Res>(_value.category, (value) {
+      return _then(_value.copyWith(category: value) as $Val);
+    });
   }
 }
 
@@ -93,11 +99,10 @@ abstract class _$$OperationImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {int id,
-      String title,
-      double sum,
-      String currencySymbol,
-      String companyName});
+      {int id, bool incoming, double sum, DateTime date, Category category});
+
+  @override
+  $CategoryCopyWith<$Res> get category;
 }
 
 /// @nodoc
@@ -112,72 +117,60 @@ class __$$OperationImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
-    Object? title = null,
+    Object? incoming = null,
     Object? sum = null,
-    Object? currencySymbol = null,
-    Object? companyName = null,
+    Object? date = null,
+    Object? category = null,
   }) {
     return _then(_$OperationImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      title: null == title
-          ? _value.title
-          : title // ignore: cast_nullable_to_non_nullable
-              as String,
+      incoming: null == incoming
+          ? _value.incoming
+          : incoming // ignore: cast_nullable_to_non_nullable
+              as bool,
       sum: null == sum
           ? _value.sum
           : sum // ignore: cast_nullable_to_non_nullable
               as double,
-      currencySymbol: null == currencySymbol
-          ? _value.currencySymbol
-          : currencySymbol // ignore: cast_nullable_to_non_nullable
-              as String,
-      companyName: null == companyName
-          ? _value.companyName
-          : companyName // ignore: cast_nullable_to_non_nullable
-              as String,
+      date: null == date
+          ? _value.date
+          : date // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      category: null == category
+          ? _value.category
+          : category // ignore: cast_nullable_to_non_nullable
+              as Category,
     ));
   }
 }
 
 /// @nodoc
 
-class _$OperationImpl with DiagnosticableTreeMixin implements _Operation {
+class _$OperationImpl implements _Operation {
   _$OperationImpl(
       {required this.id,
-      required this.title,
+      required this.incoming,
       required this.sum,
-      required this.currencySymbol,
-      required this.companyName});
+      required this.date,
+      required this.category});
 
   @override
   final int id;
   @override
-  final String title;
+  final bool incoming;
   @override
   final double sum;
   @override
-  final String currencySymbol;
+  final DateTime date;
   @override
-  final String companyName;
+  final Category category;
 
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Operation(id: $id, title: $title, sum: $sum, currencySymbol: $currencySymbol, companyName: $companyName)';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'Operation'))
-      ..add(DiagnosticsProperty('id', id))
-      ..add(DiagnosticsProperty('title', title))
-      ..add(DiagnosticsProperty('sum', sum))
-      ..add(DiagnosticsProperty('currencySymbol', currencySymbol))
-      ..add(DiagnosticsProperty('companyName', companyName));
+  String toString() {
+    return 'Operation(id: $id, incoming: $incoming, sum: $sum, date: $date, category: $category)';
   }
 
   @override
@@ -186,17 +179,17 @@ class _$OperationImpl with DiagnosticableTreeMixin implements _Operation {
         (other.runtimeType == runtimeType &&
             other is _$OperationImpl &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.title, title) || other.title == title) &&
+            (identical(other.incoming, incoming) ||
+                other.incoming == incoming) &&
             (identical(other.sum, sum) || other.sum == sum) &&
-            (identical(other.currencySymbol, currencySymbol) ||
-                other.currencySymbol == currencySymbol) &&
-            (identical(other.companyName, companyName) ||
-                other.companyName == companyName));
+            (identical(other.date, date) || other.date == date) &&
+            (identical(other.category, category) ||
+                other.category == category));
   }
 
   @override
   int get hashCode =>
-      Object.hash(runtimeType, id, title, sum, currencySymbol, companyName);
+      Object.hash(runtimeType, id, incoming, sum, date, category);
 
   @JsonKey(ignore: true)
   @override
@@ -208,21 +201,21 @@ class _$OperationImpl with DiagnosticableTreeMixin implements _Operation {
 abstract class _Operation implements Operation {
   factory _Operation(
       {required final int id,
-      required final String title,
+      required final bool incoming,
       required final double sum,
-      required final String currencySymbol,
-      required final String companyName}) = _$OperationImpl;
+      required final DateTime date,
+      required final Category category}) = _$OperationImpl;
 
   @override
   int get id;
   @override
-  String get title;
+  bool get incoming;
   @override
   double get sum;
   @override
-  String get currencySymbol;
+  DateTime get date;
   @override
-  String get companyName;
+  Category get category;
   @override
   @JsonKey(ignore: true)
   _$$OperationImplCopyWith<_$OperationImpl> get copyWith =>
