@@ -29,6 +29,7 @@ class AppScaffold extends StatelessWidget {
       child: Scaffold(
         backgroundColor: backgroundColor ?? context.colors.backgroundPrimary,
         body: SafeArea(
+          bottom: false,
           child: body,
         ),
         bottomNavigationBar: navigationBar,
