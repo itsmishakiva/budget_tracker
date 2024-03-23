@@ -24,7 +24,7 @@ mixin _$OperationDTO {
   bool get income => throw _privateConstructorUsedError;
   String get sum => throw _privateConstructorUsedError;
   int get date => throw _privateConstructorUsedError;
-  Cat.Category get category => throw _privateConstructorUsedError;
+  entity_category.Category get category => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -38,7 +38,12 @@ abstract class $OperationDTOCopyWith<$Res> {
           OperationDTO value, $Res Function(OperationDTO) then) =
       _$OperationDTOCopyWithImpl<$Res, OperationDTO>;
   @useResult
-  $Res call({int id, bool income, String sum, int date, Cat.Category category});
+  $Res call(
+      {int id,
+      bool income,
+      String sum,
+      int date,
+      entity_category.Category category});
 
   $CategoryCopyWith<$Res> get category;
 }
@@ -82,7 +87,7 @@ class _$OperationDTOCopyWithImpl<$Res, $Val extends OperationDTO>
       category: null == category
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
-              as Cat.Category,
+              as entity_category.Category,
     ) as $Val);
   }
 
@@ -103,7 +108,12 @@ abstract class _$$OperationDTOImplCopyWith<$Res>
       __$$OperationDTOImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int id, bool income, String sum, int date, Cat.Category category});
+  $Res call(
+      {int id,
+      bool income,
+      String sum,
+      int date,
+      entity_category.Category category});
 
   @override
   $CategoryCopyWith<$Res> get category;
@@ -146,7 +156,7 @@ class __$$OperationDTOImplCopyWithImpl<$Res>
       category: null == category
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
-              as Cat.Category,
+              as entity_category.Category,
     ));
   }
 }
@@ -173,7 +183,7 @@ class _$OperationDTOImpl with DiagnosticableTreeMixin implements _OperationDTO {
   @override
   final int date;
   @override
-  final Cat.Category category;
+  final entity_category.Category category;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -229,7 +239,7 @@ abstract class _OperationDTO implements OperationDTO {
       required final bool income,
       required final String sum,
       required final int date,
-      required final Cat.Category category}) = _$OperationDTOImpl;
+      required final entity_category.Category category}) = _$OperationDTOImpl;
 
   factory _OperationDTO.fromJson(Map<String, dynamic> json) =
       _$OperationDTOImpl.fromJson;
@@ -243,7 +253,7 @@ abstract class _OperationDTO implements OperationDTO {
   @override
   int get date;
   @override
-  Cat.Category get category;
+  entity_category.Category get category;
   @override
   @JsonKey(ignore: true)
   _$$OperationDTOImplCopyWith<_$OperationDTOImpl> get copyWith =>

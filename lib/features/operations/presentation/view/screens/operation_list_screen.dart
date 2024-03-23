@@ -61,7 +61,6 @@ class OperationListTile extends StatefulWidget {
 }
 
 class _OperationListTileState extends State<OperationListTile> {
-
   final double size = 30;
   Color color = Colors.white24;
 

@@ -10,7 +10,7 @@ class CategoryRepositoryImpl implements CategoryRepository {
   final CategoryMapper _mapper;
 
   @override
-  Future<List<Category>> getCategory() async {
+  Future<List<Category>> getCategories() async {
     final resultDTO = await _service.getCategoryList();
     return resultDTO.map((e) => _mapper.fromDto(e)).toList();
   }

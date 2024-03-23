@@ -1,4 +1,5 @@
-import 'package:budget_tracker/features/categories/domain/entities/category.dart' as Cat;
+import 'package:budget_tracker/features/categories/domain/entities/category.dart'
+    as entity_category;
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -11,6 +12,6 @@ class Operation with _$Operation {
     required bool incoming,
     required double sum,
     required DateTime date,
-    required Cat.Category category,
+    required entity_category.Category category,
   }) = _Operation;
 }
