@@ -1,5 +1,6 @@
 import 'package:budget_tracker/core/ui_kit/constraints_constants.dart';
 import 'package:budget_tracker/core/ui_kit/widgets/numeric_keyboard_button.dart';
+import 'package:budget_tracker/features/operations/internal/numpad_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -27,11 +28,6 @@ class NumpadController extends StateNotifier<String> {
   }
 }
 
-final calculatorControllerProvider =
-    StateNotifierProvider<NumpadController, String>(
-  (ref) => NumpadController(),
-);
-
 class NumericRow extends ConsumerWidget {
   const NumericRow({super.key, required this.startNumber});
 
@@ -45,10 +41,9 @@ class NumericRow extends ConsumerWidget {
         3,
         (index) => NumericKeyboardButton(
           text: (index + startNumber).toString(),
-          onTap: () =>
-              ref.read(calculatorControllerProvider.notifier).appendDigit(
-                    (index + startNumber).toString(),
-                  ),
+          onTap: () => ref.read(numpadControllerProvider.notifier).appendDigit(
+                (index + startNumber).toString(),
+              ),
         ),
       ),
     );
@@ -81,16 +76,14 @@ class Numpad extends ConsumerWidget {
                   text: ',',
                   // svgAssetName: 'assets/svg/comma_svg',
                   onTap: () {
-                    ref
-                        .read(calculatorControllerProvider.notifier)
-                        .appendComma();
+                    ref.read(numpadControllerProvider.notifier).appendComma();
                   },
                 ),
                 NumericKeyboardButton(
                   text: '0',
                   onTap: () {
                     ref
-                        .read(calculatorControllerProvider.notifier)
+                        .read(numpadControllerProvider.notifier)
                         .appendDigit('0');
                   },
                 ),
@@ -98,7 +91,7 @@ class Numpad extends ConsumerWidget {
                   svgAssetName: 'assets/svg/back_icon.svg',
                   onTap: () {
                     ref
-                        .read(calculatorControllerProvider.notifier)
+                        .read(numpadControllerProvider.notifier)
                         .deleteLastDigit();
                   },
                 ),

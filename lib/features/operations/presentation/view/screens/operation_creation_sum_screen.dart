@@ -4,7 +4,8 @@ import 'package:budget_tracker/core/ui_kit/app_scaffold.dart';
 import 'package:budget_tracker/core/ui_kit/constraints_constants.dart';
 import 'package:budget_tracker/core/ui_kit/widgets/app_button.dart';
 import 'package:budget_tracker/extensions/build_context_extension.dart';
-import 'package:budget_tracker/features/operation_creation/presentation/view/widgets/numpad.dart';
+import 'package:budget_tracker/features/operations/internal/numpad_provider.dart';
+import 'package:budget_tracker/features/operations/presentation/view/widgets/numpad.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -84,7 +85,7 @@ class _SumInputContainer extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final display = ref.watch(calculatorControllerProvider);
+    final display = ref.watch(numpadControllerProvider);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
