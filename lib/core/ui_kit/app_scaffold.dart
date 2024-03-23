@@ -1,3 +1,4 @@
+import 'package:budget_tracker/extensions/build_context_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -26,7 +27,7 @@ class AppScaffold extends StatelessWidget {
             : Brightness.dark,
       ),
       child: Scaffold(
-        backgroundColor: backgroundColor,
+        backgroundColor: backgroundColor ?? context.colors.backgroundPrimary,
         body: SafeArea(
           child: body,
         ),

@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logging/logging.dart';
 import 'package:budget_tracker/core/internal/logger_provider.dart';
-import 'package:budget_tracker/themes/app_colors.dart';
 import 'package:budget_tracker/features/account/domain/entities/account.dart';
 import 'package:budget_tracker/features/account/presentation/view/screens/account_screen.dart';
 import 'package:budget_tracker/features/account/presentation/view_model/account_list_view_model.dart';
@@ -23,7 +22,7 @@ class HomeScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return AppScaffold(
-      backgroundColor: AppLightColors().backgroundSecondary,
+      backgroundColor: context.colors.backgroundSecondary,
       body: AccountListScreenContent(
         scrollController: scrollController,
       ), // Передача scrollController в AccountListScreenContent
