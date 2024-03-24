@@ -134,7 +134,10 @@ class NumPadContainer extends ConsumerWidget {
               padding: EdgeInsets.symmetric(
                 horizontal: constraints.horizontalScreenPadding,
               ),
-              child: AppButton(title: context.locale!.next),
+              child: AppButton(
+                title: context.locale!.next,
+                onTap: () {},
+              ),
             ),
           ],
         ),

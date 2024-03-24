@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:budget_tracker/core/ui_kit/widgets/app_button.dart';
 import 'package:budget_tracker/extensions/build_context_extension.dart';
 import 'package:flutter/material.dart';
 
@@ -20,14 +21,16 @@ class CheckListTile extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return InkWell(
-      onTap: () {
-        ref.read(appRouterProvider).navigateNamed('/analytics');
-      },
-      child: Padding(
-        padding: const EdgeInsets.symmetric(
-          horizontal: 16.0,
-        ),
+    return Padding(
+      padding: const EdgeInsets.symmetric(
+        horizontal: 16.0,
+      ),
+      child: BounceButton(
+        scaleAmount: 0.05,
+        awaitBackAnimation: true,
+        onTap: () {
+          ref.read(appRouterProvider).navigateNamed('/analytics');
+        },
         child: Stack(
           children: [
             Center(
