@@ -9,8 +9,10 @@ class OperationCreationSumViewErrorState
     extends OperationCreationSumViewState {}
 
 class OperationCreationSumViewDataState extends OperationCreationSumViewState {
-  OperationCreationSumViewDataState(
-      {required this.checkData, required this.sum});
+  OperationCreationSumViewDataState({
+    required this.checkData,
+    required this.sum,
+  });
 
   final List<Check> checkData;
   final String sum;

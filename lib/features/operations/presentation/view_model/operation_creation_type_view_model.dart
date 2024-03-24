@@ -23,6 +23,7 @@ class OperationCreationTypeViewModel
   Future<void> loadData() async {
     try {
       state = OperationCreationTypeViewDataState(
+        sum: 123.3,
         data: await _repository.getCategories(),
       );
     } catch (e) {

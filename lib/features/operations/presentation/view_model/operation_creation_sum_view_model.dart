@@ -1,6 +1,7 @@
+import 'dart:io';
+
 import 'package:budget_tracker/features/check/domain/repositories/check_repository.dart';
 import 'package:budget_tracker/features/check/internal/check_repository_provider.dart';
-import 'package:budget_tracker/features/operations/presentation/view/widgets/numpad.dart';
 import 'package:budget_tracker/features/operations/presentation/view_model/operation_creation_sum_view_state.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -12,34 +13,52 @@ final operationCreationSumViewModelProvider = StateNotifierProvider<
   )..loadData(),
 );
 
-// final numpadControllerProvider = StateNotifierProvider<NumpadController, String>(
-//       (ref) => NumpadController(ref.watch(operationCreationSumViewModelProvider.notifier).updateNumericInput),
-// );
-
-final numpadControllerProvider =
-    StateNotifierProvider<NumpadController, String>(
-  (ref) => NumpadController(),
-);
-
 class OperationCreationSumViewModel
     extends StateNotifier<OperationCreationSumViewState> {
   final CheckRepository _repositoryAccount;
-
-  // void updateNumericInput(String input) {
-  //   state = state.copyWith(inputString: input);
-  // }
 
   OperationCreationSumViewModel(
     OperationCreationSumViewState state,
     this._repositoryAccount,
   ) : super(state);
 
+  // Миша - лучший тимлид :3
+  void appendNumber(String value) {
+    final modelState = state as OperationCreationSumViewDataState;
+    if (modelState.sum.length >= 10) {
+      exit;
+    }
+    state = OperationCreationSumViewDataState(
+      sum: (modelState.sum == '0') ? value : modelState.sum + value,
+      checkData: modelState.checkData,
+    );
+  }
+
+  void deleteSymbol() {
+    final modelState = state as OperationCreationSumViewDataState;
+    state = OperationCreationSumViewDataState(
+      sum: (modelState.sum.length > 1)
+          ? modelState.sum.substring(0, modelState.sum.length - 1)
+          : '0',
+      checkData: modelState.checkData,
+    );
+  }
+
+  void appendComma() {
+    final modelState = state as OperationCreationSumViewDataState;
+    state = OperationCreationSumViewDataState(
+      sum: ((!modelState.sum.contains(',')) && (modelState.sum.length > 1))
+          ? '${modelState.sum},'
+          : modelState.sum,
+      checkData: modelState.checkData,
+    );
+  }
+
   Future<void> loadData() async {
     try {
       state = OperationCreationSumViewDataState(
         checkData: await _repositoryAccount.getCheck(),
-        sum: NumpadController()
-            .state, //TODO у нас же в начале должно быть нулевое значение, так что тут ноль :/
+        sum: '0',
       );
     } catch (e) {
       state = OperationCreationSumViewErrorState();

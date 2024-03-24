@@ -10,7 +10,11 @@ class OperationCreationTypeViewErrorState
 
 class OperationCreationTypeViewDataState
     extends OperationCreationTypeViewState {
-  OperationCreationTypeViewDataState({required this.data});
+  OperationCreationTypeViewDataState({
+    required this.data,
+    required this.sum,
+  });
 
+  final double sum;
   final List<Category> data;
 }
