@@ -49,6 +49,7 @@ class _OperationCreationTypeScreenContent extends ConsumerWidget {
                 alignment: Alignment.bottomCenter,
                 child: AppButton(
                   title: context.locale!.next,
+                  onTap: () {},
                 ),
               ),
             ],

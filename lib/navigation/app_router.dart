@@ -22,5 +22,9 @@ class AppRouter extends $AppRouter {
           page: HomeRoute.page,
           path: '/home',
         ),
+        AutoRoute(
+          page: AnalyticsRoute.page,
+          path: '/analytics',
+        ),
       ];
 }
