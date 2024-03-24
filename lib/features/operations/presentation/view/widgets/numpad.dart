@@ -1,15 +1,20 @@
 import 'package:budget_tracker/core/ui_kit/constraints_constants.dart';
 import 'package:budget_tracker/core/ui_kit/widgets/numeric_keyboard_button.dart';
-import 'package:budget_tracker/features/operations/internal/numpad_provider.dart';
+import 'package:budget_tracker/features/operations/presentation/view_model/operation_creation_sum_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class NumpadController extends StateNotifier<String> {
-  NumpadController() : super('0');
+  // final Function(String) updateViewModel;
+  NumpadController(
+      // this.updateViewModel
+      )
+      : super('0');
 
   void appendDigit(String digit) {
     if (state.length < 10) {
       (state == '0') ? {state = digit} : {state = state + digit};
+      // updateViewModel(state);
     }
   }
 
@@ -19,11 +24,13 @@ class NumpadController extends StateNotifier<String> {
     } else {
       state = '0';
     }
+    // updateViewModel(state);
   }
 
   void appendComma() {
     if ((!state.contains(',')) && (state.length > 1)) {
       state = '$state,';
+      // updateViewModel(state);
     }
   }
 }

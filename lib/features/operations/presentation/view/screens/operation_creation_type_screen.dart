@@ -27,19 +27,19 @@ class OperationCreationTypeScreen extends StatelessWidget {
 class _OperationCreationTypeScreenContent extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.watch(operationCreationViewModelProvider);
+    final state = ref.watch(operationCreationTypeViewModelProvider);
     final constraints = ref.watch(constraintsConstantsProvider);
     switch (state) {
-      case OperationCreationViewLoadingState _:
+      case OperationCreationTypeViewLoadingState _:
         ref.read(loggerProvider).log(Level.INFO, 'Hello!');
         return const Center(
           child: CircularProgressIndicator(),
         );
-      case OperationCreationViewErrorState _:
+      case OperationCreationTypeViewErrorState _:
         return const Center(
           child: Icon(Icons.error),
         );
-      case OperationCreationViewDataState _:
+      case OperationCreationTypeViewDataState _:
         return Padding(
           padding: EdgeInsets.all(constraints.horizontalScreenPadding),
           child: Stack(
