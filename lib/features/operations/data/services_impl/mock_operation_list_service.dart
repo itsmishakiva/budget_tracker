@@ -7,6 +7,7 @@ class MockOperationListService implements OperationListService {
     await Future.delayed(
       const Duration(seconds: 2),
     );
+
     final result = {
       'operations': [
         {

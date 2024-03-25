@@ -1,23 +1,35 @@
-import 'package:budget_tracker/features/operations/domain/entities/operation.dart';
+import 'package:budget_tracker/features/analytics/domain/entities/analytics/analytics.dart';
 
-import 'package:budget_tracker/features/check/domain/entities/check.dart';
+enum TimeInterval { week, month, year }
 
-enum Category { all, expenses, income }
+enum Category { expenses, income }
 
-sealed class AnalyticsViewState {}
+enum Chart { liner, pie }
 
-class AnalyticsViewLoadingState extends AnalyticsViewState {}
+class AnalyticsViewState {
+  final TimeInterval interval;
+  final Category category;
+  final Chart chart;
+  final AnalyticsDataState analyticsData;
 
-class AnalyticsViewErrorState extends AnalyticsViewState {}
-
-class AnalyticsViewDataState extends AnalyticsViewState {
-  AnalyticsViewDataState({
-    required this.dataCategory,
-    required this.dataOperations,
+  AnalyticsViewState({
+    required this.interval,
     required this.category,
+    required this.chart,
+    required this.analyticsData,
+  });
+}
+
+sealed class AnalyticsDataState {}
+
+class AnalyticsDataLoadingState extends AnalyticsDataState {}
+
+class AnalyticsDataErrorState extends AnalyticsDataState {}
+
+class AnalyticsDataReadyState extends AnalyticsDataState {
+  AnalyticsDataReadyState({
+    required this.dataAnalytics,
   });
 
-  final Category category;
-  final List<Check> dataCategory;
-  final List<Operation> dataOperations;
+  final Analytics dataAnalytics;
 }
