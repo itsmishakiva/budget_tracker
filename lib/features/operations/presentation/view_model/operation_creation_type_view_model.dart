@@ -1,9 +1,12 @@
 import 'package:budget_tracker/features/categories/domain/entities/category.dart';
 import 'package:budget_tracker/features/categories/domain/repositories/category_repository.dart';
 import 'package:budget_tracker/features/categories/internal/caretory_repository_provider.dart';
+import 'package:budget_tracker/features/operations/domain/entities/new_operation.dart';
 import 'package:budget_tracker/features/operations/presentation/view_model/operation_creation_type_view_state.dart';
+import 'package:budget_tracker/main.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:budget_tracker/features/operations/presentation/view_model/operation_creation_sum_view_model.dart';
+import 'package:logging/logging.dart';
 
 final operationCreationTypeViewModelProvider = StateNotifierProvider<
     OperationCreationTypeViewModel, OperationCreationTypeViewState>(
@@ -27,13 +30,18 @@ class OperationCreationTypeViewModel
 
   Future<void> loadData() async {
     try {
+      List<Category> categoriesData = await _repository.getCategories();
+
       state = OperationCreationTypeViewDataState(
-        sum: double.parse(_sum.replaceAll(',', '.')),
-        data: await _repository.getCategories(),
-        isIncome: false,
-        selectedCategory: (state as OperationCreationTypeViewDataState).data[0],
+        data: categoriesData,
+        newOperation: NewOperation(
+          sum: double.parse(_sum.replaceAll(',', '.')),
+          incoming: false,
+          category: categoriesData[0],
+        ),
       );
     } catch (e) {
+      logger.log(Level.WARNING, e);
       state = OperationCreationTypeViewErrorState();
     }
   }
@@ -42,27 +50,31 @@ class OperationCreationTypeViewModel
     final modelState = state as OperationCreationTypeViewDataState;
     state = OperationCreationTypeViewDataState(
       data: modelState.data,
-      sum: modelState.sum,
-      selectedCategory: modelState.selectedCategory,
-      isIncome: value,
+      newOperation: NewOperation(
+        sum: modelState.newOperation.sum,
+        incoming: value,
+        category: modelState.newOperation.category,
+      ),
     );
   }
 
   bool returnIncomeValue() {
-    return (state as OperationCreationTypeViewDataState).isIncome;
+    return (state as OperationCreationTypeViewDataState).newOperation.incoming;
   }
 
   void selectCategory(Category category) {
     final modelState = state as OperationCreationTypeViewDataState;
     state = OperationCreationTypeViewDataState(
       data: modelState.data,
-      sum: modelState.sum,
-      selectedCategory: category,
-      isIncome: modelState.isIncome,
+      newOperation: NewOperation(
+        sum: modelState.newOperation.sum,
+        incoming: modelState.newOperation.incoming,
+        category: category,
+      ),
     );
   }
 
   Category returnSelectedCategory() {
-    return (state as OperationCreationTypeViewDataState).selectedCategory;
+    return (state as OperationCreationTypeViewDataState).newOperation.category!;
   }
 }

@@ -19,6 +19,7 @@ mixin _$Category {
   int get id => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
   String get icon => throw _privateConstructorUsedError;
+  Color get color => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $CategoryCopyWith<Category> get copyWith =>
@@ -30,7 +31,7 @@ abstract class $CategoryCopyWith<$Res> {
   factory $CategoryCopyWith(Category value, $Res Function(Category) then) =
       _$CategoryCopyWithImpl<$Res, Category>;
   @useResult
-  $Res call({int id, String title, String icon});
+  $Res call({int id, String title, String icon, Color color});
 }
 
 /// @nodoc
@@ -49,6 +50,7 @@ class _$CategoryCopyWithImpl<$Res, $Val extends Category>
     Object? id = null,
     Object? title = null,
     Object? icon = null,
+    Object? color = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -63,6 +65,10 @@ class _$CategoryCopyWithImpl<$Res, $Val extends Category>
           ? _value.icon
           : icon // ignore: cast_nullable_to_non_nullable
               as String,
+      color: freezed == color
+          ? _value.color
+          : color // ignore: cast_nullable_to_non_nullable
+              as Color,
     ) as $Val);
   }
 }
@@ -75,7 +81,7 @@ abstract class _$$CategoryImplCopyWith<$Res>
       __$$CategoryImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int id, String title, String icon});
+  $Res call({int id, String title, String icon, Color color});
 }
 
 /// @nodoc
@@ -92,6 +98,7 @@ class __$$CategoryImplCopyWithImpl<$Res>
     Object? id = null,
     Object? title = null,
     Object? icon = null,
+    Object? color = freezed,
   }) {
     return _then(_$CategoryImpl(
       id: null == id
@@ -106,6 +113,10 @@ class __$$CategoryImplCopyWithImpl<$Res>
           ? _value.icon
           : icon // ignore: cast_nullable_to_non_nullable
               as String,
+      color: freezed == color
+          ? _value.color
+          : color // ignore: cast_nullable_to_non_nullable
+              as Color,
     ));
   }
 }
@@ -113,7 +124,11 @@ class __$$CategoryImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$CategoryImpl implements _Category {
-  _$CategoryImpl({required this.id, required this.title, required this.icon});
+  _$CategoryImpl(
+      {required this.id,
+      required this.title,
+      required this.icon,
+      required this.color});
 
   @override
   final int id;
@@ -121,10 +136,12 @@ class _$CategoryImpl implements _Category {
   final String title;
   @override
   final String icon;
+  @override
+  final Color color;
 
   @override
   String toString() {
-    return 'Category(id: $id, title: $title, icon: $icon)';
+    return 'Category(id: $id, title: $title, icon: $icon, color: $color)';
   }
 
   @override
@@ -134,11 +151,13 @@ class _$CategoryImpl implements _Category {
             other is _$CategoryImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.title, title) || other.title == title) &&
-            (identical(other.icon, icon) || other.icon == icon));
+            (identical(other.icon, icon) || other.icon == icon) &&
+            const DeepCollectionEquality().equals(other.color, color));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, id, title, icon);
+  int get hashCode => Object.hash(
+      runtimeType, id, title, icon, const DeepCollectionEquality().hash(color));
 
   @JsonKey(ignore: true)
   @override
@@ -151,7 +170,8 @@ abstract class _Category implements Category {
   factory _Category(
       {required final int id,
       required final String title,
-      required final String icon}) = _$CategoryImpl;
+      required final String icon,
+      required final Color color}) = _$CategoryImpl;
 
   @override
   int get id;
@@ -159,6 +179,8 @@ abstract class _Category implements Category {
   String get title;
   @override
   String get icon;
+  @override
+  Color get color;
   @override
   @JsonKey(ignore: true)
   _$$CategoryImplCopyWith<_$CategoryImpl> get copyWith =>

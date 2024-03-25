@@ -18,6 +18,7 @@ class MockOperationListService implements OperationListService {
             'id': 1,
             'title': 'Category 1',
             'icon': 'Home',
+            'color': 1,
           },
         },
         {
@@ -29,6 +30,7 @@ class MockOperationListService implements OperationListService {
             'id': 2,
             'title': 'Category 2',
             'icon': 'Food',
+            'color': 1,
           },
         },
         {
@@ -40,6 +42,7 @@ class MockOperationListService implements OperationListService {
             'id': 1,
             'title': 'Category 1',
             'icon': 'Home',
+            'color': 1,
           },
         },
         {
@@ -51,6 +54,7 @@ class MockOperationListService implements OperationListService {
             'id': 2,
             'title': 'Category 2',
             'icon': 'Food',
+            'color': 1,
           },
         },
         {
@@ -62,6 +66,7 @@ class MockOperationListService implements OperationListService {
             'id': 1,
             'title': 'Category 1',
             'icon': 'Home',
+            'color': 1,
           },
         },
         {
@@ -73,6 +78,7 @@ class MockOperationListService implements OperationListService {
             'id': 2,
             'title': 'Category 2',
             'icon': 'Food',
+            'color': 1,
           },
         },
         {
@@ -84,6 +90,7 @@ class MockOperationListService implements OperationListService {
             'id': 1,
             'title': 'Category 1',
             'icon': 'Home',
+            'color': 1,
           },
         },
         {
@@ -95,6 +102,7 @@ class MockOperationListService implements OperationListService {
             'id': 2,
             'title': 'Category 2',
             'icon': 'Food',
+            'color': 1,
           },
         },
         {
@@ -106,6 +114,7 @@ class MockOperationListService implements OperationListService {
             'id': 1,
             'title': 'Category 1',
             'icon': 'Home',
+            'color': 1,
           },
         },
         {
@@ -117,6 +126,7 @@ class MockOperationListService implements OperationListService {
             'id': 2,
             'title': 'Category 2',
             'icon': 'Food',
+            'color': 1,
           },
         },
         {
@@ -128,6 +138,7 @@ class MockOperationListService implements OperationListService {
             'id': 1,
             'title': 'Category 1',
             'icon': 'Home',
+            'color': 1,
           },
         },
         {
@@ -139,6 +150,7 @@ class MockOperationListService implements OperationListService {
             'id': 2,
             'title': 'Category 2',
             'icon': 'Food',
+            'color': 1,
           },
         },
       ],
