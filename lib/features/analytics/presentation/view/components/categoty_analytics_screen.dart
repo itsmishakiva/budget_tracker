@@ -10,7 +10,6 @@ class CategoryAnalyticsScreen extends ConsumerWidget {
 
   final CategoryAnalytics categoryAnalytics;
 
-
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Container(
@@ -25,8 +24,7 @@ class CategoryAnalyticsScreen extends ConsumerWidget {
           Padding(
             padding: const EdgeInsets.only(top: 8.0),
             child: Text(
-              EmojiParser()
-                  .emojify(categoryAnalytics.category.icon),
+              EmojiParser().emojify(categoryAnalytics.category.icon),
               style: const TextStyle(
                 fontSize: 25,
               ),
@@ -41,7 +39,9 @@ class CategoryAnalyticsScreen extends ConsumerWidget {
             padding: const EdgeInsets.all(14.0),
             child: Text(
               '${(categoryAnalytics.sum).abs()}₽',
-              style: categoryAnalytics.sum > 0 ? context.textStyles.income : context.textStyles.expenses,
+              style: categoryAnalytics.sum > 0
+                  ? context.textStyles.income
+                  : context.textStyles.expenses,
             ),
           ),
         ],

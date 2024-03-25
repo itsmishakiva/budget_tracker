@@ -41,8 +41,9 @@ class AnalyticsViewModel extends StateNotifier<AnalyticsViewState> {
     dataAnalyticsCurrent = dataAnalytics;
     if (category == Category.income) {
       List<CategoryAnalytics> incomeCategories = dataAnalytics.categories
-          .where((category) => category.sum > 0,
-      )
+          .where(
+            (category) => category.sum > 0,
+          )
           .toList();
 
       dataAnalyticsCurrent =

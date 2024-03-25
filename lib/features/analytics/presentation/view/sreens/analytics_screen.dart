@@ -57,7 +57,8 @@ class _Body extends ConsumerWidget {
         ref.read(loggerProvider).log(Level.INFO, 'Hello!');
         return Center(
           child: CircularProgressIndicator(
-              color: context.colors.backgroundPrimary,),
+            color: context.colors.backgroundPrimary,
+          ),
         );
       case AnalyticsDataErrorState _:
         return const Center(
@@ -134,8 +135,9 @@ class _Body extends ConsumerWidget {
                         itemBuilder: (BuildContext context, int index) {
                           return GridTile(
                             child: CategoryAnalyticsScreen(
-                                categoryAnalytics:
-                                    state.dataAnalytics.categories[index],),
+                              categoryAnalytics:
+                                  state.dataAnalytics.categories[index],
+                            ),
                           );
                         },
                       ),
@@ -232,7 +234,7 @@ class _LineChartWidget extends ConsumerWidget {
     }
 
     for (int i = 0; i < barsExpenses.length; i++) {
-      pointsExpenses.add(FlSpot(i.toDouble(), barsExpenses[i].sum*(-1)));
+      pointsExpenses.add(FlSpot(i.toDouble(), barsExpenses[i].sum * (-1)));
     }
 
     double maxIncome = pointsIncome.isNotEmpty
@@ -250,7 +252,7 @@ class _LineChartWidget extends ConsumerWidget {
           minX: 0,
           minY: 0,
           maxX: barsIncome.length.toDouble(),
-          maxY: max(maxIncome, minExpenses*(-1)) * 1.2,
+          maxY: max(maxIncome, minExpenses * (-1)) * 1.2,
           borderData: FlBorderData(
             show: false,
           ),
@@ -315,7 +317,7 @@ class _LineChartWidget extends ConsumerWidget {
       );
 
   Text leftTitleWidgets(double value, TitleMeta meta) {
-    int period = (meta.max - meta.min) ~/ 7+1;
+    int period = (meta.max - meta.min) ~/ 7 + 1;
 
     return Text(
       (value % period == 0 && value > 0) ? (value).toInt().toString() : '',
@@ -405,7 +407,9 @@ class _PieChartWithLegend extends ConsumerWidget {
     List<CategoryAnalytics> categoryList = List.from(categories);
 
     double totalSum = categoryList.fold(
-        0, (previousValue, category) => previousValue + category.sum,);
+      0,
+      (previousValue, category) => previousValue + category.sum,
+    );
 
     categoryList.sort((a, b) => a.sum.compareTo(b.sum));
 
@@ -420,8 +424,7 @@ class _PieChartWithLegend extends ConsumerWidget {
             end: Alignment.bottomCenter,
             colors: [
               context.colors.graphColors[categoryList.indexOf(category)],
-              context
-                  .colors.graphDarkColors[categoryList.indexOf(category)],
+              context.colors.graphDarkColors[categoryList.indexOf(category)],
             ],
           ),
           value: value,
@@ -439,8 +442,7 @@ class _PieChartWithLegend extends ConsumerWidget {
             end: Alignment.bottomCenter,
             colors: [
               context.colors.graphColors[categoryList.indexOf(category)],
-              context
-                  .colors.graphDarkColors[categoryList.indexOf(category)],
+              context.colors.graphDarkColors[categoryList.indexOf(category)],
             ],
           ),
           value: value,
@@ -505,8 +507,11 @@ class _PieChartWithLegend extends ConsumerWidget {
                     ),
                   if (categoryList.length >
                       4) // Если категорий больше 4, добавляем категорию "Other"
-                    _legendItem(context,
-                        color: context.colors.graphColors[4], title: 'Other',),
+                    _legendItem(
+                      context,
+                      color: context.colors.graphColors[4],
+                      title: 'Other',
+                    ),
                 ],
               ),
             ),
@@ -516,8 +521,11 @@ class _PieChartWithLegend extends ConsumerWidget {
     );
   }
 
-  Widget _legendItem(BuildContext context,
-      {required Color color, required String title,}) {
+  Widget _legendItem(
+    BuildContext context, {
+    required Color color,
+    required String title,
+  }) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 4),
       child: Row(
@@ -547,8 +555,9 @@ class _NavigationPoints extends ConsumerWidget {
         shape: BoxShape.circle,
         color: isFilled ? context.colors.backgroundPrimary : Colors.transparent,
         border: Border.all(
-            color: context.colors.backgroundPrimary,
-            width: 2.0,),
+          color: context.colors.backgroundPrimary,
+          width: 2.0,
+        ),
       ),
     );
   }
