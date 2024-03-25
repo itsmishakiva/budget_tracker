@@ -2,7 +2,6 @@ import 'package:budget_tracker/features/categories/domain/entities/category.dart
 import 'package:budget_tracker/features/categories/domain/repositories/category_repository.dart';
 import 'package:budget_tracker/features/categories/internal/caretory_repository_provider.dart';
 import 'package:budget_tracker/features/operations/presentation/view_model/operation_creation_type_view_state.dart';
-import 'package:budget_tracker/main.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:budget_tracker/features/operations/presentation/view_model/operation_creation_sum_view_model.dart';
 
