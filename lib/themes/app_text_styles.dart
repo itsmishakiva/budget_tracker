@@ -24,6 +24,12 @@ class AppLightTextStyles extends AppTextStyles {
             fontSize: 16.0,
             color: colors.textPrimary,
           ),
+          headerBold3: TextStyle(
+            fontFamily: 'Nunito',
+            fontWeight: FontWeight.w800,
+            fontSize: 16.0,
+            color: colors.textPrimary,
+          ),
           headerSurface1: TextStyle(
             fontFamily: 'Nunito',
             fontWeight: FontWeight.w800,
@@ -116,6 +122,7 @@ class AppTextStyles extends ThemeExtension<AppTextStyles> {
   final TextStyle header1;
   final TextStyle header2;
   final TextStyle header3;
+  final TextStyle headerBold3;
   final TextStyle headerSurface1;
   final TextStyle headerSurface2;
   final TextStyle headerSurface3;
@@ -135,6 +142,7 @@ class AppTextStyles extends ThemeExtension<AppTextStyles> {
     required this.header1,
     required this.header2,
     required this.header3,
+    required this.headerBold3,
     required this.headerSurface1,
     required this.headerSurface2,
     required this.headerSurface3,
@@ -156,6 +164,7 @@ class AppTextStyles extends ThemeExtension<AppTextStyles> {
     TextStyle? header1,
     TextStyle? header2,
     TextStyle? header3,
+    TextStyle? headerBold3,
     TextStyle? headerSurface1,
     TextStyle? headerSurface2,
     TextStyle? headerSurface3,
@@ -175,6 +184,7 @@ class AppTextStyles extends ThemeExtension<AppTextStyles> {
       header1: header1 ?? this.header1,
       header2: header2 ?? this.header2,
       header3: header3 ?? this.header3,
+      headerBold3: headerBold3 ?? this.headerBold3,
       headerSurface1: headerSurface1 ?? this.headerSurface1,
       headerSurface2: headerSurface2 ?? this.headerSurface2,
       headerSurface3: headerSurface3 ?? this.headerSurface3,
@@ -207,6 +217,7 @@ class AppTextStyles extends ThemeExtension<AppTextStyles> {
       header1: TextStyle.lerp(header1, typedOther.header1, t)!,
       header2: TextStyle.lerp(header2, typedOther.header2, t)!,
       header3: TextStyle.lerp(header3, typedOther.header3, t)!,
+      headerBold3: TextStyle.lerp(headerBold3, typedOther.headerBold3, t)!,
       headerSurface1:
           TextStyle.lerp(headerSurface1, typedOther.headerSurface1, t)!,
       headerSurface2:

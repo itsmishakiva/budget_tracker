@@ -1,10 +1,17 @@
+import 'dart:math';
+
 import 'package:auto_route/annotations.dart';
+import 'package:budget_tracker/core/internal/logger_provider.dart';
 import 'package:budget_tracker/core/ui_kit/app_scaffold.dart';
 import 'package:budget_tracker/extensions/build_context_extension.dart';
+import 'package:budget_tracker/features/analytics/domain/entities/category_anajytics/category_analytics.dart';
+import 'package:budget_tracker/features/analytics/presentation/view/components/categoty_analytics_screen.dart';
 import 'package:budget_tracker/features/analytics/presentation/view_model/analytics_view_model.dart';
+import 'package:budget_tracker/features/analytics/presentation/view_model/analytics_view_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fl_chart/fl_chart.dart';
+import 'package:logging/logging.dart';
 
 @RoutePage()
 class AnalyticsScreen extends ConsumerWidget {
@@ -25,175 +32,264 @@ class AnalyticsScreen extends ConsumerWidget {
                   style: context.textStyles.subtitle1,
                 ),
                 const Spacer(),
-                _intervalButton(context, 'Day'),
-                _intervalButton(context, 'Week'),
-                _intervalButton(context, 'Year'),
+                const _IntervalButton(interval: TimeInterval.week),
+                const _IntervalButton(interval: TimeInterval.month),
+                const _IntervalButton(interval: TimeInterval.year),
               ],
             ),
           ),
-          SizedBox(
-            height: 250,
-            width: 350,
-            child: PageView(
-              children: const [
-                _LineChartWidget(),
-                _PieChartWithLegend(),
-              ],
-            ),
-          ),
-          const _BottomBar(),
-          Padding(
-            padding: const EdgeInsets.only(top: 19.0),
-            child: Container(
-              height: 400,
-              decoration: BoxDecoration(
-                color: context.colors.disabled,
-                borderRadius: const BorderRadius.only(
-                  topLeft: Radius.circular(30.0),
-                  topRight: Radius.circular(30.0),
-                ),
-              ),
-              child: Column(
-                children: [
-                  Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 20,
-                      vertical: 20,
-                    ),
-                    child: Row(
-                      children: [
-                        _categoryButton(context, Category.all, ref),
-                        _categoryButton(context, Category.expenses, ref),
-                        _categoryButton(context, Category.income, ref),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
+          Expanded(child: _Body()),
         ],
       ),
     );
   }
 }
 
-Widget _intervalButton(BuildContext context, String interval) {
-  return TextButton(
-    onPressed: () {},
-    child: Text(
-      interval,
-      style: context.textStyles.subtitle2,
-    ),
-  );
-}
-
-Widget _categoryButton(BuildContext context, Category category, WidgetRef ref) {
-  final notifier = ref.watch(categoryProvider.notifier);
-  var category0 = ref.watch(currentCategory);
-
-  String categoryName = category.name.toString();
-  String categoryNameCapitalized =
-      categoryName.substring(0, 1).toUpperCase() + categoryName.substring(1);
-
-  return InkWell(
-    onTap: () {
-      notifier.change(category);
-    },
-    child: Container(
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-      decoration: BoxDecoration(
-        color:
-            category0 == category ? context.colors.accent : Colors.transparent,
-        borderRadius: BorderRadius.circular(10),
-      ),
-      child: Text(
-        categoryNameCapitalized,
-        style: category0 == category
-            ? context.textStyles.subtitle2
-            : context.textStyles.subtitle3,
-      ),
-    ),
-  );
-}
-
-class _LineChartWidget extends StatelessWidget {
-  const _LineChartWidget();
-
+class _Body extends ConsumerWidget {
   @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(right: 10.0),
-      child: LineChart(
-        LineChartData(
-          minX: 0,
-          minY: 0,
-          maxX: 10,
-          maxY: 10,
-          borderData: FlBorderData(
-            show: false,
-          ),
-          titlesData: FlTitlesData(
-            rightTitles: const AxisTitles(
-              sideTitles: SideTitles(showTitles: false),
-            ),
-            topTitles: const AxisTitles(
-              sideTitles: SideTitles(showTitles: false),
-            ),
-            bottomTitles: const AxisTitles(
-              sideTitles: SideTitles(showTitles: false),
-            ),
-            leftTitles: AxisTitles(sideTitles: leftTitles()),
-          ),
-          lineBarsData: [
-            LineChartBarData(
-              spots: [
-                const FlSpot(0, 3),
-                const FlSpot(3, 9),
-                const FlSpot(5, 4),
-                const FlSpot(8, 2),
-                const FlSpot(10, 9),
-              ],
-              isCurved: true,
-              color: context.colors.backgroundPrimary,
-              barWidth: 3,
-              belowBarData: BarAreaData(
-                show: true,
-                gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: [
-                    context.colors.backgroundPrimary.withOpacity(0.3),
-                    context.colors.backgroundPrimary.withOpacity(0),
+  Widget build(BuildContext context, WidgetRef ref) {
+    final state = ref.watch(analyticsModelProvider).analyticsData;
+    final chart = ref.watch(analyticsModelProvider).chart;
+    PageController pageController =
+        PageController(initialPage: chart == Chart.liner ? 0 : 1);
+    switch (state) {
+      case AnalyticsDataLoadingState _:
+        ref.read(loggerProvider).log(Level.INFO, 'Hello!');
+        return Center(
+          child: CircularProgressIndicator(
+              color: context.colors.backgroundPrimary),
+        );
+      case AnalyticsDataErrorState _:
+        return const Center(
+          child: Icon(Icons.error),
+        );
+      case AnalyticsDataReadyState _:
+        return Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(left: 20.0),
+              child: SizedBox(
+                height: 250,
+                // width: 480,
+                child: PageView(
+                  controller: pageController,
+                  onPageChanged: (int page) {
+                    if (page == 0)
+                      ref
+                          .read(analyticsModelProvider.notifier)
+                          .changeChart(Chart.liner);
+                    if (page == 1)
+                      ref
+                          .read(analyticsModelProvider.notifier)
+                          .changeChart(Chart.pie);
+                  },
+                  children: [
+                    _LineChartWidget(),
+                    const _PieChartWithLegend(),
                   ],
                 ),
               ),
             ),
-            LineChartBarData(
-              spots: [
-                const FlSpot(0, 7),
-                const FlSpot(3, 2),
-                const FlSpot(5, 8),
-                const FlSpot(8, 1),
-                const FlSpot(10, 9),
-              ],
-              isCurved: true,
-              color: context.colors.errorLight,
-              barWidth: 3,
-              belowBarData: BarAreaData(
-                show: true,
-                gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: [
-                    context.colors.errorLight.withOpacity(0.3),
-                    context.colors.errorLight.withOpacity(0),
+            // const _BottomBar(),
+            _NavigationPoints(),
+            Padding(
+              padding: const EdgeInsets.only(top: 19.0),
+              child: Container(
+                height: 410,
+                decoration: BoxDecoration(
+                  color: context.colors.disabled,
+                  borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(30.0),
+                    topRight: Radius.circular(30.0),
+                  ),
+                ),
+                child: Column(
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 20,
+                        vertical: 20,
+                      ),
+                      child: Row(
+                        children: [
+                          _categoryButton(context, Category.all, ref),
+                          _categoryButton(context, Category.expenses, ref),
+                          _categoryButton(context, Category.income, ref),
+                        ],
+                      ),
+                    ),
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      height: 320,
+                      child: GridView.builder(
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 3,
+                          crossAxisSpacing: 20,
+                          mainAxisSpacing: 10,
+                          childAspectRatio: 0.8,
+                        ),
+                        itemCount: state.dataAnalytics.categories.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          return GridTile(
+                            child: CategoryAnalyticsScreen(
+                                categoryAnalytics:
+                                    state.dataAnalytics.categories[index]),
+                          );
+                        },
+                      ),
+                    ),
                   ],
                 ),
               ),
             ),
           ],
+        );
+    }
+  }
+}
+
+class _IntervalButton extends ConsumerWidget {
+  final TimeInterval interval;
+
+  const _IntervalButton({required this.interval});
+
+  String get intervalName => interval.name;
+
+  String get categoryNameCapitalized =>
+      intervalName.substring(0, 1).toUpperCase() + intervalName.substring(1);
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    var state = ref.watch(analyticsModelProvider);
+
+    return TextButton(
+      onPressed: state.analyticsData is AnalyticsDataLoadingState
+          ? null
+          : () {
+              ref
+                  .read(analyticsModelProvider.notifier)
+                  .changeInterval(interval);
+            },
+      child: Text(
+        categoryNameCapitalized,
+        style: state.interval == interval
+            ? context.textStyles.subtitle2
+            : context.textStyles.subtitle3,
+      ),
+    );
+  }
+}
+
+Widget _categoryButton(BuildContext context, Category category, WidgetRef ref) {
+  final notifier = ref.watch(analyticsModelProvider.notifier);
+  var categoryState = ref.watch(analyticsModelProvider).category;
+
+  String categoryName = category.name;
+  String categoryNameCapitalized =
+      categoryName.substring(0, 1).toUpperCase() + categoryName.substring(1);
+
+  return InkWell(
+    onTap: () {
+      notifier.changeCategory(category);
+    },
+    child: Container(
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+      decoration: BoxDecoration(
+        color: categoryState == category
+            ? context.colors.accent
+            : Colors.transparent,
+        // color: Colors.transparent,
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: Text(
+        categoryNameCapitalized,
+        style: categoryState == category
+            ? context.textStyles.subtitle2
+            : context.textStyles.subtitle3,
+        // style: context.textStyles.subtitle3,
+      ),
+    ),
+  );
+}
+
+class _LineChartWidget extends ConsumerWidget {
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final bars = (ref.watch(analyticsModelProvider).analyticsData
+            as AnalyticsDataReadyState)
+        .dataAnalytics
+        .bars;
+
+    List<FlSpot> points = [];
+
+    for (int i = 0; i < bars.length; i++) {
+      points.add(FlSpot(i.toDouble(), bars[i].sum));
+    }
+
+    return LineChart(
+      LineChartData(
+        minX: 0,
+        minY: 0,
+        maxX: bars.length.toDouble(),
+        maxY: 300,
+        borderData: FlBorderData(
+          show: false,
         ),
+        titlesData: FlTitlesData(
+          rightTitles: const AxisTitles(
+            sideTitles: SideTitles(showTitles: false),
+          ),
+          topTitles: const AxisTitles(
+            sideTitles: SideTitles(showTitles: false),
+          ),
+          bottomTitles: const AxisTitles(
+            sideTitles: SideTitles(showTitles: false),
+          ),
+          leftTitles: AxisTitles(sideTitles: leftTitles()),
+        ),
+        lineBarsData: [
+          LineChartBarData(
+            spots: points,
+            isCurved: true,
+            color: context.colors.backgroundPrimary,
+            barWidth: 3,
+            belowBarData: BarAreaData(
+              show: true,
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [
+                  context.colors.backgroundPrimary.withOpacity(0.3),
+                  context.colors.backgroundPrimary.withOpacity(0),
+                ],
+              ),
+            ),
+          ),
+          // LineChartBarData(
+          //   spots: [
+          //     const FlSpot(0, 7),
+          //     const FlSpot(3, 2),
+          //     const FlSpot(5, 8),
+          //     const FlSpot(8, 1),
+          //     const FlSpot(10, 9),
+          //   ],
+          //   isCurved: true,
+          //   color: context.colors.errorLight,
+          //   barWidth: 3,
+          //   belowBarData: BarAreaData(
+          //     show: true,
+          //     gradient: LinearGradient(
+          //       begin: Alignment.topCenter,
+          //       end: Alignment.bottomCenter,
+          //       colors: [
+          //         context.colors.errorLight.withOpacity(0.3),
+          //         context.colors.errorLight.withOpacity(0),
+          //       ],
+          //     ),
+          //   ),
+          // ),
+        ],
       ),
     );
   }
@@ -201,130 +297,177 @@ class _LineChartWidget extends StatelessWidget {
   SideTitles leftTitles() => SideTitles(
         getTitlesWidget: leftTitleWidgets,
         interval: 1,
-        reservedSize: 40,
+        reservedSize: 50,
         showTitles: true,
       );
 
   Text leftTitleWidgets(double value, TitleMeta meta) {
-    String text = switch (value.toInt()) {
-      1 => '5',
-      2 => '10',
-      3 => '15',
-      4 => '20',
-      5 => '25',
-      6 => '30',
-      7 => '35',
-      _ => '',
-    };
+    int period = (meta.max - meta.min) ~/ 7;
 
     return Text(
-      text,
-      textAlign: TextAlign.center,
+      (value % period == 0 && value > 0) ? value.toInt().toString() : '',
       style: TextStyle(
         fontWeight: FontWeight.bold,
         fontSize: 14,
-        color: Colors.grey.shade300,
+        color: Colors.grey.shade400,
       ),
     );
   }
 }
+//
+// class _BottomBar extends StatelessWidget {
+//   const _BottomBar();
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return Padding(
+//       padding: const EdgeInsets.only(left: 10.0, right: 0),
+//       child: SizedBox(
+//         height: 30,
+//         width: 320,
+//         child: ListView(
+//           scrollDirection: Axis.horizontal,
+//           children: const [
+//             _Dates(date: '1th week'),
+//             _Dates(date: '1th week'),
+//             _Dates(date: '1th week'),
+//             _Dates(date: '1th week'),
+//             _Dates(date: '1th week'),
+//           ],
+//         ),
+//       ),
+//     );
+//   }
+// }
 
-class _BottomBar extends StatelessWidget {
-  const _BottomBar();
+// class _Dates extends StatelessWidget {
+//   const _Dates({
+//     required this.date,
+//   });
+//
+//   final String date;
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return Padding(
+//       padding: const EdgeInsets.symmetric(horizontal: 4),
+//       child: Container(
+//         decoration: BoxDecoration(
+//           borderRadius: BorderRadius.circular(20),
+//           color: Colors.transparent,
+//           border: Border.all(
+//             color: context.colors.textSecondary,
+//             width: 2,
+//           ),
+//         ),
+//         child: Padding(
+//           padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 10),
+//           child: Text(
+//             date,
+//             style: context.textStyles.subtitle2,
+//           ),
+//         ),
+//       ),
+//     );
+//   }
+// }
 
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(left: 10.0, right: 0),
-      child: SizedBox(
-        height: 30,
-        width: 320,
-        child: ListView(
-          scrollDirection: Axis.horizontal,
-          children: const [
-            _Dates(date: '1th week'),
-            _Dates(date: '1th week'),
-            _Dates(date: '1th week'),
-            _Dates(date: '1th week'),
-            _Dates(date: '1th week'),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class _Dates extends StatelessWidget {
-  const _Dates({
-    required this.date,
-  });
-
-  final String date;
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 4),
-      child: Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20),
-          color: Colors.transparent,
-          border: Border.all(
-            color: context.colors.textSecondary,
-            width: 2,
-          ),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 10),
-          child: Text(
-            date,
-            style: context.textStyles.subtitle2,
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class _PieChartWithLegend extends StatelessWidget {
+class _PieChartWithLegend extends ConsumerWidget {
   const _PieChartWithLegend();
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    // ref.read(analyticsModelProvider.notifier).changeChart(Chart.pie);
+
+    var categories = (ref.watch(analyticsModelProvider).analyticsData
+            as AnalyticsDataReadyState)
+        .dataAnalytics
+        .categories;
+
+    List<CategoryAnalytics> expensesCategories =
+        categories.where((category) => !category.category.isIncome).toList();
+
+    double totalSum = expensesCategories.fold(
+        0, (previousValue, category) => previousValue + category.sum);
+
+    expensesCategories.sort((a, b) => a.sum.compareTo(b.sum));
+
+    List<PieChartSectionData> sections = [];
+
+    if (expensesCategories.length <= 4) {
+      sections = expensesCategories.map((category) {
+        final double value = (100) * (category.sum / totalSum);
+        return PieChartSectionData(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              context.colors.graphColors[expensesCategories.indexOf(category)],
+              context
+                  .colors.graphDarkColors[expensesCategories.indexOf(category)],
+            ],
+          ),
+          value: value,
+          title: '${(value).toStringAsFixed(1)}%',
+          radius: 80,
+          titleStyle: context.textStyles.subtitle2,
+        );
+      }).toList();
+    } else {
+      sections = expensesCategories.sublist(0, 4).map((category) {
+        final double value = (100) * (category.sum / totalSum);
+        return PieChartSectionData(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              context.colors.graphColors[expensesCategories.indexOf(category)],
+              context
+                  .colors.graphDarkColors[expensesCategories.indexOf(category)],
+            ],
+          ),
+          value: value,
+          title: '${(value).toStringAsFixed(1)}%',
+          radius: 80,
+          titleStyle: context.textStyles.subtitle2,
+        );
+      }).toList();
+
+      double otherSum = 0.0;
+      for (int i = 4; i < expensesCategories.length; i++) {
+        otherSum += expensesCategories[i].sum;
+      }
+      final double otherValue = (100) * (otherSum / totalSum);
+      sections.add(
+        PieChartSectionData(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              context.colors.graphColors[4],
+              context.colors.graphDarkColors[4],
+            ],
+          ),
+          value: otherValue,
+          title: '${(otherValue).toStringAsFixed(1)}%',
+          radius: 80,
+          titleStyle: context.textStyles.subtitle2,
+        ),
+      );
+    }
+
     return Padding(
-      padding: const EdgeInsets.only(left: 15.0),
+      padding: const EdgeInsets.only(left: 5.0, right: 10),
       child: Row(
         children: [
           Expanded(
             flex: 2,
             child: PieChart(
               PieChartData(
-                sections: [
-                  PieChartSectionData(
-                    color: Colors.green,
-                    value: 25,
-                    title: '25%',
-                    radius: 80,
-                  ),
-                  PieChartSectionData(
-                    color: Colors.blue,
-                    value: 15,
-                    title: '15%',
-                    radius: 80,
-                  ),
-                  PieChartSectionData(
-                    color: Colors.red,
-                    value: 30,
-                    title: '30%',
-                    radius: 80,
-                  ),
-                  PieChartSectionData(
-                    color: Colors.orange,
-                    value: 20,
-                    title: '20%',
-                    radius: 80,
-                  ),
-                ],
+                sections: sections,
+                pieTouchData: PieTouchData(
+                  touchCallback: (event, response) {},
+                ),
               ),
             ),
           ),
@@ -335,10 +478,18 @@ class _PieChartWithLegend extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  _legendItem(color: Colors.green, title: '25%'),
-                  _legendItem(color: Colors.blue, title: '15%'),
-                  _legendItem(color: Colors.red, title: '30%'),
-                  _legendItem(color: Colors.orange, title: '20%'),
+                  for (int i = 0;
+                      i < min(4, expensesCategories.length);
+                      i++) // Перебираем первые четыре категории
+                    _legendItem(
+                      context,
+                      color: context.colors.graphColors[i],
+                      title: expensesCategories[i].category.title.toString(),
+                    ),
+                  if (expensesCategories.length >
+                      4) // Если категорий больше 4, добавляем категорию "Other"
+                    _legendItem(context,
+                        color: context.colors.graphColors[4], title: 'Other'),
                 ],
               ),
             ),
@@ -348,7 +499,8 @@ class _PieChartWithLegend extends StatelessWidget {
     );
   }
 
-  Widget _legendItem({required Color color, required String title}) {
+  Widget _legendItem(BuildContext context,
+      {required Color color, required String title}) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 4),
       child: Row(
@@ -361,9 +513,44 @@ class _PieChartWithLegend extends StatelessWidget {
           const SizedBox(width: 8),
           Text(
             title,
-            style: const TextStyle(fontSize: 16),
+            style: context.textStyles.subtitle1,
           ),
         ],
+      ),
+    );
+  }
+}
+
+class _NavigationPoints extends ConsumerWidget {
+  Widget navigationPoint(BuildContext context, bool isFilled) {
+    return Container(
+      width: 15,
+      height: 15,
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        color: isFilled ? context.colors.backgroundPrimary : Colors.transparent,
+        border: Border.all(
+            color: context.colors.backgroundPrimary,
+            width: 2.0), // Цветная граница
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    var chart = ref.watch(analyticsModelProvider).chart;
+    return SizedBox(
+      width: 50,
+      child: Center(
+        child: Row(
+          children: [
+            navigationPoint(context, chart == Chart.liner),
+            const SizedBox(
+              width: 10,
+            ),
+            navigationPoint(context, chart == Chart.pie),
+          ],
+        ),
       ),
     );
   }

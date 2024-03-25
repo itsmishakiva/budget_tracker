@@ -33,7 +33,7 @@ abstract class $AppRouter extends _i8.RootStackRouter {
     AnalyticsRoute.name: (routeData) {
       return _i8.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: _i1.AnalyticsScreen(),
+        child: const _i1.AnalyticsScreen(),
       );
     },
     CreatePinCodeRoute.name: (routeData) {

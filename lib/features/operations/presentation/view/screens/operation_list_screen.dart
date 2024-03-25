@@ -92,7 +92,7 @@ class _OperationListTileState extends State<OperationListTile> {
         );
       case 'Food':
         return Text(
-          EmojiParser().emojify(':fork_and_knife:'),
+          EmojiParser().emojify(':green_salad:'),
           style: const TextStyle(fontSize: 24.0),
         );
       case 'Gifts':

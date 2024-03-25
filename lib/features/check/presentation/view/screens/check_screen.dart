@@ -78,7 +78,10 @@ class CheckListTile extends ConsumerWidget {
                                 child: Row(
                                   children: [
                                     _moneyFlow(
-                                        context, 'Expenses', check.expenses),
+                                      context,
+                                      'Expenses',
+                                      check.expenses,
+                                    ),
                                     _moneyFlow(context, 'Income', check.income),
                                   ],
                                 ),

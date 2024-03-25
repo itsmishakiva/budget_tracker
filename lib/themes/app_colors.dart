@@ -16,6 +16,20 @@ class AppLightColors extends AppColors {
           success: const Color(0xFF02C46D),
           successLight: const Color(0xFFE8FDEA),
           textSubtitile: const Color(0xFFB4B4B4),
+          graphColors: const [
+            Color(0xFF3600FA),
+            Color(0xFF9E00FA),
+            Color(0xFF00D5FA),
+            Color(0xFFFA00C8),
+            Color(0xFFFA9600),
+          ],
+          graphDarkColors: const [
+            Color(0xFF210091),
+            Color(0xFF6500A1),
+            Color(0xFF009EBD),
+            Color(0xFFC00098),
+            Color(0xFFB76E00),
+          ],
         );
 }
 
@@ -33,6 +47,8 @@ class AppColors extends ThemeExtension<AppColors> {
   final Color success;
   final Color successLight;
   final Color textSubtitile;
+  final List<Color> graphColors;
+  final List<Color> graphDarkColors;
 
   const AppColors({
     required this.backgroundPrimary,
@@ -48,6 +64,8 @@ class AppColors extends ThemeExtension<AppColors> {
     required this.success,
     required this.successLight,
     required this.textSubtitile,
+    required this.graphColors,
+    required this.graphDarkColors,
   });
 
   @override
@@ -65,6 +83,8 @@ class AppColors extends ThemeExtension<AppColors> {
     Color? success,
     Color? successLight,
     Color? textSubtitile,
+    List<Color>? graphColors,
+    List<Color>? graphDarlColors,
   }) {
     return AppColors(
       backgroundPrimary: backgroundPrimary ?? this.backgroundPrimary,
@@ -80,6 +100,8 @@ class AppColors extends ThemeExtension<AppColors> {
       success: success ?? this.success,
       successLight: successLight ?? this.successLight,
       textSubtitile: textSubtitile ?? this.textSubtitile,
+      graphColors: graphColors ?? this.graphColors,
+      graphDarkColors: graphDarkColors,
     );
   }
 
@@ -111,6 +133,14 @@ class AppColors extends ThemeExtension<AppColors> {
       success: Color.lerp(success, typedOther.success, t)!,
       successLight: Color.lerp(successLight, typedOther.successLight, t)!,
       textSubtitile: Color.lerp(textSubtitile, typedOther.textSubtitile, t)!,
+      graphColors: graphColors.map((color) {
+        final int index = graphColors.indexOf(color);
+        return Color.lerp(color, typedOther.graphColors[index], t)!;
+      }).toList(),
+      graphDarkColors: graphDarkColors.map((color) {
+        final int index = graphDarkColors.indexOf(color);
+        return Color.lerp(color, typedOther.graphDarkColors[index], t)!;
+      }).toList(),
     );
   }
 }
