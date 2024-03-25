@@ -20,7 +20,7 @@ class AppButton extends ConsumerWidget {
         borderRadius: BorderRadius.circular(constraints.tileBorderRadius),
       ),
       child: TextButton(
-        onPressed: () => onTap,
+        onPressed: onTap,
         child: Text(
           title,
           style: context.textStyles.textButton.copyWith(color: Colors.white),

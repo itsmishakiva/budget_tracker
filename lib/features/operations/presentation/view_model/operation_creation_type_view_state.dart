@@ -13,8 +13,12 @@ class OperationCreationTypeViewDataState
   OperationCreationTypeViewDataState({
     required this.data,
     required this.sum,
+    required this.selectedCategory,
+    required this.isIncome,
   });
 
-  final double sum;
   final List<Category> data;
+  final double sum;
+  final Category selectedCategory;
+  final bool isIncome;
 }

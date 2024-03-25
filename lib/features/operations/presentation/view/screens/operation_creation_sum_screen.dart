@@ -42,35 +42,25 @@ class _OperationCreationSumScreenContent extends ConsumerWidget {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 16),
-                    child: GestureDetector(
-                      child: Icon(
-                        Icons.arrow_back_ios_new,
-                        color: context.colors.backgroundPrimary,
-                      ),
-                      onTap: () {
-                        ref.read(appRouterProvider).maybePop();
-                      },
-                    ),
-                  ),
-                  Text(
-                    context.locale!.inputAmount,
-                    style: context.textStyles.bodyTextSurface
-                        .copyWith(fontWeight: FontWeight.w700),
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  // MyButton(),
-                ],
+            AppBar(
+              forceMaterialTransparency: true,
+              centerTitle: true,
+              leading: GestureDetector(
+                child: Icon(
+                  Icons.arrow_back_ios_new,
+                  color: context.colors.backgroundPrimary,
+                ),
+                onTap: () {
+                  ref.read(appRouterProvider).maybePop();
+                },
+              ),
+              title: Text(
+                context.locale!.inputAmount,
+                style: context.textStyles.header1
+                    .copyWith(color: context.colors.backgroundPrimary),
               ),
             ),
+            // Spacer(),
             Expanded(
               child: _SumInputContainer(
                 displaySum: state.sum,
@@ -165,7 +155,14 @@ class NumPadContainer extends ConsumerWidget {
               padding: EdgeInsets.symmetric(
                 horizontal: constraints.horizontalScreenPadding,
               ),
-              child: AppButton(title: context.locale!.next),
+              child: AppButton(
+                title: context.locale!.next,
+                onTap: () {
+                  ref
+                      .read(appRouterProvider)
+                      .navigateNamed('/operation_creation_type');
+                },
+              ),
             ),
           ],
         ),

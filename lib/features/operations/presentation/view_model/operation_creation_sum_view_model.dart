@@ -22,6 +22,17 @@ class OperationCreationSumViewModel
     this._repositoryAccount,
   ) : super(state);
 
+  Future<void> loadData() async {
+    try {
+      state = OperationCreationSumViewDataState(
+        checkData: await _repositoryAccount.getCheck(),
+        sum: '0',
+      );
+    } catch (e) {
+      state = OperationCreationSumViewErrorState();
+    }
+  }
+
   // Миша - лучший тимлид :3
   void appendNumber(String value) {
     final modelState = state as OperationCreationSumViewDataState;
@@ -54,14 +65,7 @@ class OperationCreationSumViewModel
     );
   }
 
-  Future<void> loadData() async {
-    try {
-      state = OperationCreationSumViewDataState(
-        checkData: await _repositoryAccount.getCheck(),
-        sum: '0',
-      );
-    } catch (e) {
-      state = OperationCreationSumViewErrorState();
-    }
+  String setSum() {
+    return (state as OperationCreationSumViewDataState).sum;
   }
 }
