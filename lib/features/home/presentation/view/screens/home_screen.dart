@@ -28,7 +28,7 @@ class HomeScreen extends ConsumerWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          ref.read(appRouterProvider).navigateNamed('/operation_creation');
+          ref.read(appRouterProvider).navigateNamed('/operation_creation_sum');
         },
         backgroundColor: context.colors.accent,
         child: Icon(
