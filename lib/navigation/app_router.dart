@@ -6,9 +6,13 @@ class AppRouter extends $AppRouter {
   @override
   List<AutoRoute> get routes => [
         AutoRoute(
+          page: AuthRoute.page,
+          path: '/auth',
+          initial: true,
+        ),
+        AutoRoute(
           page: RootPinCodeRoute.page,
           path: '/pin',
-          initial: true,
         ),
         AutoRoute(
           page: OperationCreationSumRoute.page,
