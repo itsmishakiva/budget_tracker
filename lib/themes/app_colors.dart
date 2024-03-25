@@ -33,6 +33,39 @@ class AppLightColors extends AppColors {
         );
 }
 
+class AppDarkColors extends AppColors {
+  AppDarkColors()
+      : super(
+          backgroundPrimary: const Color(0xFF131313),
+          backgroundSecondary: const Color(0xFF1F1F1F),
+          disabled: const Color(0xFF4B4B4B),
+          accent: const Color(0xFF244DE0),
+          accentSecondary: const Color(0xFF4359A8),
+          textPrimary: const Color(0xFFD2C9E5),
+          textSecondary: const Color(0xFF817F80),
+          textSurface: const Color(0xFFFFFFFF),
+          error: const Color(0xFFBB3334),
+          errorLight: const Color(0xFFB76868),
+          success: const Color(0xFF009356),
+          successLight: const Color(0xFF69A26F),
+          textSubtitile: const Color(0xFF4D4D4D),
+          graphColors: const [
+            Color(0xFF3600FA),
+            Color(0xFF9E00FA),
+            Color(0xFF00D5FA),
+            Color(0xFFFA00C8),
+            Color(0xFFFA9600),
+          ],
+          graphDarkColors: const [
+            Color(0xFF210091),
+            Color(0xFF6500A1),
+            Color(0xFF009EBD),
+            Color(0xFFC00098),
+            Color(0xFFB76E00),
+          ],
+        );
+}
+
 class AppColors extends ThemeExtension<AppColors> {
   final Color backgroundPrimary;
   final Color backgroundSecondary;

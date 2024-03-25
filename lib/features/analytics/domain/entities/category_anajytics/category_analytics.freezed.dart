@@ -16,7 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$CategoryAnalytics {
-  OperationType get category => throw _privateConstructorUsedError;
+  Category get category => throw _privateConstructorUsedError;
   double get sum => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -30,9 +30,9 @@ abstract class $CategoryAnalyticsCopyWith<$Res> {
           CategoryAnalytics value, $Res Function(CategoryAnalytics) then) =
       _$CategoryAnalyticsCopyWithImpl<$Res, CategoryAnalytics>;
   @useResult
-  $Res call({OperationType category, double sum});
+  $Res call({Category category, double sum});
 
-  $OperationTypeCopyWith<$Res> get category;
+  $CategoryCopyWith<$Res> get category;
 }
 
 /// @nodoc
@@ -55,7 +55,7 @@ class _$CategoryAnalyticsCopyWithImpl<$Res, $Val extends CategoryAnalytics>
       category: null == category
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
-              as OperationType,
+              as Category,
       sum: null == sum
           ? _value.sum
           : sum // ignore: cast_nullable_to_non_nullable
@@ -65,8 +65,8 @@ class _$CategoryAnalyticsCopyWithImpl<$Res, $Val extends CategoryAnalytics>
 
   @override
   @pragma('vm:prefer-inline')
-  $OperationTypeCopyWith<$Res> get category {
-    return $OperationTypeCopyWith<$Res>(_value.category, (value) {
+  $CategoryCopyWith<$Res> get category {
+    return $CategoryCopyWith<$Res>(_value.category, (value) {
       return _then(_value.copyWith(category: value) as $Val);
     });
   }
@@ -80,10 +80,10 @@ abstract class _$$CategoryAnalyticsImplCopyWith<$Res>
       __$$CategoryAnalyticsImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({OperationType category, double sum});
+  $Res call({Category category, double sum});
 
   @override
-  $OperationTypeCopyWith<$Res> get category;
+  $CategoryCopyWith<$Res> get category;
 }
 
 /// @nodoc
@@ -104,7 +104,7 @@ class __$$CategoryAnalyticsImplCopyWithImpl<$Res>
       category: null == category
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
-              as OperationType,
+              as Category,
       sum: null == sum
           ? _value.sum
           : sum // ignore: cast_nullable_to_non_nullable
@@ -115,28 +115,17 @@ class __$$CategoryAnalyticsImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$CategoryAnalyticsImpl
-    with DiagnosticableTreeMixin
-    implements _CategoryAnalytics {
+class _$CategoryAnalyticsImpl implements _CategoryAnalytics {
   _$CategoryAnalyticsImpl({required this.category, required this.sum});
 
   @override
-  final OperationType category;
+  final Category category;
   @override
   final double sum;
 
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+  String toString() {
     return 'CategoryAnalytics(category: $category, sum: $sum)';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'CategoryAnalytics'))
-      ..add(DiagnosticsProperty('category', category))
-      ..add(DiagnosticsProperty('sum', sum));
   }
 
   @override
@@ -162,11 +151,11 @@ class _$CategoryAnalyticsImpl
 
 abstract class _CategoryAnalytics implements CategoryAnalytics {
   factory _CategoryAnalytics(
-      {required final OperationType category,
+      {required final Category category,
       required final double sum}) = _$CategoryAnalyticsImpl;
 
   @override
-  OperationType get category;
+  Category get category;
   @override
   double get sum;
   @override

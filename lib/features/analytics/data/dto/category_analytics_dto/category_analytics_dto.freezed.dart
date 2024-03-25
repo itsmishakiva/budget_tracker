@@ -20,7 +20,7 @@ CategoryAnalyticsDTO _$CategoryAnalyticsDTOFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$CategoryAnalyticsDTO {
-  OperationTypeDTO get category => throw _privateConstructorUsedError;
+  CategoryDTO get category => throw _privateConstructorUsedError;
   double get sum => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -35,9 +35,9 @@ abstract class $CategoryAnalyticsDTOCopyWith<$Res> {
           $Res Function(CategoryAnalyticsDTO) then) =
       _$CategoryAnalyticsDTOCopyWithImpl<$Res, CategoryAnalyticsDTO>;
   @useResult
-  $Res call({OperationTypeDTO category, double sum});
+  $Res call({CategoryDTO category, double sum});
 
-  $OperationTypeDTOCopyWith<$Res> get category;
+  $CategoryDTOCopyWith<$Res> get category;
 }
 
 /// @nodoc
@@ -61,7 +61,7 @@ class _$CategoryAnalyticsDTOCopyWithImpl<$Res,
       category: null == category
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
-              as OperationTypeDTO,
+              as CategoryDTO,
       sum: null == sum
           ? _value.sum
           : sum // ignore: cast_nullable_to_non_nullable
@@ -71,8 +71,8 @@ class _$CategoryAnalyticsDTOCopyWithImpl<$Res,
 
   @override
   @pragma('vm:prefer-inline')
-  $OperationTypeDTOCopyWith<$Res> get category {
-    return $OperationTypeDTOCopyWith<$Res>(_value.category, (value) {
+  $CategoryDTOCopyWith<$Res> get category {
+    return $CategoryDTOCopyWith<$Res>(_value.category, (value) {
       return _then(_value.copyWith(category: value) as $Val);
     });
   }
@@ -86,10 +86,10 @@ abstract class _$$CategoryAnalyticsDTOImplCopyWith<$Res>
       __$$CategoryAnalyticsDTOImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({OperationTypeDTO category, double sum});
+  $Res call({CategoryDTO category, double sum});
 
   @override
-  $OperationTypeDTOCopyWith<$Res> get category;
+  $CategoryDTOCopyWith<$Res> get category;
 }
 
 /// @nodoc
@@ -110,7 +110,7 @@ class __$$CategoryAnalyticsDTOImplCopyWithImpl<$Res>
       category: null == category
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
-              as OperationTypeDTO,
+              as CategoryDTO,
       sum: null == sum
           ? _value.sum
           : sum // ignore: cast_nullable_to_non_nullable
@@ -121,31 +121,20 @@ class __$$CategoryAnalyticsDTOImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$CategoryAnalyticsDTOImpl
-    with DiagnosticableTreeMixin
-    implements _CategoryAnalyticsDTO {
+class _$CategoryAnalyticsDTOImpl implements _CategoryAnalyticsDTO {
   _$CategoryAnalyticsDTOImpl({required this.category, required this.sum});
 
   factory _$CategoryAnalyticsDTOImpl.fromJson(Map<String, dynamic> json) =>
       _$$CategoryAnalyticsDTOImplFromJson(json);
 
   @override
-  final OperationTypeDTO category;
+  final CategoryDTO category;
   @override
   final double sum;
 
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+  String toString() {
     return 'CategoryAnalyticsDTO(category: $category, sum: $sum)';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'CategoryAnalyticsDTO'))
-      ..add(DiagnosticsProperty('category', category))
-      ..add(DiagnosticsProperty('sum', sum));
   }
 
   @override
@@ -180,14 +169,14 @@ class _$CategoryAnalyticsDTOImpl
 
 abstract class _CategoryAnalyticsDTO implements CategoryAnalyticsDTO {
   factory _CategoryAnalyticsDTO(
-      {required final OperationTypeDTO category,
+      {required final CategoryDTO category,
       required final double sum}) = _$CategoryAnalyticsDTOImpl;
 
   factory _CategoryAnalyticsDTO.fromJson(Map<String, dynamic> json) =
       _$CategoryAnalyticsDTOImpl.fromJson;
 
   @override
-  OperationTypeDTO get category;
+  CategoryDTO get category;
   @override
   double get sum;
   @override

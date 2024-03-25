@@ -21,81 +21,72 @@ class MockAnalyticsService implements AnalyticsService {
         {
           'category': {
             'id': 1,
-            'isIncome': true,
             'title': 'Home',
-            'categoryIconAsset': ':house:',
+            'icon': ':house:',
           },
           'sum': 367,
         },
         {
           'category': {
             'id': 1,
-            'isIncome': true,
             'title': 'Gifts',
-            'categoryIconAsset': ':gift:',
+            'icon': ':gift:',
           },
           'sum': 245,
         },
         {
           'category': {
             'id': 1,
-            'isIncome': false,
             'title': 'Home',
-            'categoryIconAsset': ':house:',
+            'icon': ':house:',
           },
           'sum': -135,
         },
         {
           'category': {
             'id': 1,
-            'isIncome': false,
             'title': 'Gifts',
-            'categoryIconAsset': ':gift:',
+            'icon': ':gift:',
           },
           'sum': -438,
         },
         {
           'category': {
             'id': 1,
-            'isIncome': true,
             'title': 'Food',
-            'categoryIconAsset': ':green_salad:',
+            'icon': ':green_salad:',
           },
           'sum': 2039,
         },
         {
           'category': {
             'id': 1,
-            'isIncome': false,
             'title': 'Food',
-            'categoryIconAsset': ':green_salad:',
+            'icon': ':green_salad:',
           },
           'sum': -438,
         },
         {
           'category': {
             'id': 1,
-            'isIncome': false,
             'title': 'Family',
-            'categoryIconAsset': ':green_salad:',
+            'icon': ':green_salad:',
           },
           'sum': -217,
         },
         {
           'category': {
             'id': 1,
-            'isIncome': false,
             'title': 'Travels',
-            'categoryIconAsset': ':airplane_departure:',
+            'icon': ':airplane_departure:',
           },
           'sum': -789,
         },
         {
           'category': {
             'id': 1,
-            'isIncome': false,
             'title': 'Travels',
-            'categoryIconAsset': ':airplane_departure:',
+            'icon': ':airplane_departure:',
           },
           'sum': -90,
         },
@@ -116,9 +107,8 @@ class MockAnalyticsService implements AnalyticsService {
         {
           'category': {
             'id': 1,
-            'isIncome': true,
+            'icon': true,
             'title': 'Home',
-            'categoryIconAsset': ':house:',
           },
           'sum': 367,
         }
@@ -144,9 +134,8 @@ class MockAnalyticsService implements AnalyticsService {
         {
           'category': {
             'id': 1,
-            'isIncome': true,
             'title': 'Home',
-            'categoryIconAsset': ':house:',
+            'icon': ':house:',
           },
           'sum': 367,
         }

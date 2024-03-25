@@ -41,7 +41,8 @@ class AnalyticsViewModel extends StateNotifier<AnalyticsViewState> {
     dataAnalyticsCurrent = dataAnalytics;
     if (category == Category.income) {
       List<CategoryAnalytics> incomeCategories = dataAnalytics.categories
-          .where((category) => category.category.isIncome)
+          .where((category) => category.sum > 0
+      )
           .toList();
 
       dataAnalyticsCurrent =
@@ -49,7 +50,7 @@ class AnalyticsViewModel extends StateNotifier<AnalyticsViewState> {
     }
     if (category == Category.expenses) {
       List<CategoryAnalytics> incomeCategories = dataAnalytics.categories
-          .where((category) => !category.category.isIncome)
+          .where((category) => category.sum < 0)
           .toList();
 
       dataAnalyticsCurrent =
@@ -91,7 +92,7 @@ class AnalyticsViewModel extends StateNotifier<AnalyticsViewState> {
       dataAnalyticsCurrent = dataAnalytics;
       if (category == Category.income) {
         List<CategoryAnalytics> incomeCategories = dataAnalytics.categories
-            .where((category) => category.category.isIncome)
+            .where((category) => category.sum > 0)
             .toList();
 
         dataAnalyticsCurrent =
@@ -99,7 +100,7 @@ class AnalyticsViewModel extends StateNotifier<AnalyticsViewState> {
       }
       if (category == Category.expenses) {
         List<CategoryAnalytics> incomeCategories = dataAnalytics.categories
-            .where((category) => !category.category.isIncome)
+            .where((category) => category.sum < 0)
             .toList();
 
         dataAnalyticsCurrent =

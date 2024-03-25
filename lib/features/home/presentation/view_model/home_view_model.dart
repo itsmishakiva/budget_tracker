@@ -1,9 +1,11 @@
 import 'package:budget_tracker/features/operations/domain/repositories/operation_repository.dart';
 import 'package:budget_tracker/features/operations/internal/operation_repository_provider.dart';
+import 'package:budget_tracker/main.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:budget_tracker/features/check/internal/check_repository_provider.dart';
 import 'package:budget_tracker/features/home/presentation/view_model/home_view_state.dart';
+import 'package:logging/logging.dart';
 
 import 'package:budget_tracker/features/check/domain/repositories/check_repository.dart';
 
@@ -35,6 +37,7 @@ class HomeViewModel extends StateNotifier<HomeViewState> {
         dataOperations: dataOperations,
       );
     } catch (e) {
+      logger.log(Level.WARNING, e);
       state = HomeViewErrorState();
     }
   }

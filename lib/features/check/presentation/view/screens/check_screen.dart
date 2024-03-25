@@ -82,7 +82,11 @@ class CheckListTile extends ConsumerWidget {
                                       'Expenses',
                                       check.expenses,
                                     ),
-                                    _moneyFlow(context, 'Income', check.income),
+                                    _moneyFlow(
+                                      context,
+                                      'Income',
+                                      check.income,
+                                    ),
                                   ],
                                 ),
                               ),

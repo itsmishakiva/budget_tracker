@@ -71,6 +71,10 @@ class _NumericKeyboardButtonState extends State<NumericKeyboardButton>
               ? SvgPicture.asset(
                   widget.svgAssetName!,
                   width: 32.0,
+                  colorFilter: ColorFilter.mode(
+                    context.colors.textPrimary,
+                    BlendMode.srcIn,
+                  ),
                 )
               : Text(
                   widget.text!,

@@ -385,7 +385,7 @@ class _PieChartWithLegend extends ConsumerWidget {
         .categories;
 
     List<CategoryAnalytics> expensesCategories =
-        categories.where((category) => !category.category.isIncome).toList();
+        categories.where((category) => category.sum < 0).toList();
 
     double totalSum = expensesCategories.fold(
         0, (previousValue, category) => previousValue + category.sum);

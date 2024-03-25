@@ -1,4 +1,4 @@
-import 'package:budget_tracker/features/operation_creation/domain/entities/operation_type.dart';
+import 'package:budget_tracker/features/categories/domain/entities/category.dart';
 
 sealed class OperationCreationViewState {} // тут стейт страницы
 
@@ -9,5 +9,5 @@ class OperationCreationViewErrorState extends OperationCreationViewState {}
 class OperationCreationViewDataState extends OperationCreationViewState {
   OperationCreationViewDataState({required this.data});
 
-  final List<OperationType> data; // лист тайлов с категориями
+  final List<Category> data; // лист тайлов с категориями
 }
