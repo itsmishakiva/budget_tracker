@@ -136,7 +136,9 @@ class NumPadContainer extends ConsumerWidget {
               ),
               child: AppButton(
                 title: context.locale!.next,
-                onTap: () {},
+                onTap: () {
+                  ref.read(appRouterProvider).navigateNamed('/operation_creation_type');
+                },
               ),
             ),
           ],
