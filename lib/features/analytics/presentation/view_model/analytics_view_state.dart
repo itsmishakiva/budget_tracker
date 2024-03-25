@@ -2,7 +2,7 @@ import 'package:budget_tracker/features/analytics/domain/entities/analytics/anal
 
 enum TimeInterval { week, month, year }
 
-enum Category { all, expenses, income }
+enum Category { expenses, income }
 
 enum Chart { liner, pie }
 

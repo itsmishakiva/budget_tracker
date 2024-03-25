@@ -10,6 +10,7 @@ class CategoryAnalyticsScreen extends ConsumerWidget {
 
   final CategoryAnalytics categoryAnalytics;
 
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Container(
@@ -17,7 +18,7 @@ class CategoryAnalyticsScreen extends ConsumerWidget {
       width: 100,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
-        color: context.colors.textSecondary,
+        color: context.colors.backgroundSecondary,
       ),
       child: Column(
         children: [
@@ -39,8 +40,8 @@ class CategoryAnalyticsScreen extends ConsumerWidget {
           Padding(
             padding: const EdgeInsets.all(14.0),
             child: Text(
-              '${categoryAnalytics.sum}₽',
-              style: context.textStyles.headerBold3,
+              '${(categoryAnalytics.sum).abs()}₽',
+              style: categoryAnalytics.sum > 0 ? context.textStyles.income : context.textStyles.expenses,
             ),
           ),
         ],

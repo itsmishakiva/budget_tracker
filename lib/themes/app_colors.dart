@@ -10,12 +10,16 @@ class AppLightColors extends AppColors {
           accentSecondary: const Color(0xFF5779F7),
           textPrimary: const Color(0xFF4B425F),
           textSecondary: const Color(0xFFDEDADB),
+          dateLight: const Color(0xFFD9DAEA),
+          dateDark: const Color(0xFFAAACC2),
           textSurface: const Color(0xFFFFFFFF),
           error: const Color(0xFFFF4B4C),
           errorLight: const Color(0xFFFDE8E8),
           success: const Color(0xFF02C46D),
           successLight: const Color(0xFFE8FDEA),
           textSubtitile: const Color(0xFFB4B4B4),
+          linearChart1: const Color(0xFFFFD1F0),
+          linearChart2: const Color(0xFFCEFFF8),
           graphColors: const [
             Color(0xFF3600FA),
             Color(0xFF9E00FA),
@@ -43,12 +47,16 @@ class AppDarkColors extends AppColors {
           accentSecondary: const Color(0xFF4359A8),
           textPrimary: const Color(0xFFD2C9E5),
           textSecondary: const Color(0xFF817F80),
+          dateLight: const Color(0xFFD9DAEA),
+          dateDark: const Color(0xFFAAACC2),
           textSurface: const Color(0xFFFFFFFF),
           error: const Color(0xFFBB3334),
           errorLight: const Color(0xFFB76868),
           success: const Color(0xFF009356),
           successLight: const Color(0xFF69A26F),
           textSubtitile: const Color(0xFF4D4D4D),
+          linearChart1: const Color(0xFFFF00AD),
+          linearChart2: const Color(0xFF00FFD8),
           graphColors: const [
             Color(0xFF3600FA),
             Color(0xFF9E00FA),
@@ -74,12 +82,16 @@ class AppColors extends ThemeExtension<AppColors> {
   final Color accentSecondary;
   final Color textPrimary;
   final Color textSecondary;
+  final Color dateLight;
+  final Color dateDark;
   final Color textSurface;
   final Color error;
   final Color errorLight;
   final Color success;
   final Color successLight;
   final Color textSubtitile;
+  final Color linearChart1;
+  final Color linearChart2;
   final List<Color> graphColors;
   final List<Color> graphDarkColors;
 
@@ -91,12 +103,16 @@ class AppColors extends ThemeExtension<AppColors> {
     required this.accentSecondary,
     required this.textPrimary,
     required this.textSecondary,
+    required this.dateLight,
+    required this.dateDark,
     required this.textSurface,
     required this.error,
     required this.errorLight,
     required this.success,
     required this.successLight,
     required this.textSubtitile,
+    required this.linearChart1,
+    required this.linearChart2,
     required this.graphColors,
     required this.graphDarkColors,
   });
@@ -111,11 +127,15 @@ class AppColors extends ThemeExtension<AppColors> {
     Color? textPrimary,
     Color? textSecondary,
     Color? textSurface,
+    Color? dateLight,
+    Color? dateDark,
     Color? error,
     Color? errorLight,
     Color? success,
     Color? successLight,
     Color? textSubtitile,
+    Color? linearChart1,
+    Color? linearChart2,
     List<Color>? graphColors,
     List<Color>? graphDarlColors,
   }) {
@@ -128,11 +148,15 @@ class AppColors extends ThemeExtension<AppColors> {
       textPrimary: textPrimary ?? this.textPrimary,
       textSecondary: textSecondary ?? this.textSecondary,
       textSurface: textSurface ?? this.textSurface,
+      dateLight: dateLight ?? this.dateLight,
+      dateDark: dateDark ?? this.dateDark,
       error: error ?? this.error,
       errorLight: errorLight ?? this.errorLight,
       success: success ?? this.success,
       successLight: successLight ?? this.successLight,
       textSubtitile: textSubtitile ?? this.textSubtitile,
+      linearChart1: linearChart1 ?? this.linearChart1,
+      linearChart2: linearChart2 ?? this.linearChart2,
       graphColors: graphColors ?? this.graphColors,
       graphDarkColors: graphDarkColors,
     );
@@ -160,12 +184,16 @@ class AppColors extends ThemeExtension<AppColors> {
           Color.lerp(accentSecondary, typedOther.accentSecondary, t)!,
       textPrimary: Color.lerp(textPrimary, typedOther.textPrimary, t)!,
       textSecondary: Color.lerp(textSecondary, typedOther.textSecondary, t)!,
+      dateLight: Color.lerp(dateLight, typedOther.dateLight, t)!,
+      dateDark: Color.lerp(dateDark, typedOther.dateDark, t)!,
       textSurface: Color.lerp(textSurface, typedOther.textSurface, t)!,
       error: Color.lerp(error, typedOther.error, t)!,
       errorLight: Color.lerp(errorLight, typedOther.errorLight, t)!,
       success: Color.lerp(success, typedOther.success, t)!,
       successLight: Color.lerp(successLight, typedOther.successLight, t)!,
       textSubtitile: Color.lerp(textSubtitile, typedOther.textSubtitile, t)!,
+      linearChart1: Color.lerp(linearChart1, typedOther.linearChart1, t)!,
+      linearChart2: Color.lerp(linearChart2, typedOther.linearChart2, t)!,
       graphColors: graphColors.map((color) {
         final int index = graphColors.indexOf(color);
         return Color.lerp(color, typedOther.graphColors[index], t)!;

@@ -13,7 +13,7 @@ final analyticsModelProvider =
   (ref) => AnalyticsViewModel(
     AnalyticsViewState(
       interval: TimeInterval.week,
-      category: Category.all,
+      category: Category.expenses,
       chart: Chart.liner,
       analyticsData: AnalyticsDataLoadingState(),
     ),
@@ -28,7 +28,7 @@ class AnalyticsViewModel extends StateNotifier<AnalyticsViewState> {
   late Analytics dataAnalytics;
   late Analytics dataAnalyticsCurrent;
   TimeInterval interval = TimeInterval.month;
-  Category category = Category.all;
+  Category category = Category.expenses;
   Chart chart = Chart.liner;
 
   AnalyticsViewModel(

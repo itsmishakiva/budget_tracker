@@ -29,7 +29,7 @@ class AnalyticsScreen extends ConsumerWidget {
               children: [
                 Text(
                   'Stats',
-                  style: context.textStyles.subtitle1,
+                  style: context.textStyles.bodyTextSurface,
                 ),
                 const Spacer(),
                 const _IntervalButton(interval: TimeInterval.week),
@@ -95,9 +95,9 @@ class _Body extends ConsumerWidget {
             Padding(
               padding: const EdgeInsets.only(top: 19.0),
               child: Container(
-                height: 410,
+                height: 415,
                 decoration: BoxDecoration(
-                  color: context.colors.disabled,
+                  color: context.colors.backgroundPrimary,
                   borderRadius: const BorderRadius.only(
                     topLeft: Radius.circular(30.0),
                     topRight: Radius.circular(30.0),
@@ -112,7 +112,6 @@ class _Body extends ConsumerWidget {
                       ),
                       child: Row(
                         children: [
-                          _categoryButton(context, Category.all, ref),
                           _categoryButton(context, Category.expenses, ref),
                           _categoryButton(context, Category.income, ref),
                         ],
@@ -174,8 +173,8 @@ class _IntervalButton extends ConsumerWidget {
       child: Text(
         categoryNameCapitalized,
         style: state.interval == interval
-            ? context.textStyles.subtitle2
-            : context.textStyles.subtitle3,
+            ? context.textStyles.subtitle4
+            : context.textStyles.subtitle5,
       ),
     );
   }
@@ -205,7 +204,7 @@ Widget _categoryButton(BuildContext context, Category category, WidgetRef ref) {
       child: Text(
         categoryNameCapitalized,
         style: categoryState == category
-            ? context.textStyles.subtitle2
+            ? context.textStyles.bodyTextSurface3
             : context.textStyles.subtitle3,
         // style: context.textStyles.subtitle3,
       ),
@@ -220,76 +219,88 @@ class _LineChartWidget extends ConsumerWidget {
             as AnalyticsDataReadyState)
         .dataAnalytics
         .bars;
+    final barsIncome = bars.where((bar) => bar.sum > 0).toList();
+    final barsExpenses = bars.where((bar) => bar.sum < 0).toList();
 
-    List<FlSpot> points = [];
+    List<FlSpot> pointsIncome = [];
+    List<FlSpot> pointsExpenses = [];
 
-    for (int i = 0; i < bars.length; i++) {
-      points.add(FlSpot(i.toDouble(), bars[i].sum));
+    for (int i = 0; i < barsIncome.length; i++) {
+      pointsIncome.add(FlSpot(i.toDouble(), barsIncome[i].sum));
     }
 
-    return LineChart(
-      LineChartData(
-        minX: 0,
-        minY: 0,
-        maxX: bars.length.toDouble(),
-        maxY: 300,
-        borderData: FlBorderData(
-          show: false,
-        ),
-        titlesData: FlTitlesData(
-          rightTitles: const AxisTitles(
-            sideTitles: SideTitles(showTitles: false),
+    for (int i = 0; i < barsExpenses.length; i++) {
+      pointsExpenses.add(FlSpot(i.toDouble(), barsExpenses[i].sum*(-1)));
+    }
+
+    double maxIncome = pointsIncome.isNotEmpty
+        ? pointsIncome.reduce((a, b) => a.y > b.y ? a : b).y
+        : 0.0;
+
+    double minExpenses = pointsExpenses.isNotEmpty
+        ? pointsExpenses.reduce((a, b) => a.y < b.y ? a : b).y
+        : 0.0;
+
+    return Container(
+      padding: const EdgeInsets.only(top: 50),
+      child: LineChart(
+        LineChartData(
+          minX: 0,
+          minY: 0,
+          maxX: barsIncome.length.toDouble(),
+          maxY: max(maxIncome, minExpenses*(-1)) * 1.2,
+          borderData: FlBorderData(
+            show: false,
           ),
-          topTitles: const AxisTitles(
-            sideTitles: SideTitles(showTitles: false),
+          titlesData: FlTitlesData(
+            rightTitles: const AxisTitles(
+              sideTitles: SideTitles(showTitles: false),
+            ),
+            topTitles: const AxisTitles(
+              sideTitles: SideTitles(showTitles: false),
+            ),
+            bottomTitles: const AxisTitles(
+              sideTitles: SideTitles(showTitles: false),
+            ),
+            leftTitles: AxisTitles(sideTitles: leftTitles()),
           ),
-          bottomTitles: const AxisTitles(
-            sideTitles: SideTitles(showTitles: false),
-          ),
-          leftTitles: AxisTitles(sideTitles: leftTitles()),
-        ),
-        lineBarsData: [
-          LineChartBarData(
-            spots: points,
-            isCurved: true,
-            color: context.colors.backgroundPrimary,
-            barWidth: 3,
-            belowBarData: BarAreaData(
-              show: true,
-              gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [
-                  context.colors.backgroundPrimary.withOpacity(0.3),
-                  context.colors.backgroundPrimary.withOpacity(0),
-                ],
+          lineBarsData: [
+            LineChartBarData(
+              spots: pointsIncome,
+              isCurved: true,
+              color: context.colors.linearChart1,
+              barWidth: 3,
+              belowBarData: BarAreaData(
+                show: true,
+                gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [
+                    context.colors.linearChart1.withOpacity(0.3),
+                    context.colors.linearChart1.withOpacity(0),
+                  ],
+                ),
               ),
             ),
-          ),
-          // LineChartBarData(
-          //   spots: [
-          //     const FlSpot(0, 7),
-          //     const FlSpot(3, 2),
-          //     const FlSpot(5, 8),
-          //     const FlSpot(8, 1),
-          //     const FlSpot(10, 9),
-          //   ],
-          //   isCurved: true,
-          //   color: context.colors.errorLight,
-          //   barWidth: 3,
-          //   belowBarData: BarAreaData(
-          //     show: true,
-          //     gradient: LinearGradient(
-          //       begin: Alignment.topCenter,
-          //       end: Alignment.bottomCenter,
-          //       colors: [
-          //         context.colors.errorLight.withOpacity(0.3),
-          //         context.colors.errorLight.withOpacity(0),
-          //       ],
-          //     ),
-          //   ),
-          // ),
-        ],
+            LineChartBarData(
+              spots: pointsExpenses,
+              isCurved: true,
+              color: context.colors.linearChart2,
+              barWidth: 3,
+              belowBarData: BarAreaData(
+                show: true,
+                gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [
+                    context.colors.linearChart2.withOpacity(0.3),
+                    context.colors.linearChart2.withOpacity(0),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -302,10 +313,10 @@ class _LineChartWidget extends ConsumerWidget {
       );
 
   Text leftTitleWidgets(double value, TitleMeta meta) {
-    int period = (meta.max - meta.min) ~/ 7;
+    int period = (meta.max - meta.min) ~/ 7+1;
 
     return Text(
-      (value % period == 0 && value > 0) ? value.toInt().toString() : '',
+      (value % period == 0 && value > 0) ? (value).toInt().toString() : '',
       style: TextStyle(
         fontWeight: FontWeight.bold,
         fontSize: 14,
@@ -384,60 +395,64 @@ class _PieChartWithLegend extends ConsumerWidget {
         .dataAnalytics
         .categories;
 
-    List<CategoryAnalytics> expensesCategories =
-        categories.where((category) => category.sum < 0).toList();
+    // List<CategoryAnalytics> expensesCategories =
+    //     categories.where((category) => category.sum < 0).toList();
 
-    double totalSum = expensesCategories.fold(
+    var factor = 100;
+
+    List<CategoryAnalytics> categoryList = List.from(categories);
+
+    double totalSum = categoryList.fold(
         0, (previousValue, category) => previousValue + category.sum);
 
-    expensesCategories.sort((a, b) => a.sum.compareTo(b.sum));
+    categoryList.sort((a, b) => a.sum.compareTo(b.sum));
 
     List<PieChartSectionData> sections = [];
 
-    if (expensesCategories.length <= 4) {
-      sections = expensesCategories.map((category) {
-        final double value = (100) * (category.sum / totalSum);
+    if (categories.length <= 4) {
+      sections = categories.map((category) {
+        final double value = factor * (category.sum / totalSum);
         return PieChartSectionData(
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
             colors: [
-              context.colors.graphColors[expensesCategories.indexOf(category)],
+              context.colors.graphColors[categoryList.indexOf(category)],
               context
-                  .colors.graphDarkColors[expensesCategories.indexOf(category)],
+                  .colors.graphDarkColors[categoryList.indexOf(category)],
             ],
           ),
           value: value,
           title: '${(value).toStringAsFixed(1)}%',
           radius: 80,
-          titleStyle: context.textStyles.subtitle2,
+          titleStyle: context.textStyles.bodyTextSurface2,
         );
       }).toList();
     } else {
-      sections = expensesCategories.sublist(0, 4).map((category) {
-        final double value = (100) * (category.sum / totalSum);
+      sections = categoryList.sublist(0, 4).map((category) {
+        final double value = factor * (category.sum / totalSum);
         return PieChartSectionData(
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
             colors: [
-              context.colors.graphColors[expensesCategories.indexOf(category)],
+              context.colors.graphColors[categoryList.indexOf(category)],
               context
-                  .colors.graphDarkColors[expensesCategories.indexOf(category)],
+                  .colors.graphDarkColors[categoryList.indexOf(category)],
             ],
           ),
           value: value,
           title: '${(value).toStringAsFixed(1)}%',
           radius: 80,
-          titleStyle: context.textStyles.subtitle2,
+          titleStyle: context.textStyles.bodyTextSurface2,
         );
       }).toList();
 
       double otherSum = 0.0;
-      for (int i = 4; i < expensesCategories.length; i++) {
-        otherSum += expensesCategories[i].sum;
+      for (int i = 4; i < categoryList.length; i++) {
+        otherSum += categoryList[i].sum;
       }
-      final double otherValue = (100) * (otherSum / totalSum);
+      final double otherValue = factor * (otherSum / totalSum);
       sections.add(
         PieChartSectionData(
           gradient: LinearGradient(
@@ -451,7 +466,7 @@ class _PieChartWithLegend extends ConsumerWidget {
           value: otherValue,
           title: '${(otherValue).toStringAsFixed(1)}%',
           radius: 80,
-          titleStyle: context.textStyles.subtitle2,
+          titleStyle: context.textStyles.bodyTextSurface2,
         ),
       );
     }
@@ -479,14 +494,14 @@ class _PieChartWithLegend extends ConsumerWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   for (int i = 0;
-                      i < min(4, expensesCategories.length);
+                      i < min(4, categoryList.length);
                       i++) // Перебираем первые четыре категории
                     _legendItem(
                       context,
                       color: context.colors.graphColors[i],
-                      title: expensesCategories[i].category.title.toString(),
+                      title: categoryList[i].category.title.toString(),
                     ),
-                  if (expensesCategories.length >
+                  if (categoryList.length >
                       4) // Если категорий больше 4, добавляем категорию "Other"
                     _legendItem(context,
                         color: context.colors.graphColors[4], title: 'Other'),
@@ -513,7 +528,7 @@ class _PieChartWithLegend extends ConsumerWidget {
           const SizedBox(width: 8),
           Text(
             title,
-            style: context.textStyles.subtitle1,
+            style: context.textStyles.bodyTextSurface2,
           ),
         ],
       ),

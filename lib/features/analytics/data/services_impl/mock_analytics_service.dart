@@ -9,13 +9,20 @@ class MockAnalyticsService implements AnalyticsService {
     );
     final resultWeek = {
       'bars': [
-        {'label': 'mon', 'sum': 289},
-        {'label': 'tue', 'sum': 241},
-        {'label': 'wen', 'sum': 123},
-        {'label': 'thu', 'sum': 226},
-        {'label': 'fri', 'sum': 109},
-        {'label': 'sut', 'sum': 208},
-        {'label': 'sun', 'sum': 165},
+        {'label': 'mon', 'sum': -289},
+        {'label': 'tue', 'sum': -241},
+        {'label': 'wen', 'sum': -123},
+        {'label': 'thu', 'sum': -226},
+        {'label': 'fri', 'sum': -109},
+        {'label': 'sut', 'sum': -208},
+        {'label': 'sun', 'sum': -35},
+        {'label': 'mon', 'sum': 20},
+        {'label': 'tue', 'sum': 108},
+        {'label': 'wen', 'sum': 500},
+        {'label': 'thu', 'sum': 278},
+        {'label': 'fri', 'sum': 12},
+        {'label': 'sut', 'sum': 89},
+        {'label': 'sun', 'sum': 12},
       ],
       'categories': [
         {
@@ -107,7 +114,7 @@ class MockAnalyticsService implements AnalyticsService {
         {
           'category': {
             'id': 1,
-            'icon': true,
+            'icon': ":house:",
             'title': 'Home',
           },
           'sum': 367,
