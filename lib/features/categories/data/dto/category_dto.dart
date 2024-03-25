@@ -10,6 +10,7 @@ class CategoryDTO with _$CategoryDTO {
     required int id,
     required String title,
     required String icon,
+    required int color,
   }) = _CategoryDTO;
 
   factory CategoryDTO.fromJson(Map<String, Object?> json) =>

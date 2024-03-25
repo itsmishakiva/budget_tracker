@@ -1,4 +1,5 @@
 import 'package:budget_tracker/features/categories/domain/entities/category.dart';
+import 'package:budget_tracker/features/operations/domain/entities/new_operation.dart';
 
 sealed class OperationCreationTypeViewState {}
 
@@ -12,13 +13,9 @@ class OperationCreationTypeViewDataState
     extends OperationCreationTypeViewState {
   OperationCreationTypeViewDataState({
     required this.data,
-    required this.sum,
-    required this.selectedCategory,
-    required this.isIncome,
+    required this.newOperation,
   });
 
   final List<Category> data;
-  final double sum;
-  final Category selectedCategory;
-  final bool isIncome;
+  final NewOperation newOperation;
 }

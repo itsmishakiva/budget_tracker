@@ -47,19 +47,14 @@ class _OperationCreationTypeScreenContent extends ConsumerWidget {
             children: [
               CustomScrollViewWidget(
                 tiles: state.data,
-                isIncome: state.isIncome,
+                isIncome: state.newOperation.incoming,
               ),
               Align(
                 alignment: Alignment.bottomCenter,
                 child: AppButton(
                   title: context.locale!.next,
                   onTap: () {
-                    // final newOperation = NewOperation(
-                    //   incoming: state.isIncome,
-                    //   sum: state.sum,
-                    //   category: state.selectedCategory,
-                    // );
-                    // TODO отправка сущности
+                    // TODO отправка
                   },
                 ),
               ),
