@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:budget_tracker/core/internal/app_router_provider.dart';
 import 'package:budget_tracker/core/internal/logger_provider.dart';
 import 'package:budget_tracker/core/ui_kit/app_scaffold.dart';
 import 'package:budget_tracker/core/ui_kit/constraints_constants.dart';
@@ -27,29 +28,39 @@ class OperationCreationTypeScreen extends StatelessWidget {
 class _OperationCreationTypeScreenContent extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.watch(operationCreationViewModelProvider);
+    final state = ref.watch(operationCreationTypeViewModelProvider);
     final constraints = ref.watch(constraintsConstantsProvider);
     switch (state) {
-      case OperationCreationViewLoadingState _:
+      case OperationCreationTypeViewLoadingState _:
         ref.read(loggerProvider).log(Level.INFO, 'Hello!');
         return const Center(
           child: CircularProgressIndicator(),
         );
-      case OperationCreationViewErrorState _:
+      case OperationCreationTypeViewErrorState _:
         return const Center(
           child: Icon(Icons.error),
         );
-      case OperationCreationViewDataState _:
+      case OperationCreationTypeViewDataState _:
         return Padding(
           padding: EdgeInsets.all(constraints.horizontalScreenPadding),
           child: Stack(
             children: [
-              CustomScrollViewWidget(tiles: state.data),
+              CustomScrollViewWidget(
+                tiles: state.data,
+                isIncome: state.isIncome,
+              ),
               Align(
                 alignment: Alignment.bottomCenter,
                 child: AppButton(
                   title: context.locale!.next,
-                  onTap: () {},
+                  onTap: () {
+                    // final newOperation = NewOperation(
+                    //   incoming: state.isIncome,
+                    //   sum: state.sum,
+                    //   category: state.selectedCategory,
+                    // );
+                    // TODO отправка сущности
+                  },
                 ),
               ),
             ],
@@ -59,12 +70,17 @@ class _OperationCreationTypeScreenContent extends ConsumerWidget {
   }
 }
 
-class CustomScrollViewWidget extends StatelessWidget {
-  const CustomScrollViewWidget({super.key, required this.tiles});
+class CustomScrollViewWidget extends ConsumerWidget {
+  const CustomScrollViewWidget({
+    super.key,
+    required this.tiles,
+    required this.isIncome,
+  });
 
   final List<Category> tiles;
+  final bool isIncome;
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return CustomScrollView(
       slivers: [
         SliverAppBar(
@@ -75,7 +91,11 @@ class CustomScrollViewWidget extends StatelessWidget {
               Icons.arrow_back_ios_new,
               color: context.colors.textPrimary,
             ),
-            onTap: () {},
+            onTap: () {
+              ref
+                  .read(appRouterProvider)
+                  .navigateNamed('/operation_creation_sum');
+            },
           ),
           title: Text(
             context.locale!.createTransaction,
@@ -85,7 +105,7 @@ class CustomScrollViewWidget extends StatelessWidget {
         SliverList(
           delegate: SliverChildListDelegate(
             [
-              const _TypeTileGroup(),
+              _TypeTileGroup(isIncome: isIncome),
               const _ChoiceTileGroup(),
             ],
           ),
@@ -113,16 +133,23 @@ class CustomScrollViewWidget extends StatelessWidget {
 }
 
 class _OperationTypeTile extends ConsumerWidget {
-  const _OperationTypeTile({required this.isSelected, required this.isIncome});
+  const _OperationTypeTile({required this.incomeType, required this.isIncome});
 
-  final bool isSelected;
+  final bool incomeType;
   final bool isIncome;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final constraints = ref.watch(constraintsConstantsProvider);
+    final isIncome = ref
+        .watch(operationCreationTypeViewModelProvider.notifier)
+        .returnIncomeValue();
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        ref
+            .read(operationCreationTypeViewModelProvider.notifier)
+            .changeIncomeType(incomeType);
+      },
       child: SizedBox(
         height: 80,
         child: Card(
@@ -137,20 +164,20 @@ class _OperationTypeTile extends ConsumerWidget {
             child: ListTile(
               // tileColor: Colors.white,
               leading: CircleAvatar(
-                backgroundColor: (isIncome)
+                backgroundColor: (incomeType)
                     ? context.colors.successLight
                     : context.colors.errorLight,
-                child: (isIncome)
+                child: (incomeType)
                     ? Icon(
-                        Icons.upload,
+                        Icons.arrow_downward_rounded,
                         color: context.colors.success,
                       )
                     : Icon(
-                        Icons.download,
+                        Icons.arrow_upward_rounded,
                         color: context.colors.error,
                       ),
               ),
-              title: (isIncome)
+              title: (incomeType)
                   ? Text(
                       context.locale!.incomingTransaction,
                       style: context.textStyles.textButton,
@@ -160,12 +187,9 @@ class _OperationTypeTile extends ConsumerWidget {
                       softWrap: false,
                       style: context.textStyles.textButton,
                     ),
-              trailing: Radio(
-                activeColor: context.colors.textPrimary,
-                value: 0,
-                groupValue: 0,
-                onChanged: (value) {},
-              ),
+              trailing: (incomeType == isIncome)
+                  ? const RadioIcon(true)
+                  : const RadioIcon(false),
             ),
           ),
         ),
@@ -174,8 +198,41 @@ class _OperationTypeTile extends ConsumerWidget {
   }
 }
 
+class RadioIcon extends StatelessWidget {
+  const RadioIcon(this.showDot, {super.key});
+
+  final bool showDot;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 20,
+      height: 20,
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        color: context.colors.backgroundPrimary,
+        border: Border.all(color: context.colors.textPrimary, width: 3),
+      ),
+      child: (showDot)
+          ? Center(
+              child: Container(
+                width: 8,
+                height: 8,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: context.colors.textPrimary,
+                ),
+              ),
+            )
+          : Container(),
+    );
+  }
+}
+
 class _TypeTileGroup extends StatelessWidget {
-  const _TypeTileGroup();
+  const _TypeTileGroup({required this.isIncome});
+
+  final bool isIncome;
 
   @override
   Widget build(BuildContext context) {
@@ -192,16 +249,16 @@ class _TypeTileGroup extends StatelessWidget {
         const SizedBox(
           height: 5,
         ),
-        const _OperationTypeTile(
-          isSelected: true,
-          isIncome: true,
+        _OperationTypeTile(
+          incomeType: true,
+          isIncome: isIncome,
         ),
         const SizedBox(
           height: 5,
         ),
-        const _OperationTypeTile(
-          isSelected: false,
-          isIncome: false,
+        _OperationTypeTile(
+          incomeType: false,
+          isIncome: isIncome,
         ),
       ],
     );
@@ -220,9 +277,16 @@ class _OperationChoiceTile extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final selectedChoiceTile = ref
+        .watch(operationCreationTypeViewModelProvider.notifier)
+        .returnSelectedCategory();
     final constraints = ref.watch(constraintsConstantsProvider);
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        ref
+            .read(operationCreationTypeViewModelProvider.notifier)
+            .selectCategory(categoryTile);
+      },
       child: SizedBox(
         height: 80,
         child: Card(
@@ -242,12 +306,7 @@ class _OperationChoiceTile extends ConsumerWidget {
                 categoryTile.title,
                 style: context.textStyles.textButton,
               ),
-              trailing: Radio(
-                activeColor: context.colors.textPrimary,
-                value: 0,
-                groupValue: 0,
-                onChanged: (value) {},
-              ),
+              trailing: RadioIcon(categoryTile == selectedChoiceTile),
             ),
           ),
         ),

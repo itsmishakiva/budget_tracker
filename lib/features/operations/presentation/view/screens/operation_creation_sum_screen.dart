@@ -4,8 +4,9 @@ import 'package:budget_tracker/core/ui_kit/app_scaffold.dart';
 import 'package:budget_tracker/core/ui_kit/constraints_constants.dart';
 import 'package:budget_tracker/core/ui_kit/widgets/app_button.dart';
 import 'package:budget_tracker/extensions/build_context_extension.dart';
-import 'package:budget_tracker/features/operations/internal/numpad_provider.dart';
 import 'package:budget_tracker/features/operations/presentation/view/widgets/numpad.dart';
+import 'package:budget_tracker/features/operations/presentation/view_model/operation_creation_sum_view_model.dart';
+import 'package:budget_tracker/features/operations/presentation/view_model/operation_creation_sum_view_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -17,49 +18,65 @@ class OperationCreationSumScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return AppScaffold(
       backgroundColor: context.colors.accent,
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 16),
-                  child: GestureDetector(
-                    child: Icon(
-                      Icons.arrow_back_ios_new,
-                      color: context.colors.backgroundPrimary,
-                    ),
-                    onTap: () {
-                      ref.read(appRouterProvider).maybePop();
-                    },
-                  ),
-                ),
-                Text(
-                  context.locale!.inputAmount,
-                  style: context.textStyles.bodyTextSurface
-                      .copyWith(fontWeight: FontWeight.w700),
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                // MyButton(),
-              ],
-            ),
-          ),
-          const Expanded(
-            child: _SumInputContainer(),
-          ),
-        ],
-      ),
+      body: const _OperationCreationSumScreenContent(),
     );
   }
 }
 
+class _OperationCreationSumScreenContent extends ConsumerWidget {
+  const _OperationCreationSumScreenContent();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final state = ref.watch(operationCreationSumViewModelProvider);
+    switch (state) {
+      case OperationCreationSumViewLoadingState _:
+        return const Center(
+          child: CircularProgressIndicator(),
+        );
+      case OperationCreationSumViewErrorState _:
+        return const Center(
+          child: Icon(Icons.error),
+        );
+      case OperationCreationSumViewDataState _:
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            AppBar(
+              forceMaterialTransparency: true,
+              centerTitle: true,
+              leading: GestureDetector(
+                child: Icon(
+                  Icons.arrow_back_ios_new,
+                  color: context.colors.backgroundPrimary,
+                ),
+                onTap: () {
+                  ref.read(appRouterProvider).maybePop();
+                },
+              ),
+              title: Text(
+                context.locale!.inputAmount,
+                style: context.textStyles.header1
+                    .copyWith(color: context.colors.backgroundPrimary),
+              ),
+            ),
+            // Spacer(),
+            Expanded(
+              child: _SumInputContainer(
+                displaySum: state.sum,
+                balance: state.checkData[0].sum,
+              ),
+            ),
+          ],
+        );
+    }
+  }
+}
+
 class CurrentBalance extends StatelessWidget {
-  const CurrentBalance({super.key});
+  const CurrentBalance({super.key, required this.balance});
+
+  final double balance;
 
   @override
   Widget build(BuildContext context) {
@@ -71,7 +88,7 @@ class CurrentBalance extends StatelessWidget {
               .copyWith(fontWeight: FontWeight.w300),
         ),
         Text(
-          '1234.3',
+          balance.toString(),
           style: context.textStyles.bodyTextSurface
               .copyWith(fontWeight: FontWeight.w700),
         ),
@@ -81,27 +98,31 @@ class CurrentBalance extends StatelessWidget {
 }
 
 class _SumInputContainer extends ConsumerWidget {
-  const _SumInputContainer();
+  const _SumInputContainer({required this.displaySum, required this.balance});
+
+  final String displaySum;
+  final double balance;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final display = ref.watch(numpadControllerProvider);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16.0),
           child: Text(
-            '₽$display',
+            '₽$displaySum',
             style: context.textStyles.headerSurface1,
           ),
         ),
         const SizedBox(
           height: 5,
         ),
-        const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16.0),
-          child: CurrentBalance(),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          child: CurrentBalance(
+            balance: balance,
+          ),
         ),
         const SizedBox(
           height: 25,

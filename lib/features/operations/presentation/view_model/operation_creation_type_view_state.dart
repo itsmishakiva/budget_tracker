@@ -1,13 +1,24 @@
 import 'package:budget_tracker/features/categories/domain/entities/category.dart';
 
-sealed class OperationCreationViewState {} // тут стейт страницы
+sealed class OperationCreationTypeViewState {}
 
-class OperationCreationViewLoadingState extends OperationCreationViewState {}
+class OperationCreationTypeViewLoadingState
+    extends OperationCreationTypeViewState {}
 
-class OperationCreationViewErrorState extends OperationCreationViewState {}
+class OperationCreationTypeViewErrorState
+    extends OperationCreationTypeViewState {}
 
-class OperationCreationViewDataState extends OperationCreationViewState {
-  OperationCreationViewDataState({required this.data});
+class OperationCreationTypeViewDataState
+    extends OperationCreationTypeViewState {
+  OperationCreationTypeViewDataState({
+    required this.data,
+    required this.sum,
+    required this.selectedCategory,
+    required this.isIncome,
+  });
 
-  final List<Category> data; // лист тайлов с категориями
+  final List<Category> data;
+  final double sum;
+  final Category selectedCategory;
+  final bool isIncome;
 }

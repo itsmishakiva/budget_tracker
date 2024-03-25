@@ -1,32 +1,8 @@
 import 'package:budget_tracker/core/ui_kit/constraints_constants.dart';
 import 'package:budget_tracker/core/ui_kit/widgets/numeric_keyboard_button.dart';
-import 'package:budget_tracker/features/operations/internal/numpad_provider.dart';
+import 'package:budget_tracker/features/operations/presentation/view_model/operation_creation_sum_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-class NumpadController extends StateNotifier<String> {
-  NumpadController() : super('0');
-
-  void appendDigit(String digit) {
-    if (state.length < 10) {
-      (state == '0') ? {state = digit} : {state = state + digit};
-    }
-  }
-
-  void deleteLastDigit() {
-    if (state.length > 1) {
-      state = state.substring(0, state.length - 1);
-    } else {
-      state = '0';
-    }
-  }
-
-  void appendComma() {
-    if ((!state.contains(',')) && (state.length > 1)) {
-      state = '$state,';
-    }
-  }
-}
 
 class NumericRow extends ConsumerWidget {
   const NumericRow({super.key, required this.startNumber});
@@ -41,7 +17,9 @@ class NumericRow extends ConsumerWidget {
         3,
         (index) => NumericKeyboardButton(
           text: (index + startNumber).toString(),
-          onTap: () => ref.read(numpadControllerProvider.notifier).appendDigit(
+          onTap: () => ref
+              .read(operationCreationSumViewModelProvider.notifier)
+              .appendNumber(
                 (index + startNumber).toString(),
               ),
         ),
@@ -76,23 +54,25 @@ class Numpad extends ConsumerWidget {
                   text: ',',
                   // svgAssetName: 'assets/svg/comma_svg',
                   onTap: () {
-                    ref.read(numpadControllerProvider.notifier).appendComma();
+                    ref
+                        .read(operationCreationSumViewModelProvider.notifier)
+                        .appendComma();
                   },
                 ),
                 NumericKeyboardButton(
                   text: '0',
                   onTap: () {
                     ref
-                        .read(numpadControllerProvider.notifier)
-                        .appendDigit('0');
+                        .read(operationCreationSumViewModelProvider.notifier)
+                        .appendNumber('0');
                   },
                 ),
                 NumericKeyboardButton(
                   svgAssetName: 'assets/svg/back_icon.svg',
                   onTap: () {
                     ref
-                        .read(numpadControllerProvider.notifier)
-                        .deleteLastDigit();
+                        .read(operationCreationSumViewModelProvider.notifier)
+                        .deleteSymbol();
                   },
                 ),
               ],

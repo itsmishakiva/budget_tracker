@@ -8,7 +8,7 @@ class MockCategoryListService implements CategoryListService {
       const Duration(seconds: 2),
     );
     final result = {
-      'operation_types': [
+      'categories': [
         {
           'id': 1,
           'title': 'Trip',
@@ -47,9 +47,7 @@ class MockCategoryListService implements CategoryListService {
         },
       ],
     };
-    return result['operation_types']
-            ?.map((e) => CategoryDTO.fromJson(e))
-            .toList() ??
+    return result['categories']?.map((e) => CategoryDTO.fromJson(e)).toList() ??
         [];
   }
 }
