@@ -31,7 +31,9 @@ class HomeViewModel extends StateNotifier<HomeViewState> {
   Future<void> loadData() async {
     try {
       final dataAccount = await _repositoryAccount.getCheck();
+      print(dataAccount);
       final dataOperations = await _repositoryOperation.getOperationList();
+      print(dataOperations);
       state = HomeViewDataState(
         dataAccount: dataAccount,
         dataOperations: dataOperations,

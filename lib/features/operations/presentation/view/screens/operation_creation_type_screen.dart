@@ -72,7 +72,7 @@ class CustomScrollViewWidget extends ConsumerWidget {
     required this.isIncome,
   });
 
-  final List<Category> tiles;
+  final List<Category>? tiles;
   final bool isIncome;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -105,18 +105,21 @@ class CustomScrollViewWidget extends ConsumerWidget {
             ],
           ),
         ),
-        SliverList.separated(
-          separatorBuilder: (BuildContext context, int index) => const SizedBox(
-            height: 5,
-          ),
-          itemCount: tiles.length,
-          itemBuilder: (BuildContext context, int index) {
-            return _OperationChoiceTile(
-              isSelected: false,
-              categoryTile: tiles[index],
-            );
-          },
-        ),
+        (tiles != null)
+            ? SliverList.separated(
+                separatorBuilder: (BuildContext context, int index) =>
+                    const SizedBox(
+                  height: 5,
+                ),
+                itemCount: tiles!.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return _OperationChoiceTile(
+                    isSelected: false,
+                    categoryTile: tiles![index],
+                  );
+                },
+              )
+            : const Icon(Icons.question_mark),
         const SliverToBoxAdapter(
           child: SizedBox(
             height: 55,

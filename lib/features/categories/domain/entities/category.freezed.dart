@@ -50,7 +50,7 @@ class _$CategoryCopyWithImpl<$Res, $Val extends Category>
     Object? id = null,
     Object? title = null,
     Object? icon = null,
-    Object? color = freezed,
+    Object? color = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -65,7 +65,7 @@ class _$CategoryCopyWithImpl<$Res, $Val extends Category>
           ? _value.icon
           : icon // ignore: cast_nullable_to_non_nullable
               as String,
-      color: freezed == color
+      color: null == color
           ? _value.color
           : color // ignore: cast_nullable_to_non_nullable
               as Color,
@@ -98,7 +98,7 @@ class __$$CategoryImplCopyWithImpl<$Res>
     Object? id = null,
     Object? title = null,
     Object? icon = null,
-    Object? color = freezed,
+    Object? color = null,
   }) {
     return _then(_$CategoryImpl(
       id: null == id
@@ -113,7 +113,7 @@ class __$$CategoryImplCopyWithImpl<$Res>
           ? _value.icon
           : icon // ignore: cast_nullable_to_non_nullable
               as String,
-      color: freezed == color
+      color: null == color
           ? _value.color
           : color // ignore: cast_nullable_to_non_nullable
               as Color,
@@ -152,12 +152,11 @@ class _$CategoryImpl implements _Category {
             (identical(other.id, id) || other.id == id) &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.icon, icon) || other.icon == icon) &&
-            const DeepCollectionEquality().equals(other.color, color));
+            (identical(other.color, color) || other.color == color));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, id, title, icon, const DeepCollectionEquality().hash(color));
+  int get hashCode => Object.hash(runtimeType, id, title, icon, color);
 
   @JsonKey(ignore: true)
   @override

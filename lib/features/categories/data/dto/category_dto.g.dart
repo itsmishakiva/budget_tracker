@@ -10,7 +10,7 @@ _$CategoryDTOImpl _$$CategoryDTOImplFromJson(Map<String, dynamic> json) =>
     _$CategoryDTOImpl(
       id: json['id'] as int,
       title: json['title'] as String,
-      icon: json['icon'] as String,
+      icon: json['emoji'] as String,
       color: json['color'] as int,
     );
 
@@ -18,6 +18,6 @@ Map<String, dynamic> _$$CategoryDTOImplToJson(_$CategoryDTOImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'title': instance.title,
-      'icon': instance.icon,
+      'emoji': instance.icon,
       'color': instance.color,
     };

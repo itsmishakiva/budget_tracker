@@ -18,7 +18,7 @@ class MockOperationListService implements OperationListService {
           'category': {
             'id': 1,
             'title': 'Category 1',
-            'icon': 'Home',
+            'emoji': 'Home',
             'color': 1,
           },
         },
@@ -30,7 +30,7 @@ class MockOperationListService implements OperationListService {
           'category': {
             'id': 2,
             'title': 'Category 2',
-            'icon': 'Food',
+            'emoji': 'Food',
             'color': 1,
           },
         },
@@ -42,7 +42,7 @@ class MockOperationListService implements OperationListService {
           'category': {
             'id': 1,
             'title': 'Category 1',
-            'icon': 'Home',
+            'emoji': 'Home',
             'color': 1,
           },
         },
@@ -54,7 +54,7 @@ class MockOperationListService implements OperationListService {
           'category': {
             'id': 2,
             'title': 'Category 2',
-            'icon': 'Food',
+            'emoji': 'Food',
             'color': 1,
           },
         },
@@ -66,7 +66,7 @@ class MockOperationListService implements OperationListService {
           'category': {
             'id': 1,
             'title': 'Category 1',
-            'icon': 'Home',
+            'emoji': 'Home',
             'color': 1,
           },
         },
@@ -78,7 +78,7 @@ class MockOperationListService implements OperationListService {
           'category': {
             'id': 2,
             'title': 'Category 2',
-            'icon': 'Food',
+            'emoji': 'Food',
             'color': 1,
           },
         },
@@ -90,7 +90,7 @@ class MockOperationListService implements OperationListService {
           'category': {
             'id': 1,
             'title': 'Category 1',
-            'icon': 'Home',
+            'emoji': 'Home',
             'color': 1,
           },
         },
@@ -102,7 +102,7 @@ class MockOperationListService implements OperationListService {
           'category': {
             'id': 2,
             'title': 'Category 2',
-            'icon': 'Food',
+            'emoji': 'Food',
             'color': 1,
           },
         },
@@ -114,7 +114,7 @@ class MockOperationListService implements OperationListService {
           'category': {
             'id': 1,
             'title': 'Category 1',
-            'icon': 'Home',
+            'emoji': 'Home',
             'color': 1,
           },
         },
@@ -126,7 +126,7 @@ class MockOperationListService implements OperationListService {
           'category': {
             'id': 2,
             'title': 'Category 2',
-            'icon': 'Food',
+            'emoji': 'Food',
             'color': 1,
           },
         },
@@ -138,7 +138,7 @@ class MockOperationListService implements OperationListService {
           'category': {
             'id': 1,
             'title': 'Category 1',
-            'icon': 'Home',
+            'emoji': 'Home',
             'color': 1,
           },
         },
@@ -150,7 +150,7 @@ class MockOperationListService implements OperationListService {
           'category': {
             'id': 2,
             'title': 'Category 2',
-            'icon': 'Food',
+            'emoji': 'Food',
             'color': 1,
           },
         },

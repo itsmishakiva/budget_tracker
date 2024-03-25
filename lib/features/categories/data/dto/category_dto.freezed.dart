@@ -22,6 +22,7 @@ CategoryDTO _$CategoryDTOFromJson(Map<String, dynamic> json) {
 mixin _$CategoryDTO {
   int get id => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
+  @JsonKey(name: 'emoji')
   String get icon => throw _privateConstructorUsedError;
   int get color => throw _privateConstructorUsedError;
 
@@ -37,7 +38,8 @@ abstract class $CategoryDTOCopyWith<$Res> {
           CategoryDTO value, $Res Function(CategoryDTO) then) =
       _$CategoryDTOCopyWithImpl<$Res, CategoryDTO>;
   @useResult
-  $Res call({int id, String title, String icon, int color});
+  $Res call(
+      {int id, String title, @JsonKey(name: 'emoji') String icon, int color});
 }
 
 /// @nodoc
@@ -87,7 +89,8 @@ abstract class _$$CategoryDTOImplCopyWith<$Res>
       __$$CategoryDTOImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int id, String title, String icon, int color});
+  $Res call(
+      {int id, String title, @JsonKey(name: 'emoji') String icon, int color});
 }
 
 /// @nodoc
@@ -133,7 +136,7 @@ class _$CategoryDTOImpl with DiagnosticableTreeMixin implements _CategoryDTO {
   _$CategoryDTOImpl(
       {required this.id,
       required this.title,
-      required this.icon,
+      @JsonKey(name: 'emoji') required this.icon,
       required this.color});
 
   factory _$CategoryDTOImpl.fromJson(Map<String, dynamic> json) =>
@@ -144,6 +147,7 @@ class _$CategoryDTOImpl with DiagnosticableTreeMixin implements _CategoryDTO {
   @override
   final String title;
   @override
+  @JsonKey(name: 'emoji')
   final String icon;
   @override
   final int color;
@@ -197,7 +201,7 @@ abstract class _CategoryDTO implements CategoryDTO {
   factory _CategoryDTO(
       {required final int id,
       required final String title,
-      required final String icon,
+      @JsonKey(name: 'emoji') required final String icon,
       required final int color}) = _$CategoryDTOImpl;
 
   factory _CategoryDTO.fromJson(Map<String, dynamic> json) =
@@ -208,6 +212,7 @@ abstract class _CategoryDTO implements CategoryDTO {
   @override
   String get title;
   @override
+  @JsonKey(name: 'emoji')
   String get icon;
   @override
   int get color;
