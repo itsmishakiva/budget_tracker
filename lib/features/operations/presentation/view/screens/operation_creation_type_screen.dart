@@ -1,5 +1,4 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:budget_tracker/core/internal/app_router_provider.dart';
 import 'package:budget_tracker/core/internal/logger_provider.dart';
 import 'package:budget_tracker/core/ui_kit/app_scaffold.dart';
 import 'package:budget_tracker/core/ui_kit/constraints_constants.dart';
@@ -50,9 +49,7 @@ class _OperationCreationTypeScreenContent extends ConsumerWidget {
                 alignment: Alignment.bottomCenter,
                 child: AppButton(
                   title: context.locale!.next,
-                  onTap: () {
-
-                  },
+                  onTap: () {},
                 ),
               ),
             ],
