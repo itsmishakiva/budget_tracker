@@ -114,7 +114,7 @@ class MockAnalyticsService implements AnalyticsService {
         {
           'category': {
             'id': 1,
-            'icon': ":house:",
+            'icon': ':house:',
             'title': 'Home',
           },
           'sum': 367,

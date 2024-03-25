@@ -143,7 +143,7 @@ class AppTextStylesRealization extends AppTextStyles {
             fontWeight: FontWeight.w800,
             fontSize: 16.0,
             color: colors.error,
-          )
+          ),
         );
 }
 
@@ -235,7 +235,7 @@ class AppTextStyles extends ThemeExtension<AppTextStyles> {
       bodyTextSurface: bodyTextSurface ?? this.bodyTextSurface,
       bodyTextSurface1: bodyTextSurface1 ?? this.bodyTextSurface1,
       bodyTextSurface2: bodyTextSurface2 ?? this.bodyTextSurface2,
-      bodyTextSurface3: bodyTextSurface3 ?? this.bodyTextSurface3,
+      bodyTextSurface3: bodyTextSurface3,
       textButton: textButton ?? this.textButton,
       hint: hint ?? this.hint,
       subtitle1: subtitle1 ?? this.subtitle1,

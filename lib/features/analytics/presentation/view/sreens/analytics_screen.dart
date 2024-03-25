@@ -57,7 +57,7 @@ class _Body extends ConsumerWidget {
         ref.read(loggerProvider).log(Level.INFO, 'Hello!');
         return Center(
           child: CircularProgressIndicator(
-              color: context.colors.backgroundPrimary),
+              color: context.colors.backgroundPrimary,),
         );
       case AnalyticsDataErrorState _:
         return const Center(
@@ -74,14 +74,16 @@ class _Body extends ConsumerWidget {
                 child: PageView(
                   controller: pageController,
                   onPageChanged: (int page) {
-                    if (page == 0)
+                    if (page == 0) {
                       ref
                           .read(analyticsModelProvider.notifier)
                           .changeChart(Chart.liner);
-                    if (page == 1)
+                    }
+                    if (page == 1) {
                       ref
                           .read(analyticsModelProvider.notifier)
                           .changeChart(Chart.pie);
+                    }
                   },
                   children: [
                     _LineChartWidget(),
@@ -133,7 +135,7 @@ class _Body extends ConsumerWidget {
                           return GridTile(
                             child: CategoryAnalyticsScreen(
                                 categoryAnalytics:
-                                    state.dataAnalytics.categories[index]),
+                                    state.dataAnalytics.categories[index],),
                           );
                         },
                       ),
@@ -403,7 +405,7 @@ class _PieChartWithLegend extends ConsumerWidget {
     List<CategoryAnalytics> categoryList = List.from(categories);
 
     double totalSum = categoryList.fold(
-        0, (previousValue, category) => previousValue + category.sum);
+        0, (previousValue, category) => previousValue + category.sum,);
 
     categoryList.sort((a, b) => a.sum.compareTo(b.sum));
 
@@ -504,7 +506,7 @@ class _PieChartWithLegend extends ConsumerWidget {
                   if (categoryList.length >
                       4) // Если категорий больше 4, добавляем категорию "Other"
                     _legendItem(context,
-                        color: context.colors.graphColors[4], title: 'Other'),
+                        color: context.colors.graphColors[4], title: 'Other',),
                 ],
               ),
             ),
@@ -515,7 +517,7 @@ class _PieChartWithLegend extends ConsumerWidget {
   }
 
   Widget _legendItem(BuildContext context,
-      {required Color color, required String title}) {
+      {required Color color, required String title,}) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 4),
       child: Row(
@@ -546,7 +548,7 @@ class _NavigationPoints extends ConsumerWidget {
         color: isFilled ? context.colors.backgroundPrimary : Colors.transparent,
         border: Border.all(
             color: context.colors.backgroundPrimary,
-            width: 2.0), // Цветная граница
+            width: 2.0,),
       ),
     );
   }
