@@ -11,5 +11,13 @@
     "next": "Далее",
     "done": "Готово",
     "currentBalance": "Текущий баланс",
-    "inputAmount": "Введите сумму"
+    "inputAmount": "Введите сумму",
+    "welcome" : "Добро\nпожаловать!",
+    "signUp" : "Регистрация",
+    "signIn" : "Вход",
+    "username" : "Username",
+    "password": "Пароль",
+    "repeatPassword" : "Повторите пароль",
+    "alreadyRegistered" : "Уже есть аккаунт?",
+    "notRegistered" : "Еще нет аккаунта?"
 }

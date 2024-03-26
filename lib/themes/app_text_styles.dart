@@ -74,8 +74,8 @@ class AppTextStylesRealization extends AppTextStyles {
           ),
           textButton: TextStyle(
             fontFamily: 'Nunito',
-            fontWeight: FontWeight.w600,
-            fontSize: 15,
+            fontWeight: FontWeight.w800,
+            fontSize: 18,
             color: colors.textPrimary,
           ),
           hint: TextStyle(

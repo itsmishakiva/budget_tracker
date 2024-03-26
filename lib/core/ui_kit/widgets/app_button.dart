@@ -1,5 +1,6 @@
 import 'package:budget_tracker/core/ui_kit/constraints_constants.dart';
 import 'package:budget_tracker/extensions/build_context_extension.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -7,13 +8,15 @@ class AppButton extends ConsumerWidget {
   const AppButton({
     super.key,
     required this.onTap,
-    this.color,
     required this.title,
+    this.color,
+    this.loading = false,
   });
 
   final String title;
   final void Function() onTap;
   final Color? color;
+  final bool loading;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -37,10 +40,16 @@ class AppButton extends ConsumerWidget {
           ],
         ),
         child: Center(
-          child: Text(
-            title,
-            style: context.textStyles.textButton.copyWith(color: Colors.white),
-          ),
+          child: loading
+              ? CupertinoActivityIndicator(
+                  color: context.colors.backgroundPrimary,
+                )
+              : Text(
+                  title,
+                  style: context.textStyles.textButton.copyWith(
+                    color: context.colors.backgroundPrimary,
+                  ),
+                ),
         ),
       ),
     );

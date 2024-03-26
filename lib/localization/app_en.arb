@@ -11,5 +11,13 @@
     "next": "Continue",
     "done": "Done",
     "currentBalance": "Current balance",
-    "inputAmount": "Input amount"
+    "inputAmount": "Input amount",
+    "welcome" : "Welcome!",
+    "signUp" : "Sign up",
+    "signIn" : "Sign in",
+    "username" : "Username",
+    "password": "Password",
+    "repeatPassword" : "Repeat password",
+    "alreadyRegistered" : "Already have an account?",
+    "notRegistered" : "Don't have an account?"
 }
