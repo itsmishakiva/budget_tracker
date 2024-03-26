@@ -31,8 +31,10 @@ class _OperationCreationSumScreenContent extends ConsumerWidget {
     final state = ref.watch(operationCreationSumViewModelProvider);
     switch (state) {
       case OperationCreationSumViewLoadingState _:
-        return const Center(
-          child: CircularProgressIndicator(),
+        return Center(
+          child: CircularProgressIndicator(
+            color: context.colors.backgroundPrimary,
+          ),
         );
       case OperationCreationSumViewErrorState _:
         return const Center(
