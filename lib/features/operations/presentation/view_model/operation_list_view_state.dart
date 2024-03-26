@@ -9,7 +9,7 @@ class OperationListViewErrorState extends OperationListViewState {}
 
 class OperationListViewDataState extends OperationListViewState {
   OperationListViewDataState(
-      {required this.operations, required this.categories});
+      {required this.operations, required this.categories,});
 
   final List<Operation> operations;
   final Map<int, Category> categories;

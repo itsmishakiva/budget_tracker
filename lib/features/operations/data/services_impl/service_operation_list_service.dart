@@ -60,7 +60,7 @@ class ServerOperationListService implements OperationListService {
 
       final response = await dio.post(
           'http://178.154.223.177:8080/api/operations',
-          data: operationJson);
+          data: operationJson,);
       return response.statusCode!;
     } catch (e) {
       return 500; // Internal server error
