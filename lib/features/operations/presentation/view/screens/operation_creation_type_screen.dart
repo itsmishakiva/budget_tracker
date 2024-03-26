@@ -298,7 +298,8 @@ class _OperationChoiceTile extends ConsumerWidget {
           child: Center(
             child: ListTile(
               leading: CircleAvatar(
-                backgroundColor: context.colors.accentSecondary,
+                backgroundColor: categoryTile.color,
+                child: Text(categoryTile.emoji),
               ),
               title: Text(
                 categoryTile.title,

@@ -4,7 +4,7 @@ import 'package:budget_tracker/main.dart';
 import 'package:dio/dio.dart';
 import 'package:logging/logging.dart';
 
-class CategoryListRequest implements CategoryListService {
+class CategoryListGetRequest implements CategoryListService {
   @override
   Future<List<CategoryDTO>> getCategoryList() async {
     Dio dio = Dio();
@@ -12,7 +12,7 @@ class CategoryListRequest implements CategoryListService {
       InterceptorsWrapper(
         onRequest: (options, handler) {
           String accessToken =
-              'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjaGVsNyIsInJvbGUiOlsiVVNFUiJdLCJpYXQiOjE3MTE0NDgwNTQsImV4cCI6MTcxMTQ1MTY1NH0.RTgMrZKnzsWSRJa6zAYlggQ2KHAYEay02340M4FivS0';
+              'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjaGVsOCIsInJvbGUiOlsiVVNFUiJdLCJpYXQiOjE3MTE0NjI1ODcsImV4cCI6MTcxMTQ2NjE4N30.QUU8yHegV_CakI19y4OIW_oQLKd_bb3UFdIXxm6MMlc';
           options.headers['Authorization'] = 'Bearer $accessToken';
           return handler.next(options);
         },
@@ -21,7 +21,6 @@ class CategoryListRequest implements CategoryListService {
     try {
       final response = await dio
           .get('http://178.154.223.177:8080/api/categories?page=0&limit=20');
-      logger.log(Level.FINE, 'Responses data ${response.data}');
       return (response.data as List<dynamic>?)
               ?.map((e) => CategoryDTO.fromJson(e))
               .toList() ??
