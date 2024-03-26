@@ -105,18 +105,21 @@ class CustomScrollViewWidget extends ConsumerWidget {
             ],
           ),
         ),
-        SliverList.separated(
-          separatorBuilder: (BuildContext context, int index) => const SizedBox(
-            height: 5,
-          ),
-          itemCount: tiles.length,
-          itemBuilder: (BuildContext context, int index) {
-            return _OperationChoiceTile(
-              isSelected: false,
-              categoryTile: tiles[index],
-            );
-          },
-        ),
+        (tiles.isNotEmpty)
+            ? SliverList.separated(
+                separatorBuilder: (BuildContext context, int index) =>
+                    const SizedBox(
+                  height: 5,
+                ),
+                itemCount: tiles.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return _OperationChoiceTile(
+                    isSelected: false,
+                    categoryTile: tiles[index],
+                  );
+                },
+              )
+            : const Icon(Icons.question_mark),
         const SliverToBoxAdapter(
           child: SizedBox(
             height: 55,
@@ -295,7 +298,8 @@ class _OperationChoiceTile extends ConsumerWidget {
           child: Center(
             child: ListTile(
               leading: CircleAvatar(
-                backgroundColor: context.colors.accentSecondary,
+                backgroundColor: categoryTile.color,
+                child: Text(categoryTile.emoji),
               ),
               title: Text(
                 categoryTile.title,

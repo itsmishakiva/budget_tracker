@@ -18,7 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$Category {
   int get id => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
-  String get icon => throw _privateConstructorUsedError;
+  String get emoji => throw _privateConstructorUsedError;
   Color get color => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -31,7 +31,7 @@ abstract class $CategoryCopyWith<$Res> {
   factory $CategoryCopyWith(Category value, $Res Function(Category) then) =
       _$CategoryCopyWithImpl<$Res, Category>;
   @useResult
-  $Res call({int id, String title, String icon, Color color});
+  $Res call({int id, String title, String emoji, Color color});
 }
 
 /// @nodoc
@@ -49,8 +49,8 @@ class _$CategoryCopyWithImpl<$Res, $Val extends Category>
   $Res call({
     Object? id = null,
     Object? title = null,
-    Object? icon = null,
-    Object? color = freezed,
+    Object? emoji = null,
+    Object? color = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -61,11 +61,11 @@ class _$CategoryCopyWithImpl<$Res, $Val extends Category>
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String,
-      icon: null == icon
-          ? _value.icon
-          : icon // ignore: cast_nullable_to_non_nullable
+      emoji: null == emoji
+          ? _value.emoji
+          : emoji // ignore: cast_nullable_to_non_nullable
               as String,
-      color: freezed == color
+      color: null == color
           ? _value.color
           : color // ignore: cast_nullable_to_non_nullable
               as Color,
@@ -81,7 +81,7 @@ abstract class _$$CategoryImplCopyWith<$Res>
       __$$CategoryImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int id, String title, String icon, Color color});
+  $Res call({int id, String title, String emoji, Color color});
 }
 
 /// @nodoc
@@ -97,8 +97,8 @@ class __$$CategoryImplCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? title = null,
-    Object? icon = null,
-    Object? color = freezed,
+    Object? emoji = null,
+    Object? color = null,
   }) {
     return _then(_$CategoryImpl(
       id: null == id
@@ -109,11 +109,11 @@ class __$$CategoryImplCopyWithImpl<$Res>
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String,
-      icon: null == icon
-          ? _value.icon
-          : icon // ignore: cast_nullable_to_non_nullable
+      emoji: null == emoji
+          ? _value.emoji
+          : emoji // ignore: cast_nullable_to_non_nullable
               as String,
-      color: freezed == color
+      color: null == color
           ? _value.color
           : color // ignore: cast_nullable_to_non_nullable
               as Color,
@@ -127,7 +127,7 @@ class _$CategoryImpl implements _Category {
   _$CategoryImpl(
       {required this.id,
       required this.title,
-      required this.icon,
+      required this.emoji,
       required this.color});
 
   @override
@@ -135,13 +135,13 @@ class _$CategoryImpl implements _Category {
   @override
   final String title;
   @override
-  final String icon;
+  final String emoji;
   @override
   final Color color;
 
   @override
   String toString() {
-    return 'Category(id: $id, title: $title, icon: $icon, color: $color)';
+    return 'Category(id: $id, title: $title, emoji: $emoji, color: $color)';
   }
 
   @override
@@ -151,13 +151,12 @@ class _$CategoryImpl implements _Category {
             other is _$CategoryImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.title, title) || other.title == title) &&
-            (identical(other.icon, icon) || other.icon == icon) &&
-            const DeepCollectionEquality().equals(other.color, color));
+            (identical(other.emoji, emoji) || other.emoji == emoji) &&
+            (identical(other.color, color) || other.color == color));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, id, title, icon, const DeepCollectionEquality().hash(color));
+  int get hashCode => Object.hash(runtimeType, id, title, emoji, color);
 
   @JsonKey(ignore: true)
   @override
@@ -170,7 +169,7 @@ abstract class _Category implements Category {
   factory _Category(
       {required final int id,
       required final String title,
-      required final String icon,
+      required final String emoji,
       required final Color color}) = _$CategoryImpl;
 
   @override
@@ -178,7 +177,7 @@ abstract class _Category implements Category {
   @override
   String get title;
   @override
-  String get icon;
+  String get emoji;
   @override
   Color get color;
   @override

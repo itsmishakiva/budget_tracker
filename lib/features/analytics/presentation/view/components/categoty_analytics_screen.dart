@@ -24,7 +24,7 @@ class CategoryAnalyticsScreen extends ConsumerWidget {
           Padding(
             padding: const EdgeInsets.only(top: 8.0),
             child: Text(
-              EmojiParser().emojify(categoryAnalytics.category.icon),
+              EmojiParser().emojify(categoryAnalytics.category.emoji),
               style: const TextStyle(
                 fontSize: 25,
               ),

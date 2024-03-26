@@ -22,7 +22,7 @@ CategoryDTO _$CategoryDTOFromJson(Map<String, dynamic> json) {
 mixin _$CategoryDTO {
   int get id => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
-  String get icon => throw _privateConstructorUsedError;
+  String get emoji => throw _privateConstructorUsedError;
   int get color => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -37,7 +37,7 @@ abstract class $CategoryDTOCopyWith<$Res> {
           CategoryDTO value, $Res Function(CategoryDTO) then) =
       _$CategoryDTOCopyWithImpl<$Res, CategoryDTO>;
   @useResult
-  $Res call({int id, String title, String icon, int color});
+  $Res call({int id, String title, String emoji, int color});
 }
 
 /// @nodoc
@@ -55,7 +55,7 @@ class _$CategoryDTOCopyWithImpl<$Res, $Val extends CategoryDTO>
   $Res call({
     Object? id = null,
     Object? title = null,
-    Object? icon = null,
+    Object? emoji = null,
     Object? color = null,
   }) {
     return _then(_value.copyWith(
@@ -67,9 +67,9 @@ class _$CategoryDTOCopyWithImpl<$Res, $Val extends CategoryDTO>
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String,
-      icon: null == icon
-          ? _value.icon
-          : icon // ignore: cast_nullable_to_non_nullable
+      emoji: null == emoji
+          ? _value.emoji
+          : emoji // ignore: cast_nullable_to_non_nullable
               as String,
       color: null == color
           ? _value.color
@@ -87,7 +87,7 @@ abstract class _$$CategoryDTOImplCopyWith<$Res>
       __$$CategoryDTOImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int id, String title, String icon, int color});
+  $Res call({int id, String title, String emoji, int color});
 }
 
 /// @nodoc
@@ -103,7 +103,7 @@ class __$$CategoryDTOImplCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? title = null,
-    Object? icon = null,
+    Object? emoji = null,
     Object? color = null,
   }) {
     return _then(_$CategoryDTOImpl(
@@ -115,9 +115,9 @@ class __$$CategoryDTOImplCopyWithImpl<$Res>
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String,
-      icon: null == icon
-          ? _value.icon
-          : icon // ignore: cast_nullable_to_non_nullable
+      emoji: null == emoji
+          ? _value.emoji
+          : emoji // ignore: cast_nullable_to_non_nullable
               as String,
       color: null == color
           ? _value.color
@@ -133,7 +133,7 @@ class _$CategoryDTOImpl with DiagnosticableTreeMixin implements _CategoryDTO {
   _$CategoryDTOImpl(
       {required this.id,
       required this.title,
-      required this.icon,
+      required this.emoji,
       required this.color});
 
   factory _$CategoryDTOImpl.fromJson(Map<String, dynamic> json) =>
@@ -144,13 +144,13 @@ class _$CategoryDTOImpl with DiagnosticableTreeMixin implements _CategoryDTO {
   @override
   final String title;
   @override
-  final String icon;
+  final String emoji;
   @override
   final int color;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'CategoryDTO(id: $id, title: $title, icon: $icon, color: $color)';
+    return 'CategoryDTO(id: $id, title: $title, emoji: $emoji, color: $color)';
   }
 
   @override
@@ -160,7 +160,7 @@ class _$CategoryDTOImpl with DiagnosticableTreeMixin implements _CategoryDTO {
       ..add(DiagnosticsProperty('type', 'CategoryDTO'))
       ..add(DiagnosticsProperty('id', id))
       ..add(DiagnosticsProperty('title', title))
-      ..add(DiagnosticsProperty('icon', icon))
+      ..add(DiagnosticsProperty('emoji', emoji))
       ..add(DiagnosticsProperty('color', color));
   }
 
@@ -171,13 +171,13 @@ class _$CategoryDTOImpl with DiagnosticableTreeMixin implements _CategoryDTO {
             other is _$CategoryDTOImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.title, title) || other.title == title) &&
-            (identical(other.icon, icon) || other.icon == icon) &&
+            (identical(other.emoji, emoji) || other.emoji == emoji) &&
             (identical(other.color, color) || other.color == color));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, title, icon, color);
+  int get hashCode => Object.hash(runtimeType, id, title, emoji, color);
 
   @JsonKey(ignore: true)
   @override
@@ -197,7 +197,7 @@ abstract class _CategoryDTO implements CategoryDTO {
   factory _CategoryDTO(
       {required final int id,
       required final String title,
-      required final String icon,
+      required final String emoji,
       required final int color}) = _$CategoryDTOImpl;
 
   factory _CategoryDTO.fromJson(Map<String, dynamic> json) =
@@ -208,7 +208,7 @@ abstract class _CategoryDTO implements CategoryDTO {
   @override
   String get title;
   @override
-  String get icon;
+  String get emoji;
   @override
   int get color;
   @override

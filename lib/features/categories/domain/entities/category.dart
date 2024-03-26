@@ -9,7 +9,7 @@ class Category with _$Category {
   factory Category({
     required int id,
     required String title,
-    required String icon,
+    required String emoji,
     required Color color,
   }) = _Category;
 }
