@@ -1,6 +1,6 @@
-import 'package:budget_tracker/features/operations/domain/entities/operation.dart';
-
+import 'package:budget_tracker/features/categories/domain/entities/category.dart';
 import 'package:budget_tracker/features/check/domain/entities/check.dart';
+import 'package:budget_tracker/features/operations/domain/entities/operation.dart';
 
 sealed class HomeViewState {}
 
@@ -12,8 +12,10 @@ class HomeViewDataState extends HomeViewState {
   HomeViewDataState({
     required this.dataAccount,
     required this.dataOperations,
+    required this.dataCategory,
   });
 
   final List<Check> dataAccount;
   final List<Operation> dataOperations;
+  final Map<int, Category> dataCategory;
 }

@@ -72,7 +72,7 @@ class CustomScrollViewWidget extends ConsumerWidget {
     required this.isIncome,
   });
 
-  final List<Category> tiles;
+  final Map<int, Category> tiles;
   final bool isIncome;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -111,9 +111,12 @@ class CustomScrollViewWidget extends ConsumerWidget {
           ),
           itemCount: tiles.length,
           itemBuilder: (BuildContext context, int index) {
+            final tile = tiles.entries.elementAt(index);
+            final categoryTile = tile.value;
+
             return _OperationChoiceTile(
               isSelected: false,
-              categoryTile: tiles[index],
+              categoryTile: categoryTile,
             );
           },
         ),

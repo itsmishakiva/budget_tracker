@@ -7,7 +7,6 @@ part 'check.freezed.dart';
 class Check with _$Check {
   factory Check({
     required int id,
-    required String title,
     required double sum,
     required double expenses,
     required double income,

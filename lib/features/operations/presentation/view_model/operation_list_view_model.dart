@@ -1,3 +1,5 @@
+import 'package:budget_tracker/features/categories/domain/repositories/category_repository.dart';
+import 'package:budget_tracker/features/categories/internal/caretory_repository_provider.dart';
 import 'package:budget_tracker/features/operations/domain/repositories/operation_repository.dart';
 import 'package:budget_tracker/features/operations/internal/operation_repository_provider.dart';
 import 'package:budget_tracker/features/operations/presentation/view_model/operation_list_view_state.dart';
@@ -8,21 +10,25 @@ final operationListViewModelProvider =
   (ref) => OperationListViewModel(
     OperationListViewLoadingState(),
     ref.read(operationRepositoryProvider),
+    ref.read(categoryRepositoryProvider),
   )..loadData(),
 );
 
 class OperationListViewModel extends StateNotifier<OperationListViewState> {
-  final OperationRepository _repository;
+  final OperationRepository _operationRepository;
+  final CategoryRepository _categoryRepository;
 
   OperationListViewModel(
     OperationListViewState state,
-    this._repository,
+    this._operationRepository,
+    this._categoryRepository,
   ) : super(state);
 
   Future<void> loadData() async {
     try {
       state = OperationListViewDataState(
-        data: await _repository.getOperationList(),
+        operations: await _operationRepository.getOperationList(),
+        categories: await _categoryRepository.getCategories(),
       );
     } catch (e) {
       state = OperationListViewErrorState();

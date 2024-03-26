@@ -30,14 +30,14 @@ class OperationCreationTypeViewModel
 
   Future<void> loadData() async {
     try {
-      List<Category> categoriesData = await _repository.getCategories();
+      Map<int, Category> categoriesData = await _repository.getCategories();
 
       state = OperationCreationTypeViewDataState(
         data: categoriesData,
         newOperation: NewOperation(
           sum: double.parse(_sum.replaceAll(',', '.')),
           incoming: false,
-          category: categoriesData[0],
+          category: categoriesData[1],
         ),
       );
     } catch (e) {

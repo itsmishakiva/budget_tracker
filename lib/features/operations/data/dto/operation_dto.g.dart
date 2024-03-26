@@ -10,9 +10,10 @@ _$OperationDTOImpl _$$OperationDTOImplFromJson(Map<String, dynamic> json) =>
     _$OperationDTOImpl(
       id: json['id'] as int,
       incoming: json['incoming'] as bool,
-      sum: json['sum'] as String,
+      sum: (json['sum'] as num).toDouble(),
       date: json['date'] as int,
-      category: CategoryDTO.fromJson(json['category'] as Map<String, dynamic>),
+      checkId: json['checkId'] as int,
+      categoryId: json['categoryId'] as int,
     );
 
 Map<String, dynamic> _$$OperationDTOImplToJson(_$OperationDTOImpl instance) =>
@@ -21,5 +22,6 @@ Map<String, dynamic> _$$OperationDTOImplToJson(_$OperationDTOImpl instance) =>
       'incoming': instance.incoming,
       'sum': instance.sum,
       'date': instance.date,
-      'category': instance.category,
+      'checkId': instance.checkId,
+      'categoryId': instance.categoryId,
     };

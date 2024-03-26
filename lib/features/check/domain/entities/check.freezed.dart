@@ -17,7 +17,6 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$Check {
   int get id => throw _privateConstructorUsedError;
-  String get title => throw _privateConstructorUsedError;
   double get sum => throw _privateConstructorUsedError;
   double get expenses => throw _privateConstructorUsedError;
   double get income => throw _privateConstructorUsedError;
@@ -31,7 +30,7 @@ abstract class $CheckCopyWith<$Res> {
   factory $CheckCopyWith(Check value, $Res Function(Check) then) =
       _$CheckCopyWithImpl<$Res, Check>;
   @useResult
-  $Res call({int id, String title, double sum, double expenses, double income});
+  $Res call({int id, double sum, double expenses, double income});
 }
 
 /// @nodoc
@@ -48,7 +47,6 @@ class _$CheckCopyWithImpl<$Res, $Val extends Check>
   @override
   $Res call({
     Object? id = null,
-    Object? title = null,
     Object? sum = null,
     Object? expenses = null,
     Object? income = null,
@@ -58,10 +56,6 @@ class _$CheckCopyWithImpl<$Res, $Val extends Check>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      title: null == title
-          ? _value.title
-          : title // ignore: cast_nullable_to_non_nullable
-              as String,
       sum: null == sum
           ? _value.sum
           : sum // ignore: cast_nullable_to_non_nullable
@@ -85,7 +79,7 @@ abstract class _$$CheckImplCopyWith<$Res> implements $CheckCopyWith<$Res> {
       __$$CheckImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int id, String title, double sum, double expenses, double income});
+  $Res call({int id, double sum, double expenses, double income});
 }
 
 /// @nodoc
@@ -100,7 +94,6 @@ class __$$CheckImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
-    Object? title = null,
     Object? sum = null,
     Object? expenses = null,
     Object? income = null,
@@ -110,10 +103,6 @@ class __$$CheckImplCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      title: null == title
-          ? _value.title
-          : title // ignore: cast_nullable_to_non_nullable
-              as String,
       sum: null == sum
           ? _value.sum
           : sum // ignore: cast_nullable_to_non_nullable
@@ -135,15 +124,12 @@ class __$$CheckImplCopyWithImpl<$Res>
 class _$CheckImpl with DiagnosticableTreeMixin implements _Check {
   _$CheckImpl(
       {required this.id,
-      required this.title,
       required this.sum,
       required this.expenses,
       required this.income});
 
   @override
   final int id;
-  @override
-  final String title;
   @override
   final double sum;
   @override
@@ -153,7 +139,7 @@ class _$CheckImpl with DiagnosticableTreeMixin implements _Check {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Check(id: $id, title: $title, sum: $sum, expenses: $expenses, income: $income)';
+    return 'Check(id: $id, sum: $sum, expenses: $expenses, income: $income)';
   }
 
   @override
@@ -162,7 +148,6 @@ class _$CheckImpl with DiagnosticableTreeMixin implements _Check {
     properties
       ..add(DiagnosticsProperty('type', 'Check'))
       ..add(DiagnosticsProperty('id', id))
-      ..add(DiagnosticsProperty('title', title))
       ..add(DiagnosticsProperty('sum', sum))
       ..add(DiagnosticsProperty('expenses', expenses))
       ..add(DiagnosticsProperty('income', income));
@@ -174,7 +159,6 @@ class _$CheckImpl with DiagnosticableTreeMixin implements _Check {
         (other.runtimeType == runtimeType &&
             other is _$CheckImpl &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.title, title) || other.title == title) &&
             (identical(other.sum, sum) || other.sum == sum) &&
             (identical(other.expenses, expenses) ||
                 other.expenses == expenses) &&
@@ -182,8 +166,7 @@ class _$CheckImpl with DiagnosticableTreeMixin implements _Check {
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, id, title, sum, expenses, income);
+  int get hashCode => Object.hash(runtimeType, id, sum, expenses, income);
 
   @JsonKey(ignore: true)
   @override
@@ -195,15 +178,12 @@ class _$CheckImpl with DiagnosticableTreeMixin implements _Check {
 abstract class _Check implements Check {
   factory _Check(
       {required final int id,
-      required final String title,
       required final double sum,
       required final double expenses,
       required final double income}) = _$CheckImpl;
 
   @override
   int get id;
-  @override
-  String get title;
   @override
   double get sum;
   @override

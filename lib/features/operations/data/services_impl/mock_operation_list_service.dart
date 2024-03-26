@@ -162,4 +162,10 @@ class MockOperationListService implements OperationListService {
             .toList() ??
         [];
   }
+
+  @override
+  Future<void> setOperation(OperationDTO operationDTO) {
+    // TODO: implement setOperation
+    throw UnimplementedError();
+  }
 }

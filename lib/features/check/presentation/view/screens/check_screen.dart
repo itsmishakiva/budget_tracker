@@ -68,7 +68,7 @@ class CheckListTile extends ConsumerWidget {
                                 padding:
                                     const EdgeInsets.symmetric(vertical: 15.0),
                                 child: Text(
-                                  check.title,
+                                  'Card',
                                   style: context.textStyles.bodyTextSurface,
                                 ),
                               ),

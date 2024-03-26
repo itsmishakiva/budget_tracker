@@ -1,3 +1,5 @@
+import 'package:budget_tracker/features/categories/domain/repositories/category_repository.dart';
+import 'package:budget_tracker/features/categories/internal/caretory_repository_provider.dart';
 import 'package:budget_tracker/features/operations/domain/repositories/operation_repository.dart';
 import 'package:budget_tracker/features/operations/internal/operation_repository_provider.dart';
 import 'package:budget_tracker/main.dart';
@@ -15,26 +17,31 @@ final homeViewModelProvider =
     HomeViewLoadingState(),
     ref.read(checkRepositoryProvider),
     ref.read(operationRepositoryProvider),
+    ref.read(categoryRepositoryProvider),
   )..loadData(),
 );
 
 class HomeViewModel extends StateNotifier<HomeViewState> {
   final CheckRepository _repositoryAccount;
   final OperationRepository _repositoryOperation;
+  final CategoryRepository _categoryRepository;
 
   HomeViewModel(
     HomeViewState state,
     this._repositoryAccount,
     this._repositoryOperation,
+    this._categoryRepository,
   ) : super(state);
 
   Future<void> loadData() async {
     try {
       final dataAccount = await _repositoryAccount.getCheck();
       final dataOperations = await _repositoryOperation.getOperationList();
+      final dataCategoties = await _categoryRepository.getCategories();
       state = HomeViewDataState(
         dataAccount: dataAccount,
         dataOperations: dataOperations,
+        dataCategory: dataCategoties,
       );
     } catch (e) {
       logger.log(Level.WARNING, e);

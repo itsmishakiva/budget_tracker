@@ -1,13 +1,16 @@
 import 'package:budget_tracker/features/categories/data/mappers/i_category_mapper.dart';
+import 'package:budget_tracker/features/check/data/mappers/check_mapper.dart';
 import 'package:budget_tracker/features/operations/data/dto/operation_dto.dart';
 import 'package:budget_tracker/features/operations/data/mappers/operation_mapper.dart';
 import 'package:budget_tracker/features/operations/domain/entities/operation.dart';
 
 class OperationMapperImpl implements OperationMapper {
   final CategoryMapper categoryMapper;
+  final CheckMapper checkMapper;
 
   OperationMapperImpl({
     required this.categoryMapper,
+    required this.checkMapper,
   });
 
   @override
@@ -15,9 +18,10 @@ class OperationMapperImpl implements OperationMapper {
     return Operation(
       id: dto.id,
       incoming: dto.incoming,
-      sum: double.parse(dto.sum.substring(0, dto.sum.length - 1)),
+      sum: dto.sum,
       date: DateTime.fromMillisecondsSinceEpoch(dto.date),
-      category: categoryMapper.fromDto(dto.category),
+      categoryId: dto.categoryId,
+      checkId: dto.checkId,
     );
   }
 
@@ -26,9 +30,10 @@ class OperationMapperImpl implements OperationMapper {
     return OperationDTO(
       id: entity.id,
       incoming: entity.incoming,
-      sum: entity.sum.toString(),
+      sum: entity.sum,
       date: entity.date.millisecondsSinceEpoch,
-      category: categoryMapper.toDto(entity.category),
+      categoryId: entity.categoryId,
+      checkId: entity.checkId,
     );
   }
 }

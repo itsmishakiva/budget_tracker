@@ -3,7 +3,7 @@ import 'package:budget_tracker/features/check/data/services/check_service.dart';
 
 class MockCheckService implements CheckService {
   @override
-  Future<List<CheckDTO>> getAccountList() async {
+  Future<List<CheckDTO>> getCheckList() async {
     await Future.delayed(
       const Duration(seconds: 2),
     );
@@ -19,5 +19,17 @@ class MockCheckService implements CheckService {
       ],
     };
     return result['check']?.map((e) => CheckDTO.fromJson(e)).toList() ?? [];
+  }
+
+  @override
+  Future<CheckDTO?> getCheckById(int id) {
+    // TODO: implement getCheckById
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<int> setCheck(CheckDTO checkDto) {
+    // TODO: implement setOperation
+    throw UnimplementedError();
   }
 }

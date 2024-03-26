@@ -7,10 +7,9 @@ class CheckMapperImpl implements CheckMapper {
   Check fromDto(CheckDTO dto) {
     return Check(
       id: dto.id,
-      title: dto.title,
       sum: dto.sum,
-      expenses: dto.expenses,
-      income: dto.income,
+      expenses: dto.outcomingSum,
+      income: dto.incomingSum,
     );
   }
 
@@ -18,10 +17,9 @@ class CheckMapperImpl implements CheckMapper {
   CheckDTO toDto(Check entity) {
     return CheckDTO(
       id: entity.id,
-      title: entity.title,
       sum: entity.sum,
-      expenses: entity.expenses,
-      income: entity.sum,
+      outcomingSum: entity.expenses,
+      incomingSum: entity.sum,
     );
   }
 }

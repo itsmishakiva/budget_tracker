@@ -21,10 +21,9 @@ CheckDTO _$CheckDTOFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$CheckDTO {
   int get id => throw _privateConstructorUsedError;
-  String get title => throw _privateConstructorUsedError;
   double get sum => throw _privateConstructorUsedError;
-  double get expenses => throw _privateConstructorUsedError;
-  double get income => throw _privateConstructorUsedError;
+  double get outcomingSum => throw _privateConstructorUsedError;
+  double get incomingSum => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -37,7 +36,7 @@ abstract class $CheckDTOCopyWith<$Res> {
   factory $CheckDTOCopyWith(CheckDTO value, $Res Function(CheckDTO) then) =
       _$CheckDTOCopyWithImpl<$Res, CheckDTO>;
   @useResult
-  $Res call({int id, String title, double sum, double expenses, double income});
+  $Res call({int id, double sum, double outcomingSum, double incomingSum});
 }
 
 /// @nodoc
@@ -54,31 +53,26 @@ class _$CheckDTOCopyWithImpl<$Res, $Val extends CheckDTO>
   @override
   $Res call({
     Object? id = null,
-    Object? title = null,
     Object? sum = null,
-    Object? expenses = null,
-    Object? income = null,
+    Object? outcomingSum = null,
+    Object? incomingSum = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      title: null == title
-          ? _value.title
-          : title // ignore: cast_nullable_to_non_nullable
-              as String,
       sum: null == sum
           ? _value.sum
           : sum // ignore: cast_nullable_to_non_nullable
               as double,
-      expenses: null == expenses
-          ? _value.expenses
-          : expenses // ignore: cast_nullable_to_non_nullable
+      outcomingSum: null == outcomingSum
+          ? _value.outcomingSum
+          : outcomingSum // ignore: cast_nullable_to_non_nullable
               as double,
-      income: null == income
-          ? _value.income
-          : income // ignore: cast_nullable_to_non_nullable
+      incomingSum: null == incomingSum
+          ? _value.incomingSum
+          : incomingSum // ignore: cast_nullable_to_non_nullable
               as double,
     ) as $Val);
   }
@@ -92,7 +86,7 @@ abstract class _$$CheckDTOImplCopyWith<$Res>
       __$$CheckDTOImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int id, String title, double sum, double expenses, double income});
+  $Res call({int id, double sum, double outcomingSum, double incomingSum});
 }
 
 /// @nodoc
@@ -107,31 +101,26 @@ class __$$CheckDTOImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
-    Object? title = null,
     Object? sum = null,
-    Object? expenses = null,
-    Object? income = null,
+    Object? outcomingSum = null,
+    Object? incomingSum = null,
   }) {
     return _then(_$CheckDTOImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      title: null == title
-          ? _value.title
-          : title // ignore: cast_nullable_to_non_nullable
-              as String,
       sum: null == sum
           ? _value.sum
           : sum // ignore: cast_nullable_to_non_nullable
               as double,
-      expenses: null == expenses
-          ? _value.expenses
-          : expenses // ignore: cast_nullable_to_non_nullable
+      outcomingSum: null == outcomingSum
+          ? _value.outcomingSum
+          : outcomingSum // ignore: cast_nullable_to_non_nullable
               as double,
-      income: null == income
-          ? _value.income
-          : income // ignore: cast_nullable_to_non_nullable
+      incomingSum: null == incomingSum
+          ? _value.incomingSum
+          : incomingSum // ignore: cast_nullable_to_non_nullable
               as double,
     ));
   }
@@ -142,10 +131,9 @@ class __$$CheckDTOImplCopyWithImpl<$Res>
 class _$CheckDTOImpl with DiagnosticableTreeMixin implements _CheckDTO {
   _$CheckDTOImpl(
       {required this.id,
-      required this.title,
       required this.sum,
-      required this.expenses,
-      required this.income});
+      required this.outcomingSum,
+      required this.incomingSum});
 
   factory _$CheckDTOImpl.fromJson(Map<String, dynamic> json) =>
       _$$CheckDTOImplFromJson(json);
@@ -153,17 +141,15 @@ class _$CheckDTOImpl with DiagnosticableTreeMixin implements _CheckDTO {
   @override
   final int id;
   @override
-  final String title;
-  @override
   final double sum;
   @override
-  final double expenses;
+  final double outcomingSum;
   @override
-  final double income;
+  final double incomingSum;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'CheckDTO(id: $id, title: $title, sum: $sum, expenses: $expenses, income: $income)';
+    return 'CheckDTO(id: $id, sum: $sum, outcomingSum: $outcomingSum, incomingSum: $incomingSum)';
   }
 
   @override
@@ -172,10 +158,9 @@ class _$CheckDTOImpl with DiagnosticableTreeMixin implements _CheckDTO {
     properties
       ..add(DiagnosticsProperty('type', 'CheckDTO'))
       ..add(DiagnosticsProperty('id', id))
-      ..add(DiagnosticsProperty('title', title))
       ..add(DiagnosticsProperty('sum', sum))
-      ..add(DiagnosticsProperty('expenses', expenses))
-      ..add(DiagnosticsProperty('income', income));
+      ..add(DiagnosticsProperty('outcomingSum', outcomingSum))
+      ..add(DiagnosticsProperty('incomingSum', incomingSum));
   }
 
   @override
@@ -184,17 +169,17 @@ class _$CheckDTOImpl with DiagnosticableTreeMixin implements _CheckDTO {
         (other.runtimeType == runtimeType &&
             other is _$CheckDTOImpl &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.title, title) || other.title == title) &&
             (identical(other.sum, sum) || other.sum == sum) &&
-            (identical(other.expenses, expenses) ||
-                other.expenses == expenses) &&
-            (identical(other.income, income) || other.income == income));
+            (identical(other.outcomingSum, outcomingSum) ||
+                other.outcomingSum == outcomingSum) &&
+            (identical(other.incomingSum, incomingSum) ||
+                other.incomingSum == incomingSum));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode =>
-      Object.hash(runtimeType, id, title, sum, expenses, income);
+      Object.hash(runtimeType, id, sum, outcomingSum, incomingSum);
 
   @JsonKey(ignore: true)
   @override
@@ -213,10 +198,9 @@ class _$CheckDTOImpl with DiagnosticableTreeMixin implements _CheckDTO {
 abstract class _CheckDTO implements CheckDTO {
   factory _CheckDTO(
       {required final int id,
-      required final String title,
       required final double sum,
-      required final double expenses,
-      required final double income}) = _$CheckDTOImpl;
+      required final double outcomingSum,
+      required final double incomingSum}) = _$CheckDTOImpl;
 
   factory _CheckDTO.fromJson(Map<String, dynamic> json) =
       _$CheckDTOImpl.fromJson;
@@ -224,13 +208,11 @@ abstract class _CheckDTO implements CheckDTO {
   @override
   int get id;
   @override
-  String get title;
-  @override
   double get sum;
   @override
-  double get expenses;
+  double get outcomingSum;
   @override
-  double get income;
+  double get incomingSum;
   @override
   @JsonKey(ignore: true)
   _$$CheckDTOImplCopyWith<_$CheckDTOImpl> get copyWith =>
