@@ -142,12 +142,10 @@ class _OperationListTileState extends State<OperationListTile> {
               height: 55,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                // color: AppLightColors().customLightColors[operation.id % 6],
                 color: color,
               ),
-              // child: _operationIcon(operation.title, AppLightColors().customColors[operation.id % 6])
               child: Center(
-                child: _operationIcon(widget.operation.category.icon),
+                child: _operationIcon(widget.operation.category.emoji),
               ),
             ),
             const SizedBox(width: 16.0),

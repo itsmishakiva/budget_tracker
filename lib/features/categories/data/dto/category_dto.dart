@@ -9,7 +9,7 @@ class CategoryDTO with _$CategoryDTO {
   factory CategoryDTO({
     required int id,
     required String title,
-    required String icon,
+    required String emoji,
     required int color,
   }) = _CategoryDTO;
 

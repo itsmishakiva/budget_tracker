@@ -10,7 +10,7 @@ class CategoryMapperImpl implements CategoryMapper {
     return Category(
       id: dto.id,
       title: dto.title,
-      icon: dto.icon,
+      emoji: dto.emoji,
       color: Color(dto.color),
     );
   }
@@ -20,7 +20,7 @@ class CategoryMapperImpl implements CategoryMapper {
     return CategoryDTO(
       id: entity.id,
       title: entity.title,
-      icon: entity.icon,
+      emoji: entity.emoji,
       color: entity.color.value,
     );
   }

@@ -12,7 +12,7 @@ class CategoryListRequest implements CategoryListService {
       InterceptorsWrapper(
         onRequest: (options, handler) {
           String accessToken =
-              'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjaGVsMyIsInJvbGUiOlsiVVNFUiJdLCJpYXQiOjE3MTE0MDY1NzIsImV4cCI6MTcxMTQxMDE3Mn0.DpBW3BDQSrg32m6cYUzCXzM7QtDr2zd6qZm8W6rW8m4';
+              'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjaGVsNyIsInJvbGUiOlsiVVNFUiJdLCJpYXQiOjE3MTE0NDgwNTQsImV4cCI6MTcxMTQ1MTY1NH0.RTgMrZKnzsWSRJa6zAYlggQ2KHAYEay02340M4FivS0';
           options.headers['Authorization'] = 'Bearer $accessToken';
           return handler.next(options);
         },
@@ -21,8 +21,7 @@ class CategoryListRequest implements CategoryListService {
     try {
       final response = await dio
           .get('http://178.154.223.177:8080/api/categories?page=0&limit=20');
-      print('request response:'); //TODO delete prints
-      print(response.data);
+      logger.log(Level.FINE, 'Responses data ${response.data}');
       return (response.data as List<dynamic>?)
               ?.map((e) => CategoryDTO.fromJson(e))
               .toList() ??
