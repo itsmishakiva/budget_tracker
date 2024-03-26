@@ -3,15 +3,17 @@ import 'package:budget_tracker/features/check/data/dto/check_dto.dart';
 import 'package:budget_tracker/features/check/data/services/check_service.dart';
 import 'package:dio/dio.dart';
 
-class ServerCheckService implements CheckService {
+class RemoteCheckService implements CheckService {
   final Dio _dio = Dio();
 
-  ServerCheckService() {
+  RemoteCheckService() {
+    _dio.options.baseUrl = 'http://178.154.223.177:8080/api';
     _dio.interceptors.add(
       InterceptorsWrapper(
         onRequest: (options, handler) {
           String accessToken = Token().token;
           options.headers['Authorization'] = 'Bearer $accessToken';
+          options.headers['Custom-Header'] = 'Custom Value';
           return handler.next(options);
         },
       ),
@@ -22,7 +24,7 @@ class ServerCheckService implements CheckService {
   Future<List<CheckDTO>> getCheckList() async {
     try {
       final response = await _dio.get(
-        'http://178.154.223.177:8080/api/checks?limit=5&page=0',
+        '/checks?limit=5&page=0',
       );
       if (response.statusCode != 200) {
         return [];
@@ -40,7 +42,7 @@ class ServerCheckService implements CheckService {
   Future<CheckDTO?> getCheckById(int id) async {
     try {
       final response = await _dio.get(
-        'http://178.154.223.177:8080/api/checks/$id',
+        '/checks/$id',
       );
       if (response.statusCode != 200) {
         return null;
@@ -57,7 +59,7 @@ class ServerCheckService implements CheckService {
   Future<int> setCheck(CheckDTO checkDTO) async {
     try {
       final response = await _dio.post(
-        'http://178.154.223.177:8080/api/operations',
+        '/operations',
         data: checkDTO.toJson(),
       );
       return response.statusCode!;
@@ -72,8 +74,7 @@ class ServerCheckService implements CheckService {
       String accessToken = Token().token;
       dio.options.headers['Authorization'] = 'Bearer $accessToken';
       dio.options.headers['Custom-Header'] = 'Custom Value';
-      final response =
-          await dio.get('http://178.154.223.177:8080/api/checks/$id');
+      final response = await dio.get('/checks/$id');
 
       if (response.statusCode == 200) {
         return response.data;

@@ -3,8 +3,12 @@ import 'package:budget_tracker/features/operations/data/dto/operation_dto.dart';
 import 'package:budget_tracker/features/operations/data/services/operation_list_service.dart';
 import 'package:dio/dio.dart';
 
-class ServerOperationListService implements OperationListService {
+class RemoteOperationListService implements OperationListService {
   Dio dio = Dio();
+
+  RemoteOperationListService() {
+    dio.options.baseUrl = 'http://178.154.223.177:8080/api';
+  }
 
   @override
   Future<List<OperationDTO>> getOperationList() async {
@@ -13,8 +17,7 @@ class ServerOperationListService implements OperationListService {
       dio.options.headers['Authorization'] = 'Bearer $accessToken';
       dio.options.headers['Custom-Header'] = 'Custom Value';
 
-      final response = await dio
-          .get('http://178.154.223.177:8080/api/operations?page=0&limit=10');
+      final response = await dio.get('/operations?page=0&limit=10');
 
       if (response.statusCode != 200) {
         return [];
@@ -22,16 +25,6 @@ class ServerOperationListService implements OperationListService {
 
       List<Map<String, dynamic>> operationsDtoJson =
           (response.data as List<dynamic>).cast<Map<String, dynamic>>();
-
-      // for (var operation in operationsDtoJson) {
-      //   var category = await MockCategoryListService().getCategoryByIdJson(operation['categoryId']);
-      //   operation['category'] = category;
-      //   operation.remove('categoryId');
-      //
-      //   var check = await ServerCheckService().getCheckByIdJson(operation['checkId']);
-      //   operation['check'] = check;
-      //   operation.remove('checkId');
-      // }
 
       List<OperationDTO> operationList =
           operationsDtoJson.map((e) => OperationDTO.fromJson(e)).toList();
@@ -59,7 +52,7 @@ class ServerOperationListService implements OperationListService {
       operationJson.remove('check');
 
       final response = await dio.post(
-        'http://178.154.223.177:8080/api/operations',
+        '/operations',
         data: operationJson,
       );
       return response.statusCode!;

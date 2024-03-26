@@ -5,8 +5,12 @@ import 'package:budget_tracker/main.dart';
 import 'package:dio/dio.dart';
 import 'package:logging/logging.dart';
 
-class CategoryListGetRequest implements CategoryListService {
+class RemoteCategoriesService implements CategoryListService {
   Dio dio = Dio();
+
+  RemoteCategoriesService() {
+    dio.options.baseUrl = 'http://178.154.223.177:8080/api';
+  }
 
   @override
   Future<Map<int, CategoryDTO>> getCategoryList() async {
@@ -20,9 +24,8 @@ class CategoryListGetRequest implements CategoryListService {
       ),
     );
     try {
-      final response = await dio
-          .get('http://178.154.223.177:8080/api/categories?page=0&limit=20');
-      logger.log(Level.FINE, 'Responses data ${response.data}');
+      final response = await dio.get('/categories?page=0&limit=20');
+      logger.log(Level.FINE, 'Response data ${response.data}');
 
       final List<CategoryDTO>? categories = (response.data as List<dynamic>?)
           ?.map((e) => CategoryDTO.fromJson(e))
@@ -36,7 +39,7 @@ class CategoryListGetRequest implements CategoryListService {
 
       return categoryMap;
     } catch (e) {
-      logger.log(Level.WARNING, e);
+      logger.log(Level.WARNING, e.toString());
       return {};
     }
   }
