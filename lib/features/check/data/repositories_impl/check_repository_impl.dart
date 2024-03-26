@@ -12,7 +12,7 @@ class CheckRepositoryImpl implements CheckRepository {
 
   @override
   Future<List<Check>> getCheck() async {
-    final resultDTO = await _service.getAccountList();
+    final resultDTO = await _service.getCheckList();
     return resultDTO.map((e) => _mapper.fromDto(e)).toList();
   }
 }

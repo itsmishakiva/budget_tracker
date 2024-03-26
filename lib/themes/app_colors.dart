@@ -137,7 +137,7 @@ class AppColors extends ThemeExtension<AppColors> {
     Color? linearChart1,
     Color? linearChart2,
     List<Color>? graphColors,
-    List<Color>? graphDarlColors,
+    List<Color>? graphDarkColors,
   }) {
     return AppColors(
       backgroundPrimary: backgroundPrimary ?? this.backgroundPrimary,
@@ -158,7 +158,7 @@ class AppColors extends ThemeExtension<AppColors> {
       linearChart1: linearChart1 ?? this.linearChart1,
       linearChart2: linearChart2 ?? this.linearChart2,
       graphColors: graphColors ?? this.graphColors,
-      graphDarkColors: graphDarkColors,
+      graphDarkColors: graphDarkColors ?? this.graphDarkColors,
     );
   }
 

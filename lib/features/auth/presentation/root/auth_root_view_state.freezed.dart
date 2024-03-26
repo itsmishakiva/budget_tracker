@@ -18,44 +18,44 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$AuthRootViewState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() signup,
     required TResult Function() auth,
+    required TResult Function() signup,
     required TResult Function() loading,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? signup,
     TResult? Function()? auth,
+    TResult? Function()? signup,
     TResult? Function()? loading,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? signup,
     TResult Function()? auth,
+    TResult Function()? signup,
     TResult Function()? loading,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(AuthRootViewStateAuth value) signup,
-    required TResult Function(AuthRootViewStateSignup value) auth,
+    required TResult Function(AuthRootViewStateAuth value) auth,
+    required TResult Function(AuthRootViewStateSignup value) signup,
     required TResult Function(AuthRootViewStateLoading value) loading,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(AuthRootViewStateAuth value)? signup,
-    TResult? Function(AuthRootViewStateSignup value)? auth,
+    TResult? Function(AuthRootViewStateAuth value)? auth,
+    TResult? Function(AuthRootViewStateSignup value)? signup,
     TResult? Function(AuthRootViewStateLoading value)? loading,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(AuthRootViewStateAuth value)? signup,
-    TResult Function(AuthRootViewStateSignup value)? auth,
+    TResult Function(AuthRootViewStateAuth value)? auth,
+    TResult Function(AuthRootViewStateSignup value)? signup,
     TResult Function(AuthRootViewStateLoading value)? loading,
     required TResult orElse(),
   }) =>
@@ -104,7 +104,7 @@ class _$AuthRootViewStateAuthImpl implements AuthRootViewStateAuth {
 
   @override
   String toString() {
-    return 'AuthRootViewState.signup()';
+    return 'AuthRootViewState.auth()';
   }
 
   @override
@@ -120,33 +120,33 @@ class _$AuthRootViewStateAuthImpl implements AuthRootViewStateAuth {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() signup,
     required TResult Function() auth,
+    required TResult Function() signup,
     required TResult Function() loading,
   }) {
-    return signup();
+    return auth();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? signup,
     TResult? Function()? auth,
+    TResult? Function()? signup,
     TResult? Function()? loading,
   }) {
-    return signup?.call();
+    return auth?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? signup,
     TResult Function()? auth,
+    TResult Function()? signup,
     TResult Function()? loading,
     required TResult orElse(),
   }) {
-    if (signup != null) {
-      return signup();
+    if (auth != null) {
+      return auth();
     }
     return orElse();
   }
@@ -154,33 +154,33 @@ class _$AuthRootViewStateAuthImpl implements AuthRootViewStateAuth {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(AuthRootViewStateAuth value) signup,
-    required TResult Function(AuthRootViewStateSignup value) auth,
+    required TResult Function(AuthRootViewStateAuth value) auth,
+    required TResult Function(AuthRootViewStateSignup value) signup,
     required TResult Function(AuthRootViewStateLoading value) loading,
   }) {
-    return signup(this);
+    return auth(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(AuthRootViewStateAuth value)? signup,
-    TResult? Function(AuthRootViewStateSignup value)? auth,
+    TResult? Function(AuthRootViewStateAuth value)? auth,
+    TResult? Function(AuthRootViewStateSignup value)? signup,
     TResult? Function(AuthRootViewStateLoading value)? loading,
   }) {
-    return signup?.call(this);
+    return auth?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(AuthRootViewStateAuth value)? signup,
-    TResult Function(AuthRootViewStateSignup value)? auth,
+    TResult Function(AuthRootViewStateAuth value)? auth,
+    TResult Function(AuthRootViewStateSignup value)? signup,
     TResult Function(AuthRootViewStateLoading value)? loading,
     required TResult orElse(),
   }) {
-    if (signup != null) {
-      return signup(this);
+    if (auth != null) {
+      return auth(this);
     }
     return orElse();
   }
@@ -215,7 +215,7 @@ class _$AuthRootViewStateSignupImpl implements AuthRootViewStateSignup {
 
   @override
   String toString() {
-    return 'AuthRootViewState.auth()';
+    return 'AuthRootViewState.signup()';
   }
 
   @override
@@ -231,33 +231,33 @@ class _$AuthRootViewStateSignupImpl implements AuthRootViewStateSignup {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() signup,
     required TResult Function() auth,
+    required TResult Function() signup,
     required TResult Function() loading,
   }) {
-    return auth();
+    return signup();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? signup,
     TResult? Function()? auth,
+    TResult? Function()? signup,
     TResult? Function()? loading,
   }) {
-    return auth?.call();
+    return signup?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? signup,
     TResult Function()? auth,
+    TResult Function()? signup,
     TResult Function()? loading,
     required TResult orElse(),
   }) {
-    if (auth != null) {
-      return auth();
+    if (signup != null) {
+      return signup();
     }
     return orElse();
   }
@@ -265,33 +265,33 @@ class _$AuthRootViewStateSignupImpl implements AuthRootViewStateSignup {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(AuthRootViewStateAuth value) signup,
-    required TResult Function(AuthRootViewStateSignup value) auth,
+    required TResult Function(AuthRootViewStateAuth value) auth,
+    required TResult Function(AuthRootViewStateSignup value) signup,
     required TResult Function(AuthRootViewStateLoading value) loading,
   }) {
-    return auth(this);
+    return signup(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(AuthRootViewStateAuth value)? signup,
-    TResult? Function(AuthRootViewStateSignup value)? auth,
+    TResult? Function(AuthRootViewStateAuth value)? auth,
+    TResult? Function(AuthRootViewStateSignup value)? signup,
     TResult? Function(AuthRootViewStateLoading value)? loading,
   }) {
-    return auth?.call(this);
+    return signup?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(AuthRootViewStateAuth value)? signup,
-    TResult Function(AuthRootViewStateSignup value)? auth,
+    TResult Function(AuthRootViewStateAuth value)? auth,
+    TResult Function(AuthRootViewStateSignup value)? signup,
     TResult Function(AuthRootViewStateLoading value)? loading,
     required TResult orElse(),
   }) {
-    if (auth != null) {
-      return auth(this);
+    if (signup != null) {
+      return signup(this);
     }
     return orElse();
   }
@@ -343,8 +343,8 @@ class _$AuthRootViewStateLoadingImpl implements AuthRootViewStateLoading {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() signup,
     required TResult Function() auth,
+    required TResult Function() signup,
     required TResult Function() loading,
   }) {
     return loading();
@@ -353,8 +353,8 @@ class _$AuthRootViewStateLoadingImpl implements AuthRootViewStateLoading {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? signup,
     TResult? Function()? auth,
+    TResult? Function()? signup,
     TResult? Function()? loading,
   }) {
     return loading?.call();
@@ -363,8 +363,8 @@ class _$AuthRootViewStateLoadingImpl implements AuthRootViewStateLoading {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? signup,
     TResult Function()? auth,
+    TResult Function()? signup,
     TResult Function()? loading,
     required TResult orElse(),
   }) {
@@ -377,8 +377,8 @@ class _$AuthRootViewStateLoadingImpl implements AuthRootViewStateLoading {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(AuthRootViewStateAuth value) signup,
-    required TResult Function(AuthRootViewStateSignup value) auth,
+    required TResult Function(AuthRootViewStateAuth value) auth,
+    required TResult Function(AuthRootViewStateSignup value) signup,
     required TResult Function(AuthRootViewStateLoading value) loading,
   }) {
     return loading(this);
@@ -387,8 +387,8 @@ class _$AuthRootViewStateLoadingImpl implements AuthRootViewStateLoading {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(AuthRootViewStateAuth value)? signup,
-    TResult? Function(AuthRootViewStateSignup value)? auth,
+    TResult? Function(AuthRootViewStateAuth value)? auth,
+    TResult? Function(AuthRootViewStateSignup value)? signup,
     TResult? Function(AuthRootViewStateLoading value)? loading,
   }) {
     return loading?.call(this);
@@ -397,8 +397,8 @@ class _$AuthRootViewStateLoadingImpl implements AuthRootViewStateLoading {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(AuthRootViewStateAuth value)? signup,
-    TResult Function(AuthRootViewStateSignup value)? auth,
+    TResult Function(AuthRootViewStateAuth value)? auth,
+    TResult Function(AuthRootViewStateSignup value)? signup,
     TResult Function(AuthRootViewStateLoading value)? loading,
     required TResult orElse(),
   }) {

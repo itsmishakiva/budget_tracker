@@ -143,6 +143,7 @@ class MockAnalyticsService implements AnalyticsService {
             'id': 1,
             'title': 'Home',
             'icon': ':house:',
+            'color': 0xFFFFD1F0,
           },
           'sum': 367,
         }

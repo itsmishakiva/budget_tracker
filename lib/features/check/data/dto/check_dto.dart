@@ -8,10 +8,9 @@ part 'check_dto.g.dart';
 class CheckDTO with _$CheckDTO {
   factory CheckDTO({
     required int id,
-    required String title,
     required double sum,
-    required double expenses,
-    required double income,
+    required double outcomingSum,
+    required double incomingSum,
   }) = _CheckDTO;
 
   factory CheckDTO.fromJson(Map<String, Object?> json) =>

@@ -1,13 +1,13 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:budget_tracker/core/ui_kit/app_scaffold.dart';
 import 'package:budget_tracker/extensions/build_context_extension.dart';
+import 'package:budget_tracker/features/categories/domain/entities/category.dart';
 import 'package:budget_tracker/features/operations/domain/entities/operation.dart';
 import 'package:budget_tracker/features/operations/presentation/view_model/operation_list_view_model.dart';
 import 'package:budget_tracker/features/operations/presentation/view_model/operation_list_view_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_emoji/flutter_emoji.dart';
-import 'package:budget_tracker/themes/app_operation_colors.dart';
 import 'package:intl/intl.dart';
 
 @RoutePage()
@@ -40,9 +40,10 @@ class OperationListScreenContent extends ConsumerWidget {
       case OperationListViewDataState _:
         return ListView.builder(
           itemExtent: 100,
-          itemCount: state.data.length,
+          itemCount: state.operations.length,
           itemBuilder: (context, index) => OperationListTile(
-            operation: state.data[index],
+            operation: state.operations[index],
+            category: state.categories[state.operations[index].categoryId]!,
           ),
         );
     }
@@ -53,9 +54,11 @@ class OperationListTile extends StatefulWidget {
   const OperationListTile({
     super.key,
     required this.operation,
+    required this.category,
   });
 
   final Operation operation;
+  final Category category;
 
   @override
   State<OperationListTile> createState() => _OperationListTileState();
@@ -63,55 +66,14 @@ class OperationListTile extends StatefulWidget {
 
 class _OperationListTileState extends State<OperationListTile> {
   final double size = 30;
-  Color color = Colors.white24;
+  // Color color = Colors.white24;
+  String get icon => widget.category.emoji;
+  Color get color => widget.category.color;
 
   @override
   void initState() {
     super.initState();
-    _loadColor();
-  }
-
-  void _loadColor() async {
-    Color? loadedColor =
-        await ColorStorageManager().loadColor(widget.operation.category.title);
-    setState(() {
-      color = loadedColor;
-    });
-  }
-
-  Text _operationIcon(String operation) {
-    switch (operation) {
-      case 'Home':
-        return Text(
-          EmojiParser().emojify(':house:'),
-          style: const TextStyle(fontSize: 24.0),
-        );
-      case 'Health':
-        return Text(
-          EmojiParser().emojify(':broken_heart:'),
-          style: const TextStyle(fontSize: 24.0),
-        );
-      case 'Food':
-        return Text(
-          EmojiParser().emojify(':green_salad:'),
-          style: const TextStyle(fontSize: 24.0),
-        );
-      case 'Gifts':
-        return Text(
-          EmojiParser().emojify(':gift:'),
-          style: const TextStyle(fontSize: 24.0),
-        );
-      case 'Travels':
-        return Text(
-          EmojiParser().emojify(':airplane_departure:'),
-          style: const TextStyle(fontSize: 24.0),
-        );
-      default:
-        return Text(
-          EmojiParser().emojify(':broken_heart:'),
-          style: const TextStyle(fontSize: 24.0),
-        );
-    }
+    // _loadColor();
   }
 
   @override
@@ -145,7 +107,10 @@ class _OperationListTileState extends State<OperationListTile> {
                 color: color,
               ),
               child: Center(
-                child: _operationIcon(widget.operation.category.emoji),
+                child: Text(
+                  EmojiParser().emojify(icon),
+                  style: const TextStyle(fontSize: 24.0),
+                ),
               ),
             ),
             const SizedBox(width: 16.0),
@@ -154,7 +119,7 @@ class _OperationListTileState extends State<OperationListTile> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    widget.operation.category.title,
+                    widget.category.title,
                     style: context.textStyles.header3,
                     overflow: TextOverflow.ellipsis,
                   ),

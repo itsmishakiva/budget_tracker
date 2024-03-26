@@ -30,15 +30,14 @@ class OperationCreationTypeViewModel
 
   Future<void> loadData() async {
     try {
-      List<Category> categoriesData = await _repository.getCategories();
-      logger.log(Level.FINE, categoriesData); // TODO delete logger
+      Map<int, Category> categoriesData = await _repository.getCategories();
 
       state = OperationCreationTypeViewDataState(
         data: categoriesData,
         newOperation: NewOperation(
           sum: double.parse(_sum.replaceAll(',', '.')),
           incoming: false,
-          category: (categoriesData.isNotEmpty) ? categoriesData[0] : null,
+          category: categoriesData[1],
         ),
       );
     } catch (e) {
