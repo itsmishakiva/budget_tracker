@@ -11,7 +11,7 @@
 import 'package:auto_route/auto_route.dart' as _i10;
 import 'package:budget_tracker/features/analytics/presentation/view/sreens/analytics_screen.dart'
     as _i1;
-import 'package:budget_tracker/features/auth/presentation/auth/auth_screen.dart'
+import 'package:budget_tracker/features/auth/presentation/root/auth_screen.dart'
     as _i2;
 import 'package:budget_tracker/features/home/presentation/view/screens/home_screen.dart'
     as _i4;
