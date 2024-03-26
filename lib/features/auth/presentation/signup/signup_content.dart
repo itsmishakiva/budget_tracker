@@ -108,7 +108,7 @@ class _SignUpContentState extends ConsumerState<SignUpContent> {
         const Spacer(),
         AppButton(
           onTap: () {
-            ref.read(signupViewModelProvider.notifier).signUp();
+            ref.read(signupViewModelProvider.notifier).signUp(context.locale!);
           },
           title: context.locale!.signUp,
           loading: state is SignupViewStateLoading,

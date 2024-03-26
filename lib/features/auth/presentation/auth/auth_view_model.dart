@@ -7,6 +7,7 @@ import 'package:budget_tracker/main.dart';
 import 'package:budget_tracker/navigation/app_router.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logging/logging.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 final authViewModelProvider =
     StateNotifierProvider<AuthViewModel, AuthViewState>(
@@ -27,17 +28,13 @@ class AuthViewModel extends StateNotifier<AuthViewState> {
   final AuthRepository _repository;
   final AppRouter _router;
 
-  Future<void> signIn() async {
+  Future<void> signIn(AppLocalizations locale) async {
     try {
       final user = state.user;
-      if (user.username.length < 6) {
-        _setAuthError('Username length must be longer than 5 symbols');
-        return;
-      } else if (user.username.length > 20) {
-        _setAuthError('Username length must be not longer than 20 symbols');
-        return;
-      } else if (user.password.length < 6) {
-        _setAuthError('Password length must be longer than 5 symbols');
+      if (user.username.length < 6 ||
+          user.username.length > 20 ||
+          user.password.length < 6) {
+        _setAuthError(locale.wrongUserData);
         return;
       }
       state = AuthViewState.loading(state.user);
@@ -45,7 +42,7 @@ class AuthViewModel extends StateNotifier<AuthViewState> {
       _router.replaceNamed('/pin');
     } catch (e) {
       logger.log(Level.WARNING, e);
-      _setAuthError('Server error');
+      _setAuthError(locale.wrongUserOrConnect);
     }
   }
 

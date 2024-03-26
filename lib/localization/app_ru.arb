@@ -19,5 +19,12 @@
     "password": "Пароль",
     "repeatPassword" : "Повторите пароль",
     "alreadyRegistered" : "Уже есть аккаунт?",
-    "notRegistered" : "Еще нет аккаунта?"
+    "notRegistered" : "Еще нет аккаунта?",
+    "usernameTooShort" : "Длина username должна быть больше 5 символов",
+    "usernameTooLong" : "Длина username не должна превышать 20 символов",
+    "passwordTooShort" : "Длина пароля должна быть больше 5 символов",
+    "passwordsNotSame" : "Пароли не совпадают",
+    "wrongUserData" : "Неверные учетные данные",
+    "wrongUserOrConnect" : "Неверные учетные данные/Проблемы с интернетом"
+
 }

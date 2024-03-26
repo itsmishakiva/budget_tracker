@@ -7,6 +7,7 @@ import 'package:budget_tracker/main.dart';
 import 'package:budget_tracker/navigation/app_router.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logging/logging.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 final signupViewModelProvider =
     StateNotifierProvider<SignupViewModel, SignupViewState>(
@@ -27,26 +28,28 @@ class SignupViewModel extends StateNotifier<SignupViewState> {
   final AuthRepository _repository;
   final AppRouter _router;
 
-  Future<void> signUp() async {
+  Future<void> signUp(AppLocalizations locale) async {
     try {
       final user = state.user;
       if (user.username.length < 6) {
-        _setSignupError('Username length must be longer than 5 symbols');
+        _setSignupError(locale.usernameTooShort);
         return;
       } else if (user.username.length > 20) {
-        _setSignupError('Username length must be not longer than 20 symbols');
+        _setSignupError(locale.usernameTooLong);
         return;
       } else if (user.password.length < 6) {
-        _setSignupError('Password length must be longer than 5 symbols');
+        _setSignupError(locale.passwordTooShort);
+        return;
       } else if (user.password != user.passwordRepeat) {
-        _setSignupError('Passwords are not the same');
+        _setSignupError(locale.passwordsNotSame);
+        return;
       }
       state = SignupViewState.loading(state.user);
       await _repository.signup(user);
       _router.replaceNamed('/pin');
     } catch (e) {
       logger.log(Level.WARNING, e);
-      _setSignupError('Server error');
+      _setSignupError(locale.wrongUserOrConnect);
     }
   }
 

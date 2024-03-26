@@ -97,7 +97,7 @@ class _AuthContentState extends ConsumerState<AuthContent> {
         const Spacer(),
         AppButton(
           onTap: () {
-            ref.read(authViewModelProvider.notifier).signIn();
+            ref.read(authViewModelProvider.notifier).signIn(context.locale!);
           },
           title: context.locale!.signIn,
           loading: state is AuthViewStateLoading,

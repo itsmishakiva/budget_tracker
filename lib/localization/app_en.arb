@@ -19,5 +19,11 @@
     "password": "Password",
     "repeatPassword" : "Repeat password",
     "alreadyRegistered" : "Already have an account?",
-    "notRegistered" : "Don't have an account?"
+    "notRegistered" : "Don't have an account?",
+    "usernameTooShort" : "Username length must be longer than 5 symbols",
+    "usernameTooLong" : "Username length must be not longer than 20 symbols",
+    "passwordTooShort" : "Password length must be longer than 5 symbols",
+    "passwordsNotSame" : "Passwords are not the same",
+    "wrongUserData" : "Wrong authentication data",
+    "wrongUserOrConnect" : "Wrong authentication data or connection unstable"
 }
