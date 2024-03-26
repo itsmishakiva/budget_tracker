@@ -12,7 +12,7 @@ class CategoryListGetRequest implements CategoryListService {
       InterceptorsWrapper(
         onRequest: (options, handler) {
           String accessToken =
-              'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjaGVsOCIsInJvbGUiOlsiVVNFUiJdLCJpYXQiOjE3MTE0NjI1ODcsImV4cCI6MTcxMTQ2NjE4N30.QUU8yHegV_CakI19y4OIW_oQLKd_bb3UFdIXxm6MMlc';
+              'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjaGVsOSIsInJvbGUiOlsiVVNFUiJdLCJpYXQiOjE3MTE0NzU3NTUsImV4cCI6MTcxMTQ3OTM1NX0.6lqI_QYSeMh_aMAhCBvBSnNU_590HyNagdUikDBkyh8';
           options.headers['Authorization'] = 'Bearer $accessToken';
           return handler.next(options);
         },

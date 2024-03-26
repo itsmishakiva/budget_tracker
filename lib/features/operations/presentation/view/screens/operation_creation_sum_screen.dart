@@ -7,6 +7,7 @@ import 'package:budget_tracker/extensions/build_context_extension.dart';
 import 'package:budget_tracker/features/operations/presentation/view/widgets/numpad.dart';
 import 'package:budget_tracker/features/operations/presentation/view_model/operation_creation_sum_view_model.dart';
 import 'package:budget_tracker/features/operations/presentation/view_model/operation_creation_sum_view_state.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -31,8 +32,10 @@ class _OperationCreationSumScreenContent extends ConsumerWidget {
     final state = ref.watch(operationCreationSumViewModelProvider);
     switch (state) {
       case OperationCreationSumViewLoadingState _:
-        return const Center(
-          child: CircularProgressIndicator(),
+        return Center(
+          child: CupertinoActivityIndicator(
+            color: context.colors.backgroundPrimary,
+          ),
         );
       case OperationCreationSumViewErrorState _:
         return const Center(
