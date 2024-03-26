@@ -8,8 +8,8 @@ part of 'new_auth_user.dart';
 
 _$NewAuthUserImpl _$$NewAuthUserImplFromJson(Map<String, dynamic> json) =>
     _$NewAuthUserImpl(
-      username: json['username'] as String?,
-      password: json['password'] as String?,
+      username: json['username'] as String? ?? '',
+      password: json['password'] as String? ?? '',
     );
 
 Map<String, dynamic> _$$NewAuthUserImplToJson(_$NewAuthUserImpl instance) =>

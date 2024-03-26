@@ -20,8 +20,8 @@ NewAuthUser _$NewAuthUserFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$NewAuthUser {
-  String? get username => throw _privateConstructorUsedError;
-  String? get password => throw _privateConstructorUsedError;
+  String get username => throw _privateConstructorUsedError;
+  String get password => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -35,7 +35,7 @@ abstract class $NewAuthUserCopyWith<$Res> {
           NewAuthUser value, $Res Function(NewAuthUser) then) =
       _$NewAuthUserCopyWithImpl<$Res, NewAuthUser>;
   @useResult
-  $Res call({String? username, String? password});
+  $Res call({String username, String password});
 }
 
 /// @nodoc
@@ -51,18 +51,18 @@ class _$NewAuthUserCopyWithImpl<$Res, $Val extends NewAuthUser>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? username = freezed,
-    Object? password = freezed,
+    Object? username = null,
+    Object? password = null,
   }) {
     return _then(_value.copyWith(
-      username: freezed == username
+      username: null == username
           ? _value.username
           : username // ignore: cast_nullable_to_non_nullable
-              as String?,
-      password: freezed == password
+              as String,
+      password: null == password
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
     ) as $Val);
   }
 }
@@ -75,7 +75,7 @@ abstract class _$$NewAuthUserImplCopyWith<$Res>
       __$$NewAuthUserImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String? username, String? password});
+  $Res call({String username, String password});
 }
 
 /// @nodoc
@@ -89,18 +89,18 @@ class __$$NewAuthUserImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? username = freezed,
-    Object? password = freezed,
+    Object? username = null,
+    Object? password = null,
   }) {
     return _then(_$NewAuthUserImpl(
-      username: freezed == username
+      username: null == username
           ? _value.username
           : username // ignore: cast_nullable_to_non_nullable
-              as String?,
-      password: freezed == password
+              as String,
+      password: null == password
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
     ));
   }
 }
@@ -108,15 +108,17 @@ class __$$NewAuthUserImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$NewAuthUserImpl implements _NewAuthUser {
-  _$NewAuthUserImpl({this.username, this.password});
+  _$NewAuthUserImpl({this.username = '', this.password = ''});
 
   factory _$NewAuthUserImpl.fromJson(Map<String, dynamic> json) =>
       _$$NewAuthUserImplFromJson(json);
 
   @override
-  final String? username;
+  @JsonKey()
+  final String username;
   @override
-  final String? password;
+  @JsonKey()
+  final String password;
 
   @override
   String toString() {
@@ -153,16 +155,16 @@ class _$NewAuthUserImpl implements _NewAuthUser {
 }
 
 abstract class _NewAuthUser implements NewAuthUser {
-  factory _NewAuthUser({final String? username, final String? password}) =
+  factory _NewAuthUser({final String username, final String password}) =
       _$NewAuthUserImpl;
 
   factory _NewAuthUser.fromJson(Map<String, dynamic> json) =
       _$NewAuthUserImpl.fromJson;
 
   @override
-  String? get username;
+  String get username;
   @override
-  String? get password;
+  String get password;
   @override
   @JsonKey(ignore: true)
   _$$NewAuthUserImplCopyWith<_$NewAuthUserImpl> get copyWith =>

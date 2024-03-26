@@ -6,5 +6,7 @@ part 'auth_view_state.freezed.dart';
 @freezed
 sealed class AuthViewState with _$AuthViewState {
   const factory AuthViewState.data(NewAuthUser user) = AuthViewStateData;
-  const factory AuthViewState.error(NewAuthUser user, String error) = AuthViewStateError;
+  const factory AuthViewState.error(NewAuthUser user, String error) =
+      AuthViewStateError;
+  const factory AuthViewState.loading(NewAuthUser user) = AuthViewStateLoading;
 }

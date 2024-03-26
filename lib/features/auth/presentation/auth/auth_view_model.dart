@@ -3,8 +3,10 @@ import 'package:budget_tracker/features/auth/data/repositories_impl/auth_reposit
 import 'package:budget_tracker/features/auth/domain/entities/new_auth_user.dart';
 import 'package:budget_tracker/features/auth/domain/repository/auth_repository.dart';
 import 'package:budget_tracker/features/auth/presentation/auth/auth_view_state.dart';
+import 'package:budget_tracker/main.dart';
 import 'package:budget_tracker/navigation/app_router.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:logging/logging.dart';
 
 final authViewModelProvider =
     StateNotifierProvider<AuthViewModel, AuthViewState>(
@@ -28,22 +30,27 @@ class AuthViewModel extends StateNotifier<AuthViewState> {
   Future<void> signIn() async {
     try {
       final user = state.user;
-      if (user.username == null || user.password == null) {
-        _setAuthError('Please enter auth dara');
-      } else if (user.username!.length < 6) {
+      if (user.username.length < 6) {
         _setAuthError('Username length must be longer than 5 symbols');
         return;
-      } else if (user.username!.length > 20) {
+      } else if (user.username.length > 20) {
         _setAuthError('Username length must be not longer than 20 symbols');
         return;
-      } else if (user.password!.length < 6) {
+      } else if (user.password.length < 6) {
         _setAuthError('Password length must be longer than 5 symbols');
+        return;
       }
+      state = AuthViewState.loading(state.user);
       await _repository.auth(user);
       _router.replaceNamed('/pin');
     } catch (e) {
-      _setAuthError('Unknown error');
+      logger.log(Level.WARNING, e);
+      _setAuthError('Server error');
     }
+  }
+
+  void clear() {
+    state = AuthViewState.data(NewAuthUser());
   }
 
   void _setAuthError(String errorMessage) {
@@ -53,10 +60,17 @@ class AuthViewModel extends StateNotifier<AuthViewState> {
     );
   }
 
-  void updateAuth({String? username, String? password}) {
+  void updateUsername(String username) {
     state = state.copyWith(
       user: state.user.copyWith(
         username: username,
+      ),
+    );
+  }
+
+  void updatePassword(String password) {
+    state = state.copyWith(
+      user: state.user.copyWith(
         password: password,
       ),
     );

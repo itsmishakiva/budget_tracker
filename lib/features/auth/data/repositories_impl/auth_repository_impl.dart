@@ -18,17 +18,24 @@ class AuthRepositoryImpl implements AuthRepository {
 
   @override
   Future<(String, String)> auth(NewAuthUser user) async {
-    final response = await _service.auth();
+    final response = await _service.auth(user);
     return _parseAndSaveTokens(response);
   }
 
   @override
   Future<(String, String)> signup(NewSignupUser user) async {
-    final response = await _service.signup();
+    final response = await _service.signup(user);
     return _parseAndSaveTokens(response);
   }
 
-  Future<(String, String)> _parseAndSaveTokens(Map<String, dynamic> response) async {
+  @override
+  Future<bool> checkTokenExpire() async {
+    return _service.checkTokenExpire();
+  }
+
+  Future<(String, String)> _parseAndSaveTokens(
+    Map<String, dynamic> response,
+  ) async {
     final accessToken = response['accessToken'].toString();
     final tokenType = response['tokenType'].toString();
     await _service.saveTokens(accessToken, tokenType);

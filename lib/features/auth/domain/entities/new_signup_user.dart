@@ -11,5 +11,6 @@ class NewSignupUser with _$NewSignupUser {
     @Default('') final String passwordRepeat,
   }) = _NewSignupUser;
 
-  factory NewSignupUser.fromJson(Map<String, dynamic> json) => _$NewSignupUserFromJson(json);
+  factory NewSignupUser.fromJson(Map<String, dynamic> json) =>
+      _$NewSignupUserFromJson(json);
 }

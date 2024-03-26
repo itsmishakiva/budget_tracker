@@ -21,18 +21,21 @@ mixin _$AuthViewState {
   TResult when<TResult extends Object?>({
     required TResult Function(NewAuthUser user) data,
     required TResult Function(NewAuthUser user, String error) error,
+    required TResult Function(NewAuthUser user) loading,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(NewAuthUser user)? data,
     TResult? Function(NewAuthUser user, String error)? error,
+    TResult? Function(NewAuthUser user)? loading,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(NewAuthUser user)? data,
     TResult Function(NewAuthUser user, String error)? error,
+    TResult Function(NewAuthUser user)? loading,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -40,18 +43,21 @@ mixin _$AuthViewState {
   TResult map<TResult extends Object?>({
     required TResult Function(AuthViewStateData value) data,
     required TResult Function(AuthViewStateError value) error,
+    required TResult Function(AuthViewStateLoading value) loading,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(AuthViewStateData value)? data,
     TResult? Function(AuthViewStateError value)? error,
+    TResult? Function(AuthViewStateLoading value)? loading,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(AuthViewStateData value)? data,
     TResult Function(AuthViewStateError value)? error,
+    TResult Function(AuthViewStateLoading value)? loading,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -176,6 +182,7 @@ class _$AuthViewStateDataImpl implements AuthViewStateData {
   TResult when<TResult extends Object?>({
     required TResult Function(NewAuthUser user) data,
     required TResult Function(NewAuthUser user, String error) error,
+    required TResult Function(NewAuthUser user) loading,
   }) {
     return data(user);
   }
@@ -185,6 +192,7 @@ class _$AuthViewStateDataImpl implements AuthViewStateData {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(NewAuthUser user)? data,
     TResult? Function(NewAuthUser user, String error)? error,
+    TResult? Function(NewAuthUser user)? loading,
   }) {
     return data?.call(user);
   }
@@ -194,6 +202,7 @@ class _$AuthViewStateDataImpl implements AuthViewStateData {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(NewAuthUser user)? data,
     TResult Function(NewAuthUser user, String error)? error,
+    TResult Function(NewAuthUser user)? loading,
     required TResult orElse(),
   }) {
     if (data != null) {
@@ -207,6 +216,7 @@ class _$AuthViewStateDataImpl implements AuthViewStateData {
   TResult map<TResult extends Object?>({
     required TResult Function(AuthViewStateData value) data,
     required TResult Function(AuthViewStateError value) error,
+    required TResult Function(AuthViewStateLoading value) loading,
   }) {
     return data(this);
   }
@@ -216,6 +226,7 @@ class _$AuthViewStateDataImpl implements AuthViewStateData {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(AuthViewStateData value)? data,
     TResult? Function(AuthViewStateError value)? error,
+    TResult? Function(AuthViewStateLoading value)? loading,
   }) {
     return data?.call(this);
   }
@@ -225,6 +236,7 @@ class _$AuthViewStateDataImpl implements AuthViewStateData {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(AuthViewStateData value)? data,
     TResult Function(AuthViewStateError value)? error,
+    TResult Function(AuthViewStateLoading value)? loading,
     required TResult orElse(),
   }) {
     if (data != null) {
@@ -326,6 +338,7 @@ class _$AuthViewStateErrorImpl implements AuthViewStateError {
   TResult when<TResult extends Object?>({
     required TResult Function(NewAuthUser user) data,
     required TResult Function(NewAuthUser user, String error) error,
+    required TResult Function(NewAuthUser user) loading,
   }) {
     return error(user, this.error);
   }
@@ -335,6 +348,7 @@ class _$AuthViewStateErrorImpl implements AuthViewStateError {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(NewAuthUser user)? data,
     TResult? Function(NewAuthUser user, String error)? error,
+    TResult? Function(NewAuthUser user)? loading,
   }) {
     return error?.call(user, this.error);
   }
@@ -344,6 +358,7 @@ class _$AuthViewStateErrorImpl implements AuthViewStateError {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(NewAuthUser user)? data,
     TResult Function(NewAuthUser user, String error)? error,
+    TResult Function(NewAuthUser user)? loading,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -357,6 +372,7 @@ class _$AuthViewStateErrorImpl implements AuthViewStateError {
   TResult map<TResult extends Object?>({
     required TResult Function(AuthViewStateData value) data,
     required TResult Function(AuthViewStateError value) error,
+    required TResult Function(AuthViewStateLoading value) loading,
   }) {
     return error(this);
   }
@@ -366,6 +382,7 @@ class _$AuthViewStateErrorImpl implements AuthViewStateError {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(AuthViewStateData value)? data,
     TResult? Function(AuthViewStateError value)? error,
+    TResult? Function(AuthViewStateLoading value)? loading,
   }) {
     return error?.call(this);
   }
@@ -375,6 +392,7 @@ class _$AuthViewStateErrorImpl implements AuthViewStateError {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(AuthViewStateData value)? data,
     TResult Function(AuthViewStateError value)? error,
+    TResult Function(AuthViewStateLoading value)? loading,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -395,4 +413,153 @@ abstract class AuthViewStateError implements AuthViewState {
   @JsonKey(ignore: true)
   _$$AuthViewStateErrorImplCopyWith<_$AuthViewStateErrorImpl> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$AuthViewStateLoadingImplCopyWith<$Res>
+    implements $AuthViewStateCopyWith<$Res> {
+  factory _$$AuthViewStateLoadingImplCopyWith(_$AuthViewStateLoadingImpl value,
+          $Res Function(_$AuthViewStateLoadingImpl) then) =
+      __$$AuthViewStateLoadingImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({NewAuthUser user});
+
+  @override
+  $NewAuthUserCopyWith<$Res> get user;
+}
+
+/// @nodoc
+class __$$AuthViewStateLoadingImplCopyWithImpl<$Res>
+    extends _$AuthViewStateCopyWithImpl<$Res, _$AuthViewStateLoadingImpl>
+    implements _$$AuthViewStateLoadingImplCopyWith<$Res> {
+  __$$AuthViewStateLoadingImplCopyWithImpl(_$AuthViewStateLoadingImpl _value,
+      $Res Function(_$AuthViewStateLoadingImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? user = null,
+  }) {
+    return _then(_$AuthViewStateLoadingImpl(
+      null == user
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as NewAuthUser,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$AuthViewStateLoadingImpl implements AuthViewStateLoading {
+  const _$AuthViewStateLoadingImpl(this.user);
+
+  @override
+  final NewAuthUser user;
+
+  @override
+  String toString() {
+    return 'AuthViewState.loading(user: $user)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$AuthViewStateLoadingImpl &&
+            (identical(other.user, user) || other.user == user));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, user);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$AuthViewStateLoadingImplCopyWith<_$AuthViewStateLoadingImpl>
+      get copyWith =>
+          __$$AuthViewStateLoadingImplCopyWithImpl<_$AuthViewStateLoadingImpl>(
+              this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(NewAuthUser user) data,
+    required TResult Function(NewAuthUser user, String error) error,
+    required TResult Function(NewAuthUser user) loading,
+  }) {
+    return loading(user);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(NewAuthUser user)? data,
+    TResult? Function(NewAuthUser user, String error)? error,
+    TResult? Function(NewAuthUser user)? loading,
+  }) {
+    return loading?.call(user);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(NewAuthUser user)? data,
+    TResult Function(NewAuthUser user, String error)? error,
+    TResult Function(NewAuthUser user)? loading,
+    required TResult orElse(),
+  }) {
+    if (loading != null) {
+      return loading(user);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(AuthViewStateData value) data,
+    required TResult Function(AuthViewStateError value) error,
+    required TResult Function(AuthViewStateLoading value) loading,
+  }) {
+    return loading(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(AuthViewStateData value)? data,
+    TResult? Function(AuthViewStateError value)? error,
+    TResult? Function(AuthViewStateLoading value)? loading,
+  }) {
+    return loading?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(AuthViewStateData value)? data,
+    TResult Function(AuthViewStateError value)? error,
+    TResult Function(AuthViewStateLoading value)? loading,
+    required TResult orElse(),
+  }) {
+    if (loading != null) {
+      return loading(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class AuthViewStateLoading implements AuthViewState {
+  const factory AuthViewStateLoading(final NewAuthUser user) =
+      _$AuthViewStateLoadingImpl;
+
+  @override
+  NewAuthUser get user;
+  @override
+  @JsonKey(ignore: true)
+  _$$AuthViewStateLoadingImplCopyWith<_$AuthViewStateLoadingImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
