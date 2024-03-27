@@ -1,4 +1,4 @@
 class Token {
   final token =
-      'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJvbCIsInJvbGUiOlsiVVNFUiJdLCJpYXQiOjE3MTE0ODc5NTgsImV4cCI6MTcxMTQ5MTU1OH0.W7a7FLgiQNRJTJKcSm--1EdsCG0vwjnbFdkrvCBSf9M';
+      'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJvbGVzaWEiLCJyb2xlIjpbIlVTRVIiXSwiaWF0IjoxNzExNTc3ODg2LCJleHAiOjE3MTE1ODE0ODZ9.mxL_a9JFMANx9Mmss27pTQeRGNQnYsnWsuc4z2u1Xtg';
 }

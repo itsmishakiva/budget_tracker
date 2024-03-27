@@ -33,6 +33,7 @@ dependencies:
   shared_preferences: ^2.2.2
   fl_chart: ^0.66.2
   dio: ^5.4.2
+  rive:
 
 dev_dependencies:
   flutter_test:
@@ -50,15 +51,16 @@ flutter:
   assets:
     - assets/
     - assets/svg/
+    - assets/pig.riv
 
   fonts:
     - family: Nunito
       fonts:
-      - asset: fonts/Nunito-Black.ttf
-      - asset: fonts/Nunito-Bold.ttf
-      - asset: fonts/Nunito-ExtraBold.ttf
-      - asset: fonts/Nunito-ExtraLight.ttf
-      - asset: fonts/Nunito-Light.ttf
-      - asset: fonts/Nunito-Medium.ttf
-      - asset: fonts/Nunito-Regular.ttf
-      - asset: fonts/Nunito-SemiBold.ttf
+        - asset: fonts/Nunito-Black.ttf
+        - asset: fonts/Nunito-Bold.ttf
+        - asset: fonts/Nunito-ExtraBold.ttf
+        - asset: fonts/Nunito-ExtraLight.ttf
+        - asset: fonts/Nunito-Light.ttf
+        - asset: fonts/Nunito-Medium.ttf
+        - asset: fonts/Nunito-Regular.ttf
+        - asset: fonts/Nunito-SemiBold.ttf

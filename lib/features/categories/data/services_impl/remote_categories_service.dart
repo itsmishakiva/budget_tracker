@@ -20,6 +20,7 @@ class RemoteCategoriesService implements CategoryListService {
           String accessToken = Token().token;
           options.headers['Authorization'] = 'Bearer $accessToken';
           return handler.next(options);
+          // return InheritedWidget;
         },
       ),
     );

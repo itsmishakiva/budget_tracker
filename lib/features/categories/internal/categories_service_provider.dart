@@ -3,5 +3,5 @@ import 'package:budget_tracker/features/categories/data/services_impl/remote_cat
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final categoryServiceProvider = Provider<CategoryListService>(
-      (ref) => RemoteCategoriesService(),
+  (ref) => RemoteCategoriesService(),
 );
