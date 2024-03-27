@@ -3,6 +3,7 @@ import 'package:budget_tracker/core/internal/app_router_provider.dart';
 import 'package:budget_tracker/core/ui_kit/app_scaffold.dart';
 import 'package:budget_tracker/extensions/build_context_extension.dart';
 import 'package:budget_tracker/features/operations/presentation/view/screens/operation_list_screen.dart';
+import 'package:budget_tracker/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logging/logging.dart';
@@ -43,11 +44,15 @@ class HomeScreen extends ConsumerWidget {
 class CheckListScreenContent extends ConsumerWidget {
   final ScrollController scrollController;
 
-  const CheckListScreenContent({super.key, required this.scrollController});
+  const CheckListScreenContent({
+    super.key,
+    required this.scrollController,
+  });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(homeViewModelProvider);
+    logger.log(Level.INFO, state.runtimeType);
     switch (state) {
       case HomeViewLoadingState _:
         ref.read(loggerProvider).log(Level.INFO, 'Hello!');
@@ -67,7 +72,15 @@ class CheckListScreenContent extends ConsumerWidget {
           slivers: [
             SliverPersistentHeader(
               delegate: _CheckTileHeaderDelegate(
-                check: state.dataAccount[0],
+                //TODO remove
+                check: state.dataAccount.isEmpty
+                    ? Check(
+                        id: 1,
+                        expenses: 0,
+                        income: 0,
+                        sum: 0,
+                      )
+                    : state.dataAccount.first,
               ),
               pinned: true,
             ),

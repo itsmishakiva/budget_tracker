@@ -1,24 +1,11 @@
-import 'package:budget_tracker/core/Token.dart';
 import 'package:budget_tracker/features/check/data/dto/check_dto.dart';
 import 'package:budget_tracker/features/check/data/services/check_service.dart';
 import 'package:dio/dio.dart';
 
 class RemoteCheckService implements CheckService {
-  final Dio _dio = Dio();
+  RemoteCheckService(this._dio);
 
-  RemoteCheckService() {
-    _dio.options.baseUrl = 'http://178.154.223.177:8080/api';
-    _dio.interceptors.add(
-      InterceptorsWrapper(
-        onRequest: (options, handler) {
-          String accessToken = Token().token;
-          options.headers['Authorization'] = 'Bearer $accessToken';
-          options.headers['Custom-Header'] = 'Custom Value';
-          return handler.next(options);
-        },
-      ),
-    );
-  }
+  final Dio _dio;
 
   @override
   Future<List<CheckDTO>> getCheckList() async {
@@ -70,11 +57,7 @@ class RemoteCheckService implements CheckService {
 
   Future<Map<String, dynamic>> getCheckByIdJson(int id) async {
     try {
-      Dio dio = Dio();
-      String accessToken = Token().token;
-      dio.options.headers['Authorization'] = 'Bearer $accessToken';
-      dio.options.headers['Custom-Header'] = 'Custom Value';
-      final response = await dio.get('/checks/$id');
+      final response = await _dio.get('/checks/$id');
 
       if (response.statusCode == 200) {
         return response.data;
