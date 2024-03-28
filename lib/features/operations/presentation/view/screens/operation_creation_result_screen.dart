@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:auto_route/annotations.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:budget_tracker/core/internal/app_router_provider.dart';
+import 'package:budget_tracker/core/ui_kit/app_scaffold.dart';
 import 'package:budget_tracker/extensions/build_context_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -29,8 +30,9 @@ class _OperationCreationResultScreenState
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return AppScaffold(
       backgroundColor: context.colors.accent,
+      statusBarBrightness: Brightness.dark,
       body: const Center(
         child: SizedBox(
           height: 300,

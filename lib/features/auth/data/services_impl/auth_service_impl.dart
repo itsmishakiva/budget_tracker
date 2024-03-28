@@ -66,7 +66,16 @@ class AuthServiceImpl implements AuthService {
   @override
   Future<bool> checkToken() async {
     final token = await _secureStorage.read(key: 'accessToken');
+
     if (token == null) return true;
+    _dio.interceptors.add(
+      InterceptorsWrapper(
+        onRequest: (options, handler) {
+          options.headers['Authorization'] = 'Bearer $token';
+          return handler.next(options);
+        },
+      ),
+    );
     return false;
   }
 }

@@ -54,7 +54,7 @@ class _OperationCreationTypeScreenContent extends ConsumerWidget {
           ),
           child: Stack(
             children: [
-              CustomScrollViewWidget(
+              _CustomScrollViewWidget(
                 tiles: state.data,
                 isIncome: state.newOperation.incoming,
               ),
@@ -86,15 +86,15 @@ class _OperationCreationTypeScreenContent extends ConsumerWidget {
   }
 }
 
-class CustomScrollViewWidget extends ConsumerWidget {
-  const CustomScrollViewWidget({
-    super.key,
+class _CustomScrollViewWidget extends ConsumerWidget {
+  const _CustomScrollViewWidget({
     required this.tiles,
     required this.isIncome,
   });
 
   final Map<int, Category> tiles;
   final bool isIncome;
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return CustomScrollView(
@@ -202,6 +202,7 @@ class _OperationTypeTile extends ConsumerWidget {
           child: ListTile(
             // tileColor: Colors.white,
             leading: CircleAvatar(
+              radius: 25,
               backgroundColor: (incomeType)
                   ? context.colors.successLight
                   : context.colors.errorLight,
@@ -343,8 +344,12 @@ class _OperationChoiceTile extends ConsumerWidget {
         child: Center(
           child: ListTile(
             leading: CircleAvatar(
+              radius: 25,
               backgroundColor: categoryTile.color,
-              child: Text(categoryTile.emoji),
+              child: Text(
+                categoryTile.emoji,
+                style: const TextStyle(fontSize: 22.0),
+              ),
             ),
             title: Text(
               categoryTile.title,

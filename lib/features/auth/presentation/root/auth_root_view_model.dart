@@ -35,11 +35,7 @@ class AuthRootViewModel extends StateNotifier<AuthRootViewState> {
   Future<void> loadToken() async {
     bool expired;
     try {
-      //TODO remove these lines
-      expired = true;
-      await _repository.checkToken();
-      //TODO uncomment when backend updated
-      //expired = await _repository.checkToken();
+      expired = await _repository.checkToken();
     } catch (e) {
       expired = true;
     }

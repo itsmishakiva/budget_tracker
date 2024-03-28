@@ -71,15 +71,7 @@ class CheckListScreenContent extends ConsumerWidget {
           slivers: [
             SliverPersistentHeader(
               delegate: _CheckTileHeaderDelegate(
-                //TODO remove
-                check: state.dataAccount.isEmpty
-                    ? Check(
-                        id: 1,
-                        expenses: 0,
-                        income: 0,
-                        sum: 0,
-                      )
-                    : state.dataAccount.first,
+                check: state.dataAccount,
               ),
               pinned: true,
             ),

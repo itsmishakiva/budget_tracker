@@ -1,6 +1,8 @@
 import 'package:budget_tracker/features/check/data/dto/check_dto.dart';
 import 'package:budget_tracker/features/check/data/services/check_service.dart';
+import 'package:budget_tracker/main.dart';
 import 'package:dio/dio.dart';
+import 'package:logging/logging.dart';
 
 class RemoteCheckService implements CheckService {
   RemoteCheckService(this._dio);
@@ -8,20 +10,18 @@ class RemoteCheckService implements CheckService {
   final Dio _dio;
 
   @override
-  Future<List<CheckDTO>> getCheckList() async {
+  Future<CheckDTO> getCheck() async {
     try {
       final response = await _dio.get(
         '/checks?limit=5&page=0',
       );
+      logger.log(Level.WARNING, response);
       if (response.statusCode != 200) {
-        return [];
+        throw Exception('');
       } else {
-        List<Map<String, dynamic>> categoriesDtoJson =
-            List<Map<String, dynamic>>.from(response.data);
-        return categoriesDtoJson.map((e) => CheckDTO.fromJson(e)).toList();
+        return CheckDTO.fromJson(response.data);
       }
     } catch (e) {
-      // throw Exception('bebebe');
       return [];
     }
   }
@@ -39,7 +39,8 @@ class RemoteCheckService implements CheckService {
         return CheckDTO.fromJson(checkDtoJson);
       }
     } catch (e) {
-      return null;
+      logger.log(Level.WARNING, e);
+      rethrow;
     }
   }
 

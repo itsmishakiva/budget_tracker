@@ -21,11 +21,11 @@ class AppLightColors extends AppColors {
           linearChart1: const Color(0xFFFFD1F0),
           linearChart2: const Color(0xFFCEFFF8),
           graphColors: const [
-            Color(0xFF3600FA),
-            Color(0xFF9E00FA),
-            Color(0xFF00D5FA),
-            Color(0xFFFA00C8),
-            Color(0xFFFA9600),
+            Color(0xFF6BB7EE),
+            Color(0xFFF37198),
+            Color(0xFFBF71F3),
+            Color(0xFF7E71F3),
+            Color(0xFFF3A371),
           ],
           graphDarkColors: const [
             Color(0xFF210091),

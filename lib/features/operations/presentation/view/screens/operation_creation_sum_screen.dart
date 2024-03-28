@@ -19,6 +19,7 @@ class OperationCreationSumScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return AppScaffold(
       backgroundColor: context.colors.accent,
+      statusBarBrightness: Brightness.dark,
       body: const _OperationCreationSumScreenContent(),
     );
   }
@@ -49,7 +50,7 @@ class _OperationCreationSumScreenContent extends ConsumerWidget {
             Expanded(
               child: _SumInputContainer(
                 displaySum: state.sum,
-                balance: state.checkData.isEmpty ? 0 : state.checkData[0].sum,
+                balance: state.checkData.sum,
               ),
             ),
           ],
