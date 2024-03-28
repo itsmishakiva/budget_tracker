@@ -151,7 +151,7 @@ class _QrScannerScreenState extends ConsumerState<QrScannerScreen> {
   void _onPermissionSet(BuildContext context, QRViewController ctrl, bool p) {
     if (!p) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('no Permission')),
+        SnackBar(content: Text(context.locale!.noPermission)),
       );
     }
   }

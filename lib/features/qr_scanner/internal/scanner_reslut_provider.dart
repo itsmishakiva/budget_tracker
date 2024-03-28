@@ -17,4 +17,5 @@ class ScanResultNotifier extends StateNotifier<String?> {
 }
 
 final scanResultProvider = StateNotifierProvider<ScanResultNotifier, String?>(
-    (ref) => ScanResultNotifier());
+  (ref) => ScanResultNotifier(),
+);

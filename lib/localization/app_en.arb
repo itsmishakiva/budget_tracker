@@ -28,5 +28,6 @@
     "wrongUserOrConnect" : "Wrong authentication data or connection unstable",
     "scanCode": "Scan a code",
     "sum": "Sum is",
-    "scanCheck": "Scan a check"
+    "scanCheck": "Scan a check",
+    "noPermission": "No camera permission"
 }

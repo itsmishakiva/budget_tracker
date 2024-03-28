@@ -20,7 +20,8 @@ class QrScannerAppbar extends ConsumerWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          GestureDetector(
+          InkWell(
+            onTap: onTap,
             child: const Padding(
               padding: EdgeInsets.only(bottom: 8.0),
               child: Icon(
@@ -28,9 +29,6 @@ class QrScannerAppbar extends ConsumerWidget {
                 color: Colors.white,
               ),
             ),
-            onTap: () {
-              onTap;
-            },
           ),
           Text(
             context.locale!.scanCheck,
