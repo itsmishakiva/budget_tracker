@@ -204,7 +204,7 @@ class _IntervalButton extends ConsumerWidget {
 }
 
 Widget _categoryButton(
-    BuildContext context, MoneyFlow category, WidgetRef ref) {
+    BuildContext context, MoneyFlow category, WidgetRef ref,) {
   final notifier = ref.watch(analyticsModelProvider.notifier);
   var categoryState = ref.watch(analyticsModelProvider).category;
 
