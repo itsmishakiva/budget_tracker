@@ -38,7 +38,7 @@ class Numpad extends ConsumerWidget {
     final screenWidth = MediaQuery.of(context).size.width;
     final constraints = ref.read(constraintsConstantsProvider);
     return SizedBox(
-      height: screenWidth + constraints.horizontalScreenPadding * 2,
+      height: screenWidth + constraints.horizontalScreenPadding * 2 + 32.0,
       child: Padding(
         padding: const EdgeInsets.all(32.0),
         child: Column(

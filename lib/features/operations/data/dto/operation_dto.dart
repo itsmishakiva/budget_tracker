@@ -12,7 +12,7 @@ class OperationDTO with _$OperationDTO {
     required double sum,
     required int date,
     required int checkId,
-    required int categoryId, //todo
+    required int categoryId,
   }) = _OperationDTO;
 
   factory OperationDTO.fromJson(Map<String, Object?> json) =>

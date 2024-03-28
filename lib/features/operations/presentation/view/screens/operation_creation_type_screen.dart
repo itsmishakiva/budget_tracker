@@ -6,6 +6,8 @@ import 'package:budget_tracker/core/ui_kit/constraints_constants.dart';
 import 'package:budget_tracker/core/ui_kit/widgets/app_button.dart';
 import 'package:budget_tracker/extensions/build_context_extension.dart';
 import 'package:budget_tracker/features/categories/domain/entities/category.dart';
+import 'package:budget_tracker/features/operations/internal/new_operation_repository_provider.dart';
+import 'package:budget_tracker/features/operations/presentation/view_model/operation_creation_sum_view_model.dart';
 import 'package:budget_tracker/features/operations/presentation/view_model/operation_creation_type_view_model.dart';
 import 'package:budget_tracker/features/operations/presentation/view_model/operation_creation_type_view_state.dart';
 import 'package:flutter/material.dart';
@@ -42,7 +44,12 @@ class _OperationCreationTypeScreenContent extends ConsumerWidget {
         );
       case OperationCreationTypeViewDataState _:
         return Padding(
-          padding: EdgeInsets.all(constraints.horizontalScreenPadding),
+          padding: EdgeInsets.fromLTRB(
+            constraints.horizontalScreenPadding,
+            0,
+            constraints.horizontalScreenPadding,
+            constraints.horizontalScreenPadding,
+          ),
           child: Stack(
             children: [
               CustomScrollViewWidget(
@@ -55,9 +62,17 @@ class _OperationCreationTypeScreenContent extends ConsumerWidget {
                   title: context.locale!.next,
                   onTap: () {
                     ref
+                        .read(operationCreationTypeViewModelProvider.notifier)
+                        .setDateTime();
+                    ref
+                        .read(newOperationRepositoryProvider)
+                        .setOperation(state.newOperation);
+                    ref
+                        .read(operationCreationSumViewModelProvider.notifier)
+                        .clearSum();
+                    ref
                         .read(appRouterProvider)
                         .navigateNamed('/operation_creation_result');
-                    // TODO отправка
                   },
                 ),
               ),
@@ -81,24 +96,8 @@ class CustomScrollViewWidget extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return CustomScrollView(
       slivers: [
-        SliverAppBar(
-          centerTitle: true,
-          backgroundColor: Colors.transparent,
-          leading: GestureDetector(
-            child: Icon(
-              Icons.arrow_back_ios_new,
-              color: context.colors.textPrimary,
-            ),
-            onTap: () {
-              ref
-                  .read(appRouterProvider)
-                  .navigateNamed('/operation_creation_sum');
-            },
-          ),
-          title: Text(
-            context.locale!.createTransaction,
-            style: context.textStyles.header1,
-          ),
+        const SliverToBoxAdapter(
+          child: OperationsAppbar(),
         ),
         SliverList(
           delegate: SliverChildListDelegate(
@@ -110,7 +109,7 @@ class CustomScrollViewWidget extends ConsumerWidget {
         ),
         SliverList.separated(
           separatorBuilder: (BuildContext context, int index) => const SizedBox(
-            height: 5,
+            height: 16,
           ),
           itemCount: tiles.length,
           itemBuilder: (BuildContext context, int index) {
@@ -125,8 +124,37 @@ class CustomScrollViewWidget extends ConsumerWidget {
         ),
         const SliverToBoxAdapter(
           child: SizedBox(
-            height: 55,
+            height: 70,
           ),
+        ),
+      ],
+    );
+  }
+}
+
+class OperationsAppbar extends ConsumerWidget {
+  const OperationsAppbar({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        GestureDetector(
+          child: Padding(
+            padding: const EdgeInsets.only(bottom: 8.0),
+            child: Icon(
+              Icons.arrow_back_ios_new,
+              color: context.colors.textPrimary,
+            ),
+          ),
+          onTap: () {
+            ref.read(appRouterProvider).maybePop();
+          },
+        ),
+        Text(
+          context.locale!.createTransaction,
+          style: context.textStyles.header1,
         ),
       ],
     );
@@ -151,47 +179,52 @@ class _OperationTypeTile extends ConsumerWidget {
             .read(operationCreationTypeViewModelProvider.notifier)
             .changeIncomeType(incomeType);
       },
-      child: SizedBox(
-        height: 80,
-        child: Card(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(
-              constraints.tileBorderRadius,
-            ),
+      child: Container(
+        height: 74,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(
+            constraints.tileBorderRadius,
           ),
-          elevation: 2,
           color: context.colors.backgroundPrimary,
-          child: Center(
-            child: ListTile(
-              // tileColor: Colors.white,
-              leading: CircleAvatar(
-                backgroundColor: (incomeType)
-                    ? context.colors.successLight
-                    : context.colors.errorLight,
-                child: (incomeType)
-                    ? Icon(
-                        Icons.arrow_downward_rounded,
-                        color: context.colors.success,
-                      )
-                    : Icon(
-                        Icons.arrow_upward_rounded,
-                        color: context.colors.error,
-                      ),
-              ),
-              title: (incomeType)
-                  ? Text(
-                      context.locale!.incomingTransaction,
-                      style: context.textStyles.textButton,
-                    )
-                  : Text(
-                      context.locale!.outgoingTransaction,
-                      softWrap: false,
-                      style: context.textStyles.textButton,
-                    ),
-              trailing: (incomeType == isIncome)
-                  ? const RadioIcon(true)
-                  : const RadioIcon(false),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.06),
+              offset: const Offset(0.0, 4.0),
+              spreadRadius: 0.1,
+              blurRadius: 8.6,
             ),
+          ],
+        ),
+        child: Center(
+          child: ListTile(
+            // tileColor: Colors.white,
+            leading: CircleAvatar(
+              backgroundColor: (incomeType)
+                  ? context.colors.successLight
+                  : context.colors.errorLight,
+              child: (incomeType)
+                  ? Icon(
+                      Icons.arrow_downward_rounded,
+                      color: context.colors.success,
+                    )
+                  : Icon(
+                      Icons.arrow_upward_rounded,
+                      color: context.colors.error,
+                    ),
+            ),
+            title: (incomeType)
+                ? Text(
+                    context.locale!.incomingTransaction,
+                    style: context.textStyles.textButton,
+                  )
+                : Text(
+                    context.locale!.outgoingTransaction,
+                    softWrap: false,
+                    style: context.textStyles.textButton,
+                  ),
+            trailing: (incomeType == isIncome)
+                ? const RadioIcon(true)
+                : const RadioIcon(false),
           ),
         ),
       ),
@@ -207,18 +240,18 @@ class RadioIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 20,
-      height: 20,
+      width: 18,
+      height: 18,
       decoration: BoxDecoration(
         shape: BoxShape.circle,
         color: context.colors.backgroundPrimary,
-        border: Border.all(color: context.colors.textPrimary, width: 3),
+        border: Border.all(color: context.colors.textPrimary, width: 2),
       ),
       child: (showDot)
           ? Center(
               child: Container(
-                width: 8,
-                height: 8,
+                width: 9,
+                height: 9,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   color: context.colors.textPrimary,
@@ -241,21 +274,21 @@ class _TypeTileGroup extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const SizedBox(
-          height: 20,
+          height: 10,
         ),
         Text(
           context.locale!.chooseTransactionType,
           style: context.textStyles.hint,
         ),
         const SizedBox(
-          height: 5,
+          height: 10,
         ),
         _OperationTypeTile(
           incomeType: true,
           isIncome: isIncome,
         ),
         const SizedBox(
-          height: 5,
+          height: 16,
         ),
         _OperationTypeTile(
           incomeType: false,
@@ -280,7 +313,7 @@ class _OperationChoiceTile extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final selectedChoiceTile = ref
         .watch(operationCreationTypeViewModelProvider.notifier)
-        .returnSelectedCategory();
+        .returnSelectedCategoryId();
     final constraints = ref.watch(constraintsConstantsProvider);
     return GestureDetector(
       onTap: () {
@@ -288,28 +321,33 @@ class _OperationChoiceTile extends ConsumerWidget {
             .read(operationCreationTypeViewModelProvider.notifier)
             .selectCategory(categoryTile);
       },
-      child: SizedBox(
-        height: 80,
-        child: Card(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(
-              constraints.tileBorderRadius,
-            ),
+      child: Container(
+        height: 74,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(
+            constraints.tileBorderRadius,
           ),
-          elevation: 2,
           color: context.colors.backgroundPrimary,
-          child: Center(
-            child: ListTile(
-              leading: CircleAvatar(
-                backgroundColor: categoryTile.color,
-                child: Text(categoryTile.emoji),
-              ),
-              title: Text(
-                categoryTile.title,
-                style: context.textStyles.textButton,
-              ),
-              trailing: RadioIcon(categoryTile == selectedChoiceTile),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.06),
+              offset: const Offset(0.0, 4.0),
+              spreadRadius: 0.1,
+              blurRadius: 8.6,
             ),
+          ],
+        ),
+        child: Center(
+          child: ListTile(
+            leading: CircleAvatar(
+              backgroundColor: categoryTile.color,
+              child: Text(categoryTile.emoji),
+            ),
+            title: Text(
+              categoryTile.title,
+              style: context.textStyles.textButton,
+            ),
+            trailing: RadioIcon(categoryTile.id == selectedChoiceTile),
           ),
         ),
       ),
@@ -333,7 +371,7 @@ class _ChoiceTileGroup extends StatelessWidget {
           style: context.textStyles.hint,
         ),
         const SizedBox(
-          height: 5,
+          height: 10,
         ),
       ],
     );

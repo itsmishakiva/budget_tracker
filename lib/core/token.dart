@@ -1,0 +1,4 @@
+class Token {
+  final token =
+      'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyMTExMTExMSIsInJvbGUiOlsiVVNFUiJdLCJpYXQiOjE3MTE1ODMzODEsImV4cCI6MTcxMTU4Njk4MX0.1taNBqVrTbU6pPuk1yG27cKFB4Y-zR0uwJOa42k3NlQ';
+}

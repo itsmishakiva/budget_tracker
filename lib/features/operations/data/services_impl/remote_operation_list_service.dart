@@ -26,27 +26,4 @@ class RemoteOperationListService implements OperationListService {
       return [];
     }
   }
-
-  @override
-  Future<int> setOperation(OperationDTO operationDTO) async {
-    try {
-      var operationJson = operationDTO.toJson();
-
-      var categoryId = operationJson['category']['id'];
-      operationJson['categoryId'] = categoryId;
-      operationJson.remove('category');
-
-      var checkId = operationJson['check']['id'];
-      operationJson['checkId'] = checkId;
-      operationJson.remove('check');
-
-      final response = await _dio.post(
-        '/operations',
-        data: operationJson,
-      );
-      return response.statusCode!;
-    } catch (e) {
-      return 500; // Internal server error
-    }
-  }
 }
