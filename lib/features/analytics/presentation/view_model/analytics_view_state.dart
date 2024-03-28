@@ -2,13 +2,13 @@ import 'package:budget_tracker/features/analytics/domain/entities/analytics/anal
 
 enum TimeInterval { week, month, year }
 
-enum Category { expenses, income }
+enum MoneyFlow { expenses, income }
 
 enum Chart { liner, pie }
 
 class AnalyticsViewState {
   final TimeInterval interval;
-  final Category category;
+  final MoneyFlow category;
   final Chart chart;
   final AnalyticsDataState analyticsData;
 

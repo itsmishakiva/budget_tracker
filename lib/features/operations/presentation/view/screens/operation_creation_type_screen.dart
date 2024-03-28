@@ -5,6 +5,8 @@ import 'package:budget_tracker/core/ui_kit/app_scaffold.dart';
 import 'package:budget_tracker/core/ui_kit/constraints_constants.dart';
 import 'package:budget_tracker/core/ui_kit/widgets/app_button.dart';
 import 'package:budget_tracker/extensions/build_context_extension.dart';
+import 'package:budget_tracker/features/analytics/presentation/view_model/analytics_view_model.dart';
+import 'package:budget_tracker/features/analytics/presentation/view_model/analytics_view_state.dart';
 import 'package:budget_tracker/features/categories/domain/entities/category.dart';
 import 'package:budget_tracker/features/home/presentation/view_model/home_view_model.dart';
 import 'package:budget_tracker/features/operations/internal/new_operation_repository_provider.dart';
@@ -70,6 +72,9 @@ class _OperationCreationTypeScreenContent extends ConsumerWidget {
                     ref
                         .read(operationListViewModelProvider.notifier)
                         .loadData();
+                    ref
+                        .read(analyticsModelProvider.notifier)
+                        .changeInterval(TimeInterval.week);
                     ref
                         .read(operationCreationSumViewModelProvider.notifier)
                         .clearSum();
