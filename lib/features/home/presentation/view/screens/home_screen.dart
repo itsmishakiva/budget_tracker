@@ -91,8 +91,7 @@ class CheckListScreenContent extends ConsumerWidget {
                       if (index != 0) const SizedBox(height: 16.0),
                       OperationListTile(
                         operation: state.dataOperations[index],
-                        category: state.dataCategory[
-                            state.dataOperations[index].categoryId]!,
+                        category: state.dataOperations[index].category,
                       ),
                     ],
                   );

@@ -20,7 +20,7 @@ class OperationMapperImpl implements OperationMapper {
       incoming: dto.incoming,
       sum: dto.sum,
       date: DateTime.fromMillisecondsSinceEpoch(dto.date),
-      categoryId: dto.categoryId,
+      category: categoryMapper.fromDto(dto.category),
       checkId: dto.checkId,
     );
   }
@@ -32,7 +32,7 @@ class OperationMapperImpl implements OperationMapper {
       incoming: entity.incoming,
       sum: entity.sum,
       date: entity.date.millisecondsSinceEpoch,
-      categoryId: entity.categoryId,
+      category: categoryMapper.toDto(entity.category),
       checkId: entity.checkId,
     );
   }
