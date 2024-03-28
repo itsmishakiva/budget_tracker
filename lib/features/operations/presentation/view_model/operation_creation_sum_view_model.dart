@@ -1,3 +1,4 @@
+import 'package:budget_tracker/features/check/domain/entities/check.dart';
 import 'package:budget_tracker/features/check/domain/repositories/check_repository.dart';
 import 'package:budget_tracker/features/check/internal/check_repository_provider.dart';
 import 'package:budget_tracker/features/operations/presentation/view_model/operation_creation_sum_view_state.dart';
@@ -22,8 +23,14 @@ class OperationCreationSumViewModel
 
   Future<void> loadData() async {
     try {
+      late final Check dataAccount;
+      try {
+        dataAccount = await _repositoryAccount.getCheck();
+      } catch (e) {
+        dataAccount = Check(id: 1, sum: 0, expenses: 0, income: 0);
+      }
       state = OperationCreationSumViewDataState(
-        checkData: await _repositoryAccount.getCheck(),
+        checkData: dataAccount,
         sum: '0',
       );
     } catch (e) {
