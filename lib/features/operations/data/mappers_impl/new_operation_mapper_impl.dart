@@ -21,7 +21,7 @@ class NewOperationMapperImpl implements NewOperationMapper {
       id: entity.id,
       incoming: entity.incoming,
       sum: entity.sum,
-      date: entity.date?.millisecondsSinceEpoch,
+      date: entity.date!.millisecondsSinceEpoch,
       categoryId: entity.categoryId,
       checkId: entity.checkId,
     );
