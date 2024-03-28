@@ -51,7 +51,9 @@ class CheckListScreenContent extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(homeViewModelProvider);
-    logger.log(Level.INFO, state.runtimeType);
+    if (state is HomeViewDataState) {
+      logger.log(Level.INFO, (state).dataAccount);
+    }
     switch (state) {
       case HomeViewLoadingState _:
         ref.read(loggerProvider).log(Level.INFO, 'Hello!');
@@ -130,7 +132,7 @@ class _CheckTileHeaderDelegate extends SliverPersistentHeaderDelegate {
 
   @override
   bool shouldRebuild(_CheckTileHeaderDelegate oldDelegate) {
-    return false;
+    return true;
   }
 
   @override

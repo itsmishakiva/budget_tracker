@@ -12,7 +12,7 @@ class RemoteCategoriesService implements CategoryListService {
   @override
   Future<Map<int, CategoryDTO>> getCategoryList() async {
     try {
-      final response = await _dio.get('/categories?page=0&limit=20');
+      final response = await _dio.get('/categories?page=0&limit=1000');
       logger.log(Level.FINE, 'Response data ${response.data}');
 
       final List<CategoryDTO>? categories = (response.data as List<dynamic>?)

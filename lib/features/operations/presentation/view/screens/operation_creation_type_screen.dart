@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:auto_route/auto_route.dart';
 import 'package:budget_tracker/core/internal/app_router_provider.dart';
 import 'package:budget_tracker/core/internal/logger_provider.dart';
@@ -7,7 +9,6 @@ import 'package:budget_tracker/core/ui_kit/widgets/app_button.dart';
 import 'package:budget_tracker/extensions/build_context_extension.dart';
 import 'package:budget_tracker/features/categories/domain/entities/category.dart';
 import 'package:budget_tracker/features/home/presentation/view_model/home_view_model.dart';
-import 'package:budget_tracker/features/operations/internal/new_operation_repository_provider.dart';
 import 'package:budget_tracker/features/operations/presentation/view_model/operation_creation_sum_view_model.dart';
 import 'package:budget_tracker/features/operations/presentation/view_model/operation_creation_type_view_model.dart';
 import 'package:budget_tracker/features/operations/presentation/view_model/operation_creation_type_view_state.dart';
@@ -63,19 +64,32 @@ class _OperationCreationTypeScreenContent extends ConsumerWidget {
                 child: AppButton(
                   title: context.locale!.next,
                   onTap: () async {
-                    await ref
-                        .read(newOperationRepositoryProvider)
-                        .setOperation(state.newOperation);
-                    ref.read(homeViewModelProvider.notifier).loadData();
+                    bool animFinished = false;
+                    Timer(const Duration(seconds: 3), () {
+                      animFinished = true;
+                      if (!ref
+                          .read(appRouterProvider)
+                          .currentPath
+                          .contains('home')) {
+                        ref.read(appRouterProvider).navigateNamed('/home');
+                      }
+                    });
                     ref
+                        .read(appRouterProvider)
+                        .navigateNamed('/operation_creation_result');
+                    await ref
+                        .read(operationCreationTypeViewModelProvider.notifier)
+                        .saveData();
+                    await ref.read(homeViewModelProvider.notifier).loadData();
+                    await ref
                         .read(operationListViewModelProvider.notifier)
                         .loadData();
                     ref
                         .read(operationCreationSumViewModelProvider.notifier)
                         .clearSum();
-                    ref
-                        .read(appRouterProvider)
-                        .navigateNamed('/operation_creation_result');
+                    if (animFinished) {
+                      ref.read(appRouterProvider).navigateNamed('/home');
+                    }
                   },
                 ),
               ),

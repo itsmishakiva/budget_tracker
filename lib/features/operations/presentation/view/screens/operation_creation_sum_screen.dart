@@ -7,16 +7,30 @@ import 'package:budget_tracker/extensions/build_context_extension.dart';
 import 'package:budget_tracker/features/operations/presentation/view/widgets/numpad.dart';
 import 'package:budget_tracker/features/operations/presentation/view_model/operation_creation_sum_view_model.dart';
 import 'package:budget_tracker/features/operations/presentation/view_model/operation_creation_sum_view_state.dart';
+import 'package:budget_tracker/features/operations/presentation/view_model/operation_creation_type_view_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 @RoutePage()
-class OperationCreationSumScreen extends ConsumerWidget {
+class OperationCreationSumScreen extends ConsumerStatefulWidget {
   const OperationCreationSumScreen({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<OperationCreationSumScreen> createState() =>
+      _OperationCreationSumScreenState();
+}
+
+class _OperationCreationSumScreenState
+    extends ConsumerState<OperationCreationSumScreen> {
+  @override
+  void initState() {
+    ref.read(operationCreationSumViewModelProvider.notifier).loadData();
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return AppScaffold(
       backgroundColor: context.colors.accent,
       statusBarBrightness: Brightness.dark,
@@ -182,6 +196,12 @@ class NumPadContainer extends ConsumerWidget {
               child: AppButton(
                 title: context.locale!.next,
                 onTap: () {
+                  ref
+                      .read(operationCreationSumViewModelProvider.notifier)
+                      .save();
+                  ref
+                      .read(operationCreationTypeViewModelProvider.notifier)
+                      .loadData();
                   ref
                       .read(appRouterProvider)
                       .navigateNamed('/operation_creation_type');
