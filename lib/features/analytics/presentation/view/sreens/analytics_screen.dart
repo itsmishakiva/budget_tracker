@@ -6,12 +6,14 @@ import 'package:budget_tracker/core/ui_kit/app_scaffold.dart';
 import 'package:budget_tracker/extensions/build_context_extension.dart';
 import 'package:budget_tracker/features/analytics/domain/entities/category_anajytics/category_analytics.dart';
 import 'package:budget_tracker/features/analytics/presentation/view/components/categoty_analytics_screen.dart';
+import 'package:budget_tracker/features/analytics/presentation/view/components/linear_chart.dart';
 import 'package:budget_tracker/features/analytics/presentation/view_model/analytics_view_model.dart';
 import 'package:budget_tracker/features/analytics/presentation/view_model/analytics_view_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:logging/logging.dart';
+import 'package:rive/rive.dart';
 
 @RoutePage()
 class AnalyticsScreen extends ConsumerWidget {
@@ -70,7 +72,7 @@ class _Body extends ConsumerWidget {
           children: [
             SizedBox(
               height: 250,
-              // width: 480,
+              // width: 400,
               child: PageView(
                 controller: pageController,
                 onPageChanged: (int page) {
@@ -85,13 +87,13 @@ class _Body extends ConsumerWidget {
                         .changeChart(Chart.pie);
                   }
                 },
-                children: [
+                children: const [
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                    child: _LineChartWidget(),
-                  ),
-                  const Padding(
                     padding: EdgeInsets.symmetric(horizontal: 24.0),
+                    child: LineChartWidget(),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(left: 16.0),
                     child: _PieChartWithLegend(),
                   ),
                 ],
@@ -222,180 +224,6 @@ Widget _categoryButton(BuildContext context, Category category, WidgetRef ref) {
   );
 }
 
-class _LineChartWidget extends ConsumerWidget {
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final bars = (ref.watch(analyticsModelProvider).analyticsData
-            as AnalyticsDataReadyState)
-        .dataAnalytics
-        .bars;
-    final barsIncome = bars.where((bar) => bar.sum > 0).toList();
-    final barsExpenses = bars.where((bar) => bar.sum < 0).toList();
-
-    List<FlSpot> pointsIncome = [];
-    List<FlSpot> pointsExpenses = [];
-
-    for (int i = 0; i < barsIncome.length; i++) {
-      pointsIncome.add(FlSpot(i.toDouble(), barsIncome[i].sum));
-    }
-
-    for (int i = 0; i < barsExpenses.length; i++) {
-      pointsExpenses.add(FlSpot(i.toDouble(), barsExpenses[i].sum * (-1)));
-    }
-
-    double maxIncome = pointsIncome.isNotEmpty
-        ? pointsIncome.reduce((a, b) => a.y > b.y ? a : b).y
-        : 0.0;
-
-    double minExpenses = pointsExpenses.isNotEmpty
-        ? pointsExpenses.reduce((a, b) => a.y < b.y ? a : b).y
-        : 0.0;
-
-    return LineChart(
-      LineChartData(
-        gridData: const FlGridData(
-          show: false,
-        ),
-        minX: 0,
-        minY: 0,
-        maxX: pointsIncome.last.x,
-        maxY: max(maxIncome, minExpenses * (-1)) * 1.2,
-        borderData: FlBorderData(
-          show: false,
-        ),
-        titlesData: FlTitlesData(
-          rightTitles: const AxisTitles(
-            sideTitles: SideTitles(showTitles: false),
-          ),
-          topTitles: const AxisTitles(
-            sideTitles: SideTitles(showTitles: false),
-          ),
-          bottomTitles: const AxisTitles(
-            sideTitles: SideTitles(showTitles: false),
-          ),
-          leftTitles: AxisTitles(sideTitles: leftTitles()),
-        ),
-        lineTouchData: const LineTouchData(enabled: false),
-        lineBarsData: [
-          LineChartBarData(
-            spots: pointsIncome,
-            isCurved: true,
-            color: context.colors.linearChart1,
-            barWidth: 3,
-            dotData: const FlDotData(show: false),
-            belowBarData: BarAreaData(
-              show: true,
-              gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [
-                  context.colors.linearChart1.withOpacity(0.3),
-                  context.colors.linearChart1.withOpacity(0),
-                ],
-              ),
-            ),
-          ),
-          LineChartBarData(
-            spots: pointsExpenses,
-            isCurved: true,
-            color: context.colors.linearChart2,
-            barWidth: 2,
-            dotData: const FlDotData(show: false),
-            belowBarData: BarAreaData(
-              show: true,
-              gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [
-                  context.colors.linearChart2.withOpacity(0.3),
-                  context.colors.linearChart2.withOpacity(0),
-                ],
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  SideTitles leftTitles() => SideTitles(
-        getTitlesWidget: leftTitleWidgets,
-        interval: 1,
-        reservedSize: 50,
-        showTitles: true,
-      );
-
-  Text leftTitleWidgets(double value, TitleMeta meta) {
-    int period = (meta.max - meta.min) ~/ 7 + 1;
-
-    return Text(
-      (value % period == 0 && value > 0) ? (value).toInt().toString() : '',
-      style: TextStyle(
-        fontWeight: FontWeight.bold,
-        fontSize: 14,
-        color: Colors.grey.shade400,
-      ),
-    );
-  }
-}
-//
-// class _BottomBar extends StatelessWidget {
-//   const _BottomBar();
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return Padding(
-//       padding: const EdgeInsets.only(left: 10.0, right: 0),
-//       child: SizedBox(
-//         height: 30,
-//         width: 320,
-//         child: ListView(
-//           scrollDirection: Axis.horizontal,
-//           children: const [
-//             _Dates(date: '1th week'),
-//             _Dates(date: '1th week'),
-//             _Dates(date: '1th week'),
-//             _Dates(date: '1th week'),
-//             _Dates(date: '1th week'),
-//           ],
-//         ),
-//       ),
-//     );
-//   }
-// }
-
-// class _Dates extends StatelessWidget {
-//   const _Dates({
-//     required this.date,
-//   });
-//
-//   final String date;
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return Padding(
-//       padding: const EdgeInsets.symmetric(horizontal: 4),
-//       child: Container(
-//         decoration: BoxDecoration(
-//           borderRadius: BorderRadius.circular(20),
-//           color: Colors.transparent,
-//           border: Border.all(
-//             color: context.colors.textSecondary,
-//             width: 2,
-//           ),
-//         ),
-//         child: Padding(
-//           padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 10),
-//           child: Text(
-//             date,
-//             style: context.textStyles.subtitle2,
-//           ),
-//         ),
-//       ),
-//     );
-//   }
-// }
-
 class _PieChartWithLegend extends ConsumerWidget {
   const _PieChartWithLegend();
 
@@ -463,50 +291,70 @@ class _PieChartWithLegend extends ConsumerWidget {
       );
     }
 
-    return Padding(
-      padding: const EdgeInsets.only(left: 5.0, right: 10),
-      child: Row(
-        children: [
-          Expanded(
-            flex: 2,
-            child: PieChart(
-              PieChartData(
-                sections: sections,
-                pieTouchData: PieTouchData(
-                  touchCallback: (event, response) {},
-                ),
-              ),
-            ),
-          ),
-          Expanded(
-            flex: 1,
+    return sections.isNotEmpty
+        ? SizedBox(
+            height: 240,
             child: Padding(
-              padding: const EdgeInsets.only(left: 20.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
+              padding: const EdgeInsets.only(left: 5.0, right: 10),
+              child: Row(
                 children: [
-                  for (int i = 0;
-                      i < min(4, categoryList.length);
-                      i++) // Перебираем первые четыре категории
-                    _legendItem(
-                      context,
-                      color: context.colors.graphColors[i],
-                      title: categoryList[i].category.title.toString(),
+                  Expanded(
+                    flex: 2,
+                    child: PieChart(
+                      PieChartData(
+                        sections: sections,
+                        pieTouchData: PieTouchData(
+                          touchCallback: (event, response) {},
+                        ),
+                      ),
                     ),
-                  if (categoryList.length >
-                      4) // Если категорий больше 4, добавляем категорию "Other"
-                    _legendItem(
-                      context,
-                      color: context.colors.graphColors[4],
-                      title: 'Other',
+                  ),
+                  Expanded(
+                    flex: 1,
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 20.0),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          for (int i = 0; i < min(4, categoryList.length); i++)
+                            _legendItem(
+                              context,
+                              color: context.colors.graphColors[i],
+                              title: categoryList[i].category.title.toString(),
+                            ),
+                          if (categoryList.length > 4)
+                            _legendItem(
+                              context,
+                              color: context.colors.graphColors[4],
+                              title: 'Other',
+                            ),
+                        ],
+                      ),
                     ),
+                  ),
                 ],
               ),
             ),
-          ),
-        ],
-      ),
-    );
+          )
+        : Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(top: 4.0),
+                child: Text(
+                  'Нет данных для графиков',
+                  style: context.textStyles.headerBold3.copyWith(
+                    color: context.colors.textSurface,
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 220,
+                child: RiveAnimation.asset(
+                  'assets/error_server.riv',
+                ),
+              ),
+            ],
+          );
   }
 
   Widget _legendItem(
@@ -524,9 +372,12 @@ class _PieChartWithLegend extends ConsumerWidget {
             color: color,
           ),
           const SizedBox(width: 8),
-          Text(
-            title,
-            style: context.textStyles.bodyTextSurface2,
+          SizedBox(
+            width: 70,
+            child: Text(
+              title,
+              style: context.textStyles.bodyTextSurface2,
+            ),
           ),
         ],
       ),
