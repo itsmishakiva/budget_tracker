@@ -3,11 +3,9 @@ import 'dart:math';
 import 'package:budget_tracker/extensions/build_context_extension.dart';
 import 'package:budget_tracker/features/analytics/presentation/view_model/analytics_view_model.dart';
 import 'package:budget_tracker/features/analytics/presentation/view_model/analytics_view_state.dart';
-import 'package:budget_tracker/main.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:logging/logging.dart';
 
 class LineChartWidget extends ConsumerWidget {
   const LineChartWidget({super.key});
