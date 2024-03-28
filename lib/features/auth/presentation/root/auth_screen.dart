@@ -60,7 +60,9 @@ class AuthScreen extends ConsumerWidget {
                 ),
               ),
               SizedBox(
-                height: 597,
+                height: MediaQuery.of(context).size.height -
+                    200 -
+                    MediaQuery.of(context).viewPadding.top,
                 child: AnimatedSwitcher(
                   duration: const Duration(milliseconds: 200),
                   transitionBuilder: (child, animation) {
