@@ -31,13 +31,13 @@ class AnalyticsScreen extends ConsumerWidget {
             child: Row(
               children: [
                 Text(
-                  'Stats',
+                  context.locale!.stats,
                   style: context.textStyles.bodyTextSurface,
                 ),
                 const Spacer(),
-                const _IntervalButton(interval: TimeInterval.week),
-                const _IntervalButton(interval: TimeInterval.month),
-                const _IntervalButton(interval: TimeInterval.year),
+                _IntervalButton(context: context, interval: TimeInterval.week),
+                _IntervalButton(context: context, interval: TimeInterval.month),
+                _IntervalButton(context: context, interval: TimeInterval.year),
               ],
             ),
           ),
@@ -122,8 +122,8 @@ class _Body extends ConsumerWidget {
                         ),
                         child: Row(
                           children: [
-                            _categoryButton(context, Category.expenses, ref),
-                            _categoryButton(context, Category.income, ref),
+                            _categoryButton(context, MoneyFlow.expenses, ref),
+                            _categoryButton(context, MoneyFlow.income, ref),
                           ],
                         ),
                       ),
@@ -162,10 +162,21 @@ class _Body extends ConsumerWidget {
 
 class _IntervalButton extends ConsumerWidget {
   final TimeInterval interval;
+  final BuildContext context;
 
-  const _IntervalButton({required this.interval});
+  const _IntervalButton({required this.context, required this.interval});
 
-  String get intervalName => interval.name;
+  String get name => interval.name;
+
+  String get intervalName {
+    if (name == 'week') {
+      return context.locale!.week;
+    } else if (name == 'month') {
+      return context.locale!.month;
+    } else {
+      return context.locale!.year;
+    }
+  }
 
   String get categoryNameCapitalized =>
       intervalName.substring(0, 1).toUpperCase() + intervalName.substring(1);
@@ -192,13 +203,22 @@ class _IntervalButton extends ConsumerWidget {
   }
 }
 
-Widget _categoryButton(BuildContext context, Category category, WidgetRef ref) {
+Widget _categoryButton(
+  BuildContext context,
+  MoneyFlow category,
+  WidgetRef ref,
+) {
   final notifier = ref.watch(analyticsModelProvider.notifier);
   var categoryState = ref.watch(analyticsModelProvider).category;
 
-  String categoryName = category.name;
-  String categoryNameCapitalized =
-      categoryName.substring(0, 1).toUpperCase() + categoryName.substring(1);
+  String name = category.name;
+  String categoryName;
+
+  if (name == 'expenses') {
+    categoryName = context.locale!.expenses;
+  } else {
+    categoryName = context.locale!.income;
+  }
 
   return InkWell(
     onTap: () {
@@ -214,7 +234,7 @@ Widget _categoryButton(BuildContext context, Category category, WidgetRef ref) {
         borderRadius: BorderRadius.circular(10),
       ),
       child: Text(
-        categoryNameCapitalized,
+        categoryName,
         style: categoryState == category
             ? context.textStyles.bodyTextSurface3
             : context.textStyles.subtitle3,

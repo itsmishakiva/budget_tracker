@@ -66,7 +66,7 @@ class CheckListTile extends ConsumerWidget {
                                 padding:
                                     const EdgeInsets.symmetric(vertical: 15.0),
                                 child: Text(
-                                  'Card',
+                                  context.locale!.check,
                                   style: context.textStyles.bodyTextSurface,
                                 ),
                               ),
@@ -80,12 +80,12 @@ class CheckListTile extends ConsumerWidget {
                                   children: [
                                     _moneyFlow(
                                       context,
-                                      'Expenses',
+                                      context.locale!.expenses,
                                       check.expenses,
                                     ),
                                     _moneyFlow(
                                       context,
-                                      'Income',
+                                      context.locale!.income,
                                       check.income,
                                     ),
                                   ],

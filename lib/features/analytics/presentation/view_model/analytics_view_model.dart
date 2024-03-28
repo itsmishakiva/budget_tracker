@@ -13,7 +13,7 @@ final analyticsModelProvider =
   (ref) => AnalyticsViewModel(
     AnalyticsViewState(
       interval: TimeInterval.week,
-      category: Category.expenses,
+      category: MoneyFlow.expenses,
       chart: Chart.liner,
       analyticsData: AnalyticsDataLoadingState(),
     ),
@@ -28,7 +28,7 @@ class AnalyticsViewModel extends StateNotifier<AnalyticsViewState> {
   late Analytics dataAnalytics;
   late Analytics dataAnalyticsCurrent;
   TimeInterval interval = TimeInterval.month;
-  Category category = Category.expenses;
+  MoneyFlow category = MoneyFlow.expenses;
   Chart chart = Chart.liner;
 
   AnalyticsViewModel(
@@ -36,10 +36,10 @@ class AnalyticsViewModel extends StateNotifier<AnalyticsViewState> {
     this._repositoryCategory,
   ) : super(state);
 
-  void changeCategory(Category category) {
+  void changeCategory(MoneyFlow category) {
     this.category = category;
     dataAnalyticsCurrent = dataAnalytics;
-    if (category == Category.income) {
+    if (category == MoneyFlow.income) {
       List<CategoryAnalytics> incomeCategories = dataAnalytics.categories
           .where(
             (category) => category.sum > 0,
@@ -49,7 +49,7 @@ class AnalyticsViewModel extends StateNotifier<AnalyticsViewState> {
       dataAnalyticsCurrent =
           Analytics(bars: dataAnalytics.bars, categories: incomeCategories);
     }
-    if (category == Category.expenses) {
+    if (category == MoneyFlow.expenses) {
       List<CategoryAnalytics> incomeCategories = dataAnalytics.categories
           .where((category) => category.sum < 0)
           .toList();
@@ -91,7 +91,7 @@ class AnalyticsViewModel extends StateNotifier<AnalyticsViewState> {
 
       dataAnalytics = await _repositoryCategory.getAnalytics(interval.name);
       dataAnalyticsCurrent = dataAnalytics;
-      if (category == Category.income) {
+      if (category == MoneyFlow.income) {
         List<CategoryAnalytics> incomeCategories = dataAnalytics.categories
             .where((category) => category.sum > 0)
             .toList();
@@ -99,7 +99,7 @@ class AnalyticsViewModel extends StateNotifier<AnalyticsViewState> {
         dataAnalyticsCurrent =
             Analytics(bars: dataAnalytics.bars, categories: incomeCategories);
       }
-      if (category == Category.expenses) {
+      if (category == MoneyFlow.expenses) {
         List<CategoryAnalytics> incomeCategories = dataAnalytics.categories
             .where((category) => category.sum < 0)
             .toList();

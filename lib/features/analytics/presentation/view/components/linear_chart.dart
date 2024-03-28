@@ -16,7 +16,7 @@ class LineChartWidget extends ConsumerWidget {
             as AnalyticsDataReadyState)
         .dataAnalytics
         .bars;
-    final barsIncome = bars.where((bar) => bar.sum > 0).toList();
+    final barsIncome = bars.where((bar) => bar.sum >= 0).toList();
     final barsExpenses = bars.where((bar) => bar.sum < 0).toList();
 
     List<FlSpot> pointsIncome = [];
