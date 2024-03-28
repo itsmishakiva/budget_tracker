@@ -25,12 +25,12 @@
     "passwordTooShort" : "Password length must be longer than 5 symbols",
     "passwordsNotSame" : "Passwords are not the same",
     "wrongUserData" : "Wrong authentication data",
-    "wrongUserOrConnect" : "Wrong authentication data or connection unstable"
-    "week": "week"
-    "month": "month"
-    "year": "year"
-    "expenses": "Expenses"
-    "income": "Income"
-    "stats": "Stats"
+    "wrongUserOrConnect" : "Wrong authentication data or connection unstable",
+    "week": "week",
+    "month": "month",
+    "year": "year",
+    "expenses": "Expenses",
+    "income": "Income",
+    "stats": "Stats",
     "check": "Check"
 }
