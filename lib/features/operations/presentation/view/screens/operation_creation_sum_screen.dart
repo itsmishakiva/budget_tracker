@@ -49,7 +49,7 @@ class _OperationCreationSumScreenContent extends ConsumerWidget {
             Expanded(
               child: _SumInputContainer(
                 displaySum: state.sum,
-                balance: state.checkData.isEmpty ? 0 : state.checkData[0].sum,
+                balance: state.checkData.sum,
               ),
             ),
           ],

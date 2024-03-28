@@ -14,6 +14,6 @@ class OperationCreationSumViewDataState extends OperationCreationSumViewState {
     required this.sum,
   });
 
-  final List<Check> checkData;
+  final Check checkData;
   final String sum;
 }

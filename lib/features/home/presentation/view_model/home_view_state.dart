@@ -15,7 +15,7 @@ class HomeViewDataState extends HomeViewState {
     required this.dataCategory,
   });
 
-  final List<Check> dataAccount;
+  final Check dataAccount;
   final List<Operation> dataOperations;
   final Map<int, Category> dataCategory;
 }
