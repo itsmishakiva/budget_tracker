@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:auto_route/auto_route.dart';
 import 'package:budget_tracker/core/internal/app_router_provider.dart';
 import 'package:budget_tracker/core/internal/logger_provider.dart';
@@ -9,11 +11,11 @@ import 'package:budget_tracker/features/analytics/presentation/view_model/analyt
 import 'package:budget_tracker/features/analytics/presentation/view_model/analytics_view_state.dart';
 import 'package:budget_tracker/features/categories/domain/entities/category.dart';
 import 'package:budget_tracker/features/home/presentation/view_model/home_view_model.dart';
-import 'package:budget_tracker/features/operations/internal/new_operation_repository_provider.dart';
 import 'package:budget_tracker/features/operations/presentation/view_model/operation_creation_sum_view_model.dart';
 import 'package:budget_tracker/features/operations/presentation/view_model/operation_creation_type_view_model.dart';
 import 'package:budget_tracker/features/operations/presentation/view_model/operation_creation_type_view_state.dart';
 import 'package:budget_tracker/features/operations/presentation/view_model/operation_list_view_model.dart';
+import 'package:budget_tracker/features/qr_scanner/internal/scanner_reslut_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logging/logging.dart';
@@ -65,22 +67,45 @@ class _OperationCreationTypeScreenContent extends ConsumerWidget {
                 child: AppButton(
                   title: context.locale!.next,
                   onTap: () async {
-                    await ref
-                        .read(newOperationRepositoryProvider)
-                        .setOperation(state.newOperation);
-                    ref.read(homeViewModelProvider.notifier).loadData();
+                    bool animFinished = false;
+                    Timer(const Duration(seconds: 3), () {
+                      animFinished = true;
+                      if (!ref
+                          .read(appRouterProvider)
+                          .currentPath
+                          .contains('home')) {
+                        ref.read(appRouterProvider).navigateNamed('/home');
+                        ref
+                            .read(
+                              operationCreationTypeViewModelProvider.notifier,
+                            )
+                            .clearData();
+                      }
+                    });
                     ref
-                        .read(operationListViewModelProvider.notifier)
-                        .loadData();
+                        .read(appRouterProvider)
+                        .navigateNamed('/operation_creation_result');
                     ref
                         .read(analyticsModelProvider.notifier)
                         .changeInterval(TimeInterval.week);
                     ref
                         .read(operationCreationSumViewModelProvider.notifier)
                         .clearSum();
-                    ref
-                        .read(appRouterProvider)
-                        .navigateNamed('/operation_creation_result');
+                    await ref
+                        .read(operationCreationTypeViewModelProvider.notifier)
+                        .saveData();
+                    await ref.read(homeViewModelProvider.notifier).loadData();
+                    await ref
+                        .read(operationListViewModelProvider.notifier)
+                        .loadData();
+                    ref.read(scanResultProvider.notifier).clearResult();
+                    if (animFinished) {
+                      ref.read(appRouterProvider).navigateNamed('/home');
+                      ref
+                          .read(operationCreationTypeViewModelProvider.notifier)
+                          .clearData();
+                      ref.read(scanResultProvider.notifier).clearResult();
+                    }
                   },
                 ),
               ),
@@ -97,7 +122,7 @@ class _CustomScrollViewWidget extends ConsumerWidget {
     required this.isIncome,
   });
 
-  final Map<int, Category> tiles;
+  final List<Category> tiles;
   final bool isIncome;
 
   @override
@@ -121,8 +146,7 @@ class _CustomScrollViewWidget extends ConsumerWidget {
           ),
           itemCount: tiles.length,
           itemBuilder: (BuildContext context, int index) {
-            final tile = tiles.entries.elementAt(index);
-            final categoryTile = tile.value;
+            final categoryTile = tiles[index];
 
             return _OperationChoiceTile(
               isSelected: false,

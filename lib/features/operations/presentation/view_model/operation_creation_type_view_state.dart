@@ -1,21 +1,30 @@
 import 'package:budget_tracker/features/categories/domain/entities/category.dart';
 import 'package:budget_tracker/features/operations/domain/entities/new_operation.dart';
 
-sealed class OperationCreationTypeViewState {}
+sealed class OperationCreationTypeViewState {
+  final String sum;
+
+  OperationCreationTypeViewState(this.sum);
+}
 
 class OperationCreationTypeViewLoadingState
-    extends OperationCreationTypeViewState {}
+    extends OperationCreationTypeViewState {
+  OperationCreationTypeViewLoadingState(super.sum);
+}
 
 class OperationCreationTypeViewErrorState
-    extends OperationCreationTypeViewState {}
+    extends OperationCreationTypeViewState {
+  OperationCreationTypeViewErrorState(super.sum);
+}
 
 class OperationCreationTypeViewDataState
     extends OperationCreationTypeViewState {
-  OperationCreationTypeViewDataState({
+  OperationCreationTypeViewDataState(
+    super.sum, {
     required this.data,
     required this.newOperation,
   });
 
-  final Map<int, Category> data;
+  final List<Category> data;
   final NewOperation newOperation;
 }

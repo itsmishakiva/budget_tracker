@@ -1,8 +1,5 @@
-import 'dart:async';
-
 import 'package:auto_route/annotations.dart';
 import 'package:auto_route/auto_route.dart';
-import 'package:budget_tracker/core/internal/app_router_provider.dart';
 import 'package:budget_tracker/core/ui_kit/app_scaffold.dart';
 import 'package:budget_tracker/extensions/build_context_extension.dart';
 import 'package:flutter/material.dart';
@@ -23,9 +20,6 @@ class _OperationCreationResultScreenState
   @override
   void initState() {
     super.initState();
-    Timer(const Duration(seconds: 3), () {
-      ref.read(appRouterProvider).navigateNamed('/home');
-    });
   }
 
   @override

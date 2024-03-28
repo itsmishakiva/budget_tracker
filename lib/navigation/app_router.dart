@@ -38,5 +38,9 @@ class AppRouter extends $AppRouter {
           page: AnalyticsRoute.page,
           path: '/analytics',
         ),
+        AutoRoute(
+          page: QrScannerRoute.page,
+          path: '/qr_scanner',
+        ),
       ];
 }

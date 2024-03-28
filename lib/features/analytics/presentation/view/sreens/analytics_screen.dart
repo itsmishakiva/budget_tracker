@@ -89,7 +89,7 @@ class _Body extends ConsumerWidget {
                 },
                 children: const [
                   Padding(
-                    padding: EdgeInsets.only(left: 16.0),
+                    padding: EdgeInsets.symmetric(horizontal: 24.0),
                     child: LineChartWidget(),
                   ),
                   Padding(
@@ -362,7 +362,9 @@ class _PieChartWithLegend extends ConsumerWidget {
                 padding: const EdgeInsets.only(top: 4.0),
                 child: Text(
                   'Нет данных для графиков',
-                  style: context.textStyles.headerBold3,
+                  style: context.textStyles.headerBold3.copyWith(
+                    color: context.colors.textSurface,
+                  ),
                 ),
               ),
               const SizedBox(

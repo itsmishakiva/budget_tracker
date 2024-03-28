@@ -34,8 +34,8 @@ class LineChartWidget extends ConsumerWidget {
         ? pointsIncome.reduce((a, b) => a.y > b.y ? a : b).y
         : 0.0;
 
-    double minExpenses = pointsExpenses.isNotEmpty
-        ? pointsExpenses.reduce((a, b) => a.y < b.y ? a : b).y
+    double maxExpenses = pointsExpenses.isNotEmpty
+        ? pointsExpenses.reduce((a, b) => a.y > b.y ? a : b).y
         : 0.0;
 
     return (pointsIncome.isNotEmpty || pointsExpenses.isNotEmpty)
@@ -44,10 +44,16 @@ class LineChartWidget extends ConsumerWidget {
               gridData: const FlGridData(
                 show: false,
               ),
+              clipData: const FlClipData(
+                top: true,
+                bottom: true,
+                left: true,
+                right: true,
+              ),
               minX: 0,
               minY: 0,
-              maxX: barsIncome.length.toDouble(),
-              maxY: max(maxIncome, minExpenses * (-1)) * 1.2,
+              maxX: pointsIncome.last.x,
+              maxY: max(maxIncome, maxExpenses) * 1.2,
               borderData: FlBorderData(
                 show: false,
               ),

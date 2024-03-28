@@ -2,7 +2,9 @@ import 'dart:async';
 
 import 'package:budget_tracker/features/analytics/data/dto/analytics_dto/analytics_dto.dart';
 import 'package:budget_tracker/features/analytics/data/services/analytics_service.dart';
+import 'package:budget_tracker/main.dart';
 import 'package:dio/dio.dart';
+import 'package:logging/logging.dart';
 
 class RemoteAnalyticsService implements AnalyticsService {
   RemoteAnalyticsService(this._dio);
@@ -15,6 +17,7 @@ class RemoteAnalyticsService implements AnalyticsService {
       final response = await _dio.get(
         '/analytics?type=$period',
       );
+      logger.log(Level.INFO, response);
       if (response.statusCode != 200) {
         throw Exception('status code = ${response.statusCode}');
       } else {

@@ -13,7 +13,7 @@ class RemoteCheckService implements CheckService {
   Future<CheckDTO> getCheck() async {
     try {
       final response = await _dio.get(
-        '/checks?limit=5&page=0',
+        '/checks?limit=1&page=0',
       );
       logger.log(Level.WARNING, response);
       if (response.statusCode != 200) {

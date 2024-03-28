@@ -26,16 +26,49 @@ class HomeScreen extends ConsumerWidget {
       body: CheckListScreenContent(
         scrollController: scrollController,
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          ref.read(appRouterProvider).navigateNamed('/operation_creation_sum');
-        },
-        backgroundColor: context.colors.accent,
-        child: Icon(
-          Icons.add,
-          color: context.colors.textSurface,
+      floatingActionButton: const FloatingActionButtons(),
+    );
+  }
+}
+
+class FloatingActionButtons extends ConsumerWidget {
+  const FloatingActionButtons({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return Stack(
+      children: [
+        Positioned(
+          right: 16,
+          bottom: 20,
+          child: FloatingActionButton(
+            onPressed: () {
+              ref
+                  .read(appRouterProvider)
+                  .navigateNamed('/operation_creation_sum');
+            },
+            backgroundColor: context.colors.accent,
+            child: Icon(
+              Icons.add,
+              color: context.colors.textSurface,
+            ),
+          ),
         ),
-      ),
+        Positioned(
+          right: 16,
+          bottom: 90,
+          child: FloatingActionButton(
+            onPressed: () {
+              ref.read(appRouterProvider).navigateNamed('/qr_scanner');
+            },
+            backgroundColor: context.colors.accent,
+            child: Icon(
+              Icons.qr_code,
+              color: context.colors.textSurface,
+            ),
+          ),
+        ),
+      ],
     );
   }
 }
@@ -51,7 +84,9 @@ class CheckListScreenContent extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(homeViewModelProvider);
-    logger.log(Level.INFO, state.runtimeType);
+    if (state is HomeViewDataState) {
+      logger.log(Level.INFO, (state).dataAccount);
+    }
     switch (state) {
       case HomeViewLoadingState _:
         ref.read(loggerProvider).log(Level.INFO, 'Hello!');
@@ -130,7 +165,7 @@ class _CheckTileHeaderDelegate extends SliverPersistentHeaderDelegate {
 
   @override
   bool shouldRebuild(_CheckTileHeaderDelegate oldDelegate) {
-    return false;
+    return true;
   }
 
   @override
