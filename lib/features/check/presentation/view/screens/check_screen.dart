@@ -4,8 +4,6 @@ import 'package:budget_tracker/core/ui_kit/widgets/app_button.dart';
 import 'package:budget_tracker/extensions/build_context_extension.dart';
 import 'package:flutter/material.dart';
 
-import 'package:budget_tracker/themes/app_colors.dart';
-
 import 'package:budget_tracker/features/check/domain/entities/check.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -119,8 +117,8 @@ class CheckListTile extends ConsumerWidget {
                   ? Icons.arrow_downward
                   : Icons.arrow_upward,
               color: direction == 'Expenses'
-                  ? AppLightColors().error
-                  : AppLightColors().success,
+                  ? context.colors.error
+                  : context.colors.success,
             ),
           ),
           _info(
