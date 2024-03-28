@@ -47,7 +47,7 @@ class AppButton extends ConsumerWidget {
               : Text(
                   title,
                   style: context.textStyles.textButton.copyWith(
-                    color: context.colors.backgroundPrimary,
+                    color: context.colors.textSurface,
                   ),
                 ),
         ),
