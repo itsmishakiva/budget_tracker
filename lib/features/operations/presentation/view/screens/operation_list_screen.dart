@@ -136,12 +136,19 @@ class _OperationListTileState extends State<OperationListTile> {
             const SizedBox(width: 16.0),
             RichText(
               text: TextSpan(
-                text: widget.operation.sum.toStringAsFixed(2),
-                style: context.textStyles.header3,
+                text: (widget.operation.incoming ? '+' : '-') +
+                    widget.operation.sum.toStringAsFixed(2),
+                style: context.textStyles.header3.copyWith(
+                    color: widget.operation.incoming
+                        ? context.colors.success
+                        : context.colors.error,),
                 children: [
                   TextSpan(
-                    text: '₽',
-                    style: context.textStyles.header3,
+                    text: ' ₽',
+                    style: context.textStyles.header3.copyWith(
+                        color: widget.operation.incoming
+                            ? context.colors.success
+                            : context.colors.error,),
                   ),
                 ],
               ),
