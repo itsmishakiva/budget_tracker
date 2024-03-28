@@ -8,7 +8,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logging/logging.dart';
 import 'package:budget_tracker/core/internal/logger_provider.dart';
-import 'package:budget_tracker/themes/app_colors.dart';
 import 'package:budget_tracker/features/home/presentation/view_model/home_view_model.dart';
 import 'package:budget_tracker/features/check/domain/entities/check.dart';
 import 'package:budget_tracker/features/check/presentation/view/screens/check_screen.dart';
