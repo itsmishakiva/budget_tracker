@@ -78,6 +78,9 @@ class OperationsAppbar extends ConsumerWidget {
               ),
             ),
             onTap: () {
+              ref
+                  .read(operationCreationSumViewModelProvider.notifier)
+                  .clearSum();
               ref.read(appRouterProvider).maybePop();
             },
           ),

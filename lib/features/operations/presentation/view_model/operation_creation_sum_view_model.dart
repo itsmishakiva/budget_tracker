@@ -73,4 +73,12 @@ class OperationCreationSumViewModel
   String setSum() {
     return (state as OperationCreationSumViewDataState).sum;
   }
+
+  void clearSum() {
+    final modelState = state as OperationCreationSumViewDataState;
+    state = OperationCreationSumViewDataState(
+      checkData: modelState.checkData,
+      sum: '0',
+    );
+  }
 }
