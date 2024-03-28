@@ -139,16 +139,18 @@ class _OperationListTileState extends State<OperationListTile> {
                 text: (widget.operation.incoming ? '+' : '-') +
                     widget.operation.sum.toStringAsFixed(2),
                 style: context.textStyles.header3.copyWith(
-                    color: widget.operation.incoming
-                        ? context.colors.success
-                        : context.colors.error,),
+                  color: widget.operation.incoming
+                      ? context.colors.success
+                      : context.colors.error,
+                ),
                 children: [
                   TextSpan(
                     text: ' ₽',
                     style: context.textStyles.header3.copyWith(
-                        color: widget.operation.incoming
-                            ? context.colors.success
-                            : context.colors.error,),
+                      color: widget.operation.incoming
+                          ? context.colors.success
+                          : context.colors.error,
+                    ),
                   ),
                 ],
               ),
