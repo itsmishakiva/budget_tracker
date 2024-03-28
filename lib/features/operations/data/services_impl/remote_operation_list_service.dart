@@ -12,7 +12,7 @@ class RemoteOperationListService implements OperationListService {
   @override
   Future<List<OperationDTO>> getOperationList() async {
     try {
-      final response = await _dio.get('/operations?page=0&limit=10');
+      final response = await _dio.get('/operations?page=0&limit=20');
 
       if (response.statusCode != 200) {
         return [];

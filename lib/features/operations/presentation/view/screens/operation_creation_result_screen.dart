@@ -10,15 +10,26 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:rive/rive.dart';
 
 @RoutePage()
-class OperationCreationResultScreen extends ConsumerWidget {
-  const OperationCreationResultScreen({Key? key}) : super(key: key);
+class OperationCreationResultScreen extends ConsumerStatefulWidget {
+  const OperationCreationResultScreen({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<OperationCreationResultScreen> createState() =>
+      _OperationCreationResultScreenState();
+}
+
+class _OperationCreationResultScreenState
+    extends ConsumerState<OperationCreationResultScreen> {
+  @override
+  void initState() {
+    super.initState();
     Timer(const Duration(seconds: 3), () {
       ref.read(appRouterProvider).navigateNamed('/home');
     });
+  }
 
+  @override
+  Widget build(BuildContext context) {
     return AppScaffold(
       backgroundColor: context.colors.accent,
       statusBarBrightness: Brightness.dark,

@@ -22,6 +22,23 @@ class RemoteCheckService implements CheckService {
         return CheckDTO.fromJson(response.data);
       }
     } catch (e) {
+      return [];
+    }
+  }
+
+  @override
+  Future<CheckDTO?> getCheckById(int id) async {
+    try {
+      final response = await _dio.get(
+        '/checks/$id',
+      );
+      if (response.statusCode != 200) {
+        return null;
+      } else {
+        Map<String, dynamic> checkDtoJson = response.data;
+        return CheckDTO.fromJson(checkDtoJson);
+      }
+    } catch (e) {
       logger.log(Level.WARNING, e);
       rethrow;
     }
