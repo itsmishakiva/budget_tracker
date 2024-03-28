@@ -20,7 +20,7 @@ mixin _$Operation {
   bool get incoming => throw _privateConstructorUsedError;
   double get sum => throw _privateConstructorUsedError;
   DateTime get date => throw _privateConstructorUsedError;
-  int get categoryId => throw _privateConstructorUsedError;
+  Category get category => throw _privateConstructorUsedError;
   int get checkId => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -38,8 +38,10 @@ abstract class $OperationCopyWith<$Res> {
       bool incoming,
       double sum,
       DateTime date,
-      int categoryId,
+      Category category,
       int checkId});
+
+  $CategoryCopyWith<$Res> get category;
 }
 
 /// @nodoc
@@ -59,7 +61,7 @@ class _$OperationCopyWithImpl<$Res, $Val extends Operation>
     Object? incoming = null,
     Object? sum = null,
     Object? date = null,
-    Object? categoryId = null,
+    Object? category = null,
     Object? checkId = null,
   }) {
     return _then(_value.copyWith(
@@ -79,15 +81,23 @@ class _$OperationCopyWithImpl<$Res, $Val extends Operation>
           ? _value.date
           : date // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      categoryId: null == categoryId
-          ? _value.categoryId
-          : categoryId // ignore: cast_nullable_to_non_nullable
-              as int,
+      category: null == category
+          ? _value.category
+          : category // ignore: cast_nullable_to_non_nullable
+              as Category,
       checkId: null == checkId
           ? _value.checkId
           : checkId // ignore: cast_nullable_to_non_nullable
               as int,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $CategoryCopyWith<$Res> get category {
+    return $CategoryCopyWith<$Res>(_value.category, (value) {
+      return _then(_value.copyWith(category: value) as $Val);
+    });
   }
 }
 
@@ -104,8 +114,11 @@ abstract class _$$OperationImplCopyWith<$Res>
       bool incoming,
       double sum,
       DateTime date,
-      int categoryId,
+      Category category,
       int checkId});
+
+  @override
+  $CategoryCopyWith<$Res> get category;
 }
 
 /// @nodoc
@@ -123,7 +136,7 @@ class __$$OperationImplCopyWithImpl<$Res>
     Object? incoming = null,
     Object? sum = null,
     Object? date = null,
-    Object? categoryId = null,
+    Object? category = null,
     Object? checkId = null,
   }) {
     return _then(_$OperationImpl(
@@ -143,10 +156,10 @@ class __$$OperationImplCopyWithImpl<$Res>
           ? _value.date
           : date // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      categoryId: null == categoryId
-          ? _value.categoryId
-          : categoryId // ignore: cast_nullable_to_non_nullable
-              as int,
+      category: null == category
+          ? _value.category
+          : category // ignore: cast_nullable_to_non_nullable
+              as Category,
       checkId: null == checkId
           ? _value.checkId
           : checkId // ignore: cast_nullable_to_non_nullable
@@ -163,7 +176,7 @@ class _$OperationImpl implements _Operation {
       required this.incoming,
       required this.sum,
       required this.date,
-      required this.categoryId,
+      required this.category,
       required this.checkId});
 
   @override
@@ -175,13 +188,13 @@ class _$OperationImpl implements _Operation {
   @override
   final DateTime date;
   @override
-  final int categoryId;
+  final Category category;
   @override
   final int checkId;
 
   @override
   String toString() {
-    return 'Operation(id: $id, incoming: $incoming, sum: $sum, date: $date, categoryId: $categoryId, checkId: $checkId)';
+    return 'Operation(id: $id, incoming: $incoming, sum: $sum, date: $date, category: $category, checkId: $checkId)';
   }
 
   @override
@@ -194,14 +207,14 @@ class _$OperationImpl implements _Operation {
                 other.incoming == incoming) &&
             (identical(other.sum, sum) || other.sum == sum) &&
             (identical(other.date, date) || other.date == date) &&
-            (identical(other.categoryId, categoryId) ||
-                other.categoryId == categoryId) &&
+            (identical(other.category, category) ||
+                other.category == category) &&
             (identical(other.checkId, checkId) || other.checkId == checkId));
   }
 
   @override
   int get hashCode =>
-      Object.hash(runtimeType, id, incoming, sum, date, categoryId, checkId);
+      Object.hash(runtimeType, id, incoming, sum, date, category, checkId);
 
   @JsonKey(ignore: true)
   @override
@@ -216,7 +229,7 @@ abstract class _Operation implements Operation {
       required final bool incoming,
       required final double sum,
       required final DateTime date,
-      required final int categoryId,
+      required final Category category,
       required final int checkId}) = _$OperationImpl;
 
   @override
@@ -228,7 +241,7 @@ abstract class _Operation implements Operation {
   @override
   DateTime get date;
   @override
-  int get categoryId;
+  Category get category;
   @override
   int get checkId;
   @override

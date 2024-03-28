@@ -43,7 +43,7 @@ class OperationListScreenContent extends ConsumerWidget {
           itemCount: state.operations.length,
           itemBuilder: (context, index) => OperationListTile(
             operation: state.operations[index],
-            category: state.categories[state.operations[index].categoryId]!,
+            category: state.operations[index].category,
           ),
         );
     }

@@ -25,7 +25,7 @@ mixin _$OperationDTO {
   double get sum => throw _privateConstructorUsedError;
   int get date => throw _privateConstructorUsedError;
   int get checkId => throw _privateConstructorUsedError;
-  int get categoryId => throw _privateConstructorUsedError;
+  CategoryDTO get category => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -45,7 +45,9 @@ abstract class $OperationDTOCopyWith<$Res> {
       double sum,
       int date,
       int checkId,
-      int categoryId});
+      CategoryDTO category});
+
+  $CategoryDTOCopyWith<$Res> get category;
 }
 
 /// @nodoc
@@ -66,7 +68,7 @@ class _$OperationDTOCopyWithImpl<$Res, $Val extends OperationDTO>
     Object? sum = null,
     Object? date = null,
     Object? checkId = null,
-    Object? categoryId = null,
+    Object? category = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -89,11 +91,19 @@ class _$OperationDTOCopyWithImpl<$Res, $Val extends OperationDTO>
           ? _value.checkId
           : checkId // ignore: cast_nullable_to_non_nullable
               as int,
-      categoryId: null == categoryId
-          ? _value.categoryId
-          : categoryId // ignore: cast_nullable_to_non_nullable
-              as int,
+      category: null == category
+          ? _value.category
+          : category // ignore: cast_nullable_to_non_nullable
+              as CategoryDTO,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $CategoryDTOCopyWith<$Res> get category {
+    return $CategoryDTOCopyWith<$Res>(_value.category, (value) {
+      return _then(_value.copyWith(category: value) as $Val);
+    });
   }
 }
 
@@ -111,7 +121,10 @@ abstract class _$$OperationDTOImplCopyWith<$Res>
       double sum,
       int date,
       int checkId,
-      int categoryId});
+      CategoryDTO category});
+
+  @override
+  $CategoryDTOCopyWith<$Res> get category;
 }
 
 /// @nodoc
@@ -130,7 +143,7 @@ class __$$OperationDTOImplCopyWithImpl<$Res>
     Object? sum = null,
     Object? date = null,
     Object? checkId = null,
-    Object? categoryId = null,
+    Object? category = null,
   }) {
     return _then(_$OperationDTOImpl(
       id: null == id
@@ -153,24 +166,24 @@ class __$$OperationDTOImplCopyWithImpl<$Res>
           ? _value.checkId
           : checkId // ignore: cast_nullable_to_non_nullable
               as int,
-      categoryId: null == categoryId
-          ? _value.categoryId
-          : categoryId // ignore: cast_nullable_to_non_nullable
-              as int,
+      category: null == category
+          ? _value.category
+          : category // ignore: cast_nullable_to_non_nullable
+              as CategoryDTO,
     ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$OperationDTOImpl with DiagnosticableTreeMixin implements _OperationDTO {
+class _$OperationDTOImpl implements _OperationDTO {
   _$OperationDTOImpl(
       {required this.id,
       required this.incoming,
       required this.sum,
       required this.date,
       required this.checkId,
-      required this.categoryId});
+      required this.category});
 
   factory _$OperationDTOImpl.fromJson(Map<String, dynamic> json) =>
       _$$OperationDTOImplFromJson(json);
@@ -186,24 +199,11 @@ class _$OperationDTOImpl with DiagnosticableTreeMixin implements _OperationDTO {
   @override
   final int checkId;
   @override
-  final int categoryId;
+  final CategoryDTO category;
 
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'OperationDTO(id: $id, incoming: $incoming, sum: $sum, date: $date, checkId: $checkId, categoryId: $categoryId)';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'OperationDTO'))
-      ..add(DiagnosticsProperty('id', id))
-      ..add(DiagnosticsProperty('incoming', incoming))
-      ..add(DiagnosticsProperty('sum', sum))
-      ..add(DiagnosticsProperty('date', date))
-      ..add(DiagnosticsProperty('checkId', checkId))
-      ..add(DiagnosticsProperty('categoryId', categoryId));
+  String toString() {
+    return 'OperationDTO(id: $id, incoming: $incoming, sum: $sum, date: $date, checkId: $checkId, category: $category)';
   }
 
   @override
@@ -217,14 +217,14 @@ class _$OperationDTOImpl with DiagnosticableTreeMixin implements _OperationDTO {
             (identical(other.sum, sum) || other.sum == sum) &&
             (identical(other.date, date) || other.date == date) &&
             (identical(other.checkId, checkId) || other.checkId == checkId) &&
-            (identical(other.categoryId, categoryId) ||
-                other.categoryId == categoryId));
+            (identical(other.category, category) ||
+                other.category == category));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode =>
-      Object.hash(runtimeType, id, incoming, sum, date, checkId, categoryId);
+      Object.hash(runtimeType, id, incoming, sum, date, checkId, category);
 
   @JsonKey(ignore: true)
   @override
@@ -247,7 +247,7 @@ abstract class _OperationDTO implements OperationDTO {
       required final double sum,
       required final int date,
       required final int checkId,
-      required final int categoryId}) = _$OperationDTOImpl;
+      required final CategoryDTO category}) = _$OperationDTOImpl;
 
   factory _OperationDTO.fromJson(Map<String, dynamic> json) =
       _$OperationDTOImpl.fromJson;
@@ -263,7 +263,7 @@ abstract class _OperationDTO implements OperationDTO {
   @override
   int get checkId;
   @override
-  int get categoryId;
+  CategoryDTO get category;
   @override
   @JsonKey(ignore: true)
   _$$OperationDTOImplCopyWith<_$OperationDTOImpl> get copyWith =>
