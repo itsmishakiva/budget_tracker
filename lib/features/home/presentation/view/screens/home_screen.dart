@@ -23,7 +23,7 @@ class HomeScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return AppScaffold(
-      backgroundColor: AppLightColors().backgroundSecondary,
+      backgroundColor: AppLightColors().backgroundPrimary,
       body: CheckListScreenContent(
         scrollController: scrollController,
       ),

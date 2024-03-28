@@ -5,9 +5,11 @@ import 'package:budget_tracker/core/internal/secure_storage_provider.dart';
 import 'package:budget_tracker/features/auth/data/services/auth_service.dart';
 import 'package:budget_tracker/features/auth/domain/entities/new_auth_user.dart';
 import 'package:budget_tracker/features/auth/domain/entities/new_signup_user.dart';
+import 'package:budget_tracker/main.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:logging/logging.dart';
 
 final authServiceProvider = Provider<AuthService>(
   (ref) =>
@@ -22,6 +24,7 @@ class AuthServiceImpl implements AuthService {
 
   @override
   Future<Map<String, dynamic>> auth(NewAuthUser user) async {
+    logger.log(Level.WARNING, 'auth');
     final response = await _dio.post(
       '/auth/auth',
       data: json.encode({
@@ -29,6 +32,7 @@ class AuthServiceImpl implements AuthService {
         'password': user.password,
       }),
     );
+    logger.log(Level.WARNING, 'auth1');
     return response.data;
   }
 
@@ -54,6 +58,7 @@ class AuthServiceImpl implements AuthService {
         },
       ),
     );
+    logger.log(Level.WARNING, 'save');
     _secureStorage.write(key: 'accessToken', value: accessToken);
     _secureStorage.write(key: 'tokenType', value: tokenType);
   }

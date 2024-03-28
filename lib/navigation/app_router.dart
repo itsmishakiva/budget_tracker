@@ -23,6 +23,10 @@ class AppRouter extends $AppRouter {
           path: '/operation_creation_type',
         ),
         AutoRoute(
+          page: OperationCreationResultRoute.page,
+          path: '/operation_creation_result',
+        ),
+        AutoRoute(
           page: OperationListRoute.page,
           path: '/operations',
         ),

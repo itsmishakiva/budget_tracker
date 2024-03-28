@@ -29,7 +29,17 @@ class MockAnalyticsService implements AnalyticsService {
           'category': {
             'id': 1,
             'title': 'Home',
-            'icon': ':house:',
+            'emoji': ':house:',
+            'color': 0xFFFFD1F0,
+          },
+          'sum': 367,
+        },
+        {
+          'category': {
+            'id': 1,
+            'title': 'Home',
+            'emoji': ':house:',
+            'color': 0xFFFFD1F0,
           },
           'sum': 367,
         },
@@ -37,7 +47,8 @@ class MockAnalyticsService implements AnalyticsService {
           'category': {
             'id': 1,
             'title': 'Gifts',
-            'icon': ':gift:',
+            'emoji': ':gift:',
+            'color': 0xFFFFD1F0,
           },
           'sum': 245,
         },
@@ -45,7 +56,8 @@ class MockAnalyticsService implements AnalyticsService {
           'category': {
             'id': 1,
             'title': 'Home',
-            'icon': ':house:',
+            'color': 0xFFFFD1F0,
+            'emoji': ':house:',
           },
           'sum': -135,
         },
@@ -53,7 +65,8 @@ class MockAnalyticsService implements AnalyticsService {
           'category': {
             'id': 1,
             'title': 'Gifts',
-            'icon': ':gift:',
+            'color': 0xFFFFD1F0,
+            'emoji': ':gift:',
           },
           'sum': -438,
         },
@@ -61,7 +74,8 @@ class MockAnalyticsService implements AnalyticsService {
           'category': {
             'id': 1,
             'title': 'Food',
-            'icon': ':green_salad:',
+            'color': 0xFFFFD1F0,
+            'emoji': ':green_salad:',
           },
           'sum': 2039,
         },
@@ -69,7 +83,8 @@ class MockAnalyticsService implements AnalyticsService {
           'category': {
             'id': 1,
             'title': 'Food',
-            'icon': ':green_salad:',
+            'color': 0xFFFFD1F0,
+            'emoji': ':green_salad:',
           },
           'sum': -438,
         },
@@ -77,7 +92,8 @@ class MockAnalyticsService implements AnalyticsService {
           'category': {
             'id': 1,
             'title': 'Family',
-            'icon': ':green_salad:',
+            'color': 0xFFFFD1F0,
+            'emoji': ':green_salad:',
           },
           'sum': -217,
         },
@@ -85,7 +101,8 @@ class MockAnalyticsService implements AnalyticsService {
           'category': {
             'id': 1,
             'title': 'Travels',
-            'icon': ':airplane_departure:',
+            'color': 0xFFFFD1F0,
+            'emoji': ':airplane_departure:',
           },
           'sum': -789,
         },
@@ -93,7 +110,8 @@ class MockAnalyticsService implements AnalyticsService {
           'category': {
             'id': 1,
             'title': 'Travels',
-            'icon': ':airplane_departure:',
+            'color': 0xFFFFD1F0,
+            'emoji': ':airplane_departure:',
           },
           'sum': -90,
         },
@@ -114,7 +132,8 @@ class MockAnalyticsService implements AnalyticsService {
         {
           'category': {
             'id': 1,
-            'icon': ':house:',
+            'emoji': ':house:',
+            'color': 0xFFFFD1F0,
             'title': 'Home',
           },
           'sum': 367,
@@ -142,7 +161,7 @@ class MockAnalyticsService implements AnalyticsService {
           'category': {
             'id': 1,
             'title': 'Home',
-            'icon': ':house:',
+            'emoji': ':house:',
             'color': 0xFFFFD1F0,
           },
           'sum': 367,

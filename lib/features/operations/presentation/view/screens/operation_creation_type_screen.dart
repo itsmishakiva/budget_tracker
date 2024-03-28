@@ -54,6 +54,9 @@ class _OperationCreationTypeScreenContent extends ConsumerWidget {
                 child: AppButton(
                   title: context.locale!.next,
                   onTap: () {
+                    ref
+                        .read(appRouterProvider)
+                        .navigateNamed('/operation_creation_result');
                     // TODO отправка
                   },
                 ),
