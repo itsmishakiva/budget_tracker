@@ -34,7 +34,11 @@ class HomeViewModel extends StateNotifier<HomeViewState> {
   ) : super(state);
 
   Future<void> loadData() async {
-    try {
+    _repositoryAccount.getCheck().listen((checks) {
+      state = HomeViewDataState(dataAccount: checks, dataOperations: [], dataCategory: {});
+    });
+    /*try {
+
       final dataAccount = await _repositoryAccount.getCheck();
       final dataOperations = await _repositoryOperation.getOperationList();
       final dataCategoties = await _categoryRepository.getCategories();
@@ -47,6 +51,6 @@ class HomeViewModel extends StateNotifier<HomeViewState> {
       logger.log(Level.WARNING, e);
       logger.log(Level.WARNING, 'WTF');
       state = HomeViewErrorState();
-    }
+    }*/
   }
 }

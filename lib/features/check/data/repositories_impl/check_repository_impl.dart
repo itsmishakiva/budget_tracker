@@ -11,8 +11,5 @@ class CheckRepositoryImpl implements CheckRepository {
   final CheckMapper _mapper;
 
   @override
-  Future<List<Check>> getCheck() async {
-    final resultDTO = await _service.getCheckList();
-    return resultDTO.map((e) => _mapper.fromDto(e)).toList();
-  }
+  Stream<List<Check>> getCheck() => _service.getCheckList().map((checks) => checks.map((dto) => _mapper.fromDto(dto)).toList());
 }
