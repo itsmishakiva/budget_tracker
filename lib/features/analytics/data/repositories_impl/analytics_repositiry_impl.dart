@@ -11,7 +11,7 @@ class AnalyticsRepositoryImpl implements AnalyticsRepository {
 
   @override
   Future<Analytics> getAnalytics(String period) async {
-    final resultDTO = await _service.getAnalyticsList(period);
+    final resultDTO = await _service.getAnalytics(period);
     return _mapper.fromDto(resultDTO);
   }
 }

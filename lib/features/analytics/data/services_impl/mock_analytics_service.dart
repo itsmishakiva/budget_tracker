@@ -3,7 +3,7 @@ import 'package:budget_tracker/features/analytics/data/services/analytics_servic
 
 class MockAnalyticsService implements AnalyticsService {
   @override
-  Future<AnalyticsDTO> getAnalyticsList(String period) async {
+  Future<AnalyticsDTO> getAnalytics(String period) async {
     await Future.delayed(
       const Duration(seconds: 2),
     );

@@ -23,6 +23,7 @@ class AppTextStylesRealization extends AppTextStyles {
             fontWeight: FontWeight.w600,
             fontSize: 16.0,
             color: colors.textPrimary,
+            overflow: TextOverflow.ellipsis,
           ),
           headerBold3: TextStyle(
             fontFamily: 'Nunito',

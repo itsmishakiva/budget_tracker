@@ -21,6 +21,7 @@ class RemoteCheckService implements CheckService {
         return categoriesDtoJson.map((e) => CheckDTO.fromJson(e)).toList();
       }
     } catch (e) {
+      // throw Exception('bebebe');
       return [];
     }
   }
