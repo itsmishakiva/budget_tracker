@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:budget_tracker/features/check/domain/repositories/check_repository.dart';
 import 'package:budget_tracker/features/check/internal/check_repository_provider.dart';
 import 'package:budget_tracker/features/operations/presentation/view_model/operation_creation_sum_view_state.dart';
@@ -36,13 +34,19 @@ class OperationCreationSumViewModel
   // Миша - лучший тимлид :3
   void appendNumber(String value) {
     final modelState = state as OperationCreationSumViewDataState;
-    if (modelState.sum.length >= 10) {
-      exit;
+    int commaIndex = -1;
+    if (modelState.sum.contains(',')) {
+      commaIndex = modelState.sum.indexOf(',');
     }
-    state = OperationCreationSumViewDataState(
-      sum: (modelState.sum == '0') ? value : modelState.sum + value,
-      checkData: modelState.checkData,
-    );
+    if (modelState.sum.length < 10) {
+      if ((!modelState.sum.contains(',')) ||
+          (modelState.sum.length - commaIndex < 3)) {
+        state = OperationCreationSumViewDataState(
+          sum: (modelState.sum == '0') ? value : modelState.sum + value,
+          checkData: modelState.checkData,
+        );
+      }
+    }
   }
 
   void deleteSymbol() {
@@ -58,7 +62,8 @@ class OperationCreationSumViewModel
   void appendComma() {
     final modelState = state as OperationCreationSumViewDataState;
     state = OperationCreationSumViewDataState(
-      sum: ((!modelState.sum.contains(',')) && (modelState.sum.length > 1))
+      sum: ((!modelState.sum.contains(',')) &&
+              ((modelState.sum.length > 1) || (modelState.sum[0] != '0')))
           ? '${modelState.sum},'
           : modelState.sum,
       checkData: modelState.checkData,

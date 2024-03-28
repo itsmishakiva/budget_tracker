@@ -37,7 +37,7 @@ class OperationCreationTypeViewModel
         newOperation: NewOperation(
           sum: double.parse(_sum.replaceAll(',', '.')),
           incoming: false,
-          category: categoriesData[1],
+          categoryId: 1,
         ),
       );
     } catch (e) {
@@ -53,7 +53,7 @@ class OperationCreationTypeViewModel
       newOperation: NewOperation(
         sum: modelState.newOperation.sum,
         incoming: value,
-        category: modelState.newOperation.category,
+        categoryId: modelState.newOperation.categoryId,
       ),
     );
   }
@@ -69,12 +69,14 @@ class OperationCreationTypeViewModel
       newOperation: NewOperation(
         sum: modelState.newOperation.sum,
         incoming: modelState.newOperation.incoming,
-        category: category,
+        categoryId: category.id,
       ),
     );
   }
 
-  Category returnSelectedCategory() {
-    return (state as OperationCreationTypeViewDataState).newOperation.category!;
+  int returnSelectedCategoryId() {
+    return (state as OperationCreationTypeViewDataState)
+        .newOperation
+        .categoryId!;
   }
 }

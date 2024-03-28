@@ -45,25 +45,7 @@ class _OperationCreationSumScreenContent extends ConsumerWidget {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            AppBar(
-              forceMaterialTransparency: true,
-              centerTitle: true,
-              leading: GestureDetector(
-                child: Icon(
-                  Icons.arrow_back_ios_new,
-                  color: context.colors.backgroundPrimary,
-                ),
-                onTap: () {
-                  ref.read(appRouterProvider).maybePop();
-                },
-              ),
-              title: Text(
-                context.locale!.inputAmount,
-                style: context.textStyles.header1
-                    .copyWith(color: context.colors.backgroundPrimary),
-              ),
-            ),
-            // Spacer(),
+            const OperationsAppbar(),
             Expanded(
               child: _SumInputContainer(
                 displaySum: state.sum,
@@ -73,6 +55,40 @@ class _OperationCreationSumScreenContent extends ConsumerWidget {
           ],
         );
     }
+  }
+}
+
+class OperationsAppbar extends ConsumerWidget {
+  const OperationsAppbar({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final constraints = ref.read(constraintsConstantsProvider);
+    return Padding(
+      padding: EdgeInsets.all(constraints.horizontalScreenPadding),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          GestureDetector(
+            child: Padding(
+              padding: const EdgeInsets.only(bottom: 8.0),
+              child: Icon(
+                Icons.arrow_back_ios_new,
+                color: context.colors.backgroundPrimary,
+              ),
+            ),
+            onTap: () {
+              ref.read(appRouterProvider).maybePop();
+            },
+          ),
+          Text(
+            context.locale!.inputAmount,
+            style: context.textStyles.bodyTextSurface
+                .copyWith(fontWeight: FontWeight.w700),
+          ),
+        ],
+      ),
+    );
   }
 }
 
@@ -86,7 +102,7 @@ class CurrentBalance extends StatelessWidget {
     return Row(
       children: [
         Text(
-          '${context.locale!.currentBalance} ',
+          '${context.locale!.currentBalance}: ',
           style: context.textStyles.bodyTextSurface
               .copyWith(fontWeight: FontWeight.w300),
         ),
@@ -116,6 +132,7 @@ class _SumInputContainer extends ConsumerWidget {
           child: Text(
             '₽$displaySum',
             style: context.textStyles.headerSurface1,
+            maxLines: 1,
           ),
         ),
         const SizedBox(

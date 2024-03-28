@@ -34,30 +34,30 @@ class RemoteOperationListService implements OperationListService {
     }
   }
 
-  @override
-  Future<int> setOperation(OperationDTO operationDTO) async {
-    try {
-      String accessToken = Token().token;
-      dio.options.headers['Authorization'] = 'Bearer $accessToken';
-      dio.options.headers['Custom-Header'] = 'Custom Value';
-
-      var operationJson = operationDTO.toJson();
-
-      var categoryId = operationJson['category']['id'];
-      operationJson['categoryId'] = categoryId;
-      operationJson.remove('category');
-
-      var checkId = operationJson['check']['id'];
-      operationJson['checkId'] = checkId;
-      operationJson.remove('check');
-
-      final response = await dio.post(
-        '/operations',
-        data: operationJson,
-      );
-      return response.statusCode!;
-    } catch (e) {
-      return 500; // Internal server error
-    }
-  }
+  // @override
+  // Future<int> setOperation(NewOperationDTO newOperationDTO) async {
+  //   try {
+  //     String accessToken = Token().token;
+  //     dio.options.headers['Authorization'] = 'Bearer $accessToken';
+  //     dio.options.headers['Custom-Header'] = 'Custom Value';
+  //
+  //     var operationJson = newOperationDTO.toJson();
+  //
+  //     var categoryId = operationJson['category']['id'];
+  //     operationJson['categoryId'] = categoryId;
+  //     operationJson.remove('category');
+  //
+  //     var checkId = operationJson['check']['id'];
+  //     operationJson['checkId'] = checkId;
+  //     operationJson.remove('check');
+  //
+  //     final response = await dio.post(
+  //       '/operations',
+  //       data: operationJson,
+  //     );
+  //     return response.statusCode!;
+  //   } catch (e) {
+  //     return 500; // Internal server error
+  //   }
+  // }
 }

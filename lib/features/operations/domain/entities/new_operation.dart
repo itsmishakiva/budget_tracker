@@ -1,4 +1,3 @@
-import 'package:budget_tracker/features/categories/domain/entities/category.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'new_operation.freezed.dart';
@@ -10,6 +9,7 @@ class NewOperation with _$NewOperation {
     @Default(false) bool incoming,
     @Default(0.0) double sum,
     DateTime? date,
-    Category? category,
+    @Default(1) int checkId,
+    int? categoryId,
   }) = _NewOperation;
 }

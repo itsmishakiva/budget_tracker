@@ -25,7 +25,6 @@ class RemoteCategoriesService implements CategoryListService {
     );
     try {
       final response = await dio.get('/categories?page=0&limit=20');
-      logger.log(Level.FINE, 'Response data ${response.data}');
 
       final List<CategoryDTO>? categories = (response.data as List<dynamic>?)
           ?.map((e) => CategoryDTO.fromJson(e))
