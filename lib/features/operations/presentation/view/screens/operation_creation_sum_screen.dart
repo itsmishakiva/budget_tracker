@@ -19,6 +19,7 @@ class OperationCreationSumScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return AppScaffold(
       backgroundColor: context.colors.accent,
+      statusBarBrightness: Brightness.dark,
       body: const _OperationCreationSumScreenContent(),
     );
   }

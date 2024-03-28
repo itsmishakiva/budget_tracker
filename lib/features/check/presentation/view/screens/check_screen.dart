@@ -71,7 +71,7 @@ class CheckListTile extends ConsumerWidget {
                                 ),
                               ),
                               Text(
-                                check.sum.toString(),
+                                check.sum.toStringAsFixed(2),
                                 style: context.textStyles.headerSurface3,
                               ),
                               Padding(
@@ -124,7 +124,7 @@ class CheckListTile extends ConsumerWidget {
           _info(
             context,
             direction,
-            '$sum₽',
+            '${sum.toStringAsFixed(2)}₽',
           ),
         ],
       ),

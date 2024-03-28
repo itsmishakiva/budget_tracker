@@ -41,6 +41,7 @@ class HomeViewModel extends StateNotifier<HomeViewState> {
       try {
         dataAccount = await _repositoryAccount.getCheck();
       } catch (e) {
+        logger.log(Level.WARNING, e);
         dataAccount = Check(id: 1, sum: 0, expenses: 0, income: 0);
       }
       final dataOperations = await _repositoryOperation.getOperationList();
