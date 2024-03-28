@@ -25,6 +25,7 @@ class OperationListViewModel extends StateNotifier<OperationListViewState> {
   ) : super(state);
 
   Future<void> loadData() async {
+    state = OperationListViewLoadingState();
     try {
       state = OperationListViewDataState(
         operations: await _operationRepository.getOperationList(),

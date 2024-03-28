@@ -2,54 +2,73 @@ import 'package:budget_tracker/features/categories/domain/entities/category.dart
 import 'package:budget_tracker/features/categories/domain/repositories/category_repository.dart';
 import 'package:budget_tracker/features/categories/internal/caretory_repository_provider.dart';
 import 'package:budget_tracker/features/operations/domain/entities/new_operation.dart';
+import 'package:budget_tracker/features/operations/domain/repositories/new_operation_repository.dart';
+import 'package:budget_tracker/features/operations/internal/new_operation_repository_provider.dart';
 import 'package:budget_tracker/features/operations/presentation/view_model/operation_creation_type_view_state.dart';
 import 'package:budget_tracker/main.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:budget_tracker/features/operations/presentation/view_model/operation_creation_sum_view_model.dart';
 import 'package:logging/logging.dart';
 
 final operationCreationTypeViewModelProvider = StateNotifierProvider<
     OperationCreationTypeViewModel, OperationCreationTypeViewState>(
   (ref) => OperationCreationTypeViewModel(
-    OperationCreationTypeViewLoadingState(),
+    OperationCreationTypeViewLoadingState('0'),
     ref.read(categoryRepositoryProvider),
-    ref.read(operationCreationSumViewModelProvider.notifier).setSum(),
-  )..loadData(),
+    ref.read(newOperationRepositoryProvider),
+  ),
 );
 
 class OperationCreationTypeViewModel
     extends StateNotifier<OperationCreationTypeViewState> {
-  final CategoryRepository _repository;
-  final String _sum;
+  final CategoryRepository _categoryRepository;
+  final NewOperationRepository _newOperationRepository;
 
   OperationCreationTypeViewModel(
     OperationCreationTypeViewState state,
-    this._repository,
-    this._sum,
+    this._categoryRepository,
+    this._newOperationRepository,
   ) : super(state);
+
+  void setSum(String value) {
+    state = OperationCreationTypeViewLoadingState(value);
+  }
 
   Future<void> loadData() async {
     try {
-      Map<int, Category> categoriesData = await _repository.getCategories();
+      List<Category> categoriesData = await _categoryRepository.getCategories();
 
       state = OperationCreationTypeViewDataState(
+        state.sum,
         data: categoriesData,
         newOperation: NewOperation(
-          sum: double.parse(_sum.replaceAll(',', '.')),
+          sum: double.parse(state.sum.replaceAll(',', '.')),
           date: DateTime.now(),
-          incoming: false,
-          categoryId: 1,
+          incoming: true,
+          categoryId: categoriesData[0].id,
         ),
       );
     } catch (e) {
       logger.log(Level.WARNING, e);
-      state = OperationCreationTypeViewErrorState();
+      state = OperationCreationTypeViewErrorState(state.sum);
     }
+  }
+
+  Future<void> saveData() async {
+    if (state is OperationCreationTypeViewDataState) {
+      await _newOperationRepository.setOperation(
+        (state as OperationCreationTypeViewDataState).newOperation,
+      );
+    }
+  }
+
+  void clearData() async {
+    state = OperationCreationTypeViewLoadingState('0');
   }
 
   void changeIncomeType(bool value) {
     final modelState = state as OperationCreationTypeViewDataState;
     state = OperationCreationTypeViewDataState(
+      state.sum,
       data: modelState.data,
       newOperation: NewOperation(
         sum: modelState.newOperation.sum,
@@ -66,6 +85,7 @@ class OperationCreationTypeViewModel
   void selectCategory(Category category) {
     final modelState = state as OperationCreationTypeViewDataState;
     state = OperationCreationTypeViewDataState(
+      state.sum,
       data: modelState.data,
       newOperation: NewOperation(
         sum: modelState.newOperation.sum,
@@ -84,6 +104,7 @@ class OperationCreationTypeViewModel
   void setDateTime() {
     final modelState = state as OperationCreationTypeViewDataState;
     state = OperationCreationTypeViewDataState(
+      state.sum,
       data: modelState.data,
       newOperation: NewOperation(
         sum: modelState.newOperation.sum,

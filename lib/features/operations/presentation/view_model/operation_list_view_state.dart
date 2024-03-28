@@ -14,5 +14,5 @@ class OperationListViewDataState extends OperationListViewState {
   });
 
   final List<Operation> operations;
-  final Map<int, Category> categories;
+  final List<Category> categories;
 }
