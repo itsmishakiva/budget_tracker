@@ -39,8 +39,9 @@ class AuthScreen extends ConsumerWidget {
             width: double.infinity,
             height: double.infinity,
           ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+          ListView(
+            padding: EdgeInsets.zero,
+            physics: const ClampingScrollPhysics(),
             children: [
               SizedBox(
                 height: 200 + MediaQuery.of(context).viewPadding.top,
@@ -58,7 +59,8 @@ class AuthScreen extends ConsumerWidget {
                   ),
                 ),
               ),
-              Expanded(
+              SizedBox(
+                height: 597,
                 child: AnimatedSwitcher(
                   duration: const Duration(milliseconds: 200),
                   transitionBuilder: (child, animation) {
