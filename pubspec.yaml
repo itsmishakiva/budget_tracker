@@ -53,6 +53,9 @@ flutter:
     - assets/
     - assets/svg/
     - assets/pig.riv
+    - assets/empty.riv
+    - assets/exploration.riv
+    - assets/error_server.riv
 
   fonts:
     - family: Nunito

@@ -36,6 +36,8 @@ class AuthRootViewModel extends StateNotifier<AuthRootViewState> {
     bool expired;
     try {
       expired = await _repository.checkToken();
+
+      ///expired = true;
     } catch (e) {
       expired = true;
     }
