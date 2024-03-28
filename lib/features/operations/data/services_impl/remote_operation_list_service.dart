@@ -1,6 +1,8 @@
 import 'package:budget_tracker/features/operations/data/dto/operation_dto.dart';
 import 'package:budget_tracker/features/operations/data/services/operation_list_service.dart';
+import 'package:budget_tracker/main.dart';
 import 'package:dio/dio.dart';
+import 'package:logging/logging.dart';
 
 class RemoteOperationListService implements OperationListService {
   RemoteOperationListService(this._dio);
@@ -19,10 +21,13 @@ class RemoteOperationListService implements OperationListService {
       List<Map<String, dynamic>> operationsDtoJson =
           (response.data as List<dynamic>).cast<Map<String, dynamic>>();
 
+      logger.log(Level.WARNING, operationsDtoJson);
+
       List<OperationDTO> operationList =
           operationsDtoJson.map((e) => OperationDTO.fromJson(e)).toList();
       return operationList;
     } catch (e) {
+      logger.log(Level.WARNING, e);
       return [];
     }
   }

@@ -20,7 +20,6 @@ NewOperationDTO _$NewOperationDTOFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$NewOperationDTO {
-  int? get id => throw _privateConstructorUsedError;
   bool get incoming => throw _privateConstructorUsedError;
   double get sum => throw _privateConstructorUsedError;
   int? get date => throw _privateConstructorUsedError;
@@ -40,12 +39,7 @@ abstract class $NewOperationDTOCopyWith<$Res> {
       _$NewOperationDTOCopyWithImpl<$Res, NewOperationDTO>;
   @useResult
   $Res call(
-      {int? id,
-      bool incoming,
-      double sum,
-      int? date,
-      int checkId,
-      int? categoryId});
+      {bool incoming, double sum, int? date, int checkId, int? categoryId});
 }
 
 /// @nodoc
@@ -61,7 +55,6 @@ class _$NewOperationDTOCopyWithImpl<$Res, $Val extends NewOperationDTO>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
     Object? incoming = null,
     Object? sum = null,
     Object? date = freezed,
@@ -69,10 +62,6 @@ class _$NewOperationDTOCopyWithImpl<$Res, $Val extends NewOperationDTO>
     Object? categoryId = freezed,
   }) {
     return _then(_value.copyWith(
-      id: freezed == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as int?,
       incoming: null == incoming
           ? _value.incoming
           : incoming // ignore: cast_nullable_to_non_nullable
@@ -106,12 +95,7 @@ abstract class _$$NewOperationDTOImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {int? id,
-      bool incoming,
-      double sum,
-      int? date,
-      int checkId,
-      int? categoryId});
+      {bool incoming, double sum, int? date, int checkId, int? categoryId});
 }
 
 /// @nodoc
@@ -125,7 +109,6 @@ class __$$NewOperationDTOImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
     Object? incoming = null,
     Object? sum = null,
     Object? date = freezed,
@@ -133,10 +116,6 @@ class __$$NewOperationDTOImplCopyWithImpl<$Res>
     Object? categoryId = freezed,
   }) {
     return _then(_$NewOperationDTOImpl(
-      id: freezed == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as int?,
       incoming: null == incoming
           ? _value.incoming
           : incoming // ignore: cast_nullable_to_non_nullable
@@ -167,8 +146,7 @@ class _$NewOperationDTOImpl
     with DiagnosticableTreeMixin
     implements _NewOperationDTO {
   _$NewOperationDTOImpl(
-      {this.id,
-      this.incoming = false,
+      {this.incoming = false,
       this.sum = 0.0,
       this.date,
       this.checkId = 1,
@@ -177,8 +155,6 @@ class _$NewOperationDTOImpl
   factory _$NewOperationDTOImpl.fromJson(Map<String, dynamic> json) =>
       _$$NewOperationDTOImplFromJson(json);
 
-  @override
-  final int? id;
   @override
   @JsonKey()
   final bool incoming;
@@ -195,7 +171,7 @@ class _$NewOperationDTOImpl
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'NewOperationDTO(id: $id, incoming: $incoming, sum: $sum, date: $date, checkId: $checkId, categoryId: $categoryId)';
+    return 'NewOperationDTO(incoming: $incoming, sum: $sum, date: $date, checkId: $checkId, categoryId: $categoryId)';
   }
 
   @override
@@ -203,7 +179,6 @@ class _$NewOperationDTOImpl
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'NewOperationDTO'))
-      ..add(DiagnosticsProperty('id', id))
       ..add(DiagnosticsProperty('incoming', incoming))
       ..add(DiagnosticsProperty('sum', sum))
       ..add(DiagnosticsProperty('date', date))
@@ -216,7 +191,6 @@ class _$NewOperationDTOImpl
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$NewOperationDTOImpl &&
-            (identical(other.id, id) || other.id == id) &&
             (identical(other.incoming, incoming) ||
                 other.incoming == incoming) &&
             (identical(other.sum, sum) || other.sum == sum) &&
@@ -229,7 +203,7 @@ class _$NewOperationDTOImpl
   @JsonKey(ignore: true)
   @override
   int get hashCode =>
-      Object.hash(runtimeType, id, incoming, sum, date, checkId, categoryId);
+      Object.hash(runtimeType, incoming, sum, date, checkId, categoryId);
 
   @JsonKey(ignore: true)
   @override
@@ -248,8 +222,7 @@ class _$NewOperationDTOImpl
 
 abstract class _NewOperationDTO implements NewOperationDTO {
   factory _NewOperationDTO(
-      {final int? id,
-      final bool incoming,
+      {final bool incoming,
       final double sum,
       final int? date,
       final int checkId,
@@ -258,8 +231,6 @@ abstract class _NewOperationDTO implements NewOperationDTO {
   factory _NewOperationDTO.fromJson(Map<String, dynamic> json) =
       _$NewOperationDTOImpl.fromJson;
 
-  @override
-  int? get id;
   @override
   bool get incoming;
   @override

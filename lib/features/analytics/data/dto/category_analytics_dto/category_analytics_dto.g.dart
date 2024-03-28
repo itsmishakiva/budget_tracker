@@ -7,16 +7,14 @@ part of 'category_analytics_dto.dart';
 // **************************************************************************
 
 _$CategoryAnalyticsDTOImpl _$$CategoryAnalyticsDTOImplFromJson(
-  Map<String, dynamic> json,
-) =>
+        Map<String, dynamic> json,) =>
     _$CategoryAnalyticsDTOImpl(
       category: CategoryDTO.fromJson(json['category'] as Map<String, dynamic>),
       sum: (json['sum'] as num).toDouble(),
     );
 
 Map<String, dynamic> _$$CategoryAnalyticsDTOImplToJson(
-  _$CategoryAnalyticsDTOImpl instance,
-) =>
+        _$CategoryAnalyticsDTOImpl instance,) =>
     <String, dynamic>{
       'category': instance.category,
       'sum': instance.sum,

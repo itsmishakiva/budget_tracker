@@ -7,7 +7,6 @@ part 'new_operation_dto.g.dart';
 @freezed
 class NewOperationDTO with _$NewOperationDTO {
   factory NewOperationDTO({
-    int? id,
     @Default(false) bool incoming,
     @Default(0.0) double sum,
     int? date,

@@ -11,6 +11,7 @@ class NewOperationRepositoryImpl implements NewOperationRepository {
 
   @override
   Future<int> setOperation(NewOperation newOperation) async {
+    newOperation = newOperation.copyWith(date: DateTime.now());
     return await _service.setOperation(_mapper.toDto(newOperation));
   }
 }

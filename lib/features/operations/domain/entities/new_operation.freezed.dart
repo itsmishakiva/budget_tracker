@@ -16,7 +16,6 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$NewOperation {
-  int? get id => throw _privateConstructorUsedError;
   bool get incoming => throw _privateConstructorUsedError;
   double get sum => throw _privateConstructorUsedError;
   DateTime? get date => throw _privateConstructorUsedError;
@@ -35,8 +34,7 @@ abstract class $NewOperationCopyWith<$Res> {
       _$NewOperationCopyWithImpl<$Res, NewOperation>;
   @useResult
   $Res call(
-      {int? id,
-      bool incoming,
+      {bool incoming,
       double sum,
       DateTime? date,
       int checkId,
@@ -56,7 +54,6 @@ class _$NewOperationCopyWithImpl<$Res, $Val extends NewOperation>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
     Object? incoming = null,
     Object? sum = null,
     Object? date = freezed,
@@ -64,10 +61,6 @@ class _$NewOperationCopyWithImpl<$Res, $Val extends NewOperation>
     Object? categoryId = freezed,
   }) {
     return _then(_value.copyWith(
-      id: freezed == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as int?,
       incoming: null == incoming
           ? _value.incoming
           : incoming // ignore: cast_nullable_to_non_nullable
@@ -101,8 +94,7 @@ abstract class _$$NewOperationImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {int? id,
-      bool incoming,
+      {bool incoming,
       double sum,
       DateTime? date,
       int checkId,
@@ -120,7 +112,6 @@ class __$$NewOperationImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
     Object? incoming = null,
     Object? sum = null,
     Object? date = freezed,
@@ -128,10 +119,6 @@ class __$$NewOperationImplCopyWithImpl<$Res>
     Object? categoryId = freezed,
   }) {
     return _then(_$NewOperationImpl(
-      id: freezed == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as int?,
       incoming: null == incoming
           ? _value.incoming
           : incoming // ignore: cast_nullable_to_non_nullable
@@ -160,15 +147,12 @@ class __$$NewOperationImplCopyWithImpl<$Res>
 
 class _$NewOperationImpl implements _NewOperation {
   _$NewOperationImpl(
-      {this.id,
-      this.incoming = false,
+      {this.incoming = false,
       this.sum = 0.0,
       this.date,
       this.checkId = 1,
       this.categoryId});
 
-  @override
-  final int? id;
   @override
   @JsonKey()
   final bool incoming;
@@ -185,7 +169,7 @@ class _$NewOperationImpl implements _NewOperation {
 
   @override
   String toString() {
-    return 'NewOperation(id: $id, incoming: $incoming, sum: $sum, date: $date, checkId: $checkId, categoryId: $categoryId)';
+    return 'NewOperation(incoming: $incoming, sum: $sum, date: $date, checkId: $checkId, categoryId: $categoryId)';
   }
 
   @override
@@ -193,7 +177,6 @@ class _$NewOperationImpl implements _NewOperation {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$NewOperationImpl &&
-            (identical(other.id, id) || other.id == id) &&
             (identical(other.incoming, incoming) ||
                 other.incoming == incoming) &&
             (identical(other.sum, sum) || other.sum == sum) &&
@@ -205,7 +188,7 @@ class _$NewOperationImpl implements _NewOperation {
 
   @override
   int get hashCode =>
-      Object.hash(runtimeType, id, incoming, sum, date, checkId, categoryId);
+      Object.hash(runtimeType, incoming, sum, date, checkId, categoryId);
 
   @JsonKey(ignore: true)
   @override
@@ -216,15 +199,12 @@ class _$NewOperationImpl implements _NewOperation {
 
 abstract class _NewOperation implements NewOperation {
   factory _NewOperation(
-      {final int? id,
-      final bool incoming,
+      {final bool incoming,
       final double sum,
       final DateTime? date,
       final int checkId,
       final int? categoryId}) = _$NewOperationImpl;
 
-  @override
-  int? get id;
   @override
   bool get incoming;
   @override

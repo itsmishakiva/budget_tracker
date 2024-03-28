@@ -7,10 +7,8 @@ part of 'new_operation_dto.dart';
 // **************************************************************************
 
 _$NewOperationDTOImpl _$$NewOperationDTOImplFromJson(
-  Map<String, dynamic> json,
-) =>
+        Map<String, dynamic> json,) =>
     _$NewOperationDTOImpl(
-      id: json['id'] as int?,
       incoming: json['incoming'] as bool? ?? false,
       sum: (json['sum'] as num?)?.toDouble() ?? 0.0,
       date: json['date'] as int?,
@@ -19,10 +17,8 @@ _$NewOperationDTOImpl _$$NewOperationDTOImplFromJson(
     );
 
 Map<String, dynamic> _$$NewOperationDTOImplToJson(
-  _$NewOperationDTOImpl instance,
-) =>
+        _$NewOperationDTOImpl instance,) =>
     <String, dynamic>{
-      'id': instance.id,
       'incoming': instance.incoming,
       'sum': instance.sum,
       'date': instance.date,

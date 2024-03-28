@@ -62,9 +62,6 @@ class _OperationCreationTypeScreenContent extends ConsumerWidget {
                   title: context.locale!.next,
                   onTap: () {
                     ref
-                        .read(operationCreationTypeViewModelProvider.notifier)
-                        .setDateTime();
-                    ref
                         .read(newOperationRepositoryProvider)
                         .setOperation(state.newOperation);
                     ref
