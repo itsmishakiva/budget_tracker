@@ -66,6 +66,7 @@ class AppTextStylesRealization extends AppTextStyles {
             fontWeight: FontWeight.w400,
             fontSize: 14.0,
             color: colors.textSurface,
+            overflow: TextOverflow.ellipsis,
           ),
           bodyTextSurface3: TextStyle(
             fontFamily: 'Nunito',
@@ -96,6 +97,7 @@ class AppTextStylesRealization extends AppTextStyles {
             fontWeight: FontWeight.w600,
             fontSize: 12.0,
             color: colors.textSecondary,
+            overflow: TextOverflow.ellipsis,
           ),
           subtitle3: TextStyle(
             fontFamily: 'Nunito',
