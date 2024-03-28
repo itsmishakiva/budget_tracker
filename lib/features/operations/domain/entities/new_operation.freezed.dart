@@ -147,7 +147,7 @@ class __$$NewOperationImplCopyWithImpl<$Res>
 
 class _$NewOperationImpl implements _NewOperation {
   _$NewOperationImpl(
-      {this.incoming = false,
+      {this.incoming = true,
       this.sum = 0.0,
       this.date,
       this.checkId = 1,

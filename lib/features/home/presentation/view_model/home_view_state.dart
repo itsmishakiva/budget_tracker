@@ -17,5 +17,5 @@ class HomeViewDataState extends HomeViewState {
 
   final Check dataAccount;
   final List<Operation> dataOperations;
-  final Map<int, Category> dataCategory;
+  final List<Category> dataCategory;
 }

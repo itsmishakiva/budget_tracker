@@ -35,8 +35,7 @@ class OperationCreationTypeViewModel
 
   Future<void> loadData() async {
     try {
-      Map<int, Category> categoriesData =
-          await _categoryRepository.getCategories();
+      List<Category> categoriesData = await _categoryRepository.getCategories();
 
       state = OperationCreationTypeViewDataState(
         state.sum,
@@ -45,7 +44,7 @@ class OperationCreationTypeViewModel
           sum: double.parse(state.sum.replaceAll(',', '.')),
           date: DateTime.now(),
           incoming: false,
-          categoryId: 1,
+          categoryId: categoriesData[0].id,
         ),
       );
     } catch (e) {
@@ -60,6 +59,10 @@ class OperationCreationTypeViewModel
         (state as OperationCreationTypeViewDataState).newOperation,
       );
     }
+  }
+
+  void clearData() async {
+    state = OperationCreationTypeViewLoadingState('0');
   }
 
   void changeIncomeType(bool value) {

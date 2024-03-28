@@ -25,6 +25,6 @@ class OperationCreationTypeViewDataState
     required this.newOperation,
   });
 
-  final Map<int, Category> data;
+  final List<Category> data;
   final NewOperation newOperation;
 }

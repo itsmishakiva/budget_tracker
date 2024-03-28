@@ -10,7 +10,7 @@ class RemoteCategoriesService implements CategoryListService {
   final Dio _dio;
 
   @override
-  Future<Map<int, CategoryDTO>> getCategoryList() async {
+  Future<List<CategoryDTO>> getCategoryList() async {
     try {
       final response = await _dio.get('/categories?page=0&limit=1000');
       logger.log(Level.FINE, 'Response data ${response.data}');
@@ -19,16 +19,10 @@ class RemoteCategoriesService implements CategoryListService {
           ?.map((e) => CategoryDTO.fromJson(e))
           .toList();
 
-      // Convert List to Map
-      final Map<int, CategoryDTO> categoryMap = {};
-      categories?.forEach((category) {
-        categoryMap[category.id] = category;
-      });
-
-      return categoryMap;
+      return categories ?? [];
     } catch (e) {
       logger.log(Level.WARNING, e.toString());
-      return {};
+      rethrow;
     }
   }
 }

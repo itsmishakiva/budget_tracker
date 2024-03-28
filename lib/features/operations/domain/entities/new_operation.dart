@@ -5,7 +5,7 @@ part 'new_operation.freezed.dart';
 @freezed
 class NewOperation with _$NewOperation {
   factory NewOperation({
-    @Default(false) bool incoming,
+    @Default(true) bool incoming,
     @Default(0.0) double sum,
     DateTime? date,
     @Default(1) int checkId,

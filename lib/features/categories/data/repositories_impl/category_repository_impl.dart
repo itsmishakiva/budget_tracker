@@ -10,15 +10,12 @@ class CategoryRepositoryImpl implements CategoryRepository {
   final CategoryMapper _mapper;
 
   @override
-  Future<Map<int, Category>> getCategories() async {
+  Future<List<Category>> getCategories() async {
     final resultDTO = await _service.getCategoryList();
 
-    final Map<int, Category> categoriesMap = {};
-    resultDTO.forEach((key, value) {
-      final category = _mapper.fromDto(value);
-      categoriesMap[key] = category;
-    });
+    final List<Category> result =
+        resultDTO.map((e) => _mapper.fromDto(e)).toList();
 
-    return categoriesMap;
+    return result;
   }
 }

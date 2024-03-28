@@ -72,6 +72,11 @@ class _OperationCreationTypeScreenContent extends ConsumerWidget {
                           .currentPath
                           .contains('home')) {
                         ref.read(appRouterProvider).navigateNamed('/home');
+                        ref
+                            .read(
+                              operationCreationTypeViewModelProvider.notifier,
+                            )
+                            .clearData();
                       }
                     });
                     ref
@@ -89,6 +94,9 @@ class _OperationCreationTypeScreenContent extends ConsumerWidget {
                         .clearSum();
                     if (animFinished) {
                       ref.read(appRouterProvider).navigateNamed('/home');
+                      ref
+                          .read(operationCreationTypeViewModelProvider.notifier)
+                          .clearData();
                     }
                   },
                 ),
@@ -106,7 +114,7 @@ class _CustomScrollViewWidget extends ConsumerWidget {
     required this.isIncome,
   });
 
-  final Map<int, Category> tiles;
+  final List<Category> tiles;
   final bool isIncome;
 
   @override
@@ -130,8 +138,7 @@ class _CustomScrollViewWidget extends ConsumerWidget {
           ),
           itemCount: tiles.length,
           itemBuilder: (BuildContext context, int index) {
-            final tile = tiles.entries.elementAt(index);
-            final categoryTile = tile.value;
+            final categoryTile = tiles[index];
 
             return _OperationChoiceTile(
               isSelected: false,
