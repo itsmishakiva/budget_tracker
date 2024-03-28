@@ -13,6 +13,7 @@ import 'package:budget_tracker/features/operations/presentation/view_model/opera
 import 'package:budget_tracker/features/operations/presentation/view_model/operation_creation_type_view_model.dart';
 import 'package:budget_tracker/features/operations/presentation/view_model/operation_creation_type_view_state.dart';
 import 'package:budget_tracker/features/operations/presentation/view_model/operation_list_view_model.dart';
+import 'package:budget_tracker/features/qr_scanner/internal/scanner_reslut_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logging/logging.dart';
@@ -92,11 +93,13 @@ class _OperationCreationTypeScreenContent extends ConsumerWidget {
                     ref
                         .read(operationCreationSumViewModelProvider.notifier)
                         .clearSum();
+                    ref.read(scanResultProvider.notifier).clearResult();
                     if (animFinished) {
                       ref.read(appRouterProvider).navigateNamed('/home');
                       ref
                           .read(operationCreationTypeViewModelProvider.notifier)
                           .clearData();
+                      ref.read(scanResultProvider.notifier).clearResult();
                     }
                   },
                 ),
