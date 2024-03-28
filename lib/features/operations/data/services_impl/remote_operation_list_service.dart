@@ -1,23 +1,16 @@
-import 'package:budget_tracker/core/Token.dart';
 import 'package:budget_tracker/features/operations/data/dto/operation_dto.dart';
 import 'package:budget_tracker/features/operations/data/services/operation_list_service.dart';
 import 'package:dio/dio.dart';
 
 class RemoteOperationListService implements OperationListService {
-  Dio dio = Dio();
+  RemoteOperationListService(this._dio);
 
-  RemoteOperationListService() {
-    dio.options.baseUrl = 'http://178.154.223.177:8080/api';
-  }
+  final Dio _dio;
 
   @override
   Future<List<OperationDTO>> getOperationList() async {
     try {
-      String accessToken = Token().token;
-      dio.options.headers['Authorization'] = 'Bearer $accessToken';
-      dio.options.headers['Custom-Header'] = 'Custom Value';
-
-      final response = await dio.get('/operations?page=0&limit=10');
+      final response = await _dio.get('/operations?page=0&limit=10');
 
       if (response.statusCode != 200) {
         return [];
@@ -37,10 +30,6 @@ class RemoteOperationListService implements OperationListService {
   @override
   Future<int> setOperation(OperationDTO operationDTO) async {
     try {
-      String accessToken = Token().token;
-      dio.options.headers['Authorization'] = 'Bearer $accessToken';
-      dio.options.headers['Custom-Header'] = 'Custom Value';
-
       var operationJson = operationDTO.toJson();
 
       var categoryId = operationJson['category']['id'];
@@ -51,7 +40,7 @@ class RemoteOperationListService implements OperationListService {
       operationJson['checkId'] = checkId;
       operationJson.remove('check');
 
-      final response = await dio.post(
+      final response = await _dio.post(
         '/operations',
         data: operationJson,
       );

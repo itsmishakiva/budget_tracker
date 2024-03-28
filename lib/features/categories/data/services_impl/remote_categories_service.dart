@@ -1,4 +1,3 @@
-import 'package:budget_tracker/core/Token.dart';
 import 'package:budget_tracker/features/categories/data/dto/category_dto.dart';
 import 'package:budget_tracker/features/categories/data/services/category_list_service.dart';
 import 'package:budget_tracker/main.dart';
@@ -6,25 +5,14 @@ import 'package:dio/dio.dart';
 import 'package:logging/logging.dart';
 
 class RemoteCategoriesService implements CategoryListService {
-  Dio dio = Dio();
+  RemoteCategoriesService(this._dio);
 
-  RemoteCategoriesService() {
-    dio.options.baseUrl = 'http://178.154.223.177:8080/api';
-  }
+  final Dio _dio;
 
   @override
   Future<Map<int, CategoryDTO>> getCategoryList() async {
-    dio.interceptors.add(
-      InterceptorsWrapper(
-        onRequest: (options, handler) {
-          String accessToken = Token().token;
-          options.headers['Authorization'] = 'Bearer $accessToken';
-          return handler.next(options);
-        },
-      ),
-    );
     try {
-      final response = await dio.get('/categories?page=0&limit=20');
+      final response = await _dio.get('/categories?page=0&limit=20');
       logger.log(Level.FINE, 'Response data ${response.data}');
 
       final List<CategoryDTO>? categories = (response.data as List<dynamic>?)

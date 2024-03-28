@@ -8,5 +8,5 @@ abstract interface class AuthService {
 
   Future<void> saveTokens(String accessToken, String tokenType);
 
-  Future<bool> checkTokenExpire();
+  Future<bool> checkToken();
 }

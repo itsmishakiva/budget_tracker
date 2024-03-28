@@ -45,6 +45,7 @@ class HomeViewModel extends StateNotifier<HomeViewState> {
       );
     } catch (e) {
       logger.log(Level.WARNING, e);
+      logger.log(Level.WARNING, 'WTF');
       state = HomeViewErrorState();
     }
   }

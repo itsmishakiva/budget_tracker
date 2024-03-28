@@ -6,5 +6,5 @@ abstract interface class AuthRepository {
 
   Future<(String, String)> signup(NewSignupUser user);
 
-  Future<bool> checkTokenExpire();
+  Future<bool> checkToken();
 }

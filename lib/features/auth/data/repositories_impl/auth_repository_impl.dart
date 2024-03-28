@@ -3,7 +3,9 @@ import 'package:budget_tracker/features/auth/data/services_impl/auth_service_imp
 import 'package:budget_tracker/features/auth/domain/entities/new_auth_user.dart';
 import 'package:budget_tracker/features/auth/domain/entities/new_signup_user.dart';
 import 'package:budget_tracker/features/auth/domain/repository/auth_repository.dart';
+import 'package:budget_tracker/main.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:logging/logging.dart';
 
 final authRepositoryProvider = Provider<AuthRepository>(
   (ref) => AuthRepositoryImpl(
@@ -19,6 +21,7 @@ class AuthRepositoryImpl implements AuthRepository {
   @override
   Future<(String, String)> auth(NewAuthUser user) async {
     final response = await _service.auth(user);
+    logger.log(Level.WARNING, response['accessToken']);
     return _parseAndSaveTokens(response);
   }
 
@@ -29,8 +32,8 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
-  Future<bool> checkTokenExpire() async {
-    return _service.checkTokenExpire();
+  Future<bool> checkToken() async {
+    return _service.checkToken();
   }
 
   Future<(String, String)> _parseAndSaveTokens(
