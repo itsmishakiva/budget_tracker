@@ -87,11 +87,11 @@ class _Body extends ConsumerWidget {
                 },
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(left: 16.0),
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
                     child: _LineChartWidget(),
                   ),
                   const Padding(
-                    padding: EdgeInsets.only(left: 16.0),
+                    padding: EdgeInsets.symmetric(horizontal: 24.0),
                     child: _PieChartWithLegend(),
                   ),
                 ],
@@ -258,7 +258,7 @@ class _LineChartWidget extends ConsumerWidget {
         ),
         minX: 0,
         minY: 0,
-        maxX: barsIncome.length.toDouble(),
+        maxX: pointsIncome.last.x,
         maxY: max(maxIncome, minExpenses * (-1)) * 1.2,
         borderData: FlBorderData(
           show: false,

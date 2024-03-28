@@ -82,6 +82,9 @@ class _OperationCreationTypeScreenContent extends ConsumerWidget {
                     ref
                         .read(appRouterProvider)
                         .navigateNamed('/operation_creation_result');
+                    ref
+                        .read(operationCreationSumViewModelProvider.notifier)
+                        .clearSum();
                     await ref
                         .read(operationCreationTypeViewModelProvider.notifier)
                         .saveData();
@@ -89,9 +92,6 @@ class _OperationCreationTypeScreenContent extends ConsumerWidget {
                     await ref
                         .read(operationListViewModelProvider.notifier)
                         .loadData();
-                    ref
-                        .read(operationCreationSumViewModelProvider.notifier)
-                        .clearSum();
                     if (animFinished) {
                       ref.read(appRouterProvider).navigateNamed('/home');
                       ref
