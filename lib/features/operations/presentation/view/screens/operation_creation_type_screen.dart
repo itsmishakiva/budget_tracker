@@ -62,6 +62,9 @@ class _OperationCreationTypeScreenContent extends ConsumerWidget {
                   onTap: () {
                     // TODO отправка
                     ref
+                        .read(operationCreationTypeViewModelProvider.notifier)
+                        .setDateTime();
+                    ref
                         .read(newOperationRepositoryProvider)
                         .setOperation(state.newOperation);
                     ref.read(appRouterProvider).navigateNamed('/home');
