@@ -3,6 +3,7 @@ import 'package:budget_tracker/features/check/domain/repositories/check_reposito
 import 'package:budget_tracker/features/check/internal/check_repository_provider.dart';
 import 'package:budget_tracker/features/operations/presentation/view_model/operation_creation_sum_view_state.dart';
 import 'package:budget_tracker/features/operations/presentation/view_model/operation_creation_type_view_model.dart';
+import 'package:budget_tracker/features/qr_scanner/internal/scanner_reslut_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final operationCreationSumViewModelProvider = StateNotifierProvider<
@@ -11,6 +12,7 @@ final operationCreationSumViewModelProvider = StateNotifierProvider<
     OperationCreationSumViewLoadingState(),
     ref.read(checkRepositoryProvider),
     ref.read(operationCreationTypeViewModelProvider.notifier),
+    ref.watch(scanResultProvider),
   )..loadData(),
 );
 
@@ -18,11 +20,13 @@ class OperationCreationSumViewModel
     extends StateNotifier<OperationCreationSumViewState> {
   final CheckRepository _repositoryAccount;
   final OperationCreationTypeViewModel _creationTypeViewModel;
+  final String? _sum;
 
   OperationCreationSumViewModel(
     OperationCreationSumViewState state,
     this._repositoryAccount,
     this._creationTypeViewModel,
+    this._sum,
   ) : super(state);
 
   Future<void> loadData() async {
@@ -35,7 +39,7 @@ class OperationCreationSumViewModel
       }
       state = OperationCreationSumViewDataState(
         checkData: dataAccount,
-        sum: '0',
+        sum: (_sum == null) ? '0' : _sum,
       );
     } catch (e) {
       state = OperationCreationSumViewErrorState();
