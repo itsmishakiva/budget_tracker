@@ -43,7 +43,7 @@ class OperationCreationTypeViewModel
         newOperation: NewOperation(
           sum: double.parse(state.sum.replaceAll(',', '.')),
           date: DateTime.now(),
-          incoming: false,
+          incoming: true,
           categoryId: categoriesData[0].id,
         ),
       );
