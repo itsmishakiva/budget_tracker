@@ -97,12 +97,10 @@ class CustomScrollViewWidget extends ConsumerWidget {
           child: OperationsAppbar(),
         ),
         SliverList(
-          delegate: SliverChildListDelegate(
-            [
-              _TypeTileGroup(isIncome: isIncome),
-              const _ChoiceTileGroup(),
-            ],
-          ),
+          delegate: SliverChildListDelegate([
+            _TypeTileGroup(isIncome: isIncome),
+            const _ChoiceTileGroup(),
+          ]),
         ),
         SliverList.separated(
           separatorBuilder: (BuildContext context, int index) => const SizedBox(

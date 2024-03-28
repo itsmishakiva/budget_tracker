@@ -4,6 +4,7 @@ import 'package:budget_tracker/extensions/build_context_extension.dart';
 import 'package:budget_tracker/features/auth/presentation/root/auth_root_view_model.dart';
 import 'package:budget_tracker/features/auth/presentation/signup/signup_view_model.dart';
 import 'package:budget_tracker/features/auth/presentation/signup/signup_view_state.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -106,12 +107,17 @@ class _SignUpContentState extends ConsumerState<SignUpContent> {
           ),
         ),
         const Spacer(),
-        AppButton(
-          onTap: () {
-            ref.read(signupViewModelProvider.notifier).signUp(context.locale!);
-          },
-          title: context.locale!.signUp,
-          loading: state is SignupViewStateLoading,
+        Padding(
+          padding: const EdgeInsets.only(bottom: 48.0),
+          child: AppButton(
+            onTap: () {
+              ref
+                  .read(signupViewModelProvider.notifier)
+                  .signUp(context.locale!);
+            },
+            title: context.locale!.signUp,
+            loading: state is SignupViewStateLoading,
+          ),
         ),
       ],
     );

@@ -65,7 +65,12 @@ class OperationsAppbar extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final constraints = ref.read(constraintsConstantsProvider);
     return Padding(
-      padding: EdgeInsets.all(constraints.horizontalScreenPadding),
+      padding: EdgeInsets.fromLTRB(
+        constraints.horizontalScreenPadding,
+        0,
+        constraints.horizontalScreenPadding,
+        constraints.horizontalScreenPadding,
+      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -130,6 +135,15 @@ class _SumInputContainer extends ConsumerWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        ConstrainedBox(
+          constraints: const BoxConstraints(
+            maxHeight: 30,
+            minHeight: 0,
+          ),
+          child: Expanded(
+            child: Container(),
+          ),
+        ),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16.0),
           child: Text(

@@ -95,12 +95,15 @@ class _AuthContentState extends ConsumerState<AuthContent> {
           ),
         ),
         const Spacer(),
-        AppButton(
-          onTap: () {
-            ref.read(authViewModelProvider.notifier).signIn(context.locale!);
-          },
-          title: context.locale!.signIn,
-          loading: state is AuthViewStateLoading,
+        Padding(
+          padding: const EdgeInsets.only(bottom: 48.0),
+          child: AppButton(
+            onTap: () {
+              ref.read(authViewModelProvider.notifier).signIn(context.locale!);
+            },
+            title: context.locale!.signIn,
+            loading: state is AuthViewStateLoading,
+          ),
         ),
       ],
     );
