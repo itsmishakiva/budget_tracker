@@ -21,6 +21,7 @@ class AnalyticsScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return AppScaffold(
       backgroundColor: context.colors.accent,
+      statusBarBrightness: Brightness.dark,
       body: Column(
         children: [
           Padding(
@@ -67,82 +68,87 @@ class _Body extends ConsumerWidget {
       case AnalyticsDataReadyState _:
         return Column(
           children: [
-            Padding(
-              padding: const EdgeInsets.only(left: 20.0),
-              child: SizedBox(
-                height: 250,
-                // width: 480,
-                child: PageView(
-                  controller: pageController,
-                  onPageChanged: (int page) {
-                    if (page == 0) {
-                      ref
-                          .read(analyticsModelProvider.notifier)
-                          .changeChart(Chart.liner);
-                    }
-                    if (page == 1) {
-                      ref
-                          .read(analyticsModelProvider.notifier)
-                          .changeChart(Chart.pie);
-                    }
-                  },
-                  children: [
-                    _LineChartWidget(),
-                    const _PieChartWithLegend(),
-                  ],
-                ),
+            SizedBox(
+              height: 250,
+              // width: 480,
+              child: PageView(
+                controller: pageController,
+                onPageChanged: (int page) {
+                  if (page == 0) {
+                    ref
+                        .read(analyticsModelProvider.notifier)
+                        .changeChart(Chart.liner);
+                  }
+                  if (page == 1) {
+                    ref
+                        .read(analyticsModelProvider.notifier)
+                        .changeChart(Chart.pie);
+                  }
+                },
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(left: 16.0),
+                    child: _LineChartWidget(),
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.only(left: 16.0),
+                    child: _PieChartWithLegend(),
+                  ),
+                ],
               ),
             ),
             // const _BottomBar(),
             _NavigationPoints(),
-            Padding(
-              padding: const EdgeInsets.only(top: 19.0),
-              child: Container(
-                height: 415,
-                decoration: BoxDecoration(
-                  color: context.colors.backgroundPrimary,
-                  borderRadius: const BorderRadius.only(
-                    topLeft: Radius.circular(30.0),
-                    topRight: Radius.circular(30.0),
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.only(top: 19.0),
+                child: Container(
+                  height: 415,
+                  decoration: BoxDecoration(
+                    color: context.colors.backgroundPrimary,
+                    borderRadius: const BorderRadius.only(
+                      topLeft: Radius.circular(30.0),
+                      topRight: Radius.circular(30.0),
+                    ),
                   ),
-                ),
-                child: Column(
-                  children: [
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 20,
-                        vertical: 20,
-                      ),
-                      child: Row(
-                        children: [
-                          _categoryButton(context, Category.expenses, ref),
-                          _categoryButton(context, Category.income, ref),
-                        ],
-                      ),
-                    ),
-                    Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
-                      height: 320,
-                      child: GridView.builder(
-                        gridDelegate:
-                            const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 3,
-                          crossAxisSpacing: 20,
-                          mainAxisSpacing: 10,
-                          childAspectRatio: 0.8,
+                  child: Column(
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 20,
+                          vertical: 20,
                         ),
-                        itemCount: state.dataAnalytics.categories.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          return GridTile(
-                            child: CategoryAnalyticsScreen(
-                              categoryAnalytics:
-                                  state.dataAnalytics.categories[index],
-                            ),
-                          );
-                        },
+                        child: Row(
+                          children: [
+                            _categoryButton(context, Category.expenses, ref),
+                            _categoryButton(context, Category.income, ref),
+                          ],
+                        ),
                       ),
-                    ),
-                  ],
+                      Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        height: 320,
+                        child: GridView.builder(
+                          gridDelegate:
+                              const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 3,
+                            crossAxisSpacing: 20,
+                            mainAxisSpacing: 10,
+                            childAspectRatio: 0.8,
+                          ),
+                          itemCount: state.dataAnalytics.categories.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            return GridTile(
+                              child: CategoryAnalyticsScreen(
+                                categoryAnalytics:
+                                    state.dataAnalytics.categories[index],
+                              ),
+                            );
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -245,66 +251,69 @@ class _LineChartWidget extends ConsumerWidget {
         ? pointsExpenses.reduce((a, b) => a.y < b.y ? a : b).y
         : 0.0;
 
-    return Container(
-      padding: const EdgeInsets.only(top: 50),
-      child: LineChart(
-        LineChartData(
-          minX: 0,
-          minY: 0,
-          maxX: barsIncome.length.toDouble(),
-          maxY: max(maxIncome, minExpenses * (-1)) * 1.2,
-          borderData: FlBorderData(
-            show: false,
-          ),
-          titlesData: FlTitlesData(
-            rightTitles: const AxisTitles(
-              sideTitles: SideTitles(showTitles: false),
-            ),
-            topTitles: const AxisTitles(
-              sideTitles: SideTitles(showTitles: false),
-            ),
-            bottomTitles: const AxisTitles(
-              sideTitles: SideTitles(showTitles: false),
-            ),
-            leftTitles: AxisTitles(sideTitles: leftTitles()),
-          ),
-          lineBarsData: [
-            LineChartBarData(
-              spots: pointsIncome,
-              isCurved: true,
-              color: context.colors.linearChart1,
-              barWidth: 3,
-              belowBarData: BarAreaData(
-                show: true,
-                gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: [
-                    context.colors.linearChart1.withOpacity(0.3),
-                    context.colors.linearChart1.withOpacity(0),
-                  ],
-                ),
-              ),
-            ),
-            LineChartBarData(
-              spots: pointsExpenses,
-              isCurved: true,
-              color: context.colors.linearChart2,
-              barWidth: 3,
-              belowBarData: BarAreaData(
-                show: true,
-                gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: [
-                    context.colors.linearChart2.withOpacity(0.3),
-                    context.colors.linearChart2.withOpacity(0),
-                  ],
-                ),
-              ),
-            ),
-          ],
+    return LineChart(
+      LineChartData(
+        gridData: const FlGridData(
+          show: false,
         ),
+        minX: 0,
+        minY: 0,
+        maxX: barsIncome.length.toDouble(),
+        maxY: max(maxIncome, minExpenses * (-1)) * 1.2,
+        borderData: FlBorderData(
+          show: false,
+        ),
+        titlesData: FlTitlesData(
+          rightTitles: const AxisTitles(
+            sideTitles: SideTitles(showTitles: false),
+          ),
+          topTitles: const AxisTitles(
+            sideTitles: SideTitles(showTitles: false),
+          ),
+          bottomTitles: const AxisTitles(
+            sideTitles: SideTitles(showTitles: false),
+          ),
+          leftTitles: AxisTitles(sideTitles: leftTitles()),
+        ),
+        lineTouchData: const LineTouchData(enabled: false),
+        lineBarsData: [
+          LineChartBarData(
+            spots: pointsIncome,
+            isCurved: true,
+            color: context.colors.linearChart1,
+            barWidth: 3,
+            dotData: const FlDotData(show: false),
+            belowBarData: BarAreaData(
+              show: true,
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [
+                  context.colors.linearChart1.withOpacity(0.3),
+                  context.colors.linearChart1.withOpacity(0),
+                ],
+              ),
+            ),
+          ),
+          LineChartBarData(
+            spots: pointsExpenses,
+            isCurved: true,
+            color: context.colors.linearChart2,
+            barWidth: 2,
+            dotData: const FlDotData(show: false),
+            belowBarData: BarAreaData(
+              show: true,
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [
+                  context.colors.linearChart2.withOpacity(0.3),
+                  context.colors.linearChart2.withOpacity(0),
+                ],
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -419,14 +428,7 @@ class _PieChartWithLegend extends ConsumerWidget {
       sections = categories.map((category) {
         final double value = factor * (category.sum / totalSum);
         return PieChartSectionData(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [
-              context.colors.graphColors[categoryList.indexOf(category)],
-              context.colors.graphDarkColors[categoryList.indexOf(category)],
-            ],
-          ),
+          color: context.colors.graphColors[categoryList.indexOf(category)],
           value: value,
           title: '${(value).toStringAsFixed(1)}%',
           radius: 80,
@@ -437,14 +439,7 @@ class _PieChartWithLegend extends ConsumerWidget {
       sections = categoryList.sublist(0, 4).map((category) {
         final double value = factor * (category.sum / totalSum);
         return PieChartSectionData(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [
-              context.colors.graphColors[categoryList.indexOf(category)],
-              context.colors.graphDarkColors[categoryList.indexOf(category)],
-            ],
-          ),
+          color: context.colors.graphColors[categoryList.indexOf(category)],
           value: value,
           title: '${(value).toStringAsFixed(1)}%',
           radius: 80,
@@ -459,14 +454,7 @@ class _PieChartWithLegend extends ConsumerWidget {
       final double otherValue = factor * (otherSum / totalSum);
       sections.add(
         PieChartSectionData(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [
-              context.colors.graphColors[4],
-              context.colors.graphDarkColors[4],
-            ],
-          ),
+          color: context.colors.graphColors[4],
           value: otherValue,
           title: '${(otherValue).toStringAsFixed(1)}%',
           radius: 80,
